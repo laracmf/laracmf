@@ -1,7 +1,15 @@
+public/uploads
+/vendor
+.idea
+Homestead.yaml
+Homestead.json
 .env
-phpunit.xml
-vendor
+/storage
 node_modules
-.idea/
+npm-debug.log
 .vagrant
+composer.phar
+/public/vendor
 
+
+/.project

@@ -54,21 +54,24 @@ if (Config::get('cms.events')) {
 
 $router->get('auth/github', [
     'as' => 'auth.github',
-    'uses' => 'Auth\RegistrationController@redirectToProvider'
+    'uses' => 'Auth\AuthController@redirectToProvider'
 ]);
 
 $router->get('auth/github/callback', [
     'as' => 'auth.github.callback',
-    'uses' => 'Auth\RegistrationController@handleProviderCallback'
+    'uses' => 'Auth\AuthController@handleProviderCallback'
 ]);
 
 $router->get('register/complete/{token}', [
     'as' => 'register.complete',
-    'uses' => 'Auth\RegistrationController@showCompleteRegistrationView'
+    'uses' => 'Auth\AuthController@showCompleteRegistrationView'
 ]);
 
 $router->post('register/complete/{id}', [
     'as' => 'save.register.complete',
-    'uses' => 'Auth\RegistrationController@completeRegistration'
+    'uses' => 'Auth\AuthController@completeRegistration'
 ]);
+
+$router->get('account/register', ['as' => 'account.register', 'uses' => 'ViewsController@getRegister']);
+$router->get('account/login', ['as' => 'account.login', 'uses' => 'ViewsController@getLogin']);
 
