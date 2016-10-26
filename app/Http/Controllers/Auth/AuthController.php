@@ -120,10 +120,7 @@ class AuthController extends AbstractController
             $user->attemptActivation($user->getActivationCode());
             $user->addGroup(Credentials::getGroupProvider()->findByName('Users'));
 
-            Credentials::authenticate([
-                'email' => $user->email,
-                'password' => $request->password
-            ]);
+            Credentials::login($user);
         }
 
         return redirect()->route('base');
