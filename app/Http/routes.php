@@ -52,13 +52,13 @@ if (Config::get('cms.events')) {
     $router->resource('events', 'EventController');
 }
 
-$router->get('auth/github', [
-    'as' => 'auth.github',
+$router->get('auth/social/{social}', [
+    'as' => 'auth.social',
     'uses' => 'Auth\AuthController@redirectToProvider'
 ]);
 
-$router->get('auth/github/callback', [
-    'as' => 'auth.github.callback',
+$router->get('auth/social/{social}/callback', [
+    'as' => 'auth.social.callback',
     'uses' => 'Auth\AuthController@handleProviderCallback'
 ]);
 

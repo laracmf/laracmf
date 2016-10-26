@@ -13,7 +13,7 @@
 @section('content')
     <p class="lead">Please enter your details:</p>
     <div class="well">
-        <form class="form-horizontal" action="{{ URL::route('account.register.post') }}" method="POST">
+        <form class="form-horizontal" action="{{ route('account.register.post') }}" method="POST">
 
             {{ csrf_field() }}
 
@@ -61,7 +61,7 @@
                 <div class="col-md-offset-2 col-sm-offset-3 col-sm-10 col-xs-12">
                     <button class="btn btn-primary" type="submit"><i class="fa fa-rocket"></i> Register</button>
                     <button class="btn btn-default" type="reset">Reset</button>
-                    <a href="<?php echo e(route('auth.github')); ?>"><img id="githubLink" src="<?php echo e(asset('assets/images/github.png')); ?>"></a>
+                    <a href="{{ route('auth.social', ['social' => 'github']) }}"><img id="githubLink" src="<?php echo e(asset('assets/images/github.png')); ?>"></a>
                 </div>
             </div>
 

@@ -19,6 +19,7 @@ use GrahamCampbell\BootstrapCMS\Repositories\CommentRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\EventRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PageRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PostRepository;
+use GrahamCampbell\BootstrapCMS\Services\SocialUserService;
 use GrahamCampbell\BootstrapCMS\Subscribers\CommandSubscriber;
 use GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber;
 use Illuminate\Support\ServiceProvider;
@@ -94,8 +95,6 @@ class AppServiceProvider extends ServiceProvider
         $this->registerNavigationSubscriber();
 
         $this->registerCommentController();
-
-
     }
 
     /**
@@ -110,6 +109,20 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('mailer', 'GrahamCampbell\BootstrapCMS\Services\MailerService');
+    }
+
+    /**
+     * Register the mailer service class.
+     *
+     * @return void
+     */
+    protected function registerSocialUserService()
+    {
+        $this->app->bind(SocialUserService::class, function () {
+            return new SocialUserService();
+        });
+
+        $this->app->alias('socialuser', 'GrahamCampbell\BootstrapCMS\Services\SocialUserService');
     }
 
     /**
@@ -277,7 +290,8 @@ class AppServiceProvider extends ServiceProvider
             'folderprovider',
             'pagerepository',
             'postrepository',
-            'mailer'
+            'mailer',
+            'socialuser'
         ];
     }
 }

@@ -9,9 +9,8 @@ use Illuminate\Support\Facades\View;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Response;
 use GrahamCampbell\BootstrapCMS\Http\Controllers\AbstractController;
-use Webpatser\Uuid\Uuid;
 use GrahamCampbell\Credentials\Facades\Credentials;
-use Auth;
+use GrahamCampbell\BootstrapCMS\Services\SocialUserService;
 
 class AuthController extends AbstractController
 {
@@ -21,32 +20,43 @@ class AuthController extends AbstractController
     private $mailerService;
 
     /**
+     * Social user service instance
+     */
+    private $socialUserService;
+
+    /**
      * AuthController constructor.
      *
      * @param MailerService $mailerService
+     * @param SocialUserService $socialUserService
      */
-    public function __construct(MailerService $mailerService)
+    public function __construct(MailerService $mailerService, SocialUserService $socialUserService)
     {
         parent::__construct();
         $this->mailerService = new $mailerService;
+        $this->socialUserService = new SocialUserService();
     }
 
     /**
      * Obtain the user information from GitHub.
      *
+     * @param string $social
      * @return Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider($social)
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver($social)->redirect();
     }
 
     /**
      * Obtain the user information from GitHub.
+     *
+     * @param string $social
+     * @return Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback($social)
     {
-        $response = Socialite::driver('github')->user();
+        $response = Socialite::driver($social)->user();
 
         if ($response) {
             $user = User::where('email', '=', $response->email)->first();
@@ -57,14 +67,13 @@ class AuthController extends AbstractController
                 return redirect()->route('base');
             }
 
-            $model = new User();
+            $saveUserMethod = 'save' . ucfirst($social) . 'User';
 
-            $model->email = $response->email;
-            $model->first_name = $response->name;
-            $model->password = $model->hash(rand(1, 10));
-            $model->confirm_token = Uuid::generate(4);
+            if (!method_exists($this->socialUserService, $saveUserMethod)) {
+                return redirect()->route('base');
+            }
 
-            $model->save();
+            $model = $this->socialUserService->{$saveUserMethod}($response);
 
             $mail = [
                 'url' => route('register.complete', ['confirm_token' =>  $model->confirm_token]),
