@@ -23,19 +23,19 @@ class AuthController extends AbstractController
     /**
      * Social user service instance
      */
-    private $SocialAccountService;
+    private $socialAccountService;
 
     /**
      * AuthController constructor.
      *
      * @param MailerService $mailerService
-     * @param SocialAccountService $SocialAccountService
+     * @param SocialAccountService $socialAccountService
      */
-    public function __construct(MailerService $mailerService, SocialAccountService $SocialAccountService)
+    public function __construct(MailerService $mailerService, SocialAccountService $socialAccountService)
     {
         parent::__construct();
-        $this->mailerService = new $mailerService;
-        $this->SocialAccountService = new SocialAccountService();
+        $this->mailerService = $mailerService;
+        $this->socialAccountService = $socialAccountService;
     }
 
     /**
