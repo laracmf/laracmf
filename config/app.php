@@ -172,6 +172,7 @@ return [
         'GrahamCampbell\BootstrapCMS\Providers\RouteServiceProvider',
         'GrahamCampbell\BootstrapCMS\Providers\MailServiceProvider',
         'Laravel\Socialite\SocialiteServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider',
 
     ],
 

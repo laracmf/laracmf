@@ -3,11 +3,6 @@
     <a class="close" data-dismiss="alert">×</a>
     Please check the form below for errors
 </div>
-@elseif(isset($flash))
-    <div class="alert {{ $alert }} cms-alert">
-        <a class="close" data-dismiss="alert">×</a>
-        {{ $message }}
-    </div>
 @endif
 
 <?php $types = ['success', 'error', 'warning', 'info']; ?>
@@ -21,3 +16,11 @@
     </div>
     @endif
 @endforeach
+
+@if (session()->has('flash_notification.message'))
+    <div class="alert alert-{{ session('flash_notification.level') }}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+        {!! session('flash_notification.message') !!}
+    </div>
+@endif
