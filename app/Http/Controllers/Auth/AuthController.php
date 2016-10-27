@@ -4,7 +4,6 @@ namespace GrahamCampbell\BootstrapCMS\Http\Controllers\Auth;
 
 use GrahamCampbell\BootstrapCMS\Http\Requests\SignUpRequest;
 use GrahamCampbell\BootstrapCMS\Models\User;
-use GrahamCampbell\BootstrapCMS\Services\MailerService;
 use Illuminate\Support\Facades\View;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Response;
@@ -12,14 +11,10 @@ use GrahamCampbell\BootstrapCMS\Http\Controllers\AbstractController;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
 use Webpatser\Uuid\Uuid;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends AbstractController
 {
-    /**
-     * Mailer service instance
-     */
-    private $mailerService;
-
     /**
      * Social user service instance
      */
@@ -28,13 +23,11 @@ class AuthController extends AbstractController
     /**
      * AuthController constructor.
      *
-     * @param MailerService $mailerService
      * @param SocialAccountService $socialAccountService
      */
-    public function __construct(MailerService $mailerService, SocialAccountService $socialAccountService)
+    public function __construct(SocialAccountService $socialAccountService)
     {
         parent::__construct();
-        $this->mailerService = $mailerService;
         $this->socialAccountService = $socialAccountService;
     }
 
@@ -63,7 +56,9 @@ class AuthController extends AbstractController
             $user = User::where('email', '=', $response->email)->first();
 
             if ($user) {
-                Credentials::login($user);
+                if ($user->activated) {
+                    Credentials::login($user);
+                }
 
                 return redirect()->route('base');
             }
@@ -82,17 +77,14 @@ class AuthController extends AbstractController
             $model->save();
 
             $mail = [
-                'url' => route('register.complete', ['confirm_token' =>  $model->confirm_token]),
-                'email' => $response->email,
-                'subject' => 'Complete your registration',
+                'url'     => route('register.complete', ['confirm_token' =>  $model->confirm_token]),
+                'email'   => $response->email,
+                'subject' => 'Complete your registration'
             ];
 
-            $this->mailerService->sendMessage([
-                'template' => 'emails.completeRegistration',
-                'email' => $mail['email'],
-                'subject' => $mail['subject'],
-                'data' => $mail['url']
-            ]);
+            Mail::queue('emails.completeRegistration', $mail, function ($message) use ($mail) {
+                $message->to($mail['email'])->subject($mail['subject']);
+            });
         }
 
         return redirect()->route('base');

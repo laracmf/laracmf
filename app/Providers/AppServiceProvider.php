@@ -11,7 +11,6 @@
 
 namespace GrahamCampbell\BootstrapCMS\Providers;
 
-use GrahamCampbell\BootstrapCMS\Services\MailerService;
 use GrahamCampbell\BootstrapCMS\Http\Controllers\CommentController;
 use GrahamCampbell\BootstrapCMS\Navigation\Factory;
 use GrahamCampbell\BootstrapCMS\Observers\PageObserver;
@@ -98,21 +97,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the mailer service class.
-     *
-     * @return void
-     */
-    protected function registerMailerService()
-    {
-        $this->app->bind(MailerService::class, function () {
-            return new MailerService();
-        });
-
-        $this->app->alias('mailer', 'GrahamCampbell\BootstrapCMS\Services\MailerService');
-    }
-
-    /**
-     * Register the mailer service class.
+     * Register the social account service class.
      *
      * @return void
      */
@@ -290,7 +275,6 @@ class AppServiceProvider extends ServiceProvider
             'folderprovider',
             'pagerepository',
             'postrepository',
-            'mailer',
             'socialuser'
         ];
     }

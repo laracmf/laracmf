@@ -13,7 +13,7 @@
 @section('content')
     <p class="lead">Please enter your details:</p>
     <div class="well">
-        <form class="form-horizontal" action="{{ route('account.login.post') }}" method="POST">
+        <form class="form-horizontal" action="{{ URL::route('account.login.post') }}" method="POST">
 
             {{ csrf_field() }}
 

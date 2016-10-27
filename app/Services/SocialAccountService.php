@@ -5,7 +5,7 @@ namespace GrahamCampbell\BootstrapCMS\Services;
 use GrahamCampbell\BootstrapCMS\Models\User;
 use Webpatser\Uuid\Uuid;
 
-class SocialAccountService
+class SocialAccountService implements SociableInterface
 {
     /**
      * Create user account based on user data from github.

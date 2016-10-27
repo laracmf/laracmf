@@ -170,6 +170,7 @@ return [
         'GrahamCampbell\LogViewer\LogViewerServiceProvider',
         'GrahamCampbell\BootstrapCMS\Providers\AppServiceProvider',
         'GrahamCampbell\BootstrapCMS\Providers\RouteServiceProvider',
+        'GrahamCampbell\BootstrapCMS\Providers\MailServiceProvider',
         'Laravel\Socialite\SocialiteServiceProvider',
 
     ],
@@ -186,7 +187,6 @@ return [
     */
 
     'aliases' => [
-
         'App'         => 'Illuminate\Support\Facades\App',
         'Artisan'     => 'Illuminate\Support\Facades\Artisan',
         'Auth'        => 'Illuminate\Support\Facades\Auth',
