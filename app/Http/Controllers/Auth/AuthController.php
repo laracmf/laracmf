@@ -106,9 +106,9 @@ class AuthController extends AbstractController
      */
     public function showCompleteRegistrationView($token)
     {
-        $user = User::where('confirm_token', '=', $token)->get()->first();
+        $user = User::where('confirm_token', '=', $token)->first();
 
-        if ($user) {
+        if ($user && $user->confirm_token) {
             return view('auth.registerComplete', ['userId' => $user->id]);
         }
 
@@ -130,6 +130,8 @@ class AuthController extends AbstractController
             $user->setAttribute('password', $request->password);
             $user->setAttribute('persist_code', $user->getRandomString());
             $user->activation_code = $user->getRandomString();
+            $user->confirm_token = null;
+
             $user->save();
 
             $user->attemptActivation($user->getActivationCode());
