@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use GrahamCampbell\BootstrapCMS\Http\Controllers\AbstractController;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
+use Webpatser\Uuid\Uuid;
 
 class AuthController extends AbstractController
 {
