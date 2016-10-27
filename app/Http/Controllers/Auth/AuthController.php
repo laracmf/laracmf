@@ -70,11 +70,11 @@ class AuthController extends AbstractController
 
             $saveUserMethod = 'save' . ucfirst($social) . 'User';
 
-            if (!method_exists($this->SocialAccountService, $saveUserMethod)) {
+            if (!method_exists($this->socialAccountService, $saveUserMethod)) {
                 return redirect()->route('base');
             }
 
-            $model = $this->SocialAccountService->{$saveUserMethod}($response, new User());
+            $model = $this->socialAccountService->{$saveUserMethod}($response, new User());
 
             $model->password = $model->hash(rand(1, 10));
             $model->confirm_token = Uuid::generate(4);
