@@ -10,7 +10,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Response;
 use GrahamCampbell\BootstrapCMS\Http\Controllers\AbstractController;
 use GrahamCampbell\Credentials\Facades\Credentials;
-use GrahamCampbell\BootstrapCMS\Services\SocialUserService;
+use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
 
 class AuthController extends AbstractController
 {
@@ -22,19 +22,19 @@ class AuthController extends AbstractController
     /**
      * Social user service instance
      */
-    private $socialUserService;
+    private $SocialAccountService;
 
     /**
      * AuthController constructor.
      *
      * @param MailerService $mailerService
-     * @param SocialUserService $socialUserService
+     * @param SocialAccountService $SocialAccountService
      */
-    public function __construct(MailerService $mailerService, SocialUserService $socialUserService)
+    public function __construct(MailerService $mailerService, SocialAccountService $SocialAccountService)
     {
         parent::__construct();
         $this->mailerService = new $mailerService;
-        $this->socialUserService = new SocialUserService();
+        $this->SocialAccountService = new SocialAccountService();
     }
 
     /**
@@ -69,11 +69,16 @@ class AuthController extends AbstractController
 
             $saveUserMethod = 'save' . ucfirst($social) . 'User';
 
-            if (!method_exists($this->socialUserService, $saveUserMethod)) {
+            if (!method_exists($this->SocialAccountService, $saveUserMethod)) {
                 return redirect()->route('base');
             }
 
-            $model = $this->socialUserService->{$saveUserMethod}($response);
+            $model = $this->SocialAccountService->{$saveUserMethod}($response, new User());
+
+            $model->password = $model->hash(rand(1, 10));
+            $model->confirm_token = Uuid::generate(4);
+
+            $model->save();
 
             $mail = [
                 'url' => route('register.complete', ['confirm_token' =>  $model->confirm_token]),

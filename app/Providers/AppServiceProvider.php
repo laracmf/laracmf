@@ -19,7 +19,7 @@ use GrahamCampbell\BootstrapCMS\Repositories\CommentRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\EventRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PageRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PostRepository;
-use GrahamCampbell\BootstrapCMS\Services\SocialUserService;
+use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
 use GrahamCampbell\BootstrapCMS\Subscribers\CommandSubscriber;
 use GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber;
 use Illuminate\Support\ServiceProvider;
@@ -116,13 +116,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerSocialUserService()
+    protected function registerSocialAccountService()
     {
-        $this->app->bind(SocialUserService::class, function () {
-            return new SocialUserService();
+        $this->app->bind(SocialAccountService::class, function () {
+            return new SocialAccountService();
         });
 
-        $this->app->alias('socialuser', 'GrahamCampbell\BootstrapCMS\Services\SocialUserService');
+        $this->app->alias('socialuser', 'GrahamCampbell\BootstrapCMS\Services\SocialAccountService');
     }
 
     /**
