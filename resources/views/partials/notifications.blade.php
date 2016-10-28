@@ -1,12 +1,7 @@
 @if (isset($errors) && count($errors->all()) > 0)
-<div class="alert alert-danger cms-alert">
-    <a class="close" data-dismiss="alert">×</a>
-    Please check the form below for errors
-</div>
-@elseif(isset($flash))
-    <div class="alert {{ $alert }} cms-alert">
+    <div class="alert alert-danger cms-alert">
         <a class="close" data-dismiss="alert">×</a>
-        {{ $message }}
+        Please check the form below for errors
     </div>
 @endif
 
@@ -14,10 +9,23 @@
 
 @foreach ($types as $type)
     @if ($message = Session::get($type))
-    <?php if ($type === 'error') $type = 'danger'; ?>
-    <div class="alert alert-{{ $type }} cms-alert">
-        <a class="close" data-dismiss="alert">×</a>
-        {!! $message !!}
-    </div>
+        <?php if ($type === 'error') $type = 'danger'; ?>
+        <div class="alert alert-{{ $type }} cms-alert">
+            <a class="close" data-dismiss="alert">×</a>
+            {!! $message !!}
+        </div>
     @endif
 @endforeach
+
+@if (session()->has('flash_notification.message'))
+    <div class="alert alert-{{ session('flash_notification.level') }}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+        {!! session('flash_notification.message') !!}
+    </div>
+@endif
+{!! Breadcrumbs::renderIfExists() !!}
+
+@if(Request::path() === Config::get('credentials.home'))
+    {!! Breadcrumbs::render('home') !!}
+@endif

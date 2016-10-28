@@ -145,7 +145,6 @@ return [
         'Illuminate\Filesystem\FilesystemServiceProvider',
         'Illuminate\Foundation\Providers\FoundationServiceProvider',
         'Illuminate\Hashing\HashServiceProvider',
-        'Illuminate\Mail\MailServiceProvider',
         'Illuminate\Pagination\PaginationServiceProvider',
         'Illuminate\Pipeline\PipelineServiceProvider',
         'Illuminate\Queue\QueueServiceProvider',
@@ -172,6 +171,8 @@ return [
         'GrahamCampbell\BootstrapCMS\Providers\RouteServiceProvider',
         'GrahamCampbell\BootstrapCMS\Providers\MailServiceProvider',
         'Laravel\Socialite\SocialiteServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider',
+        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
 
     ],
 
@@ -218,6 +219,7 @@ return [
         'Validator'   => 'Illuminate\Support\Facades\Validator',
         'View'        => 'Illuminate\Support\Facades\View',
         'Socialite'   => 'Laravel\Socialite\Facades\Socialite',
+        'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
 
     ],
 
