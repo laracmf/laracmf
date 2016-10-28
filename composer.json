@@ -47,7 +47,8 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database",
+            "app/Providers"
         ],
         "psr-4": {
             "GrahamCampbell\\BootstrapCMS\\": "app/"
