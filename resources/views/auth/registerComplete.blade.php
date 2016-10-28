@@ -61,10 +61,5 @@
                 </div>
             </div>
         </div>
-    @else
-        <div class="alert alert-danger">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>{{ trans('messages.common.warning') }}!</strong> {{ trans('messages.common.wrong.token') }}!
-        </div>
     @endif
 @endsection

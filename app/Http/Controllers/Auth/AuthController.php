@@ -52,6 +52,11 @@ class AuthController extends AbstractController
     {
         $response = Socialite::driver($social)->user();
 
+        $flash = [
+            'message' => 'Bad credentials!',
+            'level' => 'error'
+        ];
+
         if ($response) {
             $user = User::where('email', '=', $response->email)->first();
 
@@ -60,14 +65,12 @@ class AuthController extends AbstractController
                     Credentials::login($user);
                 }
 
+                flash()->warning('User hasn\'t activated!');
+
                 return redirect()->route('base');
             }
 
             $saveUserMethod = 'save' . ucfirst($social) . 'User';
-
-            if (!method_exists($this->socialAccountService, $saveUserMethod)) {
-                return redirect()->route('base');
-            }
 
             $model = $this->socialAccountService->{$saveUserMethod}($response, new User());
 
@@ -85,7 +88,14 @@ class AuthController extends AbstractController
             Mail::queue('emails.completeRegistration', $mail, function ($message) use ($mail) {
                 $message->to($mail['email'])->subject($mail['subject']);
             });
+
+            $flash = [
+                'message' => 'Account has successfully created. To complete your registration check the mail ' . $model->email,
+                'level' => 'success'
+            ];
         }
+
+        flash()->{$flash['level']}($flash['message']);
 
         return redirect()->route('base');
     }
@@ -104,7 +114,11 @@ class AuthController extends AbstractController
             return view('auth.registerComplete', ['userId' => $user->id]);
         }
 
-        return view('auth.registerComplete');
+        flash()->warning(
+            'Token invalid!'
+        );
+
+        return redirect()->route('base');
     }
 
     /**
@@ -118,6 +132,11 @@ class AuthController extends AbstractController
     {
         $user = User::find($id);
 
+        $flash = [
+            'message' => 'User doesn\'t exist!',
+            'level' => 'error'
+        ];
+
         if ($user) {
             $user->setAttribute('password', $request->password);
             $user->setAttribute('persist_code', $user->getRandomString());
@@ -130,7 +149,14 @@ class AuthController extends AbstractController
             $user->addGroup(Credentials::getGroupProvider()->findByName('Users'));
 
             Credentials::login($user);
+
+            $flash = [
+                'message' => 'User activated!',
+                'level' => 'success'
+            ];
         }
+
+        flash()->{$flash['level']}($flash['message']);
 
         return redirect()->route('base');
     }
