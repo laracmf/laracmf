@@ -16,13 +16,14 @@ use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
 use GrahamCampbell\Credentials\Models\Relations\RevisionableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use GrahamCampbell\BootstrapCMS\Models\ModelInterface;
 
 /**
  * This is the page model class.
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class Page extends AbstractModel implements HasPresenter
+class Page extends AbstractModel implements HasPresenter, ModelInterface
 {
     use BelongsToUserTrait, RevisionableTrait, SoftDeletes;
 
@@ -119,5 +120,15 @@ class Page extends AbstractModel implements HasPresenter
         if ($this->slug == 'home') {
             throw new \Exception('You cannot delete the homepage.');
         }
+    }
+
+    /**
+     * Return class name
+     *
+     * @return string
+     */
+    public function getClassName()
+    {
+        return get_class($this);
     }
 }
