@@ -35,6 +35,18 @@
         </div>
     </div>
 
+    <div class="form-group{!! ($errors->has('pages')) ? ' has-error' : '' !!}">
+        <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="title">Categories List</label>
+        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
+            <select name="categories[]" class="form-control selectCategories" multiple>
+                @foreach( $form['defaults']['categories'] as $category)
+                    <option selected value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+            {!! ($errors->has('categories') ? $errors->first('categories') : '') !!}
+        </div>
+    </div>
+
     <div class="form-group{!! ($errors->has('body')) ? ' has-error' : '' !!}">
         <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="body">Page Body</label>
         <div class="col-lg-6 col-md-8 col-sm-9 col-xs-12">

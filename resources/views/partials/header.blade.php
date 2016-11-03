@@ -6,9 +6,9 @@
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/styles/cms-main.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/styles/bootstrap.'.Config::get('theme.name', 'default').'.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/styles/select2.min.css') }}">
 
-@section('css')
-@show
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <!--[if lt IE 9]>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>

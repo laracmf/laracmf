@@ -270,6 +270,12 @@ class NavigationSubscriber
                 );
             }
 
+            if ($this->credentials->hasAccess('mod')) {
+                $this->navigation->addToBar(
+                    ['title' => 'View Categories', 'slug' => 'categories', 'icon' => 'folder-open']
+                );
+            }
+
             // add the create user link
             if ($this->credentials->hasAccess('admin')) {
                 $this->navigation->addToBar(
@@ -300,6 +306,12 @@ class NavigationSubscriber
                         ['title' => 'Create Event', 'slug' => 'events/create', 'icon' => 'calendar']
                     );
                 }
+            }
+
+            if ($this->credentials->hasAccess('edit')) {
+                $this->navigation->addToBar(
+                    ['title' => 'Create Categories', 'slug' => 'category/create', 'icon' => 'pencil']
+                );
             }
         }
     }

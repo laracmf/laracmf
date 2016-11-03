@@ -61,11 +61,11 @@ class AuthController extends AbstractController
             $user = User::where('email', '=', $response->email)->first();
 
             if ($user) {
-                if ($user->activated) {
+                if (!$user->activated) {
+                    flash()->warning('User hasn\'t activated!');
+                } else {
                     Credentials::login($user);
                 }
-
-                flash()->warning('User hasn\'t activated!');
 
                 return redirect()->route('base');
             }

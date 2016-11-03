@@ -37,6 +37,7 @@ Edit {{ $page->title }}
             'icon' => $page->icon,
             'body' => $page->body,
             'css' => $page->css,
+            'categories' => $page->categories,
             'js' => $page->js,
             'show_title' => ($page->show_title == true),
             'show_nav' => ($page->show_nav == true),

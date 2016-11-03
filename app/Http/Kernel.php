@@ -12,6 +12,7 @@
 namespace GrahamCampbell\BootstrapCMS\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use GrahamCampbell\BootstrapCMS\Http\Middleware\AccessMiddleware;
 
 /**
  * This is the http kernel class.
@@ -40,5 +41,8 @@ class Kernel extends HttpKernel
      *
      * @var string[]
      */
-    protected $routeMiddleware = [];
+    protected $routeMiddleware = [
+        'access' => \GrahamCampbell\BootstrapCMS\Http\Middleware\AccessMiddleware::class,
+        'admin' => \GrahamCampbell\BootstrapCMS\Http\Middleware\AdminMiddleware::class,
+    ];
 }
