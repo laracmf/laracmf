@@ -12,19 +12,18 @@
 namespace GrahamCampbell\BootstrapCMS\Models;
 
 use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyCommentsTrait;
-use GrahamCampbell\Credentials\Models\AbstractModel;
+use GrahamCampbell\BootstrapCMS\Models\AbstractModel;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
 use GrahamCampbell\Credentials\Models\Relations\RevisionableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use GrahamCampbell\BootstrapCMS\Models\ModelInterface;
 
 /**
  * This is the post model class.
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class Post extends AbstractModel implements HasPresenter, ModelInterface
+class Post extends AbstractModel implements HasPresenter
 {
     use HasManyCommentsTrait, BelongsToUserTrait, RevisionableTrait, SoftDeletes;
 
@@ -114,15 +113,5 @@ class Post extends AbstractModel implements HasPresenter, ModelInterface
     public function beforeDelete()
     {
         $this->deleteComments();
-    }
-
-    /**
-     * Return class name
-     *
-     * @return string
-     */
-    public function getClassName()
-    {
-        return get_class($this);
     }
 }

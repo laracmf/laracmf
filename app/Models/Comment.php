@@ -12,19 +12,18 @@
 namespace GrahamCampbell\BootstrapCMS\Models;
 
 use GrahamCampbell\BootstrapCMS\Models\Relations\BelongsToPostTrait;
-use GrahamCampbell\Credentials\Models\AbstractModel;
+use GrahamCampbell\BootstrapCMS\Models\AbstractModel;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
 use GrahamCampbell\Credentials\Models\Relations\RevisionableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use GrahamCampbell\BootstrapCMS\Models\ModelInterface;
 
 /**
  * This is the comment model class.
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class Comment extends AbstractModel implements HasPresenter, ModelInterface
+class Comment extends AbstractModel implements HasPresenter
 {
     use BelongsToPostTrait, BelongsToUserTrait, RevisionableTrait, SoftDeletes;
 
@@ -96,15 +95,5 @@ class Comment extends AbstractModel implements HasPresenter, ModelInterface
     public function getPresenterClass()
     {
         return 'GrahamCampbell\BootstrapCMS\Presenters\CommentPresenter';
-    }
-
-    /**
-     * Return class name
-     *
-     * @return string
-     */
-    public function getClassName()
-    {
-        return get_class($this);
     }
 }

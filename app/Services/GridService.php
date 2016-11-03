@@ -3,7 +3,6 @@
 namespace GrahamCampbell\BootstrapCMS\Services;
 
 use Grids;
-use GrahamCampbell\BootstrapCMS\Models\User;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
 use Nayjest\Grids\Components\ColumnHeadersRow;
 use Nayjest\Grids\Components\ColumnsHider;
@@ -33,7 +32,7 @@ use Nayjest\Grids\Components\FiltersRow;
  *  view('your_template',  compact('gridComponent'));
  *
  * 2. In template add following:
- *   {!! $templ !!}
+ *   {!! $gridComponent !!}
  *
  * @package GrahamCampbell\BootstrapCMS\Services
  */
