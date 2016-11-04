@@ -1,27 +1,29 @@
 @extends('layouts.default')
 
 @section('title')
-    Edit Category
+    Create Environment Config
 @stop
 
 @section('top')
     <div class="page-header">
-        <h1>Edit Category</h1>
+        <h1>Create Environment Config</h1>
     </div>
 @stop
 
 @section('content')
     <div class="well half">
         <?php
-        $form = ['url' => route('edit.category', [$id]),
+        $form = ['url' => route('create.environment'),
+                '_method' => 'POST',
                 'method' => 'POST',
-                'button' => 'Edit Category',
+                'button' => 'Create Environment',
                 'defaults' => [
-                        'name' => $category->name,
-                        'pages' => $category->pages
-                ], ];
+                        'environment' => [],
+                        'name' => ''
+                ],
+        ];
         ?>
-        @include('categories.form')
+        @include('config.form')
     </div>
 @stop
 
@@ -34,16 +36,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $(".make-switch").bootstrapSwitch();
-            var title = $('#title');
-            title.keyup(function (e) {
-                val = title.val();
-                $("#nav_title").val(val);
-                var slug = val.replace(/[^a-zA-Z0-9\s]/g, '')
-                        .replace(/^\s+|\s+$/, '')
-                        .replace(/\s+/g, '-')
-                        .toLowerCase();
-                $("#slug").val(slug);
-            });
         });
     </script>
 @stop

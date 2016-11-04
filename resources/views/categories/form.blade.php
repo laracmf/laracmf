@@ -4,16 +4,16 @@
     <input type="hidden" name="_method" value="{{ isset($form['_method'])? $form['_method'] : $form['method'] }}">
 
     <div class="form-group{!! ($errors->has('name')) ? ' has-error' : '' !!}">
-        <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="title">Category Name</label>
-        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
+        <label class="col-md-2 control-label" for="title">Category Name</label>
+        <div class="col-lg-10">
             <input name="name" id="name" value="{!! Request::old('name', $form['defaults']['name']) !!}" type="text" class="form-control" placeholder="Category Name">
             {!! ($errors->has('name') ? $errors->first('name') : '') !!}
         </div>
     </div>
 
     <div class="form-group{!! ($errors->has('pages')) ? ' has-error' : '' !!}">
-        <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="title">Pages List</label>
-        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
+        <label class="col-md-2 control-label" for="title">Pages List</label>
+        <div class="col-lg-10">
             <select name="pages[]" class="form-control selectPages" multiple>
                 @foreach( $form['defaults']['pages'] as $page)
                     <option selected value="{{ $page->id }}">{{ $page->title }}</option>

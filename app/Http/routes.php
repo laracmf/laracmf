@@ -78,7 +78,7 @@ $router->get('account/login', ['as' => 'account.login', 'uses' => 'ViewsControll
 Route::group(['middleware' => ['access']], function () use ($router) {
     Route::group(['middleware' => ['admin']], function () use ($router) {
         Route::group(['prefix' => 'category'], function () use ($router) {
-            $router->get('/create', ['as' => 'show.create.category.page', 'uses' => 'CategoryController@showCreateForm']);
+            $router->get('/', ['as' => 'show.create.category.page', 'uses' => 'CategoryController@showCreateForm']);
             $router->post('/', ['as' => 'create.category', 'uses' => 'CategoryController@createCategory']);
             $router->get('/{id}', ['as' => 'show.edit.category.page', 'uses' => 'CategoryController@editCategoryForm']);
             $router->post('/{id}', ['as' => 'edit.category', 'uses' => 'CategoryController@editCategory']);
@@ -91,5 +91,15 @@ Route::group(['middleware' => ['access']], function () use ($router) {
             'as' => 'categories.search',
             'uses' => 'CategoryController@searchCategories'
         ]);
+
+        $router->get('/environments', ['as' => 'show.environments.list', 'uses' => 'ConfigurationController@showEnvironments']);
+
+        Route::group(['prefix' => 'environment'], function () use ($router) {
+            $router->post('/', ['as' => 'create.environment', 'uses' => 'ConfigurationController@createEnvironment']);
+            $router->get('/{name}', ['as' => 'show.edit.form', 'uses' => 'ConfigurationController@showEditForm']);
+            $router->get('/', ['as' => 'show.create.form', 'uses' => 'ConfigurationController@showCreateForm']);
+            $router->put('/{name}', ['as' => 'edit.environment', 'uses' => 'ConfigurationController@editEnvironment']);
+            $router->delete('/{name}', ['as' => 'delete.environment', 'uses' => 'ConfigurationController@deleteEnvironment']);
+        });
     });
 });
