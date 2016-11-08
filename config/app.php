@@ -172,7 +172,7 @@ return [
         'GrahamCampbell\BootstrapCMS\Providers\MailServiceProvider',
         'Laravel\Socialite\SocialiteServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
-
+        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
     ],
 
     /*
@@ -218,6 +218,7 @@ return [
         'Validator'   => 'Illuminate\Support\Facades\Validator',
         'View'        => 'Illuminate\Support\Facades\View',
         'Socialite'   => 'Laravel\Socialite\Facades\Socialite',
+        'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
 
     ],
 

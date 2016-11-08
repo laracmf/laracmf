@@ -11,8 +11,8 @@
 <div id="wrap">
 @navigation
 <div class="container">
-@section('top')
-@show
+{{--@section('top')--}}
+{{--@show--}}
 @include('partials.notifications')
 @section('content')
 @show
