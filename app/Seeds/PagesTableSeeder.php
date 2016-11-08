@@ -31,6 +31,7 @@ class PagesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('pages')->truncate();
 
         $home = [
@@ -72,6 +73,8 @@ class PagesTableSeeder extends Seeder
         ];
 
         DB::table('pages')->insert($about);
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
     }
 
     /**

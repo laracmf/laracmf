@@ -18,10 +18,12 @@ use GrahamCampbell\BootstrapCMS\Repositories\CommentRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\EventRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PageRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PostRepository;
+use GrahamCampbell\BootstrapCMS\Services\PagesService;
 use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
 use GrahamCampbell\BootstrapCMS\Subscribers\CommandSubscriber;
 use GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber;
 use Illuminate\Support\ServiceProvider;
+use GrahamCampbell\BootstrapCMS\Services\CategoriesService;
 
 /**
  * This is the app service provider class.
@@ -94,6 +96,8 @@ class AppServiceProvider extends ServiceProvider
         $this->registerNavigationSubscriber();
 
         $this->registerCommentController();
+        $this->registerCategoriesService();
+        $this->registerPagesService();
     }
 
     /**
@@ -147,6 +151,30 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('commentrepository', 'GrahamCampbell\BootstrapCMS\Repositories\CommentRepository');
+    }
+
+    /**
+     * Register category service.
+     *
+     * @return void
+     */
+    protected function registerCategoriesService()
+    {
+        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\CategoriesService', function () {
+            return new CategoriesService();
+        });
+    }
+
+    /**
+     * Register pages service.
+     *
+     * @return void
+     */
+    protected function registerPagesService()
+    {
+        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\PagesService', function () {
+            return new PagesService();
+        });
     }
 
     /**

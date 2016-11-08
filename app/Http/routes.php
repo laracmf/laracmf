@@ -75,3 +75,21 @@ $router->post('register/complete/{id}', [
 $router->get('account/register', ['as' => 'account.register', 'uses' => 'ViewsController@getRegister']);
 $router->get('account/login', ['as' => 'account.login', 'uses' => 'ViewsController@getLogin']);
 
+Route::group(['middleware' => ['access']], function () use ($router) {
+    Route::group(['middleware' => ['admin']], function () use ($router) {
+        Route::group(['prefix' => 'category'], function () use ($router) {
+            $router->get('/create', ['as' => 'show.create.category.page', 'uses' => 'CategoryController@showCreateForm']);
+            $router->post('/', ['as' => 'create.category', 'uses' => 'CategoryController@createCategory']);
+            $router->get('/{id}', ['as' => 'show.edit.category.page', 'uses' => 'CategoryController@editCategoryForm']);
+            $router->post('/{id}', ['as' => 'edit.category', 'uses' => 'CategoryController@editCategory']);
+            $router->delete('/', ['as' => 'delete.category', 'uses' => 'CategoryController@deleteCategory']);
+        });
+
+        $router->get('search/pages', ['as' => 'pages.search', 'uses' => 'PageController@searchPages']);
+        $router->get('categories', ['as' => 'show.categories', 'uses' => 'CategoryController@showCategories']);
+        $router->get('search/categories', [
+            'as' => 'categories.search',
+            'uses' => 'CategoryController@searchCategories'
+        ]);
+    });
+});

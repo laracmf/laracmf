@@ -6,6 +6,10 @@
 <title>{{ Config::get('app.name') }} - @section('title')
 @show</title>
 @include('partials.header')
+    @section('css')
+    @show
+    @section('js')
+    @show
 </head>
 <body>
 <div id="wrap">

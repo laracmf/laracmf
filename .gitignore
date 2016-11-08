@@ -5,11 +5,10 @@ Homestead.yaml
 Homestead.json
 .env
 /storage
-node_modules
+node_modules/
 npm-debug.log
 .vagrant
 composer.phar
 /public/vendor
-
-
+bower_components/
 /.project

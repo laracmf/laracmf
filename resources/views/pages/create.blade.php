@@ -24,6 +24,7 @@ Create Page
             'body' => '',
             'css' => '',
             'js' => '',
+            'categories' => [],
             'show_title' => true,
             'show_nav' => true,
     ], ];

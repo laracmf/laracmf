@@ -14,7 +14,10 @@ namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
 use Exception;
 use GrahamCampbell\Binput\Facades\Binput;
 use GrahamCampbell\BootstrapCMS\Facades\PageRepository;
+use GrahamCampbell\BootstrapCMS\Models\Page;
+use GrahamCampbell\BootstrapCMS\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
@@ -28,11 +31,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PageController extends AbstractController
 {
     /**
+     * @var PagesService
+     */
+    protected $pagesService;
+
+    /**
      * Create a new instance.
      *
-     * @return void
+     * @param PagesService $pagesService
      */
-    public function __construct()
+    public function __construct(PagesService $pagesService)
     {
         $this->setPermissions([
             'create'  => 'edit',
@@ -41,6 +49,8 @@ class PageController extends AbstractController
             'update'  => 'edit',
             'destroy' => 'edit',
         ]);
+
+        $this->pagesService = $pagesService;
 
         parent::__construct();
     }
@@ -76,6 +86,7 @@ class PageController extends AbstractController
     public function store()
     {
         $input = array_merge($this->getInput(), ['user_id' => Credentials::getuser()->id]);
+        $categories = Request::get('categories') ?: [];
 
         $val = PageRepository::validate($input, array_keys($input));
         if ($val->fails()) {
@@ -83,6 +94,8 @@ class PageController extends AbstractController
         }
 
         $page = PageRepository::create($input);
+
+        $this->pagesService->savePageCategories($page, $categories);
 
         // write flash message and redirect
         return Redirect::route('pages.show', ['pages' => $page->slug])
@@ -101,6 +114,10 @@ class PageController extends AbstractController
         $page = PageRepository::find($slug);
         $this->checkPage($page, $slug);
 
+        if ($page) {
+            $page->categories = $this->pagesService->getPageCategories($page);
+        }
+
         return View::make('pages.show', ['page' => $page]);
     }
 
@@ -114,6 +131,11 @@ class PageController extends AbstractController
     public function edit($slug)
     {
         $page = PageRepository::find($slug);
+
+        if ($page) {
+            $page->categories = $this->pagesService->getPageCategories($page);
+        }
+
         $this->checkPage($page, $slug);
 
         return View::make('pages.edit', ['page' => $page]);
@@ -129,6 +151,7 @@ class PageController extends AbstractController
     public function update($slug)
     {
         $input = $this->getInput();
+        $categories = Request::get('categories') ?: [];
 
         if (empty($input['css'])) {
             $input['css'] = '';
@@ -151,7 +174,12 @@ class PageController extends AbstractController
             return $checkupdate;
         }
 
+        $this->pagesService->deletePageCategories($page);
+        $this->pagesService->savePageCategories($page, $categories);
+
         $page->update($input);
+
+        $page->categories = $this->pagesService->getPageCategories($page);
 
         // write flash message and redirect
         return Redirect::route('pages.show', ['pages' => $page->slug])
@@ -169,6 +197,10 @@ class PageController extends AbstractController
     {
         $page = PageRepository::find($slug);
         $this->checkPage($page, $slug);
+
+        if ($page) {
+            $this->pagesService->deletePageCategories($page);
+        }
 
         try {
             $page->delete();
@@ -197,7 +229,7 @@ class PageController extends AbstractController
             'js'         => Binput::get('js', null, true, false), // no xss protection please
             'show_title' => (Binput::get('show_title') == 'on'),
             'show_nav'   => (Binput::get('show_nav') == 'on'),
-            'icon'       => Binput::get('icon'),
+            'icon'       => Binput::get('icon')
         ];
     }
 
@@ -246,5 +278,15 @@ class PageController extends AbstractController
                     ->with('error', trans('messages.page.show_nav'));
             }
         }
+    }
+
+    /**
+     * Search pages.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected function searchPages()
+    {
+        return Page::where('title', 'like', Request::get('query') . '%')->get(['id', 'title as text']);
     }
 }

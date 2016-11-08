@@ -120,4 +120,15 @@ class Page extends AbstractModel implements HasPresenter
             throw new \Exception('You cannot delete the homepage.');
         }
     }
+
+    /**
+     * Returns current category pages.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this
+            ->belongsToMany('GrahamCampbell\BootstrapCMS\Models\Category', 'categories_pages', 'page_id', 'category_id');
+    }
 }
