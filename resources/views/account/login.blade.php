@@ -51,7 +51,7 @@
                     @endif
                 </div>
                 <div class="col-md-offset-2 col-sm-offset-3 col-sm-10 col-xs-12">
-                    <a href="{{ route('auth.social', ['social' => 'github']) }}"><img id="githubLink" src="<?php echo e(asset('assets/images/github.png')); ?>"></a>
+                    <a href="{{ route('auth.social', ['social' => 'github']) }}"><img id="githubLink" src="{{ asset('assets/images/github.png') }}"></a>
                 </div>
             </div>
         </form>

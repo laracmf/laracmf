@@ -18,6 +18,7 @@ use GrahamCampbell\BootstrapCMS\Repositories\CommentRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\EventRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PageRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PostRepository;
+use GrahamCampbell\BootstrapCMS\Services\MediaService;
 use GrahamCampbell\BootstrapCMS\Services\PagesService;
 use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
 use GrahamCampbell\BootstrapCMS\Subscribers\CommandSubscriber;
@@ -112,6 +113,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerCategoriesService();
         $this->registerPagesService();
         $this->registerConfigurationsService();
+        $this->registerMediaService();
     }
 
     /**
@@ -200,6 +202,18 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('GrahamCampbell\BootstrapCMS\Services\ConfigurationsService', function () {
             return new ConfigurationsService();
+        });
+    }
+
+    /**
+     * Register media service.
+     *
+     * @return void
+     */
+    protected function registerMediaService()
+    {
+        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\MediaService', function () {
+            return new MediaService();
         });
     }
 

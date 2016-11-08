@@ -101,5 +101,11 @@ Route::group(['middleware' => ['access']], function () use ($router) {
             $router->put('/{name}', ['as' => 'edit.environment', 'uses' => 'ConfigurationController@editEnvironment']);
             $router->delete('/{name}', ['as' => 'delete.environment', 'uses' => 'ConfigurationController@deleteEnvironment']);
         });
+
+        Route::group(['prefix' => 'media'], function () use ($router) {
+            $router->post('/', ['as' => 'upload.media', 'uses' => 'MediaController@uploadMedia']);
+            $router->get('/', ['as' => 'show.all.media', 'uses' => 'MediaController@showAllMedia']);
+            $router->delete('/{id}', ['as' => 'delete.media', 'uses' => 'MediaController@deleteMedia']);
+        });
     });
 });
