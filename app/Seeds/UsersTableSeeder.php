@@ -30,6 +30,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users')->truncate();
 
         $user = [
@@ -91,5 +92,6 @@ class UsersTableSeeder extends Seeder
             'activated_at' => Carbon::now(),
         ];
         Credentials::getUserProvider()->create($user);
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

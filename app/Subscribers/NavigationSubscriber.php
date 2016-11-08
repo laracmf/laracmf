@@ -325,6 +325,12 @@ class NavigationSubscriber
                     ['title' => 'Create Environment', 'slug' => 'environment/', 'icon' => 'pencil']
                 );
             }
+
+            if ($this->credentials->hasAccess('edit')) {
+                $this->navigation->addToBar(
+                    ['title' => 'Media', 'slug' => 'media/', 'icon' => 'camera']
+                );
+            }
         }
     }
 
