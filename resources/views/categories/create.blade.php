@@ -11,7 +11,7 @@
 @stop
 
 @section('content')
-    <div class="well">
+    <div class="well half">
         <?php
         $form = ['url' => route('create.category'),
                 'method' => 'POST',

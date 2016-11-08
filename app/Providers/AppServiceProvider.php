@@ -24,6 +24,8 @@ use GrahamCampbell\BootstrapCMS\Subscribers\CommandSubscriber;
 use GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber;
 use Illuminate\Support\ServiceProvider;
 use GrahamCampbell\BootstrapCMS\Services\CategoriesService;
+use GrahamCampbell\BootstrapCMS\Services\ConfigurationsService;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * This is the app service provider class.
@@ -42,6 +44,17 @@ class AppServiceProvider extends ServiceProvider
         $this->setupBlade();
 
         $this->setupListeners();
+
+        Validator::extend('name_unique', function ($attribute, $value, $parameters) {
+            $configService = new ConfigurationsService();
+            $environments = $configService->getEnvironmentsList();
+
+            return !in_array($parameters[0], $environments);
+        });
+
+        Validator::replacer('name_unique', function ($message) {
+            return str_replace($message, 'Config with such name already exists!', $message);
+        });
     }
 
     /**
@@ -98,6 +111,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerCommentController();
         $this->registerCategoriesService();
         $this->registerPagesService();
+        $this->registerConfigurationsService();
     }
 
     /**
@@ -174,6 +188,18 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('GrahamCampbell\BootstrapCMS\Services\PagesService', function () {
             return new PagesService();
+        });
+    }
+
+    /**
+     * Register configurations service.
+     *
+     * @return void
+     */
+    protected function registerConfigurationsService()
+    {
+        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\ConfigurationsService', function () {
+            return new ConfigurationsService();
         });
     }
 

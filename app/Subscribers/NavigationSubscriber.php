@@ -276,6 +276,12 @@ class NavigationSubscriber
                 );
             }
 
+            if ($this->credentials->hasAccess('mod')) {
+                $this->navigation->addToBar(
+                    ['title' => 'View Environments', 'slug' => 'environments', 'icon' => 'th-large']
+                );
+            }
+
             // add the create user link
             if ($this->credentials->hasAccess('admin')) {
                 $this->navigation->addToBar(
@@ -310,7 +316,13 @@ class NavigationSubscriber
 
             if ($this->credentials->hasAccess('edit')) {
                 $this->navigation->addToBar(
-                    ['title' => 'Create Categories', 'slug' => 'category/create', 'icon' => 'pencil']
+                    ['title' => 'Create Categories', 'slug' => 'category/', 'icon' => 'pencil']
+                );
+            }
+
+            if ($this->credentials->hasAccess('edit')) {
+                $this->navigation->addToBar(
+                    ['title' => 'Create Environment', 'slug' => 'environment/', 'icon' => 'pencil']
                 );
             }
         }
