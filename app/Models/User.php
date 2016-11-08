@@ -16,13 +16,14 @@ use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyEventsTrait;
 use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyPagesTrait;
 use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyPostsTrait;
 use GrahamCampbell\Credentials\Models\User as CredentialsUser;
+use GrahamCampbell\BootstrapCMS\Models\ModelInterface;
 
 /**
  * This is the user model class.
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class User extends CredentialsUser
+class User extends CredentialsUser implements ModelInterface
 {
     use HasManyPagesTrait, HasManyPostsTrait, HasManyEventsTrait, HasManyCommentsTrait;
 
@@ -47,5 +48,15 @@ class User extends CredentialsUser
         $this->deletePosts();
         $this->deleteEvents();
         $this->deleteComments();
+    }
+
+    /**
+     * Return class name
+     *
+     * @return string
+     */
+    public function getClassName()
+    {
+        return get_class($this);
     }
 }

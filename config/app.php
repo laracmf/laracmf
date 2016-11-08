@@ -181,6 +181,9 @@ return [
         'Laravel\Socialite\SocialiteServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+        'Nayjest\Grids\ServiceProvider',
+        'Collective\Html\HtmlServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider'
     ],
 
     /*
@@ -208,7 +211,10 @@ return [
         'DB'          => 'Illuminate\Support\Facades\DB',
         'Event'       => 'Illuminate\Support\Facades\Event',
         'File'        => 'Illuminate\Support\Facades\File',
+        'Form'        => 'Illuminate\Html\FormFacade',
+        'Grids'       => 'Nayjest\Grids\Grids',
         'Hash'        => 'Illuminate\Support\Facades\Hash',
+        'Html'        => 'Collective\Html\HtmlFacade',
         'Input'       => 'Illuminate\Support\Facades\Input',
         'Lang'        => 'Illuminate\Support\Facades\Lang',
         'Log'         => 'Illuminate\Support\Facades\Log',
@@ -222,11 +228,12 @@ return [
         'Route'       => 'Illuminate\Support\Facades\Route',
         'Schema'      => 'Illuminate\Support\Facades\Schema',
         'Session'     => 'Illuminate\Support\Facades\Session',
+        'Socialite'   => 'Laravel\Socialite\Facades\Socialite',
         'URL'         => 'Illuminate\Support\Facades\URL',
         'Validator'   => 'Illuminate\Support\Facades\Validator',
         'View'        => 'Illuminate\Support\Facades\View',
-        'Socialite'   => 'Laravel\Socialite\Facades\Socialite',
         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
+        'Excel'       => 'Maatwebsite\Excel\Facades\Excel'
 
     ],
 

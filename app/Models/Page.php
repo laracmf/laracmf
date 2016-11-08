@@ -11,7 +11,7 @@
 
 namespace GrahamCampbell\BootstrapCMS\Models;
 
-use GrahamCampbell\Credentials\Models\AbstractModel;
+use GrahamCampbell\BootstrapCMS\Models\AbstractModel;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
 use GrahamCampbell\Credentials\Models\Relations\RevisionableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
