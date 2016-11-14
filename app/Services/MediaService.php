@@ -50,8 +50,7 @@ class MediaService
             'type' => $type,
             'name' => $file->getClientOriginalName(),
             'size' => $size,
-            'path' => $path,
-            'isImage' => isImage($path)
+            'path' => $path
         ];
 
         if (file_exists($path)) {
@@ -60,6 +59,7 @@ class MediaService
             $fileData['id'] = $id;
             $fileData['size'] = formatBytes($size);
             $fileData['deleteUrl'] = route('delete.media', [$id]);
+            $fileData['isImage'] = isImage($path);
         }
 
         return $fileData;
@@ -71,7 +71,7 @@ class MediaService
      * @param $data
      * @return int
      */
-    private function saveMedia($data)
+    public function saveMedia($data)
     {
         $media = new Media($data);
         $user = Credentials::getUser();

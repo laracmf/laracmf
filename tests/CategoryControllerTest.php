@@ -20,7 +20,7 @@ class CategoryControllerTest extends TestCase
                 'expected' => 'Category Name',
             ],
             'testShowCreateFormFailed' => [
-                'id' => 2,
+                'id' => 3,
                 'expected' => 'Redirecting to',
             ]
         ];
@@ -38,7 +38,7 @@ class CategoryControllerTest extends TestCase
                 'expected' => '<input name="name" id="name" value="test" type="text"',
             ],
             'testEditCategoryFormFailed' => [
-                'id' => 2,
+                'id' => 3,
                 'expected' => 'Redirecting to',
             ]
         ];
