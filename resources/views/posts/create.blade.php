@@ -13,7 +13,7 @@ Create Post
 @section('content')
 <div class="well">
     <?php
-    $form = ['url' => URL::route('blog.posts.store'),
+    $form = ['url' => route('blog.posts.store'),
         'method' => 'POST',
         'button' => 'Create New Post',
         'defaults' => [
@@ -24,12 +24,4 @@ Create Post
     ?>
     @include('posts.form')
 </div>
-@stop
-
-@section('css')
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/css/bootstrap-markdown.min.css">
-@stop
-
-@section('js')
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/js/bootstrap-markdown.min.js"></script>
 @stop

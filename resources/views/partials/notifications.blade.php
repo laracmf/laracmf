@@ -1,15 +1,8 @@
 @if (isset($errors) && count($errors->all()) > 0)
-<<<<<<< HEAD
 <div class="alert alert-danger cms-alert">
     <a class="close" data-dismiss="alert">×</a>
     Please check the form below for errors
 </div>
-=======
-    <div class="alert alert-danger cms-alert">
-        <a class="close" data-dismiss="alert">×</a>
-        Please check the form below for errors
-    </div>
->>>>>>> breadcrumbs
 @endif
 
 <?php $types = ['success', 'error', 'warning', 'info']; ?>

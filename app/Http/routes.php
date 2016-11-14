@@ -92,14 +92,26 @@ Route::group(['middleware' => ['access']], function () use ($router) {
             'uses' => 'CategoryController@searchCategories'
         ]);
 
-        $router->get('/environments', ['as' => 'show.environments.list', 'uses' => 'ConfigurationController@showEnvironments']);
+        $router->get(
+            '/environments',
+            [
+                'as' => 'show.environments.list',
+                'uses' => 'ConfigurationController@showEnvironments'
+            ]
+        );
 
         Route::group(['prefix' => 'environment'], function () use ($router) {
             $router->post('/', ['as' => 'create.environment', 'uses' => 'ConfigurationController@createEnvironment']);
             $router->get('/{name}', ['as' => 'show.edit.form', 'uses' => 'ConfigurationController@showEditForm']);
             $router->get('/', ['as' => 'show.create.form', 'uses' => 'ConfigurationController@showCreateForm']);
             $router->put('/{name}', ['as' => 'edit.environment', 'uses' => 'ConfigurationController@editEnvironment']);
-            $router->delete('/{name}', ['as' => 'delete.environment', 'uses' => 'ConfigurationController@deleteEnvironment']);
+            $router->delete(
+                '/{name}',
+                [
+                    'as' => 'delete.environment',
+                    'uses' => 'ConfigurationController@deleteEnvironment'
+                ]
+            );
         });
 
         Route::group(['prefix' => 'media'], function () use ($router) {

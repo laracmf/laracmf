@@ -1,0 +1,99 @@
+#githubLink {
+	width: 90px;
+}
+
+.half {
+	width: 50%;
+	margin: auto;
+}
+
+.env, .env:hover, .env:focus {
+	color: white;
+	text-decoration: none;
+}
+
+.env .btn-primary {
+	width: 90%;
+	display: inline-block;
+	margin: 5px;
+}
+
+.env .delete {
+	display: inline-block;
+}
+
+.env-table {
+	border-collapse: separate;
+	border-spacing: 5px;
+	margin: auto;
+}
+
+table th {
+	text-align: center;
+}
+
+.centering {
+	margin: auto;
+}
+
+.centering button {
+	width: 50%;
+	padding: 10px;
+}
+
+.fileUpload {
+	position: relative;
+	overflow: hidden;
+	margin: 10px;
+}
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+}
+
+.bar {
+	height: 18px;
+	background: green;
+}
+
+.img-block {
+	display: inline-block;
+	padding: 5px;
+}
+
+.img-block-modal img {
+	max-width: 100%
+}
+
+.img-minimized img {
+	max-width: 250px;
+	max-height: 200px;
+}
+
+.img-minimized {
+	position: relative;
+}
+
+.img-minimized > .delete {
+	position: absolute;
+	top: 3px;
+	color: red;
+	right: 7px;
+	z-index: 100;
+}
+
+img {
+	position: relative;
+	width: inherit;
+	height: inherit;
+}
+
+ul li {
+	list-style-type: none;
+}

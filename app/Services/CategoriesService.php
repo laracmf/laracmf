@@ -45,9 +45,11 @@ class CategoriesService
         return CategoriesPages::join('pages', 'pages.id', '=', 'categories_pages.page_id')
             ->join('categories', 'categories.id', '=', 'categories_pages.category_id')
             ->where('categories.id', '=', $category->id)
-            ->get([
-                'pages.id',
-                'pages.title'
-            ]);
+            ->get(
+                [
+                    'pages.id',
+                    'pages.title'
+                ]
+            );
     }
 }

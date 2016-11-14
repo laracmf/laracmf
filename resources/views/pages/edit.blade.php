@@ -19,14 +19,14 @@ Edit {{ $page->title }}
     </div>
     <div class="col-xs-6">
         <div class="pull-right">
-            <a class="btn btn-success" href="{!! URL::route('pages.show', array('pages' => $page->slug)) !!}"><i class="fa fa-file-text"></i> Show Page</a> <a class="btn btn-danger" href="#delete_page" data-toggle="modal" data-target="#delete_page"><i class="fa fa-times"></i> Delete Page</a>
+            <a class="btn btn-success" href="{!! route('pages.show', array('pages' => $page->slug)) !!}"><i class="fa fa-file-text"></i> Show Page</a> <a class="btn btn-danger" href="#delete_page" data-toggle="modal" data-target="#delete_page"><i class="fa fa-times"></i> Delete Page</a>
         </div>
     </div>
 </div>
 <hr>
 <div class="well">
     <?php
-    $form = ['url' => URL::route('pages.update', ['pages' => $page->slug]),
+    $form = ['url' => route('pages.update', ['pages' => $page->slug]),
         '_method' => 'PATCH',
         'method' => 'POST',
         'button' => 'Save Page',
@@ -51,17 +51,4 @@ Edit {{ $page->title }}
 @auth('edit')
     @include('pages.delete')
 @endauth
-@stop
-
-@section('css')
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.min.css">
-@stop
-
-@section('js')
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function () {
-    $(".make-switch").bootstrapSwitch();
-});
-</script>
 @stop

@@ -11,9 +11,11 @@
 
 namespace GrahamCampbell\BootstrapCMS\Models;
 
+use Exception;
 use GrahamCampbell\BootstrapCMS\Models\AbstractModel;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
 use GrahamCampbell\Credentials\Models\Relations\RevisionableTrait;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
@@ -117,18 +119,22 @@ class Page extends AbstractModel implements HasPresenter
     public function beforeDelete()
     {
         if ($this->slug == 'home') {
-            throw new \Exception('You cannot delete the homepage.');
+            throw new Exception('You cannot delete the homepage.');
         }
     }
 
     /**
      * Returns current category pages.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function categories()
     {
-        return $this
-            ->belongsToMany('GrahamCampbell\BootstrapCMS\Models\Category', 'categories_pages', 'page_id', 'category_id');
+        return $this->belongsToMany(
+            'GrahamCampbell\BootstrapCMS\Models\Category',
+            'categories_pages',
+            'page_id',
+            'category_id'
+        );
     }
 }

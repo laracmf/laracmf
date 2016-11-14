@@ -36,5 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call('GrahamCampbell\BootstrapCMS\Seeds\PostsTableSeeder');
         $this->call('GrahamCampbell\BootstrapCMS\Seeds\CommentsTableSeeder');
         $this->call('GrahamCampbell\BootstrapCMS\Seeds\EventsTableSeeder');
+        $this->call('GrahamCampbell\BootstrapCMS\Seeds\CategoriesTableSeeder');
+        $this->call('GrahamCampbell\BootstrapCMS\Seeds\CategoriesPagesTableSeeder');
     }
 }

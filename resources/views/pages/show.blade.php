@@ -20,7 +20,7 @@
                 <p>
                     <strong>Page Owner:</strong> {!! $page->owner !!}
                 </p>
-                <a class="btn btn-info" href="{!! URL::route('pages.edit', array('pages' => $page->slug)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Page</a> <a class="btn btn-danger" href="#delete_page" data-toggle="modal" data-target="#delete_page"><i class="fa fa-times"></i> Delete Page</a>
+                <a class="btn btn-info" href="{!! route('pages.edit', array('pages' => $page->slug)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Page</a> <a class="btn btn-danger" href="#delete_page" data-toggle="modal" data-target="#delete_page"><i class="fa fa-times"></i> Delete Page</a>
             </div>
             <div class="col-xs-6">
                 <div class="pull-right">
@@ -44,7 +44,7 @@
                 <p>
                     <strong>Last Updated:</strong> {!! html_ago($page->updated_at) !!}
                 </p>
-                <a class="btn btn-info" href="{!! URL::route('pages.edit', array('pages' => $page->slug)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Page</a> <a class="btn btn-danger" href="#delete_page" data-toggle="modal" data-target="#delete_page"><i class="fa fa-times"></i> Delete Page</a>
+                <a class="btn btn-info" href="{!! route('pages.edit', array('pages' => $page->slug)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Page</a> <a class="btn btn-danger" href="#delete_page" data-toggle="modal" data-target="#delete_page"><i class="fa fa-times"></i> Delete Page</a>
             </div>
         </div>
     </div>

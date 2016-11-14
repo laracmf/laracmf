@@ -4,7 +4,7 @@ namespace GrahamCampbell\BootstrapCMS\Http\Requests;
 
 use GrahamCampbell\BootstrapCMS\Http\Requests\Request;
 
-class ConfigutationRequest extends Request
+class ConfigurationRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

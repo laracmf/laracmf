@@ -13,27 +13,39 @@ class ConfigurationsService
      */
     public function getEnvironmentsList()
     {
-        return array_map(function ($fileName) {
-            return explode('.', $fileName)[2];
-        }, array_diff(scandir(config('app.env_path')), ['.', '..']));
+        return array_map(
+            function ($fileName) {
+                return explode('.', $fileName)[2];
+            },
+            array_diff(scandir(config('app.env_path')), ['.', '..'])
+        );
     }
 
     /**
      * Get file data.
      *
-     * @return array
+     * @return array|bool
      */
     public function getEnvironment($name)
     {
+        if (!$this->fileExists($name)) {
+            return false;
+        }
+
         $params = explode("\n", file_get_contents(config('app.env_path') . '/' . $this->getFileName($name)));
-        $params = array_filter($params, function($value) { return $value !== ''; });
+        $params = array_filter(
+            $params,
+            function ($value) {
+                return $value !== '';
+            }
+        );
 
         $result = [];
 
         foreach ($params as $param) {
             $keyValue = explode('=', $param);
 
-            if (count($keyValue) >=2) {
+            if (count($keyValue) >= 2) {
                 $result[$keyValue[0]] = $keyValue[1];
             }
         }
@@ -44,24 +56,25 @@ class ConfigurationsService
     /**
      * Save config data into file.
      *
-     * @param Request $request
+     * @param $data
      * @param $name
      *
      * @return bool|int
      */
-    public function writeData(Request $request, $name = null)
+    public function writeData($data, $name = null)
     {
-        $keys = $request->get('keys');
-        $values = $request->get('values');
-        $formName = $request->get('name');
+        $keys = array_get($data, 'keys', []);
+        $values = array_get($data, 'values', []);
+        $formName = array_get($data, 'name', '');
 
-        if ($name && ($name !== $formName)) {
+        if ($name && ($name !== $formName) && $this->fileExists($name)) {
             unlink(config('app.env_path') . '/' . $this->getFileName($name));
         }
 
-        $file = config('app.env_path') . '/' . $this->getFileName($formName);
-
-        return file_put_contents($file, $this->createAssociations($keys, $values));
+        return file_put_contents(
+            config('app.env_path') . '/' . $this->getFileName($formName),
+            $this->createAssociations($keys, $values)
+        );
     }
 
     /**
@@ -108,5 +121,17 @@ class ConfigurationsService
     public function getFileName($name)
     {
         return '.env.' . $name;
+    }
+
+    /**
+     * Check whether file exists or not.
+     *
+     * @param $fileName
+     *
+     * @return bool
+     */
+    public function fileExists($fileName)
+    {
+        return file_exists(config('app.env_path') . '/' . $this->getFileName($fileName));
     }
 }

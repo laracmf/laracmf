@@ -63,7 +63,7 @@ class GridService
 
         $config = $this->setColumns($fields, $config);
 
-        $config = !$components ? $config : $this->setComponents($config, $components);
+        $config = !$components || !is_array($components) ? $config : $this->setComponents($config, $components);
 
         $grid = new Grid($config);
 
@@ -90,13 +90,16 @@ class GridService
             }
         }
 
-        $columns = array_merge([
-            (new FieldConfig)
-                ->setName('id')
-                ->setLabel('ID')
-                ->setSortable(true)
-                ->setSorting(Grid::SORT_ASC)
-        ], $columns);
+        $columns = array_merge(
+            [
+                (new FieldConfig)
+                    ->setName('id')
+                    ->setLabel('ID')
+                    ->setSortable(true)
+                    ->setSorting(Grid::SORT_ASC)
+            ],
+            $columns
+        );
 
         return $config->setColumns($columns);
     }
