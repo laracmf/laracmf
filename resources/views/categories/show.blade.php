@@ -18,7 +18,7 @@
         @auth('admin')
         <div class="col-xs-4">
             <div class="pull-right">
-                <a class="btn btn-primary" href="{!! URL::route('show.create.category.page') !!}"><i class="fa fa-folder"></i> New Category</a>
+                <a class="btn btn-primary" href="{!! route('show.create.category.page') !!}"><i class="fa fa-folder"></i> New Category</a>
             </div>
         </div>
         @endauth

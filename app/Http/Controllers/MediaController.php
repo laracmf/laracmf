@@ -57,10 +57,7 @@ class MediaController extends AbstractController
     {
         $media = Media::find($id);
 
-        if ($media) {
-            unlink($media->path);
-            $media->delete();
-
+        if ($this->mediaService->deleteMedia($media)) {
             flash()->success('Media was deleted!');
 
             return $this->response(true);

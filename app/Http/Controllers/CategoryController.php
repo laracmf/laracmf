@@ -16,6 +16,7 @@ use GrahamCampbell\BootstrapCMS\Models\Category;
 use GrahamCampbell\BootstrapCMS\Services\CategoriesService;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Input;
 
 /**
  * This is the comment controller class.
@@ -69,8 +70,8 @@ class CategoryController extends AbstractController
      */
     public function createCategory(CategoryRequest $request)
     {
-        $pages = $request->get('pages');
-        $category = new Category(['name' => $request->get('name')]);
+        $pages = $request->input('pages');
+        $category = new Category(['name' => $request->input('name')]);
         $category->save();
 
         if ($category) {
@@ -91,7 +92,7 @@ class CategoryController extends AbstractController
      */
     public function deleteCategory()
     {
-        $id = Request::get('id');
+        $id = Input::get('id');
 
         $category = Category::find($id);
 
@@ -159,6 +160,6 @@ class CategoryController extends AbstractController
      */
     protected function searchCategories()
     {
-        return Category::where('name', 'like', Request::get('query') . '%')->get(['id', 'name as text']);
+        return Category::where('name', 'like', Request::input('query') . '%')->get(['id', 'name as text']);
     }
 }

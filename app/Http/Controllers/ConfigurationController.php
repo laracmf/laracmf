@@ -4,7 +4,7 @@ namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
 
 use GrahamCampbell\BootstrapCMS\Services\ConfigurationsService;
 use Illuminate\Http\Request;
-use GrahamCampbell\BootstrapCMS\Http\Requests\ConfigutationRequest;
+use GrahamCampbell\BootstrapCMS\Http\Requests\ConfigurationRequest;
 
 /**
  * This is the comment controller class.
@@ -48,10 +48,14 @@ class ConfigurationController extends AbstractController
      */
     public function showEditForm($name)
     {
-        return view('config.edit', [
-            'environment' => $this->configurationsService->getEnvironment($name),
-            'name' => $name
-        ]);
+        if ($env = $this->configurationsService->getEnvironment($name)) {
+            return view('config.edit', [
+                'environment' => $env,
+                'name' => $name
+            ]);
+        }
+
+        return redirect()->back();
     }
 
     public function showCreateForm()
@@ -62,15 +66,15 @@ class ConfigurationController extends AbstractController
     /**
      * Edit configuration file.
      *
-     * @param ConfigutationRequest $request
+     * @param ConfigurationRequest $request
      * @param $name
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function editEnvironment(ConfigutationRequest $request, $name)
+    public function editEnvironment(ConfigurationRequest $request, $name)
     {
         $flash = ['level' => 'success', 'message' => 'File successfully edited.'];
 
-        if (!$this->configurationsService->writeData($request, $name)) {
+        if (!$this->configurationsService->writeData($request->all(), $name)) {
             $flash = ['level' => 'error', 'message' => 'Something went wrong, please, resubmit data.'];
         }
 
@@ -83,14 +87,14 @@ class ConfigurationController extends AbstractController
     /**
      * Create new config file
      *
-     * @param ConfigutationRequest $request
+     * @param ConfigurationRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function createEnvironment(ConfigutationRequest $request)
+    public function createEnvironment(ConfigurationRequest $request)
     {
         $flash = ['level' => 'success', 'message' => 'File successfully created.'];
 
-        if (!$this->configurationsService->writeData($request)) {
+        if (!$this->configurationsService->writeData($request->all())) {
             $flash = ['level' => 'error', 'message' => 'Something went wrong, please, resubmit data.'];
         }
 

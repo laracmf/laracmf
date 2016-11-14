@@ -25,10 +25,13 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.1/jquery.timeago.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/js/bootstrap-markdown.min.js"></script>
 <script type="text/javascript" src="{{ asset('assets/scripts/select2.full.min.js') }}"></script>
 <script src="{{ asset('assets/scripts/jquery.ui.widget.js') }}"></script>
 <script src="{{ asset('assets/scripts/jquery.iframe-transport.js') }}"></script>
 <script src="{{ asset('assets/scripts/jquery.fileupload.js') }}"></script>
+<script src="{{ asset('assets/scripts/script.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/scripts/cms-main.js') }}"></script>
 @section('js')
 @show

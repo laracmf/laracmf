@@ -11,8 +11,6 @@
 
 namespace GrahamCampbell\BootstrapCMS\Models;
 
-use GrahamCampbell\Credentials\Models\AbstractModel;
-
 /**
  * This is the comment model class.
  *

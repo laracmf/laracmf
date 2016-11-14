@@ -13,7 +13,7 @@
 @section('content')
     <p class="lead">Please enter your details:</p>
     <div class="well">
-        <form class="form-horizontal" action="{{ URL::route('account.login.post') }}" method="POST">
+        <form class="form-horizontal" action="{{ route('account.login.post') }}" method="POST">
 
             {{ csrf_field() }}
 
@@ -45,9 +45,9 @@
                 <div class="col-md-offset-2 col-sm-offset-3 col-sm-10 col-xs-12">
                     <button class="btn btn-primary" type="submit"><i class="fa fa-rocket"></i> Log In</button>
                     @if (Config::get('credentials.activation'))
-                        <label><a href="{!! URL::route('account.reset') !!}" class="btn btn-link">Forgot Password?</a>/<a href="{!! URL::route('account.resend') !!}" class="btn btn-link">Not Activated?</a></label>
+                        <label><a href="{!! route('account.reset') !!}" class="btn btn-link">Forgot Password?</a>/<a href="{!! route('account.resend') !!}" class="btn btn-link">Not Activated?</a></label>
                     @else
-                        <label><a href="{!! URL::route('account.reset') !!}" class="btn btn-link">Forgot Password?</a></label>
+                        <label><a href="{!! route('account.reset') !!}" class="btn btn-link">Forgot Password?</a></label>
                     @endif
                 </div>
                 <div class="col-md-offset-2 col-sm-offset-3 col-sm-10 col-xs-12">

@@ -33,6 +33,13 @@ class CommentTest extends AbstractTestCase
 
     public function testIndexSuccess()
     {
-        $this->visit('blog/posts/1/comments')->see('[{"comment_id":"1","comment_ver":"1"}]');
+        $this->visit('blog/posts/1/comments')->seeJsonEquals(
+            [
+                [
+                    'comment_id' => 1,
+                    'comment_ver' => 1
+                ]
+            ]
+        );
     }
 }

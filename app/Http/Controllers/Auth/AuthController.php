@@ -90,7 +90,8 @@ class AuthController extends AbstractController
             });
 
             $flash = [
-                'message' => 'Account has successfully created. To complete your registration check the mail ' . $model->email,
+                'message' => 'Account has successfully created. To complete your registration check the mail ' .
+                    $model->email,
                 'level' => 'success'
             ];
         }
@@ -114,9 +115,7 @@ class AuthController extends AbstractController
             return view('auth.registerComplete', ['userId' => $user->id]);
         }
 
-        flash()->warning(
-            'Token invalid!'
-        );
+        flash()->warning('Token invalid!');
 
         return redirect()->route('base');
     }
@@ -138,22 +137,29 @@ class AuthController extends AbstractController
         ];
 
         if ($user) {
-            $user->setAttribute('password', $request->password);
-            $user->setAttribute('persist_code', $user->getRandomString());
-            $user->activation_code = $user->getRandomString();
-            $user->confirm_token = null;
+            if (!$user->activated) {
+                $user->setAttribute('password', $request->password);
+                $user->setAttribute('persist_code', $user->getRandomString());
+                $user->activation_code = $user->getRandomString();
+                $user->confirm_token = null;
 
-            $user->save();
+                $user->save();
 
-            $user->attemptActivation($user->getActivationCode());
-            $user->addGroup(Credentials::getGroupProvider()->findByName('Users'));
+                $user->attemptActivation($user->getActivationCode());
+                $user->addGroup(Credentials::getGroupProvider()->findByName('Users'));
 
-            Credentials::login($user);
+                Credentials::login($user);
 
-            $flash = [
-                'message' => 'User activated!',
-                'level' => 'success'
-            ];
+                $flash = [
+                    'message' => 'User activated!',
+                    'level' => 'success'
+                ];
+            } else {
+                $flash = [
+                    'message' => 'User already activated!',
+                    'level' => 'warning'
+                ];
+            }
         }
 
         flash()->{$flash['level']}($flash['message']);

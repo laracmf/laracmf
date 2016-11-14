@@ -37,7 +37,7 @@
                                 @endforeach
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="{!! URL::route('account.logout') !!}">
+                                    <a href="{!! route('account.logout') !!}">
                                         <i class="fa fa-power-off fa-fw"></i> Logout
                                     </a>
                                 </li>
@@ -45,13 +45,13 @@
                         </li>
                     @else
                         <li {!! (Request::is('account/login') ? 'class="active"' : '') !!}>
-                            <a href="{!! URL::route('account.login') !!}">
+                            <a href="{!! route('account.login') !!}">
                                 Login
                             </a>
                         </li>
                         @if (Config::get('credentials.regallowed'))
                             <li {!! (Request::is('account/register') ? 'class="active"' : '') !!}>
-                                <a href="{!! URL::route('account.register') !!}">
+                                <a href="{!! route('account.register') !!}">
                                     Register
                                 </a>
                             </li>

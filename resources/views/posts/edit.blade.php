@@ -19,14 +19,14 @@ Edit {{ $post->title }}
     </div>
     <div class="col-xs-6">
         <div class="pull-right">
-            <a class="btn btn-success" href="{!! URL::route('blog.posts.show', array('posts' => $post->id)) !!}"><i class="fa fa-file-text"></i> Show Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
+            <a class="btn btn-success" href="{!! route('blog.posts.show', array('posts' => $post->id)) !!}"><i class="fa fa-file-text"></i> Show Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
         </div>
     </div>
 </div>
 <hr>
 <div class="well">
     <?php
-    $form = ['url' => URL::route('blog.posts.update', ['posts' => $post->id]),
+    $form = ['url' => route('blog.posts.update', ['posts' => $post->id]),
         '_method' => 'PATCH',
         'method' => 'POST',
         'button' => 'Save Post',
@@ -44,12 +44,4 @@ Edit {{ $post->title }}
 @auth('blog')
     @include('posts.delete')
 @endauth
-@stop
-
-@section('css')
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/css/bootstrap-markdown.min.css">
-@stop
-
-@section('js')
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/js/bootstrap-markdown.min.js"></script>
 @stop

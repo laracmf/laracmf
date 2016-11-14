@@ -19,34 +19,50 @@ class MediaService
         $filesInfo = [];
 
         foreach ($files as $file) {
-            $fileName = $file->getFilename() . '.' . $file->getClientOriginalExtension();
-            $type = $file->getClientMimeType();
-            $size =  $file->getClientSize();
-
-            if ($this->checkOnSize($size) && $this->checkOnType($type)) {
-                $path = ($file->move(config('uploads.upload_dir'), $fileName))->getPathname();
-
-                $fileData = [
-                    'type' => $type,
-                    'name' => $file->getClientOriginalName(),
-                    'size' => $size,
-                    'path' => $path,
-                    'isImage' => isImage($path)
-                ];
-
-                if (file_exists($path)) {
-                    $id = $this->saveMedia($fileData);
-
-                    $fileData['id'] = $id;
-                    $fileData['size'] = formatBytes($size);
-                    $fileData['deleteUrl'] = route('delete.media', [$id]);
-
-                    $filesInfo[] = $fileData;
-                }
+            if ($uploadedFile = $this->uploadFile($file)) {
+                $filesInfo[] = $uploadedFile;
             }
         }
 
         return $filesInfo;
+    }
+
+    /**
+     * Upload file
+     *
+     * @param UploadedFile $file
+     *
+     * @return array|bool
+     */
+    public function uploadFile($file)
+    {
+        $fileName = $file->getFilename() . '.' . $file->getClientOriginalExtension();
+        $type = $file->getClientMimeType();
+        $size =  $file->getClientSize();
+
+        if (!$this->checkOnSize($size) && !$this->checkOnType($type)) {
+            return false;
+        }
+
+        $path = ($file->move(config('uploads.upload_dir'), $fileName))->getPathname();
+
+        $fileData = [
+            'type' => $type,
+            'name' => $file->getClientOriginalName(),
+            'size' => $size,
+            'path' => $path,
+            'isImage' => isImage($path)
+        ];
+
+        if (file_exists($path)) {
+            $id = $this->saveMedia($fileData);
+
+            $fileData['id'] = $id;
+            $fileData['size'] = formatBytes($size);
+            $fileData['deleteUrl'] = route('delete.media', [$id]);
+        }
+
+        return $fileData;
     }
 
     /**
@@ -89,5 +105,23 @@ class MediaService
     public function checkOnType($type)
     {
         return in_array($type, config('uploads.allowed_types'));
+    }
+
+    /**
+     * Delete media.
+     *
+     * @param Media $media
+     *
+     * @return bool
+     */
+    public function deleteMedia(Media $media)
+    {
+        if ($media) {
+            unlink($media->path);
+
+            return $media->delete();
+        }
+
+        return false;
     }
 }
