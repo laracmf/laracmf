@@ -29,6 +29,9 @@ class CategoriesPagesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('categories_pages')->truncate();
+
         DB::table('categories_pages')->insert(
             [
                 [
@@ -49,5 +52,7 @@ class CategoriesPagesTableSeeder extends Seeder
                 ]
             ]
         );
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

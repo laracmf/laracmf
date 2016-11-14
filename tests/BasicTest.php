@@ -18,7 +18,7 @@ use Illuminate\Contracts\Console\Kernel;
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class BasicTest extends AbstractTestCase
+class BasicTest extends TestCase
 {
     /**
      * @before

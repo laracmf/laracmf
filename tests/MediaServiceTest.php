@@ -24,24 +24,43 @@ class MediaServiceTest extends TestCase
         config(['uploads.upload_dir' => 'public/uploads']);
     }
 
+    /**
+     * Test upload files
+     */
     public function testUploadMedia()
     {
-        $files = [
-            new UploadedFile(
-                'resources/assets/images/github.png',
-                'github.png',
-                'image/jpeg',
-                5007
-            )
-        ];
+        $this->authenticateUser(1);
 
-        $this->assertEquals(['dddd'], $this->mediaService->uploadMedia($files));
+        $uploadedFile = new UploadedFile(
+            'resources/assets/test-files/testImage',
+            'testImage.png',
+            'image/png',
+            5007,
+            null,
+            true
+        );
+
+        $this->assertArrayHasKey('path', ($this->mediaService->uploadMedia([$uploadedFile]))[0]);
+
+        copy('public/uploads/testImage.png', 'resources/assets/test-files/testImage');
     }
 
+    /**
+     * Test delete media
+     */
     public function testDeleteMedia()
     {
-        $media = Media::where('name', '=', 'github.png')->first();
+        $this->authenticateUser(1);
 
-        $this->assertTrue($this->mediaService->deleteMedia($media));
+        $data = [
+            'type'    => 'image/png',
+            'name'    => 'testImage',
+            'size'    => 100,
+            'path'    => 'public/uploads/testImage.png'
+        ];
+
+        $mediaId = $this->mediaService->saveMedia($data);
+
+        $this->assertTrue($this->mediaService->deleteMedia(Media::find($mediaId)));
     }
 }
