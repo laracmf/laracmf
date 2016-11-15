@@ -13,8 +13,13 @@
         {
             "type": "vcs",
             "url": "https://github.com/BootstrapCMS/Sentry"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Kit-kat1/Credentials"
         }
     ],
+    "require-all": true,
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "~5.1.10",
@@ -22,7 +27,7 @@
         "graham-campbell/binput": "~3.0",
         "graham-campbell/contact": "~1.0",
         "graham-campbell/core": "~4.0",
-        "graham-campbell/credentials": "~1.0",
+        "graham-campbell/credentials": "dev-master",
         "graham-campbell/exceptions": "~4.0",
         "graham-campbell/htmlmin": "~4.0",
         "graham-campbell/logviewer": "~1.0",
