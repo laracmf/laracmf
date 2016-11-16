@@ -20,14 +20,18 @@ $(document).ready(function () {
     $('div.alert').not('.alert-important').delay(5000).fadeOut(350);
 
     $(document).on('click', '.delete', function () {
+        var token = $("input[name='_token']").val();
+
         $.ajax({
             type: "DELETE",
             url: $(this).data('url'),
-            data: []
-        })
-            .success(function (data) {
+            data: {
+                _token: token
+            },
+            success: function (data) {
                 location.reload();
-            })
+            }
+        });
     });
 
     $(document).on('click', '.delete-pair', function (event) {
@@ -97,11 +101,14 @@ $(document).ready(function () {
     });
 
     $('#contact-submit').on('click', function () {
+        var token = $("input[name='_token']").val();
+
         $.ajax({
             type: "POST",
             url: $(this).data('url'),
             data: {
-                body: $('#body').val()
+                body: $('#body').val(),
+                _token: token
             },
             success: function(data, status, xhr) {
                 if (!xhr.responseJSON) {

@@ -1,13 +1,16 @@
 var pk = 0;
 
 function cmsCommentSubmit() {
+    var token = $("input[name='_token']").val();
+
     $.ajax({
         url: $("#comments").data("url") + '/' + this.pk,
         type: 'PUT',
         dataType: 'json',
         data: {
             body: $('#edit_body').val(),
-            version: $('#version').val()
+            version: $('#version').val(),
+            _token: token
         },
         clearForm: true,
         resetForm: true,

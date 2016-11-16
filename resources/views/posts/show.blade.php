@@ -76,6 +76,7 @@
     @auth('user')
     <br>
     <div class="well well-sm clearfix">
+        {{ csrf_field() }}
         <div class="form-group">
             <div class="col-xs-12">
                 <textarea id="body" name="body" class="form-control comment-box" placeholder="Type a comment..." rows="3"></textarea>

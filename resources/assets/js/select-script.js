@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    var token = $("input[name='_token']").val();
+
     $(".selectPages").select2({
         tags: true,
         tokenSeparators: [',', ' '],
@@ -9,7 +11,8 @@ $(document).ready(function () {
             dataType: 'json',
             data: function(params, page) {
                 return {
-                    query: params.term
+                    query: params.term,
+                    _token: token
                 };
             },
             processResults: function(data, page) {
@@ -22,6 +25,8 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    var token = $("input[name='_token']").val();
+
     $(".selectCategories").select2({
         tags: true,
         tokenSeparators: [',', ' '],
@@ -32,7 +37,8 @@ $(document).ready(function () {
             dataType: 'json',
             data: function(params, page) {
                 return {
-                    query: params.term
+                    query: params.term,
+                    _token: token
                 };
             },
             processResults: function(data, page) {

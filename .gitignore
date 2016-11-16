@@ -10,5 +10,6 @@ npm-debug.log
 .vagrant
 composer.phar
 /public/vendor
+/public/build
 bower_components/
 /.project

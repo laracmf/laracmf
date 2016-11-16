@@ -1,8 +1,13 @@
 function cmsCommentDeleteSubmit(that) {
+    var token = $("input[name='_token']").val();
+
     $.ajax({
         url: $(that).attr("href"),
         type: 'DELETE',
         dataType: "json",
+        data: {
+            _token: token
+        },
         success: function(data, status, xhr) {
             if (!xhr.responseJSON) {
                 cmsCommentLock = false;
