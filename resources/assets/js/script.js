@@ -1,83 +1,6 @@
 var baseURL = window.location.origin;
 
 $(document).ready(function () {
-    $(".make-switch").bootstrapSwitch();
-    var title = $('#title');
-    title.keyup(function (e) {
-        val = title.val();
-        $("#nav_title").val(val);
-        var slug = val.replace(/[^a-zA-Z0-9\s]/g, '')
-            .replace(/^\s+|\s+$/, '')
-            .replace(/\s+/g, '-')
-            .toLowerCase();
-        $("#slug").val(slug);
-    });
-});
-
-$(document).ready(function () {
-    $('div.alert').not('.alert-important').delay(5000).fadeOut(350);
-});
-
-$(document).ready(function () {
-    $(".selectPages").select2({
-        tags: true,
-        tokenSeparators: [',', ' '],
-        placeholder: 'Pages',
-        multiple: true,
-        ajax: {
-            url: baseURL + '/search/pages',
-            dataType: 'json',
-            data: function(params, page) {
-                return {
-                    query: params.term
-                };
-            },
-            processResults: function(data, page) {
-                return {
-                    results: data
-                };
-            }
-        }
-    });
-});
-
-$(document).ready(function () {
-    $(".selectCategories").select2({
-        tags: true,
-        tokenSeparators: [',', ' '],
-        placeholder: 'Pages',
-        multiple: true,
-        ajax: {
-            url: baseURL + '/search/categories',
-            dataType: 'json',
-            data: function(params, page) {
-                return {
-                    query: params.term
-                };
-            },
-            processResults: function(data, page) {
-                return {
-                    results: data
-                };
-            }
-        }
-    });
-});
-
-$(document).ready(function () {
-    $(document).on('click', '.delete', function () {
-        $.ajax({
-            type: "DELETE",
-            url: $(this).data('url'),
-            data: []
-        })
-            .success(function (data) {
-                location.reload();
-            })
-    });
-});
-
-$(document).ready(function () {
     $('.add-new-pair').on('click', function () {
         $('table tr:last').after(
             '<tr>' +
@@ -94,31 +17,21 @@ $(document).ready(function () {
         );
     });
 
-    $(document).on('click', '.delete-pair', function (event) {
-        $(this).closest('tr').remove();
+    $('div.alert').not('.alert-important').delay(5000).fadeOut(350);
+
+    $(document).on('click', '.delete', function () {
+        $.ajax({
+            type: "DELETE",
+            url: $(this).data('url'),
+            data: []
+        })
+            .success(function (data) {
+                location.reload();
+            })
     });
 
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-            $.each(data.result, function (index, file) {
-                var $partial = '<b>' + file.name + '</b>';
-
-                if (file.isImage) {
-                    $partial = '<img src="' + file.path + '">';
-                }
-
-                $('.well').append('<div class="img-block img-minimized"' +
-                    ' data-url="' + file.deleteUrl + '"' +
-                    ' data-name="' + file.name + '"' +
-                    ' data-size="' + file.size + '"' +
-                    ' data-type="' + file.type + '"' +
-                    ' data-path="' + file.path + '"' +
-                    ' data-is_image="' + file.isImage + '">' +
-                    $partial +
-                    '</div>');
-            });
-        }
+    $(document).on('click', '.delete-pair', function (event) {
+        $(this).closest('tr').remove();
     });
 
     $(document).on('click', '.img-minimized', function (event) {
