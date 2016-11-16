@@ -79,12 +79,12 @@ class CategoryController extends AbstractController
                 $this->categoriesService->saveCategoryPages($category, $pages);
             }
 
-            flash()->{'success'}('Category successfully created.');
+            flash()->success('Category successfully created.');
 
             return redirect()->route('show.categories');
         }
 
-        flash()->{'warning'}('Something went wrong. Please, resubmit form.');
+        flash()->warning('Something went wrong. Please, resubmit form.');
 
         return redirect()->back();
     }
@@ -97,12 +97,23 @@ class CategoryController extends AbstractController
         $id = Input::get('id');
 
         $category = Category::find($id);
+        $flash = [
+            'level' => 'warning',
+            'message' => 'Ooops, something went wrong.'
+        ];
 
         if ($category) {
             $this->categoriesService->deleteCategoryPages($category);
 
-            $category->delete();
+            if ($category->delete()) {
+                $flash = [
+                    'level' => 'success',
+                    'message' => 'Category successfully deleted.'
+                ];
+            }
         }
+
+        flash()->{$flash['level']}($flash['message']);
     }
 
     /**
@@ -121,7 +132,7 @@ class CategoryController extends AbstractController
             return view('categories.edit', ['category' => $category, 'id' => $id]);
         }
 
-        flash()->{'warning'}('There is no category with id ' . $id);
+        flash()->warning('There is no category with id ' . $id);
 
         return redirect()->back();
     }
@@ -148,12 +159,12 @@ class CategoryController extends AbstractController
                 $this->categoriesService->saveCategoryPages($category, $pages);
             }
 
-            flash()->{'success'}('Category successfully updated.');
+            flash()->success('Category successfully updated.');
 
             return redirect()->route('show.categories');
         }
 
-        flash()->{'warning'}('Something went wrong. Please, resubmit form.');
+        flash()->warning('Something went wrong. Please, resubmit form.');
 
         return redirect()->back();
     }

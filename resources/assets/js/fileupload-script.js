@@ -1,5 +1,8 @@
 $(document).ready(function () {
-    $('#fileupload').fileupload({
+    var token = $("input[name='_token']").val();
+    var $fileupload = $('#fileupload');
+
+    $fileupload.fileupload({
         dataType: 'json',
         done: function (e, data) {
             $.each(data.result, function (index, file) {
@@ -20,5 +23,11 @@ $(document).ready(function () {
                     '</div>');
             });
         }
+    });
+
+    $fileupload.bind('fileuploadsubmit', function (e, data) {
+        data.formData = {
+            _token: token
+        };
     });
 });

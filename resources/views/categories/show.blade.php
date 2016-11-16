@@ -26,6 +26,7 @@
     <hr>
     <div class="well">
         <table class="table">
+            {{ csrf_field() }}
             <thead>
             <th>Name</th>
             <th>Options</th>
