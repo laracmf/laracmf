@@ -72,6 +72,5 @@ elixir(function (mix) {
             'cms-main.css',
             'style.css'
         ], stylesPath + 'all.css')
-        .version([stylesPath + 'all.css', scriptsPath + 'all.js'])
-        .stylesIn(stylesPath);
+        .version([stylesPath + 'all.css', scriptsPath + 'all.js']);
 });
