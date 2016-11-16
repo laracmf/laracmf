@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 $router->filter('throttle.comment', function ($route, $request) {
     // check if we've reached the rate limit, but don't hit the throttle yet
     // we can hit the throttle later on in the if validation passes
-    if (!Throttle::check($request, 10, 1)) {
-        throw new TooManyRequestsHttpException(60, 'Rate limit exceeded.');
-    }
+//    if (!Throttle::check($request, 1000000000, 100000)) {
+//        throw new TooManyRequestsHttpException(60, 'Rate limit exceeded.');
+//    }
 });

@@ -14,8 +14,10 @@ namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
 use GrahamCampbell\Binput\Facades\Binput;
 use GrahamCampbell\BootstrapCMS\Facades\CommentRepository;
 use GrahamCampbell\BootstrapCMS\Facades\PostRepository;
+use GrahamCampbell\BootstrapCMS\Models\Post;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use GrahamCampbell\Throttle\Throttlers\ThrottlerInterface;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
@@ -119,7 +121,7 @@ class CommentController extends AbstractController
 
         $contents = View::make('posts.comment', [
             'comment' => $comment,
-            'post_id' => $postId,
+            'post' => Post::find($postId),
         ]);
 
         return Response::json([
@@ -169,16 +171,16 @@ class CommentController extends AbstractController
      */
     public function update($postId, $id)
     {
-        $input = Binput::map(['edit_body' => 'body']);
+        $body = Binput::input('body');
 
-        if (CommentRepository::validate($input, array_keys($input))->fails()) {
+        if (!$body) {
             throw new BadRequestHttpException('Your comment was empty.');
         }
 
         $comment = CommentRepository::find($id);
         $this->checkComment($comment);
 
-        $version = Binput::get('version');
+        $version = Binput::input('version');
 
         if (empty($version)) {
             throw new BadRequestHttpException('No version data was supplied.');
@@ -190,7 +192,10 @@ class CommentController extends AbstractController
 
         $version++;
 
-        $comment->update(array_merge($input, ['version' => $version]));
+        $comment->body = $body;
+        $comment->version = $version;
+
+        $comment->update();
 
         return Response::json([
             'success'      => true,

@@ -86,16 +86,17 @@ class PageController extends AbstractController
     public function store()
     {
         $input = array_merge($this->getInput(), ['user_id' => Credentials::getuser()->id]);
-        $categories = Request::get('categories') ?: [];
+        $categories = Request::input('categories') ?: [];
 
         $val = PageRepository::validate($input, array_keys($input));
+
         if ($val->fails()) {
             return Redirect::route('pages.create')->withInput()->withErrors($val->errors());
         }
 
         $page = PageRepository::create($input);
 
-        if (is_array($categories)) {
+        if ($categories) {
             $this->pagesService->savePageCategories($page, $categories);
         }
 
