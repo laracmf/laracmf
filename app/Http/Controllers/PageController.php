@@ -95,7 +95,9 @@ class PageController extends AbstractController
 
         $page = PageRepository::create($input);
 
-        $this->pagesService->savePageCategories($page, $categories);
+        if (is_array($categories)) {
+            $this->pagesService->savePageCategories($page, $categories);
+        }
 
         // write flash message and redirect
         return Redirect::route('pages.show', ['pages' => $page->slug])
@@ -175,7 +177,10 @@ class PageController extends AbstractController
         }
 
         $this->pagesService->deletePageCategories($page);
-        $this->pagesService->savePageCategories($page, $categories);
+
+        if (is_array($categories)) {
+            $this->pagesService->savePageCategories($page, $categories);
+        }
 
         $page->update($input);
 

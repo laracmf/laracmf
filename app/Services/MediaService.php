@@ -5,6 +5,7 @@ namespace GrahamCampbell\BootstrapCMS\Services;
 use GrahamCampbell\BootstrapCMS\Models\Media;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class MediaService
 {
@@ -44,7 +45,12 @@ class MediaService
             return false;
         }
 
-        $path = ($file->move(config('uploads.upload_dir'), $fileName))->getPathname();
+        Storage::disk(config('filesystems.default'))->put($fileName, file_get_contents($file->getRealPath()));
+
+        /**
+         * @todo: after update to Laravel 5.2 or higher, please use Storage::url instead
+         */
+        $path = config('uploads.upload_dir') . $fileName;
 
         $fileData = [
             'type' => $type,

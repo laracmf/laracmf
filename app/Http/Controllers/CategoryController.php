@@ -75,7 +75,9 @@ class CategoryController extends AbstractController
         $category->save();
 
         if ($category) {
-            $this->categoriesService->saveCategoryPages($category, $pages);
+            if (is_array($pages)) {
+                $this->categoriesService->saveCategoryPages($category, $pages);
+            }
 
             flash()->{'success'}('Category successfully created.');
 
@@ -141,7 +143,10 @@ class CategoryController extends AbstractController
             $category->save();
 
             $this->categoriesService->deleteCategoryPages($category);
-            $this->categoriesService->saveCategoryPages($category, $pages);
+
+            if (is_array($pages)) {
+                $this->categoriesService->saveCategoryPages($category, $pages);
+            }
 
             flash()->{'success'}('Category successfully updated.');
 
