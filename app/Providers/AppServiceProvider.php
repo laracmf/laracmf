@@ -27,6 +27,7 @@ use Illuminate\Support\ServiceProvider;
 use GrahamCampbell\BootstrapCMS\Services\CategoriesService;
 use GrahamCampbell\BootstrapCMS\Services\ConfigurationsService;
 use Illuminate\Support\Facades\Validator;
+use GrahamCampbell\BootstrapCMS\Models\Page;
 
 /**
  * This is the app service provider class.
@@ -53,8 +54,22 @@ class AppServiceProvider extends ServiceProvider
             return !in_array($parameters[0], $environments);
         });
 
+        Validator::extend('ids_array', function ($attribute, $value, $parameters) {
+            $pages = unserialize($parameters[0]);
+            $model = unserialize($parameters[1]);
+
+            $modelData = $model::all();
+            $modelData = ($modelData->pluck('id'))->toArray();
+
+            return count($pages) === count(array_intersect($pages, $modelData));
+        });
+
         Validator::replacer('name_unique', function ($message) {
             return str_replace($message, 'Config with such name already exists!', $message);
+        });
+
+        Validator::replacer('ids_array', function ($message) {
+            return str_replace($message, 'Some or all pages you entered don\'t exists!', $message);
         });
     }
 

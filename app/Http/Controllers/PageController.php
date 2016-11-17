@@ -14,6 +14,7 @@ namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
 use Exception;
 use GrahamCampbell\Binput\Facades\Binput;
 use GrahamCampbell\BootstrapCMS\Facades\PageRepository;
+use GrahamCampbell\BootstrapCMS\Http\Requests\PageRequest;
 use GrahamCampbell\BootstrapCMS\Models\Page;
 use GrahamCampbell\BootstrapCMS\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
@@ -81,12 +82,14 @@ class PageController extends AbstractController
     /**
      * Store a new page.
      *
+     * @param PageRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(PageRequest $request)
     {
         $input = array_merge($this->getInput(), ['user_id' => Credentials::getuser()->id]);
-        $categories = Request::input('categories') ?: [];
+        $categories = $request->input('categories');
 
         $val = PageRepository::validate($input, array_keys($input));
 
@@ -148,13 +151,14 @@ class PageController extends AbstractController
      * Update an existing page.
      *
      * @param string $slug
+     * @param PageRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($slug)
+    public function update($slug, PageRequest $request)
     {
         $input = $this->getInput();
-        $categories = Request::get('categories') ?: [];
+        $categories = $request->input('categories');
 
         if (empty($input['css'])) {
             $input['css'] = '';
