@@ -12,3 +12,4 @@ composer.phar
 /public/vendor
 bower_components/
 /.project
+_ide_helper.php

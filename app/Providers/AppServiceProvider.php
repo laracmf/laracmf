@@ -114,6 +114,10 @@ class AppServiceProvider extends ServiceProvider
         $this->registerPagesService();
         $this->registerConfigurationsService();
         $this->registerMediaService();
+
+        if ($this->app->environment() !== 'production') {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
     }
 
     /**
