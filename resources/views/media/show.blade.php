@@ -20,6 +20,7 @@
             <div class="pull-right">
                 <div class="fileUpload btn btn-primary">
                     <span><i class='fa fa-camera'></i> Upload New Media</span>
+                    {{ csrf_field() }}
                     <input id="fileupload" type="file" class="upload" name="files[]" data-url="{{ route('upload.media') }}" multiple>
                 </div>
             </div>

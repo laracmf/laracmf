@@ -76,19 +76,17 @@
     @auth('user')
     <br>
     <div class="well well-sm clearfix">
-        <form id="commentform" class="form-vertical" action="{{ route('blog.posts.comments.store', array('posts' => $post->id)) }}" method="POST">
-            {{ csrf_field() }}
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <textarea id="body" name="body" class="form-control comment-box" placeholder="Type a comment..." rows="3"></textarea>
-                </div>
+        {{ csrf_field() }}
+        <div class="form-group">
+            <div class="col-xs-12">
+                <textarea id="body" name="body" class="form-control comment-box" placeholder="Type a comment..." rows="3"></textarea>
             </div>
-            <div class="form-group">
-                <div class="col-xs-12 comment-button">
-                    <button id="contact-submit" type="submit" class="btn btn-primary"><i class="fa fa-comment"></i> Post Comment</button> <label id="commentstatus"></label>
-                </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12 comment-button">
+                <button id="contact-submit" type="button" data-url="{{ route('blog.posts.comments.store', ['posts' => $post->id]) }}" class="btn btn-primary"><i class="fa fa-comment"></i> Post Comment</button> <label id="commentstatus"></label>
             </div>
-        </form>
+        </div>
     </div>
     @else
         <p>
@@ -127,18 +125,16 @@
                 <div class="modal-body">
                     <form id="edit_commentform" class="form-vertical" action="{{ route('blog.posts.comments.store', array('posts' => $post->id)) }}" method="PATCH" data-pk="0">
                         {{ csrf_field() }}
-                        <input id="verion" name="version" value="1" type="hidden">
+                        <input id="version" name="version" value="1" type="hidden">
                         <div class="form-group">
-                            <div class="col-xs-12">
-                                <textarea id="edit_body" name="edit_body" class="form-control comment-box" placeholder="Type a comment..." rows="3"></textarea>
-                            </div>
+                            <textarea id="edit_body" name="edit_body" class="form-control comment-box" placeholder="Type a comment..." rows="3"></textarea>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button id="edit_comment_cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button id="edit_comment_ok" type="button" class="btn btn-primary">OK</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="edit_comment_ok" type="button" class="btn btn-primary">OK</button>
+                </div>
             </div>
         </div>
     </div>

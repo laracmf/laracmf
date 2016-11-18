@@ -25,6 +25,7 @@
     </div>
     <hr>
     <div class="well half">
+        {{ csrf_field() }}
         @foreach($environments as $environment)
             <a class="env" href="{{ route('show.edit.form', [$environment]) }}">
                 <button type="button" class="btn btn-primary btn-lg btn-block">

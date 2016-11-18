@@ -3,6 +3,5 @@ $(document).ready(function() {
     cmsCommentModel();
     cmsCommentDelete();
     cmsCommentCreate();
-    cmsCommentFetch();
     cmsCommentLock = false;
 });
