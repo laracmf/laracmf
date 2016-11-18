@@ -44,5 +44,6 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'access' => \GrahamCampbell\BootstrapCMS\Http\Middleware\AccessMiddleware::class,
         'admin' => \GrahamCampbell\BootstrapCMS\Http\Middleware\AdminMiddleware::class,
+        'throttle' => \GrahamCampbell\BootstrapCMS\Http\Middleware\ThrottleMiddleware::class,
     ];
 }

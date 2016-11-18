@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\GroupsTableSeeder');
+//        $this->call('GrahamCampbell\BootstrapCMS\Seeds\GroupsTableSeeder');
         $this->call('GrahamCampbell\BootstrapCMS\Seeds\UsersTableSeeder');
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\UsersGroupsTableSeeder');
+//        $this->call('GrahamCampbell\BootstrapCMS\Seeds\UsersGroupsTableSeeder');
 
         $this->call('GrahamCampbell\BootstrapCMS\Seeds\PagesTableSeeder');
         $this->call('GrahamCampbell\BootstrapCMS\Seeds\PostsTableSeeder');

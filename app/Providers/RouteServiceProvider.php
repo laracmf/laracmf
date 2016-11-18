@@ -41,8 +41,6 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         parent::boot($router);
-
-        require app_path('Http/filters.php');
     }
 
     /**

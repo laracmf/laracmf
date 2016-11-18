@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
             $model = unserialize($parameters[1]);
 
             $modelData = $model::all();
-            $modelData = ($modelData->pluck('id'))->toArray();
+            $modelData = $modelData->pluck('id');
 
             return count($pages) === count(array_intersect($pages, $modelData));
         });

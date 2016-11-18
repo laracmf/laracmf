@@ -57,7 +57,8 @@ class CommentController extends AbstractController
             'destroy' => 'mod',
         ]);
 
-        $this->beforeFilter('throttle.comment', ['only' => ['store']]);
+
+        $this->middleware(['throttle'], ['only' => ['store']]);
 
         parent::__construct();
     }
