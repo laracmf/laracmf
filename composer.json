@@ -49,7 +49,8 @@
         "doctrine/dbal": "~2.5",
         "graham-campbell/testbench-core": "~1.0",
         "mockery/mockery": "^0.9.4",
-        "phpunit/phpunit": "^4.7.6"
+        "phpunit/phpunit": "^4.7.6",
+        "barryvdh/laravel-ide-helper": "^2.2"
     },
     "suggest": {
         "graham-campbell/cloudflare": "Integration with CloudFlare."
