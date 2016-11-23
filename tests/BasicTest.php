@@ -20,14 +20,6 @@ use Illuminate\Contracts\Console\Kernel;
  */
 class BasicTest extends TestCase
 {
-    /**
-     * @before
-     */
-    public function runInstallCommand()
-    {
-        $this->app->make(Kernel::class)->call('app:install');
-    }
-
     public function testBase()
     {
         $this->visit('/')->seePageIs('pages/home');

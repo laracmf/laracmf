@@ -27,9 +27,9 @@ abstract class AbstractDisplayer extends AbstractRevisionDisplayer
      */
     protected function name()
     {
-        $comment = $this->wrappedObject->revisionable()->withTrashed()->first(['post_id']);
+        $comment = $this->wrappedObject()->revisionable()->getResults();
 
-        $post = $comment->post()->withTrashed()->first(['title']);
+        $post = $comment->post()->getResults();
 
         return ' "'.$post->title.'".';
     }

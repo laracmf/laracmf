@@ -33,11 +33,11 @@ class PostController extends AbstractController
     public function __construct()
     {
         $this->setPermissions([
-            'create'  => 'blog',
-            'store'   => 'blog',
-            'edit'    => 'blog',
-            'update'  => 'blog',
-            'destroy' => 'blog',
+            'create'  => 'blogger|admin',
+            'store'   => 'blogger|admin',
+            'edit'    => 'blogger|admin',
+            'update'  => 'blogger|admin',
+            'destroy' => 'blogger|admin',
         ]);
 
         parent::__construct();

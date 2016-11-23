@@ -40,6 +40,11 @@ class UsersRolesTableSeeder extends Seeder
         $this->matchUser('blogger@dsmg.co.uk', 'blogger');
         $this->matchUser('editor@dsmg.co.uk', 'editor');
         $this->matchUser('user@dsmg.co.uk', 'user');
+        $this->matchUser('semiadmin@dsmg.co.uk', 'user');
+        $this->matchUser('moderator@dsmg.co.uk', 'user');
+        $this->matchUser('blogger@dsmg.co.uk', 'user');
+        $this->matchUser('editor@dsmg.co.uk', 'user');
+        $this->matchUser('admin@dsmg.co.uk', 'user');
     }
 
     /**

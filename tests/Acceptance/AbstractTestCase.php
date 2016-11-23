@@ -21,11 +21,4 @@ use Illuminate\Contracts\Console\Kernel;
  */
 abstract class AbstractTestCase extends BaseTestCase
 {
-    /**
-     * @before
-     */
-    public function runInstallCommand()
-    {
-        $this->app->make(Kernel::class)->call('app:install');
-    }
 }

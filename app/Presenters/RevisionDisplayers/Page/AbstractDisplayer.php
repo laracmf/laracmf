@@ -39,7 +39,7 @@ abstract class AbstractDisplayer extends AbstractRevisionDisplayer
      */
     protected function name($final = true)
     {
-        $page = $this->wrappedObject->revisionable()->withTrashed()->first(['title']);
+        $page = $this->wrappedObject()->revisionable()->getResults();
 
         if ($final) {
             return ' "'.$page->title.'".';

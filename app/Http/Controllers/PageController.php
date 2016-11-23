@@ -44,11 +44,11 @@ class PageController extends AbstractController
     public function __construct(PagesService $pagesService)
     {
         $this->setPermissions([
-            'create'  => 'edit',
-            'store'   => 'edit',
-            'edit'    => 'edit',
-            'update'  => 'edit',
-            'destroy' => 'edit',
+            'create'  => 'editor',
+            'store'   => 'editor',
+            'edit'    => 'editor',
+            'update'  => 'editor',
+            'destroy' => 'editor',
         ]);
 
         $this->pagesService = $pagesService;

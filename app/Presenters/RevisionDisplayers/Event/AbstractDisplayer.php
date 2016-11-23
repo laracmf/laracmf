@@ -37,7 +37,7 @@ abstract class AbstractDisplayer extends AbstractRevisionDisplayer
      */
     protected function name()
     {
-        $event = $this->wrappedObject->revisionable()->withTrashed()->first(['title']);
+        $event = $this->wrappedObject()->revisionable()->getResults();
 
         return ' "'.$event->title.'".';
     }

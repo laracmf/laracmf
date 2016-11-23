@@ -48,5 +48,5 @@ function isRole($role)
         return \GrahamCampbell\Credentials\Facades\Credentials::inRole($role);
     }
 
-    return true;
+    return false;
 }
