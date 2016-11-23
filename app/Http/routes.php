@@ -62,12 +62,12 @@ $router->get('auth/social/{social}/callback', [
     'uses' => 'Auth\AuthController@handleProviderCallback'
 ]);
 
-$router->get('register/complete/{token}', [
+$router->get('register/{id}/complete/{code}', [
     'as' => 'register.complete',
     'uses' => 'Auth\AuthController@showCompleteRegistrationView'
 ]);
 
-$router->post('register/complete/{id}', [
+$router->post('register/{id}/complete/{code}', [
     'as' => 'save.register.complete',
     'uses' => 'Auth\AuthController@completeRegistration'
 ]);

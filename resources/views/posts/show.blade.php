@@ -11,43 +11,43 @@
 @stop
 
 @section('content')
-    @auth('blog')
-    <div class="well clearfix">
-        <div class="hidden-xs">
-            <div class="col-xs-6">
-                <p>
-                    <strong>Post Owner:</strong> {!! $post->owner !!}
-                </p>
-                <a class="btn btn-info" href="{!! route('blog.posts.edit', array('posts' => $post->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
+    @if(isRole('blogger'))
+        <div class="well clearfix">
+            <div class="hidden-xs">
+                <div class="col-xs-6">
+                    <p>
+                        <strong>Post Owner:</strong> {!! $post->owner !!}
+                    </p>
+                    <a class="btn btn-info" href="{!! route('blog.posts.edit', array('posts' => $post->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
+                </div>
+                <div class="col-xs-6">
+                    <div class="pull-right">
+                        <p>
+                            <em>Post Created: {!! html_ago($post->created_at) !!}</em>
+                        </p>
+                        <p>
+                            <em>Last Updated: {!! html_ago($post->updated_at) !!}</em>
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-6">
-                <div class="pull-right">
+            <div class="visible-xs">
+                <div class="col-xs-12">
                     <p>
-                        <em>Post Created: {!! html_ago($post->created_at) !!}</em>
+                        <strong>Post Owner:</strong> {!! $post->owner !!}
                     </p>
                     <p>
-                        <em>Last Updated: {!! html_ago($post->updated_at) !!}</em>
+                        <strong>Post Created:</strong> {!! html_ago($post->created_at) !!}
                     </p>
+                    <p>
+                        <strong>Last Updated:</strong> {!! html_ago($post->updated_at) !!}
+                    </p>
+                    <a class="btn btn-info" href="{!! route('blog.posts.edit', array('posts' => $post->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
                 </div>
             </div>
         </div>
-        <div class="visible-xs">
-            <div class="col-xs-12">
-                <p>
-                    <strong>Post Owner:</strong> {!! $post->owner !!}
-                </p>
-                <p>
-                    <strong>Post Created:</strong> {!! html_ago($post->created_at) !!}
-                </p>
-                <p>
-                    <strong>Last Updated:</strong> {!! html_ago($post->updated_at) !!}
-                </p>
-                <a class="btn btn-info" href="{!! route('blog.posts.edit', array('posts' => $post->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
-            </div>
-        </div>
-    </div>
-    <hr>
-    @endauth
+        <hr>
+    @endif
 
     <div class="row">
         <div class="hidden-xs">
@@ -73,7 +73,7 @@
     <br><hr>
 
     <h3>Comments</h3>
-    @auth('user')
+    @if(isRole('user'))
     <br>
     <div class="well well-sm clearfix">
         {{ csrf_field() }}
@@ -96,7 +96,7 @@
                 <strong>Please <a href="{!! route('account.login') !!}">login</a> to post a comment.</strong>
             @endif
         </p>
-        @endauth
+    @endif
         <br>
 
         <div id="comments" data-url="{!! route('blog.posts.comments.index', ['posts' => $post->id]) !!}">
@@ -111,35 +111,35 @@
 @stop
 
 @section('bottom')
-    @auth('blog')
-    @include('posts.delete')
-    @endauth
-    @auth('mod')
-    <div id="edit_comment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Edit Comment</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="edit_commentform" class="form-vertical" action="{{ route('blog.posts.comments.store', array('posts' => $post->id)) }}" method="PATCH" data-pk="0">
-                        {{ csrf_field() }}
-                        <input id="version" name="version" value="1" type="hidden">
-                        <div class="form-group">
-                            <textarea id="edit_body" name="edit_body" class="form-control comment-box" placeholder="Type a comment..." rows="3"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button id="edit_comment_ok" type="button" class="btn btn-primary">OK</button>
+    @if(isRole('blogger'))
+        @include('posts.delete')
+    @endif
+    @if(isRole('moderator'))
+        <div id="edit_comment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Edit Comment</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit_commentform" class="form-vertical" action="{{ route('blog.posts.comments.store', array('posts' => $post->id)) }}" method="PATCH" data-pk="0">
+                            {{ csrf_field() }}
+                            <input id="version" name="version" value="1" type="hidden">
+                            <div class="form-group">
+                                <textarea id="edit_body" name="edit_body" class="form-control comment-box" placeholder="Type a comment..." rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="edit_comment_ok" type="button" class="btn btn-primary">OK</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    @endauth
+        </div>
+    @endif
 @stop
 
 @section('js')

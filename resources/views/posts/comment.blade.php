@@ -1,5 +1,5 @@
 <div id="comment_{!! $comment->id !!}" class="well clearfix col-xs-12 animated bounceIn{!! rand(0, 1) ? 'Left': 'Right' !!}" data-pk="{!! $comment->id !!}" data-ver="{!! $comment->version !!}">
-    @auth('mod')
+    @if(isRole('moderator'))
         <div class="col-md-9 col-sm-8">
             <p><strong>{!! $comment->author !!}</strong> - {!! html_ago($comment->created_at, 'timeago_comment_'.$comment->id) !!}</p>
             <p id="main_comment_{!! $comment->id !!}" class="main">{!! nl2br(e($comment->body)) !!}</p>
@@ -21,5 +21,5 @@
             <p><strong>{!! $comment->author !!}</strong> - {!! html_ago($comment->created_at, 'timeago_comment_'.$comment->id) !!}</p>
             <p id="main_comment_{!! $comment->id !!}" class="main">{!! nl2br(e($comment->body)) !!}</p>
         </div>
-    @endauth
+    @endif
 </div>

@@ -26,7 +26,7 @@ class ConfirmToken extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('confirm_token');
+            $table->dropIfExists('confirm_token');
         });
     }
 }

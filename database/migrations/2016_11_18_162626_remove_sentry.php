@@ -60,6 +60,7 @@ class RemoveSentry extends Migration
             $table->string('name');
             $table->text('permissions')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             // We'll need to ensure that MySQL uses the InnoDB engine to
             // support the indexes, other engines aren't affected.
@@ -81,6 +82,7 @@ class RemoveSentry extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             // We'll need to ensure that MySQL uses the InnoDB engine to
             // support the indexes, other engines aren't affected.

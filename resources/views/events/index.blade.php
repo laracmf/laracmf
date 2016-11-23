@@ -21,13 +21,13 @@ Events
             @endif
         </p>
     </div>
-    @auth('edit')
+    @if(isRole('editor'))
         <div class="col-xs-4">
             <div class="pull-right">
                 <a class="btn btn-primary" href="{!! route('events.create') !!}"><i class="fa fa-calendar"></i> New Event</a>
             </div>
         </div>
-    @endauth
+    @endif
 </div>
 @foreach($events as $event)
     <h2>{!! $event->title !!}</h2>
@@ -36,9 +36,9 @@ Events
     </p>
     <p>
         <a class="btn btn-success" href="{!! route('events.show', array('events' => $event->id)) !!}"><i class="fa fa-file-text"></i> Show Event</a>
-        @auth('edit')
+        @if(isRole('editor'))
              <a class="btn btn-info" href="{!! route('events.edit', array('events' => $event->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Event</a> <a class="btn btn-danger" href="#delete_event_{!! $event->id !!}" data-toggle="modal" data-target="#delete_event_{!! $event->id !!}"><i class="fa fa-times"></i> Delete Event</a>
-        @endauth
+        @endif
     </p>
     <br>
 @endforeach
@@ -46,7 +46,7 @@ Events
 @stop
 
 @section('bottom')
-@auth('edit')
-    @include('events.deletes')
-@endauth
+    @if(isRole('editor'))
+        @include('events.deletes')
+    @endif
 @stop

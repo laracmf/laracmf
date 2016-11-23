@@ -34,8 +34,6 @@ class AccessMiddleware
      *
      * @param \GrahamCampbell\Credentials\Credentials $credentials
      * @param \Psr\Log\LoggerInterface $logger
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException|\Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      */
     public function __construct(Credentials $credentials, LoggerInterface $logger)
     {

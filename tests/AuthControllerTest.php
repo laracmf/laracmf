@@ -43,6 +43,7 @@ class AuthControllerTest extends TestCase
                     'password' => 'password',
                     'password_confirmation' => 'password'
                 ],
+                'code' => '',
                 'id' => 7,
                 'expected' => 'Redirecting to'
             ],
@@ -51,6 +52,7 @@ class AuthControllerTest extends TestCase
                     'password' => 'password',
                     'password_confirmation' => 'password'
                 ],
+                'code' => '',
                 'id' => 1,
                 'expected' => 'Redirecting to'
             ],
@@ -59,6 +61,7 @@ class AuthControllerTest extends TestCase
                     'password' => 'password',
                     'password_confirmation' => 'paSsasfasfasfasfword'
                 ],
+                'code' => 'fake',
                 'id' => 7,
                 'expected' => 'The password confirmation does not match.'
             ]
@@ -73,11 +76,11 @@ class AuthControllerTest extends TestCase
     {
         return [
             'testShowCompleteRegistrationView' => [
-                'id' => 0,
+                'code' => '',
                 'expected' => 'password_confirmation'
             ],
             'testShowCompleteRegistrationViewFailed' => [
-                'id' => 1,
+                'code' => 'fake',
                 'expected' => ' Redirecting to'
             ]
         ];
@@ -122,14 +125,19 @@ class AuthControllerTest extends TestCase
      * @dataProvider providerCompleteRegistration
      *
      * @param $data
+     * @param $code
      * @param $id
      * @param $expected
      */
-    public function testCompleteRegistration($data, $id, $expected)
+    public function testCompleteRegistration($data, $code, $id, $expected)
     {
-        $this->createUser();
+        $response = $this->createUser();
 
-        $this->json('POST', 'register/complete/' . $id, $data, [])->see($expected);
+        if (!$code) {
+            $code = $response['code'];
+        }
+
+        $this->json('POST', 'register/' . $id . '/complete/' . $code, $data, [])->see($expected);
     }
 
     /**
@@ -137,19 +145,17 @@ class AuthControllerTest extends TestCase
      *
      * @dataProvider providerShowCompleteRegistrationView
      *
-     * @param $id
+     * @param $code
      * @param $expected
      */
-    public function testShowCompleteRegistrationView($id, $expected)
+    public function testShowCompleteRegistrationView($code, $expected)
     {
-        $user = $this->createUser();
+        $response = $this->createUser();
 
-        $confirmToken = $user->confirm_token;
-
-        if ($id) {
-            $confirmToken = 'fake';
+        if (!$code) {
+            $code = $response['code'];
         }
 
-        $this->json('GET', 'register/complete/' . $confirmToken, [], [])->see($expected);
+        $this->json('GET', 'register/' . ($response['user'])->id . '/complete/' . $code, [], [])->see($expected);
     }
 }

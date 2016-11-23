@@ -10,7 +10,6 @@ use Illuminate\Http\Response;
 use GrahamCampbell\BootstrapCMS\Http\Controllers\AbstractController;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
-use Webpatser\Uuid\Uuid;
 use Illuminate\Support\Facades\Mail;
 
 class AuthController extends AbstractController
@@ -61,7 +60,7 @@ class AuthController extends AbstractController
             $user = User::where('email', '=', $response->email)->first();
 
             if ($user) {
-                if (!$user->activated) {
+                if (!Credentials::getActivationRepository()->completed($user)) {
                     flash()->warning('User hasn\'t activated!');
                 } else {
                     Credentials::login($user);
@@ -71,16 +70,20 @@ class AuthController extends AbstractController
             }
 
             $saveUserMethod = 'save' . ucfirst($social) . 'User';
-
             $model = $this->socialAccountService->{$saveUserMethod}($response, new User());
 
             $model->password = $model->hash(rand(1, 10));
-            $model->confirm_token = Uuid::generate(4);
-
             $model->save();
 
+            $activationResponse = Credentials::getActivationRepository()->create($model);
+            $code = $activationResponse ? $activationResponse->code : '';
+
+            //Set role for user
+            $role = Credentials::getRoleRepository()->findByName('user');
+            $role->users()->attach($model);
+
             $mail = [
-                'url'     => route('register.complete', ['confirm_token' =>  $model->confirm_token]),
+                'url'     => route('register.complete', ['id' => $model->id, 'confirm_token' =>  $code]),
                 'email'   => $response->email,
                 'subject' => 'Complete your registration'
             ];
@@ -104,15 +107,17 @@ class AuthController extends AbstractController
     /**
      * Show complete registration view
      *
-     * @param string $token
+     * @param int $id
+     * @param string $code
      * @return View
      */
-    public function showCompleteRegistrationView($token)
+    public function showCompleteRegistrationView($id, $code)
     {
-        $user = User::where('confirm_token', '=', $token)->first();
+        $user = User::find($id);
+        $activation = Credentials::getActivationRepository()->exists($user);
 
-        if ($user && $user->confirm_token) {
-            return view('auth.registerComplete', ['userId' => $user->id]);
+        if ($user && $activation && ($activation->code === $code)) {
+            return view('auth.registerComplete', ['userId' => $user->id, 'code' => $code]);
         }
 
         flash()->warning('Token invalid!');
@@ -125,9 +130,10 @@ class AuthController extends AbstractController
      *
      * @param SignUpRequest $request
      * @param int $id
+     * @param string $code
      * @return \Illuminate\Http\Response
      */
-    public function completeRegistration(SignUpRequest $request, $id)
+    public function completeRegistration(SignUpRequest $request, $id, $code)
     {
         $user = User::find($id);
 
@@ -137,16 +143,11 @@ class AuthController extends AbstractController
         ];
 
         if ($user) {
-            if (!$user->activated) {
-                $user->setAttribute('password', $request->password);
-                $user->setAttribute('persist_code', $user->getRandomString());
-                $user->activation_code = $user->getRandomString();
-                $user->confirm_token = null;
-
+            if (!$activation = Credentials::getActivationRepository()->completed($user)) {
+                $user->setAttribute('password', $user->hash($request->password));
                 $user->save();
 
-                $user->attemptActivation($user->getActivationCode());
-                $user->addGroup(Credentials::getGroupProvider()->findByName('Users'));
+                Credentials::getActivationRepository()->complete($user, $code);
 
                 Credentials::login($user);
 

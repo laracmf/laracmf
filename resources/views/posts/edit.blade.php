@@ -41,9 +41,9 @@ Edit {{ $post->title }}
 @stop
 
 @section('bottom')
-@auth('blog')
-    @include('posts.delete')
-@endauth
+    @if(isRole('blogger'))
+        @include('posts.delete')
+    @endif
 @stop
 
 @section('css')

@@ -176,7 +176,7 @@ class NavigationSubscriber
 
         if ($this->credentials->check()) {
             // add the admin links
-            if ($this->credentials->hasAccess('admin')) {
+            if ($this->credentials->hasAccess('user.*')) {
                 $this->navigation->addToMain(
                     ['title' => 'Logs', 'slug' => 'logviewer', 'icon' => 'wrench'],
                     'admin'
@@ -209,7 +209,8 @@ class NavigationSubscriber
         $this->navigation->addToMain($page, 'admin', true);
 
         // add the view users link
-        if ($this->credentials->check() && $this->credentials->hasAccess('mod')) {
+        if ($this->credentials->check()
+            && $this->credentials->hasAccess(userPermissions($this->credentials, 'moderator'))) {
             $this->navigation->addToMain(
                 ['title' => 'Users', 'slug' => 'users', 'icon' => 'user'],
                 'admin'
@@ -243,7 +244,7 @@ class NavigationSubscriber
     public function onNavigationBarSecond()
     {
         // add the admin links
-        if ($this->credentials->check() && $this->credentials->hasAccess('admin')) {
+        if ($this->credentials->check() && $this->credentials->hasAccess('user.*')) {
             $this->navigation->addToBar(
                 ['title' => 'View Logs', 'slug' => 'logviewer', 'icon' => 'wrench']
             );
@@ -262,43 +263,54 @@ class NavigationSubscriber
      */
     public function onNavigationBarThird()
     {
-        if ($this->credentials->check()) {
-            // add the view users link
-            if ($this->credentials->hasAccess('mod')) {
+        $moderatorPermissions = userPermissions($this->credentials, 'moderator');
+        $editorPermissions = userPermissions($this->credentials, 'editor');
+        $user = $this->credentials->getUser();
+
+        if ($this->credentials->check() && $user) {
+            if ($user->hasAccess($moderatorPermissions)) {
+                $this->navigation->addToBar(
+                    ['title' => 'View Categories', 'slug' => 'categories', 'icon' => 'folder-open']
+                );
+
+                $this->navigation->addToBar(
+                    ['title' => 'View Environments', 'slug' => 'environments', 'icon' => 'th-large']
+                );
+
                 $this->navigation->addToBar(
                     ['title' => 'View Users', 'slug' => 'users', 'icon' => 'user']
                 );
             }
 
-            if ($this->credentials->hasAccess('mod')) {
-                $this->navigation->addToBar(
-                    ['title' => 'View Categories', 'slug' => 'categories', 'icon' => 'folder-open']
-                );
-            }
-
-            if ($this->credentials->hasAccess('mod')) {
-                $this->navigation->addToBar(
-                    ['title' => 'View Environments', 'slug' => 'environments', 'icon' => 'th-large']
-                );
-            }
-
             // add the create user link
-            if ($this->credentials->hasAccess('admin')) {
+            if ($user->hasAccess(['user.create', 'user.delete', 'user.view', 'user.update'])) {
                 $this->navigation->addToBar(
                     ['title' => 'Create User', 'slug' => 'users/create', 'icon' => 'star']
                 );
             }
 
             // add the create page link
-            if ($this->credentials->hasAccess('edit')) {
+            if ($user->hasAccess($editorPermissions)) {
                 $this->navigation->addToBar(
                     ['title' => 'Create Page', 'slug' => 'pages/create', 'icon' => 'pencil']
+                );
+
+                $this->navigation->addToBar(
+                    ['title' => 'Create Categories', 'slug' => 'category/', 'icon' => 'pencil']
+                );
+
+                $this->navigation->addToBar(
+                    ['title' => 'Create Environment', 'slug' => 'environment/', 'icon' => 'pencil']
+                );
+
+                $this->navigation->addToBar(
+                    ['title' => 'Media', 'slug' => 'media/', 'icon' => 'camera']
                 );
             }
 
             // add the create post link
             if ($this->blogging) {
-                if ($this->credentials->hasAccess('blog')) {
+                if ($user->hasAccess(userPermissions($this->credentials, 'blogger'))) {
                     $this->navigation->addToBar(
                         ['title' => 'Create Post', 'slug' => 'blog/posts/create', 'icon' => 'book']
                     );
@@ -307,29 +319,11 @@ class NavigationSubscriber
 
             // add the create event link
             if ($this->events) {
-                if ($this->credentials->hasAccess('edit')) {
+                if ($user->hasAccess($editorPermissions)) {
                     $this->navigation->addToBar(
                         ['title' => 'Create Event', 'slug' => 'events/create', 'icon' => 'calendar']
                     );
                 }
-            }
-
-            if ($this->credentials->hasAccess('edit')) {
-                $this->navigation->addToBar(
-                    ['title' => 'Create Categories', 'slug' => 'category/', 'icon' => 'pencil']
-                );
-            }
-
-            if ($this->credentials->hasAccess('edit')) {
-                $this->navigation->addToBar(
-                    ['title' => 'Create Environment', 'slug' => 'environment/', 'icon' => 'pencil']
-                );
-            }
-
-            if ($this->credentials->hasAccess('edit')) {
-                $this->navigation->addToBar(
-                    ['title' => 'Media', 'slug' => 'media/', 'icon' => 'camera']
-                );
             }
         }
     }

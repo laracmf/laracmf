@@ -22,7 +22,7 @@ class SignUpRequest extends Request
     public function rules()
     {
         return [
-            'password' => 'required|max:255|min:6|confirmed',
+            'password' => 'required|max:255|min:6|confirmed'
         ];
     }
 }

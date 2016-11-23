@@ -15,7 +15,7 @@
         <div class="col-xs-8">
             <p class="lead">Here is a list of all media:</p>
         </div>
-        @auth('admin')
+        @if(isRole('admin'))
         <div class="col-xs-4">
             <div class="pull-right">
                 <div class="fileUpload btn btn-primary">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        @endauth
+        @endif
     </div>
     <hr>
     <div class="well">
