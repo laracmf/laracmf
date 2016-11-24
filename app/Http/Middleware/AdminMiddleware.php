@@ -38,7 +38,8 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         $user = $this->credentials->getUser();
-        if (!$user->inRole('admin')) {
+
+        if ($user && !$user->inRole('admin')) {
             return Redirect::guest(URL::route('base'))
                 ->with('error', 'You must have admin permissions.');
         }

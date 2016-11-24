@@ -52,7 +52,11 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
 
     public function authenticateUser($id)
     {
-        Credentials::login(User::find($id), true);
+        $user = User::find($id);
+
+        if ($user) {
+            Credentials::login($user, true);
+        }
     }
 
     /**

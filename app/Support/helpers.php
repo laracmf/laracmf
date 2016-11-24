@@ -24,24 +24,6 @@ function formatBytes($bytes)
     return $bytes;
 }
 
-function userPermissions(GrahamCampbell\Credentials\Credentials $credentials, $level)
-{
-    $role = $credentials->findRoleBySlug($level);
-
-    if ($role) {
-        $permissions = array_filter(
-            $role->permissions,
-            function ($value) {
-                return $value;
-            }
-        );
-
-        return array_keys($permissions);
-    }
-
-    return false;
-}
-
 function isRole($role)
 {
     if (\GrahamCampbell\Credentials\Facades\Credentials::getUser()) {

@@ -63,11 +63,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => \GrahamCampbell\BootstrapCMS\Models\User::class,
-        ],
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        ]
     ],
 
     /*

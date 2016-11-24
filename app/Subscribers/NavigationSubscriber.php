@@ -176,7 +176,7 @@ class NavigationSubscriber
 
         if ($this->credentials->check()) {
             // add the admin links
-            if ($this->credentials->hasAccess('user.*')) {
+            if ($this->credentials->inRole('admin')) {
                 $this->navigation->addToMain(
                     ['title' => 'Logs', 'slug' => 'logviewer', 'icon' => 'wrench'],
                     'admin'
@@ -210,7 +210,7 @@ class NavigationSubscriber
 
         // add the view users link
         if ($this->credentials->check()
-            && $this->credentials->hasAccess(userPermissions($this->credentials, 'moderator'))) {
+            && $this->credentials->inRole('moderator')) {
             $this->navigation->addToMain(
                 ['title' => 'Users', 'slug' => 'users', 'icon' => 'user'],
                 'admin'
@@ -241,9 +241,7 @@ class NavigationSubscriber
     public function onNavigationBarSecond()
     {
         // add the admin links
-        if ($this->credentials->check() && $this
-                ->credentials
-                ->hasAccess(['user.create', 'user.delete', 'user.view', 'user.update'])) {
+        if ($this->credentials->check() && $this->credentials->inRole('admin')) {
             $this->navigation->addToBar(
                 ['title' => 'View Logs', 'slug' => 'logviewer', 'icon' => 'wrench']
             );

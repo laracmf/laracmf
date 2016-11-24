@@ -114,10 +114,13 @@ class AuthController extends AbstractController
     public function showCompleteRegistrationView($id, $code)
     {
         $user = User::find($id);
-        $activation = Credentials::getActivationRepository()->exists($user);
 
-        if ($user && $activation && ($activation->code === $code)) {
-            return view('auth.registerComplete', ['userId' => $user->id, 'code' => $code]);
+        if ($user) {
+            $activation = Credentials::getActivationRepository()->exists($user);
+
+            if ($activation && ($activation->code === $code)) {
+                return view('auth.registerComplete', ['userId' => $user->id, 'code' => $code]);
+            }
         }
 
         flash()->warning('Token invalid!');
