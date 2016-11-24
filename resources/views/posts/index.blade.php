@@ -24,7 +24,7 @@ Blog
     @if(isRole('blogger'))
         <div class="col-xs-4">
             <div class="pull-right">
-                <a class="btn btn-primary" href="{!! route('blog.posts.create') !!}"><i class="fa fa-book"></i> New Post</a>
+                <a class="btn btn-primary" href="{!! route('posts.create') !!}"><i class="fa fa-book"></i> New Post</a>
             </div>
         </div>
     @endif
@@ -35,9 +35,9 @@ Blog
         <strong>{!! $post->summary !!}</strong>
     </p>
     <p>
-        <a class="btn btn-success" href="{!! route('blog.posts.show', array('posts' => $post->id)) !!}"><i class="fa fa-file-text"></i> Show Post</a>
+        <a class="btn btn-success" href="{!! route('posts.show', array('posts' => $post->id)) !!}"><i class="fa fa-file-text"></i> Show Post</a>
         @if(isRole('blogger'))
-             <a class="btn btn-info" href="{!! route('blog.posts.edit', array('posts' => $post->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Post</a> <a class="btn btn-danger" href="#delete_post_{!! $post->id !!}" data-toggle="modal" data-target="#delete_post_{!! $post->id !!}"><i class="fa fa-times"></i> Delete Post</a>
+             <a class="btn btn-info" href="{!! route('posts.edit', array('posts' => $post->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Post</a> <a class="btn btn-danger" href="#delete_post_{!! $post->id !!}" data-toggle="modal" data-target="#delete_post_{!! $post->id !!}"><i class="fa fa-times"></i> Delete Post</a>
         @endif
     </p>
     <br>

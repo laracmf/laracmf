@@ -64,7 +64,7 @@ class CommentController extends AbstractController
                 'success' => false,
                 'code'    => 404,
                 'msg'     => trans('messages.comment.view_error'),
-                'url'     => URL::route('blog.posts.index'),
+                'url'     => URL::route('posts.index'),
             ], 404);
         }
 

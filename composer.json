@@ -25,18 +25,22 @@
         {
             "type": "vcs",
             "url": "https://github.com/Kit-kat1/Contact"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Kit-kat1/Laravel-Exceptions"
         }
     ],
     "require-all": true,
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
+        "laravel/framework": "5.3.*",
         "fideloper/proxy": "~3.0",
         "graham-campbell/binput": "~3.0",
         "graham-campbell/contact": "dev-master",
         "graham-campbell/credentials": "dev-master",
         "graham-campbell/core": "~4.0",
-        "graham-campbell/exceptions": "9.1",
+        "graham-campbell/exceptions": "dev-master",
         "graham-campbell/htmlmin": "~4.0",
         "graham-campbell/logviewer": "dev-master",
         "graham-campbell/markdown": "7.0",
@@ -58,8 +62,8 @@
         "graham-campbell/testbench-core": "~1.0",
         "mockery/mockery": "^0.9.4",
         "phpunit/phpunit": "^4.7.6",
-        "symfony/dom-crawler": "~3.0",
-        "symfony/css-selector": "~3.0",
+        "symfony/dom-crawler": "3.1.*",
+        "symfony/css-selector": "3.1.*",
         "barryvdh/laravel-ide-helper": "^2.2"
     },
     "suggest": {

@@ -27,7 +27,6 @@ use Illuminate\Support\ServiceProvider;
 use GrahamCampbell\BootstrapCMS\Services\CategoriesService;
 use GrahamCampbell\BootstrapCMS\Services\ConfigurationsService;
 use Illuminate\Support\Facades\Validator;
-use GrahamCampbell\BootstrapCMS\Models\Page;
 
 /**
  * This is the app service provider class.

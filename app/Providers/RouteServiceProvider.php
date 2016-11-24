@@ -32,18 +32,6 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'GrahamCampbell\BootstrapCMS\Http\Controllers';
 
     /**
-     * Define the route model bindings, pattern filters, etc.
-     *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
-     */
-    public function boot(Router $router)
-    {
-        parent::boot($router);
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @param \Illuminate\Routing\Router $router
@@ -52,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
-        $router->group(['namespace' => $this->namespace], function ($router) {
+        $router->group(['namespace' => $this->namespace], function () {
             require app_path('Http/routes.php');
         });
     }

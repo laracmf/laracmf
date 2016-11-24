@@ -18,7 +18,7 @@
                     <p>
                         <strong>Post Owner:</strong> {!! $post->owner !!}
                     </p>
-                    <a class="btn btn-info" href="{!! route('blog.posts.edit', array('posts' => $post->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
+                    <a class="btn btn-info" href="{!! route('posts.edit', array('posts' => $post->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
                 </div>
                 <div class="col-xs-6">
                     <div class="pull-right">
@@ -42,7 +42,7 @@
                     <p>
                         <strong>Last Updated:</strong> {!! html_ago($post->updated_at) !!}
                     </p>
-                    <a class="btn btn-info" href="{!! route('blog.posts.edit', array('posts' => $post->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
+                    <a class="btn btn-info" href="{!! route('posts.edit', array('posts' => $post->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
         </div>
         <div class="form-group">
             <div class="col-xs-12 comment-button">
-                <button id="contact-submit" type="button" data-url="{{ route('blog.posts.comments.store', ['posts' => $post->id]) }}" class="btn btn-primary"><i class="fa fa-comment"></i> Post Comment</button> <label id="commentstatus"></label>
+                <button id="contact-submit" type="button" data-url="{{ route('posts.comments.store', ['posts' => $post->id]) }}" class="btn btn-primary"><i class="fa fa-comment"></i> Post Comment</button> <label id="commentstatus"></label>
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@
     @endif
         <br>
 
-        <div id="comments" data-url="{!! route('blog.posts.comments.index', ['posts' => $post->id]) !!}">
+        <div id="comments" data-url="{!! route('posts.comments.index', ['posts' => $post->id]) !!}">
             @if (!count($comments))
                 <p id="nocomments">There are currently no comments.</p>
             @else
@@ -123,7 +123,7 @@
                         <h4 class="modal-title">Edit Comment</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="edit_commentform" class="form-vertical" action="{{ route('blog.posts.comments.store', array('posts' => $post->id)) }}" method="PATCH" data-pk="0">
+                        <form id="edit_commentform" class="form-vertical" action="{{ route('posts.comments.store', array('posts' => $post->id)) }}" method="PATCH" data-pk="0">
                             {{ csrf_field() }}
                             <input id="version" name="version" value="1" type="hidden">
                             <div class="form-group">

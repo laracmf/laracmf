@@ -230,9 +230,6 @@ class NavigationSubscriber
             $this->navigation->addToBar(
                 ['title' => 'View Profile', 'slug' => 'account/profile', 'icon' => 'cog']
             );
-            $this->navigation->addToBar(
-                ['title' => 'View History', 'slug' => 'account/history', 'icon' => 'history']
-            );
         }
     }
 
@@ -244,7 +241,9 @@ class NavigationSubscriber
     public function onNavigationBarSecond()
     {
         // add the admin links
-        if ($this->credentials->check() && $this->credentials->hasAccess('user.*')) {
+        if ($this->credentials->check() && $this
+                ->credentials
+                ->hasAccess(['user.create', 'user.delete', 'user.view', 'user.update'])) {
             $this->navigation->addToBar(
                 ['title' => 'View Logs', 'slug' => 'logviewer', 'icon' => 'wrench']
             );
@@ -263,34 +262,27 @@ class NavigationSubscriber
      */
     public function onNavigationBarThird()
     {
-        $moderatorPermissions = userPermissions($this->credentials, 'moderator');
-        $editorPermissions = userPermissions($this->credentials, 'editor');
         $user = $this->credentials->getUser();
 
         if ($this->credentials->check() && $user) {
-            if ($user->hasAccess($moderatorPermissions)) {
+            // add the create user link
+            if ($user->inRole('admin')) {
+                $this->navigation->addToBar(
+                    ['title' => 'Create User', 'slug' => 'users/create', 'icon' => 'star']
+                );
+
                 $this->navigation->addToBar(
                     ['title' => 'View Categories', 'slug' => 'categories', 'icon' => 'folder-open']
                 );
 
                 $this->navigation->addToBar(
-                    ['title' => 'View Environments', 'slug' => 'environments', 'icon' => 'th-large']
+                    ['title' => 'Media', 'slug' => 'media/', 'icon' => 'camera']
                 );
 
                 $this->navigation->addToBar(
                     ['title' => 'View Users', 'slug' => 'users', 'icon' => 'user']
                 );
-            }
 
-            // add the create user link
-            if ($user->hasAccess(['user.create', 'user.delete', 'user.view', 'user.update'])) {
-                $this->navigation->addToBar(
-                    ['title' => 'Create User', 'slug' => 'users/create', 'icon' => 'star']
-                );
-            }
-
-            // add the create page link
-            if ($user->hasAccess($editorPermissions)) {
                 $this->navigation->addToBar(
                     ['title' => 'Create Page', 'slug' => 'pages/create', 'icon' => 'pencil']
                 );
@@ -304,13 +296,13 @@ class NavigationSubscriber
                 );
 
                 $this->navigation->addToBar(
-                    ['title' => 'Media', 'slug' => 'media/', 'icon' => 'camera']
+                    ['title' => 'View Environments', 'slug' => 'environments', 'icon' => 'th-large']
                 );
             }
 
             // add the create post link
             if ($this->blogging) {
-                if ($user->hasAccess(userPermissions($this->credentials, 'blogger'))) {
+                if ($user->inRole('blogger')) {
                     $this->navigation->addToBar(
                         ['title' => 'Create Post', 'slug' => 'blog/posts/create', 'icon' => 'book']
                     );
@@ -319,7 +311,7 @@ class NavigationSubscriber
 
             // add the create event link
             if ($this->events) {
-                if ($user->hasAccess($editorPermissions)) {
+                if ($user->inRole('editor')) {
                     $this->navigation->addToBar(
                         ['title' => 'Create Event', 'slug' => 'events/create', 'icon' => 'calendar']
                     );
