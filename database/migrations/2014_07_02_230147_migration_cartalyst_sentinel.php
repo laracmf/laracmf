@@ -100,7 +100,6 @@ class MigrationCartalystSentinel extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->timestamps();
-            $table->softDeletes();
 
             $table->engine = 'InnoDB';
             $table->unique('email');
@@ -114,7 +113,6 @@ class MigrationCartalystSentinel extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::drop('activations');
         Schema::drop('persistences');
         Schema::drop('reminders');
@@ -122,6 +120,5 @@ class MigrationCartalystSentinel extends Migration
         Schema::drop('role_users');
         Schema::drop('throttle');
         Schema::drop('users');
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

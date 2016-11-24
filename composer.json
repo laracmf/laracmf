@@ -1,7 +1,7 @@
 {
     "name": "graham-campbell/bootstrap-cms",
-    "description": "Bootstrap CMS Is A PHP CMS Powered By Laravel 5 And Sentry",
-    "keywords": ["laravel", "framework", "sentry", "bootstrap", "cms", "bootstrap cms", "Bootstrap CMS", "Bootstrap-CMS", "blog", "login", "Graham Campbell", "GrahamCampbell"],
+    "description": "Bootstrap CMS Is A PHP CMS Powered By Laravel 5 And Sentinel",
+    "keywords": ["laravel", "framework", "sentinel", "bootstrap", "cms", "bootstrap cms", "Bootstrap CMS", "Bootstrap-CMS", "blog", "login", "Graham Campbell", "GrahamCampbell"],
     "license": "AGPL-3.0",
     "authors": [
         {
@@ -10,10 +10,6 @@
         }
     ],
     "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/BootstrapCMS/Sentry"
-        },
         {
             "type": "vcs",
             "url": "https://github.com/Kit-kat1/Credentials"
