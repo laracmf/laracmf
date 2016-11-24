@@ -265,10 +265,16 @@ class NavigationSubscriber
         $user = $this->credentials->getUser();
 
         if ($this->credentials->check() && $user) {
+            if ($user->inRole('moderator') || $user->inRole('admin')) {
+                $this->navigation->addToBar(
+                    ['title' => 'Create Page', 'slug' => 'pages/create', 'icon' => 'pencil']
+                );
+            }
+
             // add the create user link
             if ($user->inRole('admin')) {
                 $this->navigation->addToBar(
-                    ['title' => 'Create User', 'slug' => 'users/create', 'icon' => 'star']
+                    ['title' => 'Create Categories', 'slug' => 'category/', 'icon' => 'pencil']
                 );
 
                 $this->navigation->addToBar(
@@ -280,15 +286,11 @@ class NavigationSubscriber
                 );
 
                 $this->navigation->addToBar(
+                    ['title' => 'Create User', 'slug' => 'users/create', 'icon' => 'star']
+                );
+
+                $this->navigation->addToBar(
                     ['title' => 'View Users', 'slug' => 'users', 'icon' => 'user']
-                );
-
-                $this->navigation->addToBar(
-                    ['title' => 'Create Page', 'slug' => 'pages/create', 'icon' => 'pencil']
-                );
-
-                $this->navigation->addToBar(
-                    ['title' => 'Create Categories', 'slug' => 'category/', 'icon' => 'pencil']
                 );
 
                 $this->navigation->addToBar(
