@@ -13,3 +13,4 @@ composer.phar
 /public/build
 bower_components/
 /.project
+_ide_helper.php
