@@ -25,7 +25,7 @@ trait OwnerPresenterTrait
      */
     public function owner()
     {
-        $user = $this->getWrappedObject()->user()->withTrashed()->first(['first_name', 'last_name', 'email']);
+        $user = $this->getWrappedObject()->user()->getResults();
 
         return $user->first_name.' '.$user->last_name.' ('.$user->email.')';
     }

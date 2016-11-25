@@ -11,43 +11,43 @@
 @stop
 
 @section('content')
-@auth('edit')
-    <div class="well clearfix">
-        <div class="hidden-xs">
-            <div class="col-xs-6">
-                <p>
-                    <strong>Event Owner:</strong> {!! $event->owner !!}
-                </p>
-                <a class="btn btn-info" href="{!! route('events.edit', array('events' => $event->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Event</a> <a class="btn btn-danger" href="#delete_event" data-toggle="modal" data-target="#delete_event"><i class="fa fa-times"></i> Delete Event</a>
+    @if(isRole('editor'))
+        <div class="well clearfix">
+            <div class="hidden-xs">
+                <div class="col-xs-6">
+                    <p>
+                        <strong>Event Owner:</strong> {!! $event->owner !!}
+                    </p>
+                    <a class="btn btn-info" href="{!! route('events.edit', array('events' => $event->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Event</a> <a class="btn btn-danger" href="#delete_event" data-toggle="modal" data-target="#delete_event"><i class="fa fa-times"></i> Delete Event</a>
+                </div>
+                <div class="col-xs-6">
+                    <div class="pull-right">
+                        <p>
+                            <em>Event Created: {!! html_ago($event->created_at) !!}</em>
+                        </p>
+                        <p>
+                            <em>Last Updated: {!! html_ago($event->updated_at) !!}</em>
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-6">
-                <div class="pull-right">
+            <div class="visible-xs">
+                <div class="col-xs-12">
                     <p>
-                        <em>Event Created: {!! html_ago($event->created_at) !!}</em>
+                        <strong>Event Owner:</strong> {!! $event->owner !!}
                     </p>
                     <p>
-                        <em>Last Updated: {!! html_ago($event->updated_at) !!}</em>
+                        <strong>Event Created:</strong> {!! html_ago($event->created_at) !!}
                     </p>
+                    <p>
+                        <strong>Last Updated:</strong> {!! html_ago($event->updated_at) !!}
+                    </p>
+                    <a class="btn btn-info" href="{!! route('events.edit', array('events' => $event->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Event</a> <a class="btn btn-danger" href="#delete_event" data-toggle="modal" data-target="#delete_event"><i class="fa fa-times"></i> Delete Event</a>
                 </div>
             </div>
         </div>
-        <div class="visible-xs">
-            <div class="col-xs-12">
-                <p>
-                    <strong>Event Owner:</strong> {!! $event->owner !!}
-                </p>
-                <p>
-                    <strong>Event Created:</strong> {!! html_ago($event->created_at) !!}
-                </p>
-                <p>
-                    <strong>Last Updated:</strong> {!! html_ago($event->updated_at) !!}
-                </p>
-                <a class="btn btn-info" href="{!! route('events.edit', array('events' => $event->id)) !!}"><i class="fa fa-pencil-square-o"></i> Edit Event</a> <a class="btn btn-danger" href="#delete_event" data-toggle="modal" data-target="#delete_event"><i class="fa fa-times"></i> Delete Event</a>
-            </div>
-        </div>
-    </div>
-    <hr>
-@endauth
+        <hr>
+    @endif
 <div class="well clearfix">
     <div class="hidden-xs">
         <div class="col-xs-6">
@@ -73,7 +73,7 @@
 @stop
 
 @section('bottom')
-@auth('edit')
-@include('events.delete')
-@endauth
+    @if(isRole('editor'))
+        @include('events.delete')
+    @endif
 @stop

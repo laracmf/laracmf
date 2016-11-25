@@ -16,8 +16,6 @@ use GrahamCampbell\BootstrapCMS\Facades\CommentRepository;
 use GrahamCampbell\BootstrapCMS\Facades\PostRepository;
 use GrahamCampbell\BootstrapCMS\Models\Post;
 use GrahamCampbell\Credentials\Facades\Credentials;
-use GrahamCampbell\Throttle\Throttlers\ThrottlerInterface;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
@@ -34,30 +32,17 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class CommentController extends AbstractController
 {
     /**
-     * The throttler instance.
-     *
-     * @var \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
-     */
-    protected $throttler;
-
-    /**
      * Create a new instance.
-     *
-     * @param \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface $throttler
      *
      * @return void
      */
-    public function __construct(ThrottlerInterface $throttler)
+    public function __construct()
     {
-        $this->throttler = $throttler;
-
         $this->setPermissions([
             'store'   => 'user',
-            'update'  => 'mod',
-            'destroy' => 'mod',
+            'update'  => 'moderator',
+            'destroy' => 'moderator',
         ]);
-
-        $this->beforeFilter('throttle.comment', ['only' => ['store']]);
 
         parent::__construct();
     }
@@ -79,7 +64,7 @@ class CommentController extends AbstractController
                 'success' => false,
                 'code'    => 404,
                 'msg'     => trans('messages.comment.view_error'),
-                'url'     => URL::route('blog.posts.index'),
+                'url'     => URL::route('posts.index'),
             ], 404);
         }
 
@@ -114,8 +99,6 @@ class CommentController extends AbstractController
         if (CommentRepository::validate($input, array_keys($input))->fails()) {
             throw new BadRequestHttpException('Your comment was empty.');
         }
-
-        $this->throttler->hit();
 
         $comment = CommentRepository::create($input);
 

@@ -4,7 +4,6 @@ public/uploads
 Homestead.yaml
 Homestead.json
 .env
-/storage
 node_modules/
 npm-debug.log
 .vagrant

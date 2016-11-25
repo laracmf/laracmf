@@ -11,7 +11,7 @@
                     <p>Are you sure you wish to continue?</p>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-success" href="{!! route('blog.posts.destroy', array('posts' => $post->id)) !!}" data-token="{!! Session::getToken() !!}" data-method="DELETE">Yes</a>
+                    <a class="btn btn-success" href="{!! route('posts.destroy', array('posts' => $post->id)) !!}" data-token="{!! Session::getToken() !!}" data-method="DELETE">Yes</a>
                     <button class="btn btn-danger" data-dismiss="modal">No</button>
                 </div>
             </div>

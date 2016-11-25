@@ -11,9 +11,7 @@
 
 namespace GrahamCampbell\BootstrapCMS\Models;
 
-use GrahamCampbell\BootstrapCMS\Models\AbstractModel;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
-use GrahamCampbell\Credentials\Models\Relations\RevisionableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
@@ -24,7 +22,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  */
 class Event extends AbstractModel implements HasPresenter
 {
-    use BelongsToUserTrait, RevisionableTrait, SoftDeletes;
+    use BelongsToUserTrait, SoftDeletes;
 
     /**
      * The table the events are stored in.
@@ -46,13 +44,6 @@ class Event extends AbstractModel implements HasPresenter
      * @var array
      */
     protected $dates = ['date', 'deleted_at'];
-
-    /**
-     * The revisionable columns.
-     *
-     * @var array
-     */
-    protected $keepRevisionOf = ['title', 'body', 'date', 'location'];
 
     /**
      * The columns to select when displaying an index.

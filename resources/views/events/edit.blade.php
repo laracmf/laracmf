@@ -42,9 +42,9 @@ Edit {{ $event->title }}
 @stop
 
 @section('bottom')
-@auth('edit')
-@include('events.delete')
-@endauth
+    @if(isRole('editor'))
+        @include('events.delete')
+    @endif
 @stop
 
 @section('css')

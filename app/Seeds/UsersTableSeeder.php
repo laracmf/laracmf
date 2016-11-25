@@ -37,61 +37,49 @@ class UsersTableSeeder extends Seeder
             'first_name'   => 'CMS',
             'last_name'    => 'Admin',
             'email'        => 'admin@dsmg.co.uk',
-            'password'     => 'password',
-            'activated'    => 1,
-            'activated_at' => Carbon::now(),
+            'password'     => 'password'
         ];
-        Credentials::getUserProvider()->create($user);
+        Credentials::getUserRepository()->create($user);
 
         $user = [
             'first_name'   => 'CMS',
             'last_name'    => 'Semi-Admin',
             'email'        => 'semiadmin@dsmg.co.uk',
-            'password'     => 'password',
-            'activated'    => 1,
-            'activated_at' => Carbon::now(),
+            'password'     => 'password'
         ];
-        Credentials::getUserProvider()->create($user);
+        Credentials::getUserRepository()->create($user);
 
         $user = [
             'first_name'   => 'CMS',
             'last_name'    => 'Moderator',
             'email'        => 'moderator@dsmg.co.uk',
-            'password'     => 'password',
-            'activated'    => 1,
-            'activated_at' => Carbon::now(),
+            'password'     => 'password'
         ];
-        Credentials::getUserProvider()->create($user);
+        Credentials::getUserRepository()->create($user);
 
         $user = [
             'first_name'   => 'CMS',
             'last_name'    => 'Blogger',
             'email'        => 'blogger@dsmg.co.uk',
-            'password'     => 'password',
-            'activated'    => 1,
-            'activated_at' => Carbon::now(),
+            'password'     => 'password'
         ];
-        Credentials::getUserProvider()->create($user);
+        Credentials::getUserRepository()->create($user);
 
         $user = [
             'first_name'   => 'CMS',
             'last_name'    => 'Editor',
             'email'        => 'editor@dsmg.co.uk',
-            'password'     => 'password',
-            'activated'    => 1,
-            'activated_at' => Carbon::now(),
+            'password'     => 'password'
         ];
-        Credentials::getUserProvider()->create($user);
+        Credentials::getUserRepository()->create($user);
 
         $user = [
             'first_name'   => 'CMS',
             'last_name'    => 'User',
             'email'        => 'user@dsmg.co.uk',
-            'password'     => 'password',
-            'activated'    => 1,
-            'activated_at' => Carbon::now(),
+            'password'     => 'password'
         ];
-        Credentials::getUserProvider()->create($user);
+        Credentials::getUserRepository()->create($user);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

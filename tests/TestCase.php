@@ -2,11 +2,12 @@
 
 namespace GrahamCampbell\Tests\BootstrapCMS;
 
+use Cartalyst\Sentinel\Permissions\StandardPermissions;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Facades\DB;
 use GrahamCampbell\BootstrapCMS\Models\User;
 use GrahamCampbell\Credentials\Facades\Credentials;
-use Webpatser\Uuid\Uuid;
+use Mockery;
 
 class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {
@@ -35,18 +36,33 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
     {
         parent::setUp();
         DB::beginTransaction();
+
+        $sentinel = Mockery::mock('overload:' . StandardPermissions::class);
+        $sentinel->shouldReceive('createPreparedPermissions')->andReturn(
+            [
+                'user.create' => false,
+                'user.delete' => false,
+                'user.view' => true,
+                'user.update' => true
+            ]
+        );
+
+        $sentinel->shouldReceive('hasAccess')->andReturn(true);
     }
 
     public function authenticateUser($id)
     {
         $user = User::find($id);
-        Credentials::login($user, true);
+
+        if ($user) {
+            Credentials::login($user, true);
+        }
     }
 
     /**
      * Create unactivated user method.
      *
-     * @return User
+     * @return array
      */
     public function createUser()
     {
@@ -55,11 +71,16 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
         $user->email = 'test@mail.ru';
         $user->first_name = 'test';
         $user->password = $user->hash(rand(1, 10));
-        $user->confirm_token = Uuid::generate(4);
 
         $user->save();
 
-        return $user;
+        $activationResponse = Credentials::getActivationRepository()->create($user);
+        $code = $activationResponse ? $activationResponse->code : '';
+
+        return [
+            'user' => $user,
+            'code' => $code
+        ];
     }
 
     /**

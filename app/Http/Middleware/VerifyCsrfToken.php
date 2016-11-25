@@ -3,7 +3,6 @@
 namespace GrahamCampbell\BootstrapCMS\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifyCsrfToken;
-use Illuminate\Support\Str;
 
 class VerifyCsrfToken extends BaseVerifyCsrfToken
 {
@@ -31,6 +30,6 @@ class VerifyCsrfToken extends BaseVerifyCsrfToken
             return false;
         }
 
-        return Str::equals($sessionToken, $token);
+        return hash_equals($sessionToken, $token);
     }
 }

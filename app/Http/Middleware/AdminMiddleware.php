@@ -21,8 +21,6 @@ class AdminMiddleware
      * Create a new instance.
      *
      * @param \GrahamCampbell\Credentials\Credentials $credentials
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException|\Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      */
     public function __construct(Credentials $credentials)
     {
@@ -39,7 +37,9 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!$this->credentials->hasAccess('admin')) {
+        $user = $this->credentials->getUser();
+
+        if ($user && !$user->inRole('admin')) {
             return Redirect::guest(URL::route('base'))
                 ->with('error', 'You must have admin permissions.');
         }

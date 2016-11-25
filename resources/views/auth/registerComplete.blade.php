@@ -19,7 +19,7 @@
                         <div class="panel-heading">Complete registration</div>
 
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ route('save.register.complete', ['id' => $userId]) }}">
+                            <form class="form-horizontal" role="form" method="POST" action="{{ route('save.register.complete', ['id' => $userId, 'code' => $code]) }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <label for="password" class="col-md-4 control-label">Password</label>

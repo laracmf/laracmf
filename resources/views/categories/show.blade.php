@@ -15,13 +15,13 @@
         <div class="col-xs-8">
             <p class="lead">Here is a list of all current categories:</p>
         </div>
-        @auth('admin')
+        @if(isRole('admin'))
         <div class="col-xs-4">
             <div class="pull-right">
                 <a class="btn btn-primary" href="{!! route('show.create.category.page') !!}"><i class="fa fa-folder"></i> New Category</a>
             </div>
         </div>
-        @endauth
+        @endif
     </div>
     <hr>
     <div class="well">

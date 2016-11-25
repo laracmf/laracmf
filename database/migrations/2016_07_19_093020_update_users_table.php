@@ -14,11 +14,11 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * This is the create pages table migration class.
+ * This is the update users table migration class.
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class CreateCommentsTable extends Migration
+class UpdateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -27,14 +27,7 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
-            $table->text('body');
-            $table->integer('version')->unsigned()->default(1);
-            $table->integer('user_id')->unsigned();
-            $table->integer('post_id')->unsigned();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
@@ -46,6 +39,10 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('comments');
+        if (Schema::hasTable('users')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropSoftDeletes();
+            });
+        }
     }
 }

@@ -48,9 +48,9 @@ Edit {{ $page->title }}
 @stop
 
 @section('bottom')
-@auth('edit')
-    @include('pages.delete')
-@endauth
+    @if(isRole('editor'))
+        @include('pages.delete')
+    @endif
 @stop
 
 @section('css')

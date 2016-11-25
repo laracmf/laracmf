@@ -33,11 +33,11 @@ class PostController extends AbstractController
     public function __construct()
     {
         $this->setPermissions([
-            'create'  => 'blog',
-            'store'   => 'blog',
-            'edit'    => 'blog',
-            'update'  => 'blog',
-            'destroy' => 'blog',
+            'create'  => 'blogger|admin',
+            'store'   => 'blogger|admin',
+            'edit'    => 'blogger|admin',
+            'update'  => 'blogger|admin',
+            'destroy' => 'blogger|admin',
         ]);
 
         parent::__construct();
@@ -79,12 +79,12 @@ class PostController extends AbstractController
 
         $val = PostRepository::validate($input, array_keys($input));
         if ($val->fails()) {
-            return Redirect::route('blog.posts.create')->withInput()->withErrors($val->errors());
+            return Redirect::route('posts.create')->withInput()->withErrors($val->errors());
         }
 
         $post = PostRepository::create($input);
 
-        return Redirect::route('blog.posts.show', ['posts' => $post->id])
+        return Redirect::route('posts.show', ['posts' => $post->id])
             ->with('success', trans('messages.post.store_success'));
     }
 
@@ -133,7 +133,7 @@ class PostController extends AbstractController
 
         $val = PostRepository::validate($input, array_keys($input));
         if ($val->fails()) {
-            return Redirect::route('blog.posts.edit', ['posts' => $id])->withInput()->withErrors($val->errors());
+            return Redirect::route('posts.edit', ['posts' => $id])->withInput()->withErrors($val->errors());
         }
 
         $post = PostRepository::find($id);
@@ -141,7 +141,7 @@ class PostController extends AbstractController
 
         $post->update($input);
 
-        return Redirect::route('blog.posts.show', ['posts' => $post->id])
+        return Redirect::route('posts.show', ['posts' => $post->id])
             ->with('success', trans('messages.post.update_success'));
     }
 
@@ -159,7 +159,7 @@ class PostController extends AbstractController
 
         $post->delete();
 
-        return Redirect::route('blog.posts.index')
+        return Redirect::route('posts.index')
             ->with('success', trans('messages.post.delete_success'));
     }
 

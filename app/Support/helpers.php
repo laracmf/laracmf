@@ -23,3 +23,12 @@ function formatBytes($bytes)
 
     return $bytes;
 }
+
+function isRole($role)
+{
+    if (\GrahamCampbell\Credentials\Facades\Credentials::getUser()) {
+        return \GrahamCampbell\Credentials\Facades\Credentials::inRole($role);
+    }
+
+    return false;
+}

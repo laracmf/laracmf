@@ -21,7 +21,7 @@
 */
 
 // send users to the home page
-$router->get('/', ['as' => 'base', function () {
+Route::get('/', ['as' => 'base', function () {
     Session::flash('', ''); // work around laravel bug if there is no session yet
     Session::reflash();
 
@@ -30,69 +30,70 @@ $router->get('/', ['as' => 'base', function () {
 
 // send users to the posts page
 if (Config::get('cms.blogging')) {
-    $router->get('blog', ['as' => 'blog', function () {
+    Route::get('blog', ['as' => 'blog', function () {
         Session::flash('', ''); // work around laravel bug if there is no session yet
         Session::reflash();
 
-        return Redirect::route('blog.posts.index');
+        return Redirect::route('posts.index');
     }]);
 }
 
 // page routes
-$router->resource('pages', 'PageController');
+Route::resource('pages', 'PageController');
 
 // blog routes
 if (Config::get('cms.blogging')) {
-    $router->resource('blog/posts', 'PostController');
-    $router->resource('blog/posts.comments', 'CommentController');
+    Route::resource('blog/posts', 'PostController');
+    Route::resource('blog/posts.comments', 'CommentController');
 }
 
 // event routes
 if (Config::get('cms.events')) {
-    $router->resource('events', 'EventController');
+    Route::resource('events', 'EventController');
 }
 
-$router->get('auth/social/{social}', [
+Route::get('auth/social/{social}', [
     'as' => 'auth.social',
     'uses' => 'Auth\AuthController@redirectToProvider'
 ]);
 
-$router->get('auth/social/{social}/callback', [
+Route::get('auth/social/{social}/callback', [
     'as' => 'auth.social.callback',
     'uses' => 'Auth\AuthController@handleProviderCallback'
 ]);
 
-$router->get('register/complete/{token}', [
+Route::get('register/{id}/complete/{code}', [
     'as' => 'register.complete',
     'uses' => 'Auth\AuthController@showCompleteRegistrationView'
 ]);
 
-$router->post('register/complete/{id}', [
+Route::post('register/{id}/complete/{code}', [
     'as' => 'save.register.complete',
     'uses' => 'Auth\AuthController@completeRegistration'
 ]);
 
-$router->get('account/register', ['as' => 'account.register', 'uses' => 'ViewsController@getRegister']);
-$router->get('account/login', ['as' => 'account.login', 'uses' => 'ViewsController@getLogin']);
+Route::get('account/register', ['as' => 'account.register', 'uses' => 'ViewsController@getRegister']);
+Route::get('account/login', ['as' => 'account.login', 'uses' => 'ViewsController@getLogin']);
 
-Route::group(['middleware' => ['access']], function () use ($router) {
-    Route::group(['middleware' => ['admin']], function () use ($router) {
-        Route::group(['prefix' => 'category'], function () use ($router) {
-            $router->get('/', ['as' => 'show.create.category.page', 'uses' => 'CategoryController@showCreateForm']);
-            $router->post('/', ['as' => 'create.category', 'uses' => 'CategoryController@createCategory']);
-            $router->get('/{id}', ['as' => 'show.edit.category.page', 'uses' => 'CategoryController@editCategoryForm']);
-            $router->post('/{id}', ['as' => 'edit.category', 'uses' => 'CategoryController@editCategory']);
-            $router->delete('/', ['as' => 'delete.category', 'uses' => 'CategoryController@deleteCategory']);
+Route::group(['middleware' => ['access']], function () {
+    Route::get('search/categories', [
+        'as' => 'categories.search',
+        'uses' => 'CategoryController@searchCategories'
+    ]);
+
+    Route::group(['middleware' => ['admin']], function () {
+        Route::group(['prefix' => 'category'], function () {
+            Route::get('/', ['as' => 'show.create.category.page', 'uses' => 'CategoryController@showCreateForm']);
+            Route::post('/', ['as' => 'create.category', 'uses' => 'CategoryController@createCategory']);
+            Route::get('/{id}', ['as' => 'show.edit.category.page', 'uses' => 'CategoryController@editCategoryForm']);
+            Route::post('/{id}', ['as' => 'edit.category', 'uses' => 'CategoryController@editCategory']);
+            Route::delete('/', ['as' => 'delete.category', 'uses' => 'CategoryController@deleteCategory']);
         });
 
-        $router->get('search/pages', ['as' => 'pages.search', 'uses' => 'PageController@searchPages']);
-        $router->get('categories', ['as' => 'show.categories', 'uses' => 'CategoryController@showCategories']);
-        $router->get('search/categories', [
-            'as' => 'categories.search',
-            'uses' => 'CategoryController@searchCategories'
-        ]);
+        Route::get('search/pages', ['as' => 'pages.search', 'uses' => 'PageController@searchPages']);
+        Route::get('categories', ['as' => 'show.categories', 'uses' => 'CategoryController@showCategories']);
 
-        $router->get(
+        Route::get(
             '/environments',
             [
                 'as' => 'show.environments.list',
@@ -100,12 +101,12 @@ Route::group(['middleware' => ['access']], function () use ($router) {
             ]
         );
 
-        Route::group(['prefix' => 'environment'], function () use ($router) {
-            $router->post('/', ['as' => 'create.environment', 'uses' => 'ConfigurationController@createEnvironment']);
-            $router->get('/{name}', ['as' => 'show.edit.form', 'uses' => 'ConfigurationController@showEditForm']);
-            $router->get('/', ['as' => 'show.create.form', 'uses' => 'ConfigurationController@showCreateForm']);
-            $router->put('/{name}', ['as' => 'edit.environment', 'uses' => 'ConfigurationController@editEnvironment']);
-            $router->delete(
+        Route::group(['prefix' => 'environment'], function () {
+            Route::post('/', ['as' => 'create.environment', 'uses' => 'ConfigurationController@createEnvironment']);
+            Route::get('/{name}', ['as' => 'show.edit.form', 'uses' => 'ConfigurationController@showEditForm']);
+            Route::get('/', ['as' => 'show.create.form', 'uses' => 'ConfigurationController@showCreateForm']);
+            Route::put('/{name}', ['as' => 'edit.environment', 'uses' => 'ConfigurationController@editEnvironment']);
+            Route::delete(
                 '/{name}',
                 [
                     'as' => 'delete.environment',
@@ -114,10 +115,10 @@ Route::group(['middleware' => ['access']], function () use ($router) {
             );
         });
 
-        Route::group(['prefix' => 'media'], function () use ($router) {
-            $router->post('/', ['as' => 'upload.media', 'uses' => 'MediaController@uploadMedia']);
-            $router->get('/', ['as' => 'show.all.media', 'uses' => 'MediaController@showAllMedia']);
-            $router->delete('/{id}', ['as' => 'delete.media', 'uses' => 'MediaController@deleteMedia']);
+        Route::group(['prefix' => 'media'], function () {
+            Route::post('/', ['as' => 'upload.media', 'uses' => 'MediaController@uploadMedia']);
+            Route::get('/', ['as' => 'show.all.media', 'uses' => 'MediaController@showAllMedia']);
+            Route::delete('/{id}', ['as' => 'delete.media', 'uses' => 'MediaController@deleteMedia']);
         });
     });
 });

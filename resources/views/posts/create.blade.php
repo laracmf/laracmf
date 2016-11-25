@@ -13,7 +13,7 @@ Create Post
 @section('content')
 <div class="well">
     <?php
-    $form = ['url' => route('blog.posts.store'),
+    $form = ['url' => route('posts.store'),
         'method' => 'POST',
         'button' => 'Create New Post',
         'defaults' => [

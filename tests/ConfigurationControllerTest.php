@@ -165,6 +165,6 @@ class ConfigurationControllerTest extends TestCase
         $configurationsService = Mockery::mock('overload:' . ConfigurationsService::class);
         $configurationsService->shouldReceive('deleteConfig')->once()->andReturn(true);
 
-        $this->json('DELETE', 'environment/testing', [], [])->assertSessionHas('flash');
+        $this->json('DELETE', 'environment/testing', [], [])->seeStatusCode(200);
     }
 }

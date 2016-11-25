@@ -19,14 +19,14 @@ Edit {{ $post->title }}
     </div>
     <div class="col-xs-6">
         <div class="pull-right">
-            <a class="btn btn-success" href="{!! route('blog.posts.show', array('posts' => $post->id)) !!}"><i class="fa fa-file-text"></i> Show Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
+            <a class="btn btn-success" href="{!! route('posts.show', array('posts' => $post->id)) !!}"><i class="fa fa-file-text"></i> Show Post</a> <a class="btn btn-danger" href="#delete_post" data-toggle="modal" data-target="#delete_post"><i class="fa fa-times"></i> Delete Post</a>
         </div>
     </div>
 </div>
 <hr>
 <div class="well">
     <?php
-    $form = ['url' => route('blog.posts.update', ['posts' => $post->id]),
+    $form = ['url' => route('posts.update', ['posts' => $post->id]),
         '_method' => 'PATCH',
         'method' => 'POST',
         'button' => 'Save Post',
@@ -41,9 +41,9 @@ Edit {{ $post->title }}
 @stop
 
 @section('bottom')
-@auth('blog')
-    @include('posts.delete')
-@endauth
+    @if(isRole('blogger'))
+        @include('posts.delete')
+    @endif
 @stop
 
 @section('css')

@@ -15,13 +15,13 @@
         <div class="col-xs-8">
             <p class="lead">Here is a list of all current environments:</p>
         </div>
-        @auth('admin')
+        @if(isRole('admin'))
         <div class="col-xs-4">
             <div class="pull-right">
                 <a class="btn btn-primary" href="{!! route('show.create.form') !!}"><i class="fa fa-folder"></i> New Configuration Environment</a>
             </div>
         </div>
-        @endauth
+        @endif
     </div>
     <hr>
     <div class="well half">

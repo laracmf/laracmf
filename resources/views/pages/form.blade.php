@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div class="form-group{!! ($errors->has('pages')) ? ' has-error' : '' !!}">
+    <div class="form-group{!! ($errors->has('categories')) ? ' has-error' : '' !!}">
         <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="title">Categories List</label>
         <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
             <select name="categories[]" class="form-control selectCategories" multiple>
