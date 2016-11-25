@@ -28,6 +28,17 @@ Route::get('/', ['as' => 'base', function () {
     return Redirect::to(Config::get('credentials.home'));
 }]);
 
+/*
+ * Rotes provided by method resource:
+ *
+ *  GET         /defaults	               index	defaults.index
+ *  POST        /defaults	               store	defaults.store
+ *  GET	        /defaults/{default}	       show   	defaults.show
+ *  PUT/PATCH	/defaults/{default}	       update	defaults.update
+ *  DELETE	    /defaults/{default}	       destroy	defaults.destroy
+ */
+Route::resource('default', 'DefaultController');
+
 // send users to the posts page
 if (Config::get('cms.blogging')) {
     Route::get('blog', ['as' => 'blog', function () {
