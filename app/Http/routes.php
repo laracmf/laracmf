@@ -76,6 +76,11 @@ Route::get('account/register', ['as' => 'account.register', 'uses' => 'ViewsCont
 Route::get('account/login', ['as' => 'account.login', 'uses' => 'ViewsController@getLogin']);
 
 Route::group(['middleware' => ['access']], function () {
+    Route::get('search/categories', [
+        'as' => 'categories.search',
+        'uses' => 'CategoryController@searchCategories'
+    ]);
+
     Route::group(['middleware' => ['admin']], function () {
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', ['as' => 'show.create.category.page', 'uses' => 'CategoryController@showCreateForm']);
@@ -87,10 +92,6 @@ Route::group(['middleware' => ['access']], function () {
 
         Route::get('search/pages', ['as' => 'pages.search', 'uses' => 'PageController@searchPages']);
         Route::get('categories', ['as' => 'show.categories', 'uses' => 'CategoryController@showCategories']);
-        Route::get('search/categories', [
-            'as' => 'categories.search',
-            'uses' => 'CategoryController@searchCategories'
-        ]);
 
         Route::get(
             '/environments',

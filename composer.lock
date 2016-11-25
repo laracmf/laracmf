@@ -601,12 +601,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kit-kat1/Credentials.git",
-                "reference": "65e5390f649e819746e6fdb5340e6e6297cd08ee"
+                "reference": "153b2feaf1b9782a167284ec7725337b07abe1ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kit-kat1/Credentials/zipball/65e5390f649e819746e6fdb5340e6e6297cd08ee",
-                "reference": "65e5390f649e819746e6fdb5340e6e6297cd08ee",
+                "url": "https://api.github.com/repos/Kit-kat1/Credentials/zipball/153b2feaf1b9782a167284ec7725337b07abe1ed",
+                "reference": "153b2feaf1b9782a167284ec7725337b07abe1ed",
                 "shasum": ""
             },
             "require": {
@@ -682,7 +682,7 @@
             "support": {
                 "source": "https://github.com/Kit-kat1/Credentials/tree/master"
             },
-            "time": "2016-11-24 16:18:29"
+            "time": "2016-11-25 09:44:52"
         },
         {
             "name": "graham-campbell/exceptions",
@@ -4851,16 +4851,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "0.2",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "b39c7a5b194f9ed7bd0dd345c751007a41862443"
+                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/b39c7a5b194f9ed7bd0dd345c751007a41862443",
-                "reference": "b39c7a5b194f9ed7bd0dd345c751007a41862443",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
+                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
                 "shasum": ""
             },
             "require": {
@@ -4894,7 +4894,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2016-06-10 07:14:17"
+            "time": "2016-11-25 06:54:22"
         },
         {
             "name": "phpspec/prophecy",
