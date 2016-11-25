@@ -601,12 +601,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kit-kat1/Credentials.git",
-                "reference": "153b2feaf1b9782a167284ec7725337b07abe1ed"
+                "reference": "f330ce19793c7a5fe42f1c74159f96c9b23cf413"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kit-kat1/Credentials/zipball/153b2feaf1b9782a167284ec7725337b07abe1ed",
-                "reference": "153b2feaf1b9782a167284ec7725337b07abe1ed",
+                "url": "https://api.github.com/repos/Kit-kat1/Credentials/zipball/f330ce19793c7a5fe42f1c74159f96c9b23cf413",
+                "reference": "f330ce19793c7a5fe42f1c74159f96c9b23cf413",
                 "shasum": ""
             },
             "require": {
@@ -682,7 +682,7 @@
             "support": {
                 "source": "https://github.com/Kit-kat1/Credentials/tree/master"
             },
-            "time": "2016-11-25 09:44:52"
+            "time": "2016-11-25 10:18:56"
         },
         {
             "name": "graham-campbell/exceptions",
