@@ -690,12 +690,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kit-kat1/Laravel-Exceptions.git",
-                "reference": "40c6ab65f1309dedbee5020d56caf4321875948a"
+                "reference": "c6ba135639d488befbe3c38443027eee45320c0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kit-kat1/Laravel-Exceptions/zipball/40c6ab65f1309dedbee5020d56caf4321875948a",
-                "reference": "40c6ab65f1309dedbee5020d56caf4321875948a",
+                "url": "https://api.github.com/repos/Kit-kat1/Laravel-Exceptions/zipball/c6ba135639d488befbe3c38443027eee45320c0e",
+                "reference": "c6ba135639d488befbe3c38443027eee45320c0e",
                 "shasum": ""
             },
             "require": {
@@ -762,7 +762,7 @@
             "support": {
                 "source": "https://github.com/Kit-kat1/Laravel-Exceptions/tree/master"
             },
-            "time": "2016-11-24 11:01:20"
+            "time": "2016-11-25 11:42:24"
         },
         {
             "name": "graham-campbell/htmlmin",
