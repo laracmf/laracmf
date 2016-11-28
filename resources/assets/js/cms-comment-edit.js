@@ -1,10 +1,10 @@
 var pk = 0;
 
-function cmsCommentSubmit() {
+function cmsCommentSubmit(that) {
     var token = $("input[name='_token']").val();
 
     $.ajax({
-        url: $("#comments").data("url") + '/' + this.pk,
+        url: $(that).data('url'),
         type: 'PUT',
         dataType: 'json',
         data: {
@@ -67,7 +67,7 @@ function cmsCommentModel() {
     });
 
     $(document).on('click', '#edit_comment_ok', function(event) {
-        cmsCommentSubmit();
+        cmsCommentSubmit(this);
         event.stopImmediatePropagation();
     });
 }

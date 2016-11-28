@@ -267,6 +267,10 @@ class NavigationSubscriber
                 $this->navigation->addToBar(
                     ['title' => 'Create Page', 'slug' => 'pages/create', 'icon' => 'pencil']
                 );
+
+                $this->navigation->addToBar(
+                    ['title' => 'Comments moderation', 'slug' => 'comments', 'icon' => 'comment']
+                );
             }
 
             // add the create user link

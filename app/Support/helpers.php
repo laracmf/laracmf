@@ -32,3 +32,10 @@ function isRole($role)
 
     return false;
 }
+
+function commentOwner($userId)
+{
+    $user = \GrahamCampbell\Credentials\Facades\Credentials::getUser();
+
+    return $user && ($user->id === $userId);
+}

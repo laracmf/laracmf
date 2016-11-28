@@ -97,3 +97,24 @@ img {
 ul li {
 	list-style-type: none;
 }
+
+.pull-right a {
+	margin-right: 5px;
+}
+
+.top-header {
+	min-height: 0;
+	padding: 0;
+	margin-bottom: 20px;
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+}
+
+.common-actions {
+	padding: 5px;
+}
+
+.select-all {
+	padding-top: 10px;
+}

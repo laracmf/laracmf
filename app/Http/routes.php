@@ -44,7 +44,41 @@ Route::resource('pages', 'PageController');
 // blog routes
 if (Config::get('cms.blogging')) {
     Route::resource('blog/posts', 'PostController');
-    Route::resource('blog/posts.comments', 'CommentController');
+
+    Route::get('blog/posts/{post}/comments', [
+        'as' => 'posts.comments.index',
+        'uses' => 'CommentController@index'
+    ]);
+
+    Route::post('blog/posts/{post}/comments', [
+        'as' => 'posts.comments.store',
+        'uses' => 'CommentController@store'
+    ]);
+
+    Route::get('blog/posts/{post}/comments/create', [
+        'as' => 'posts.comments.create',
+        'uses' => 'CommentController@create'
+    ]);
+
+    Route::delete('blog/comments/{comment}', [
+        'as' => 'posts.comments.destroy',
+        'uses' => 'CommentController@destroy'
+    ]);
+
+    Route::put('blog/comments/{comment}', [
+        'as' => 'posts.comments.update',
+        'uses' => 'CommentController@update'
+    ]);
+
+    Route::get('blog/posts/{post}/comments/{comment}', [
+        'as' => 'posts.comments.show',
+        'uses' => 'CommentController@show'
+    ]);
+
+    Route::get('blog/posts/{post}/comments/{comment}/edit', [
+        'as' => 'posts.comments.edit',
+        'uses' => 'CommentController@edit'
+    ]);
 }
 
 // event routes
@@ -80,6 +114,23 @@ Route::group(['middleware' => ['access']], function () {
         'as' => 'categories.search',
         'uses' => 'CategoryController@searchCategories'
     ]);
+
+    Route::group(['middleware' => ['moderator']], function () {
+        Route::get('comment/{id}/approve', [
+            'as' => 'comment.approve',
+            'uses' => 'CommentController@approve'
+        ]);
+
+        Route::get('comments', [
+            'as' => 'comments.show',
+            'uses' => 'CommentsManageController@showAll'
+        ]);
+
+        Route::post('comments/multiple/{action}', [
+            'as' => 'comments.multiple',
+            'uses' => 'CommentsManageController@multiple'
+        ]);
+    });
 
     Route::group(['middleware' => ['admin']], function () {
         Route::group(['prefix' => 'category'], function () {
