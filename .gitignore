@@ -9,7 +9,7 @@ npm-debug.log
 .vagrant
 composer.phar
 /public/vendor
-/public/build
+/public/build/
 bower_components/
 /.project
 _ide_helper.php

@@ -14,6 +14,7 @@ namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
 use GrahamCampbell\Binput\Facades\Binput;
 use GrahamCampbell\BootstrapCMS\Facades\CommentRepository;
 use GrahamCampbell\BootstrapCMS\Facades\PostRepository;
+use GrahamCampbell\BootstrapCMS\Models\Comment;
 use GrahamCampbell\BootstrapCMS\Models\Post;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Response;
@@ -41,7 +42,7 @@ class CommentController extends AbstractController
         $this->setPermissions([
             'store'   => 'user',
             'update'  => 'moderator',
-            'destroy' => 'moderator',
+            'destroy' => 'moderator'
         ]);
 
         parent::__construct();
@@ -91,9 +92,10 @@ class CommentController extends AbstractController
     public function store($postId)
     {
         $input = array_merge(Binput::only('body'), [
-            'user_id' => Credentials::getuser()->id,
-            'post_id' => $postId,
-            'version' => 1,
+            'user_id'  => Credentials::getuser()->id,
+            'post_id'  => $postId,
+            'version'  => 1,
+            'approved' => false
         ]);
 
         if (CommentRepository::validate($input, array_keys($input))->fails()) {
@@ -101,6 +103,11 @@ class CommentController extends AbstractController
         }
 
         $comment = CommentRepository::create($input);
+
+        if (!config('app.moderation')) {
+            $comment->approved = true;
+            $comment->save();
+        }
 
         $contents = View::make('posts.comment', [
             'comment' => $comment,
@@ -111,7 +118,7 @@ class CommentController extends AbstractController
             'success'    => true,
             'msg'        => trans('messages.comment.store_success'),
             'contents'   => $contents->render(),
-            'comment_id' => $comment->id,
+            'comment_id' => $comment->id
         ], 201);
     }
 
@@ -152,7 +159,7 @@ class CommentController extends AbstractController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($postId, $id)
+    public function update($id)
     {
         $body = Binput::input('body');
 
@@ -197,7 +204,7 @@ class CommentController extends AbstractController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($postId, $id)
+    public function destroy($id)
     {
         $comment = CommentRepository::find($id);
         $this->checkComment($comment);
@@ -225,5 +232,23 @@ class CommentController extends AbstractController
         if (!$comment) {
             throw new NotFoundHttpException('Comment Not Found.');
         }
+    }
+
+    /**
+     * Comment approved by moderator
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function approve($id)
+    {
+        $comment = Comment::find($id);
+
+        if ($comment) {
+            $comment->approved = true;
+            $comment->save();
+        }
+
+        return redirect()->back();
     }
 }

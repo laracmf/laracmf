@@ -26,13 +26,6 @@ class Comment extends AbstractModel implements HasPresenter
     use BelongsToPostTrait, BelongsToUserTrait, SoftDeletes;
 
     /**
-     * The table the comments are stored in.
-     *
-     * @var string
-     */
-    protected $table = 'comments';
-
-    /**
      * The model name.
      *
      * @var string
@@ -51,7 +44,7 @@ class Comment extends AbstractModel implements HasPresenter
      *
      * @var array
      */
-    public static $index = ['id', 'body', 'user_id', 'created_at', 'version'];
+    public static $index = ['id', 'body', 'user_id', 'created_at', 'version', 'approved'];
 
     /**
      * The columns to order by when displaying an index.

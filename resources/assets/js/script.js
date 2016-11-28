@@ -34,6 +34,22 @@ $(document).ready(function () {
         });
     });
 
+    function multipleActions(multipleAction) {
+        var action = baseURL + '/comments/multiple/' + multipleAction;
+        var $commentsForm = $('.comments-form');
+
+        $commentsForm.prop('action', action);
+        $commentsForm.submit();
+    }
+
+    $(document).on('click', '.mass-deleting', function () {
+        multipleActions('delete');
+    });
+
+    $(document).on('click', '.mass-approving', function () {
+        multipleActions('approve');
+    });
+
     $(document).on('click', '.delete-pair', function (event) {
         $(this).closest('tr').remove();
     });
@@ -111,6 +127,7 @@ $(document).ready(function () {
                 _token: token
             },
             success: function(data, status, xhr) {
+                console.log(data);
                 if (!xhr.responseJSON) {
                     cmsCommentMessage("There was an unknown error!", "error");
                     cmsCommentLock = false;
@@ -169,5 +186,43 @@ $(document).ready(function () {
                 cmsCommentLock = false;
             }
         });
+    });
+
+    $('.editable').on('click', function () {
+        var commentId = $(this).data('pk');
+        var action =  baseURL + '/blog/comments/' + commentId;
+
+        $('#edit_comment_ok').data('url', action);
+    });
+
+    $('#select-all').on('click', function () {
+        var $comment = $('.comment');
+        if ($(this).is(':checked')) {
+            $comment.css({'background-image': 'inherit', 'background-color': 'silver'});
+
+            $comment.each(function(i, comment) {
+                var $hiddenInput = $(comment).find('input[type=hidden]');
+                $hiddenInput.val($(this).data('pk'));
+            });
+        } else {
+            $comment.css({'background-image': '', 'background-color': ''});
+
+            $comment.each(function(i, comment) {
+                var $hiddenInput = $(comment).find('input[type=hidden]');
+                $hiddenInput.val('');
+            });
+        }
+    });
+
+    $('.comment').on('click', function () {
+        var $hiddenInput = $(this).find('input[type=hidden]');
+
+        if ($hiddenInput.val()) {
+            $(this).css({'background-image': '', 'background-color': ''});
+            $hiddenInput.val('');
+        } else {
+            $(this).css({'background-image': 'inherit', 'background-color': 'silver'});
+            $hiddenInput.val($(this).data('pk'));
+        }
     });
 });

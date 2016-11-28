@@ -37,7 +37,7 @@ class CommentTest extends AbstractTestCase
             [
                 [
                     'comment_id' => 1,
-                    'comment_ver' => 1
+                    'comment_ver' => 0
                 ]
             ]
         );

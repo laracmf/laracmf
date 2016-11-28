@@ -201,20 +201,22 @@ class NavigationSubscriber
         // get the pages
         $pages = $this->pagerepository->navigation();
 
-        // select the home page
-        $page = $pages[0];
+        $page = isset($pages[0]) ? $pages[0] : false;
 
-        // add the page to the start of the main nav bars
-        $this->navigation->addToMain($page, 'default', true);
-        $this->navigation->addToMain($page, 'admin', true);
+        if ($page) {
+            // add the page to the start of the main nav bars
+            $this->navigation->addToMain($page, 'default', true);
+            $this->navigation->addToMain($page, 'admin', true);
 
-        // add the view users link
-        if ($this->credentials->check()
-            && $this->credentials->inRole('moderator')) {
-            $this->navigation->addToMain(
-                ['title' => 'Users', 'slug' => 'users', 'icon' => 'user'],
-                'admin'
-            );
+            // add the view users link
+            if ($this->credentials->check()
+                && $this->credentials->inRole('moderator')
+            ) {
+                $this->navigation->addToMain(
+                    ['title' => 'Users', 'slug' => 'users', 'icon' => 'user'],
+                    'admin'
+                );
+            }
         }
     }
 
@@ -266,6 +268,10 @@ class NavigationSubscriber
             if ($user->inRole('moderator') || $user->inRole('admin')) {
                 $this->navigation->addToBar(
                     ['title' => 'Create Page', 'slug' => 'pages/create', 'icon' => 'pencil']
+                );
+
+                $this->navigation->addToBar(
+                    ['title' => 'Comments moderation', 'slug' => 'comments', 'icon' => 'comment']
                 );
             }
 
