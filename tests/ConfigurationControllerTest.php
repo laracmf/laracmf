@@ -8,32 +8,6 @@ use Mockery;
 class ConfigurationControllerTest extends TestCase
 {
     /**
-     * @name providerCreateEnvironment
-     * @return array
-     */
-    public function providerCreateEnvironment()
-    {
-        return [
-            'testCreateEnvironment' => [
-                'data' => [
-                    'name' => 'new_env',
-                    'keys' => ['APP_ENV'],
-                    'values' => ['local']
-                ],
-                'expected' => 'environments?environments%5B0%5D=vagrant&amp;environments%5B1%5D=testing',
-            ],
-            'testCreateEnvironmentFailed' => [
-                'data' => [
-                    'name' => 'vagrant',
-                    'keys' => '',
-                    'values' => ''
-                ],
-                'expected' => 'Config with such name already exists!',
-            ]
-        ];
-    }
-
-    /**
      * @name providerEditEnvironment
      * @return array
      */
@@ -42,39 +16,40 @@ class ConfigurationControllerTest extends TestCase
         return [
             'testEditEnvironment' => [
                 'data' => [
-                    'name' => 'new_env',
                     'keys' => ['APP_ENV'],
                     'values' => ['local']
                 ],
-                'name' => 'testing',
-                'expected' => 'environments?environments%5B0%5D=vagrant&amp;environments%5B1%5D=testing',
+                'expected' => 'Redirecting to',
             ],
             'testEditEnvironmentFailed' => [
                 'data' => [
-                    'name' => 'vagrant',
                     'keys' => '',
                     'values' => ''
                 ],
-                'name' => 'testing',
-                'expected' => 'Config with such name already exists!',
+                'expected' => 'The values field is required.',
             ]
         ];
     }
 
     /**
-     * Test show environments.
+     * Test edit environment.
+     *
+     * @dataProvider providerEditEnvironment
      *
      * @runInSeparateProcess
      * @preserveGlobalState disabled
+     *
+     * @param $data
+     * @param $expected
      */
-    public function testShowEnvironments()
+    public function testEditEnvironment($data, $expected)
     {
         $this->authenticateUser(1);
 
         $configurationsService = Mockery::mock('overload:' . ConfigurationsService::class);
-        $configurationsService->shouldReceive('getEnvironmentsList')->once()->andReturn(['vagrant', 'testing']);
+        $configurationsService->shouldReceive('writeData')->once()->andReturn(true);
 
-        $this->json('GET', 'environments', [], [])->see('/environment/vagrant');
+        $this->json('PUT', 'environment', $data, [])->see($expected);
     }
 
     /**
@@ -93,78 +68,8 @@ class ConfigurationControllerTest extends TestCase
             'APP_DEBUG' => 'true'
         ]);
 
-        $this->json('GET', 'environment/vagrant', [], [])
+        $this->json('GET', 'environment', [], [])
             ->see('<input name="keys[]" value="APP_ENV" type="text" class="form-control">');
     }
-
-    /**
-     * Test show create environment config form.
-     */
-    public function testShowCreateForm()
-    {
-        $this->authenticateUser(1);
-
-        $this->json('GET', 'environment', [], [])->see('<i class="fa fa-plus"></i> Add New Pair</button>');
-    }
-
-    /**
-     * Test create environment.
-     *
-     * @dataProvider providerCreateEnvironment
-     *
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     *
-     * @param $data
-     * @param $expected
-     */
-    public function testCreateEnvironment($data, $expected)
-    {
-        $this->authenticateUser(1);
-
-        $configurationsService = Mockery::mock('overload:' . ConfigurationsService::class);
-        $configurationsService->shouldReceive('getEnvironmentsList')->once()->andReturn(['vagrant', 'testing']);
-        $configurationsService->shouldReceive('writeData')->once()->andReturn(true);
-
-        $this->json('POST', 'environment', $data, [])->see($expected);
-    }
-
-    /**
-     * Test edit environment.
-     *
-     * @dataProvider providerEditEnvironment
-     *
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     *
-     * @param $data
-     * @param $name
-     * @param $expected
-     */
-    public function testEditEnvironment($data, $name, $expected)
-    {
-        $this->authenticateUser(1);
-
-        $configurationsService = Mockery::mock('overload:' . ConfigurationsService::class);
-        $configurationsService->shouldReceive('getEnvironmentsList')->once()->andReturn(['vagrant', 'testing']);
-        $configurationsService->shouldReceive('writeData')->once()->andReturn(true);
-
-        $this->json('PUT', 'environment/' . $name, $data, [])->see($expected);
-    }
-
-    /**
-     * Test delete environment.
-     *
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
-    public function testDeleteEnvironment()
-    {
-        $this->authenticateUser(1);
-
-        $configurationsService = Mockery::mock('overload:' . ConfigurationsService::class);
-        $configurationsService->shouldReceive('deleteConfig')->once()->andReturn(true);
-
-        $this->json('DELETE', 'environment/testing', [], [])->seeStatusCode(200);
-    }
 }
+

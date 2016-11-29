@@ -278,7 +278,7 @@ class NavigationSubscriber
             // add the create user link
             if ($user->inRole('admin')) {
                 $this->navigation->addToBar(
-                    ['title' => 'Create Categories', 'slug' => 'category/', 'icon' => 'pencil']
+                    ['title' => 'Create Categories', 'slug' => 'category', 'icon' => 'pencil']
                 );
 
                 $this->navigation->addToBar(
@@ -286,7 +286,7 @@ class NavigationSubscriber
                 );
 
                 $this->navigation->addToBar(
-                    ['title' => 'Media', 'slug' => 'media/', 'icon' => 'camera']
+                    ['title' => 'Media', 'slug' => 'media', 'icon' => 'camera']
                 );
 
                 $this->navigation->addToBar(
@@ -298,11 +298,7 @@ class NavigationSubscriber
                 );
 
                 $this->navigation->addToBar(
-                    ['title' => 'Create Environment', 'slug' => 'environment/', 'icon' => 'pencil']
-                );
-
-                $this->navigation->addToBar(
-                    ['title' => 'View Environments', 'slug' => 'environments', 'icon' => 'th-large']
+                    ['title' => 'View Environment', 'slug' => 'environment', 'icon' => 'pencil']
                 );
             }
 

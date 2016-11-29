@@ -144,26 +144,9 @@ Route::group(['middleware' => ['access']], function () {
         Route::get('search/pages', ['as' => 'pages.search', 'uses' => 'PageController@searchPages']);
         Route::get('categories', ['as' => 'show.categories', 'uses' => 'CategoryController@showCategories']);
 
-        Route::get(
-            '/environments',
-            [
-                'as' => 'show.environments.list',
-                'uses' => 'ConfigurationController@showEnvironments'
-            ]
-        );
-
         Route::group(['prefix' => 'environment'], function () {
-            Route::post('/', ['as' => 'create.environment', 'uses' => 'ConfigurationController@createEnvironment']);
-            Route::get('/{name}', ['as' => 'show.edit.form', 'uses' => 'ConfigurationController@showEditForm']);
-            Route::get('/', ['as' => 'show.create.form', 'uses' => 'ConfigurationController@showCreateForm']);
-            Route::put('/{name}', ['as' => 'edit.environment', 'uses' => 'ConfigurationController@editEnvironment']);
-            Route::delete(
-                '/{name}',
-                [
-                    'as' => 'delete.environment',
-                    'uses' => 'ConfigurationController@deleteEnvironment'
-                ]
-            );
+            Route::get('/', ['as' => 'show.environment', 'uses' => 'ConfigurationController@showEnvironment']);
+            Route::put('/', ['as' => 'edit.environment', 'uses' => 'ConfigurationController@editEnvironment']);
         });
 
         Route::group(['prefix' => 'media'], function () {

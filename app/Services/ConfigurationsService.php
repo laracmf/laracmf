@@ -6,33 +6,20 @@ use Illuminate\Http\Request;
 
 class ConfigurationsService
 {
-    /**
-     * Get environments files names placed in path provided in config/app.php
-     *
-     * @return array
-     */
-    public function getEnvironmentsList()
-    {
-        return array_map(
-            function ($fileName) {
-                return explode('.', $fileName)[2];
-            },
-            array_diff(scandir(config('app.env_path')), ['.', '..'])
-        );
-    }
+    const ENV_NAME = '.env';
 
     /**
      * Get file data.
      *
      * @return array|bool
      */
-    public function getEnvironment($name)
+    public function getEnvironment()
     {
-        if (!$this->fileExists($name)) {
+        if (!$this->fileExists($this::ENV_NAME)) {
             return false;
         }
 
-        $params = explode("\n", file_get_contents(config('app.env_path') . '/' . $this->getFileName($name)));
+        $params = explode("\n", file_get_contents(config('app.env_path') . $this::ENV_NAME));
         $params = array_filter(
             $params,
             function ($value) {
@@ -57,22 +44,20 @@ class ConfigurationsService
      * Save config data into file.
      *
      * @param $data
-     * @param $name
      *
      * @return bool|int
      */
-    public function writeData($data, $name = null)
+    public function writeData($data)
     {
         $keys = array_get($data, 'keys', []);
         $values = array_get($data, 'values', []);
-        $formName = array_get($data, 'name', '');
 
-        if ($name && ($name !== $formName) && $this->fileExists($name)) {
-            unlink(config('app.env_path') . '/' . $this->getFileName($name));
+        if ($this->fileExists($this::ENV_NAME)) {
+            unlink(config('app.env_path') . $this::ENV_NAME);
         }
 
         return file_put_contents(
-            config('app.env_path') . '/' . $this->getFileName($formName),
+            config('app.env_path') . $this::ENV_NAME,
             $this->createAssociations($keys, $values)
         );
     }
@@ -103,24 +88,13 @@ class ConfigurationsService
      */
     public function deleteConfig($name)
     {
-        $file = config('app.env_path') . '/' . $this->getFileName($name);
+        $file = config('app.env_path') . $name;
 
         if (file_exists($file)) {
-            return unlink(config('app.env_path') . '/' . $this->getFileName($name));
+            return unlink(config('app.env_path') . $name);
         }
 
         return false;
-    }
-
-    /**
-     * Get environment file name. For example "prod" it converts to .env.prod
-     *
-     * @param $name
-     * @return string
-     */
-    public function getFileName($name)
-    {
-        return '.env.' . $name;
     }
 
     /**
@@ -132,6 +106,6 @@ class ConfigurationsService
      */
     public function fileExists($fileName)
     {
-        return file_exists(config('app.env_path') . '/' . $this->getFileName($fileName));
+        return file_exists(config('app.env_path') . $fileName);
     }
 }

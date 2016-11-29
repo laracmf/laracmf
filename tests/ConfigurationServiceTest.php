@@ -23,26 +23,6 @@ class ConfigurationServiceTest extends TestCase
     ];
 
     /**
-     * @name providerGetEnvironment
-     * @return array
-     */
-    public function providerGetEnvironment()
-    {
-        return [
-            'testGetEnvironment' => [
-                'name' => 'vagrant',
-                'assertMethod' => 'assertArrayHasKey',
-                'expected' => 'APP_ENV'
-            ],
-            'testGetEnvironmentFailed' => [
-                'name' => 'new',
-                'assertMethod' => 'assertEquals',
-                'expected' => false
-            ]
-        ];
-    }
-
-    /**
      * Configuration service instance.
      *
      * @var object
@@ -53,52 +33,17 @@ class ConfigurationServiceTest extends TestCase
     {
         parent::setUp();
 
-        config(['app.env_path' => 'config/env']);
+        config(['app.env_path' => '']);
 
         $this->configurationService = new ConfigurationsService();
     }
 
     /**
-     * Test get environments list.
-     */
-    public function testGetEnvironmentsList()
-    {
-        $this->assertEquals([2 => 'testing', 3 => 'vagrant'], $this->configurationService->getEnvironmentsList());
-    }
-
-    /**
      * Test get environment data
-     *
-     * @dataProvider providerGetEnvironment
-     *
-     * @param $name
-     * @param $assertMethod
-     * @param $expected
      */
-    public function testGetEnvironment($name, $assertMethod, $expected)
+    public function testGetEnvironment()
     {
-        $this->{$assertMethod}($expected, $this->configurationService->getEnvironment($name));
-    }
-
-    /**
-     * Test write data in new config file.
-     */
-    public function testWriteData()
-    {
-        $data = $this->testData;
-        $data['name'] = 'test12345';
-
-        $this->assertTrue(true, $this->configurationService->writeData($data));
-    }
-
-    /**
-     * Test delete config file.
-     */
-    public function testDeleteConfig()
-    {
-        $this->assertEquals(true, $this->configurationService->deleteConfig('test12345'));
-
-        $this->assertEquals([2 => 'testing', 3 => 'vagrant'], $this->configurationService->getEnvironmentsList());
+        $this->assertArrayHasKey('APP_ENV', $this->configurationService->getEnvironment());
     }
 
     /**
@@ -115,18 +60,10 @@ class ConfigurationServiceTest extends TestCase
     }
 
     /**
-     * Test get file name
-     */
-    public function testGetFileName()
-    {
-        $this->assertEquals('.env.testing', $this->configurationService->getFileName('testing'));
-    }
-
-    /**
      * Test file exists
      */
     public function testFileExists()
     {
-        $this->assertTrue($this->configurationService->fileExists('testing'));
+        $this->assertTrue($this->configurationService->fileExists('.env'));
     }
 }

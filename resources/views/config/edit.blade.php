@@ -13,13 +13,12 @@
 @section('content')
 <div class="well half">
     <?php
-    $form = ['url' => route('edit.environment', [$name]),
+    $form = ['url' => route('edit.environment'),
         '_method' => 'PUT',
         'method' => 'POST',
         'button' => 'Edit Environment',
         'defaults' => [
-            'environment' => $environment,
-            'name' => $name
+            'environment' => $environment
     ], ];
     ?>
     @include('config.form')
