@@ -3,13 +3,6 @@
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="{{ isset($form['_method'])? $form['_method'] : $form['method'] }}">
 
-    <div class="form-group{!! ($errors->has('name')) ? ' has-error' : '' !!}">
-        <label class="col-md-2 control-label" for="title">Environment Name</label>
-        <div class="col-lg-8">
-            <input name="name" id="name" value="{!! Request::old('name', $form['defaults']['name']) !!}" type="text" class="form-control" placeholder="Environment Name">
-            {!! ($errors->has('name') ? $errors->first('name') : '') !!}
-        </div>
-    </div>
     <table class="env-table">
         <thead>
         <th>Key</th>

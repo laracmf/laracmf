@@ -24,7 +24,6 @@ class ConfigurationRequest extends Request
     public function rules()
     {
         return [
-            'name'  => 'required|max:255|name_unique:' . $this->name,
             'keys' => 'required|array|filled',
             'values' => 'required|array|filled'
         ];

@@ -5,6 +5,7 @@
 .half {
 	width: 50%;
 	margin: auto;
+	padding-top: 0!important;
 }
 
 .env, .env:hover, .env:focus {
