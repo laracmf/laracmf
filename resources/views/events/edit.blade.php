@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends(config('app.layout'))
 
 @section('title')
 Edit {{ $event->title }}

@@ -21,12 +21,18 @@
 */
 
 // send users to the home page
-Route::get('/', ['as' => 'base', function () {
-    Session::flash('', ''); // work around laravel bug if there is no session yet
-    Session::reflash();
+Route::get(
+    '/',
+    [
+        'as' => 'base',
+        function () {
+            Session::flash('', ''); // work around laravel bug if there is no session yet
+            Session::reflash();
 
-    return Redirect::to(Config::get('credentials.home'));
-}]);
+            return Redirect::to(Config::get('credentials.home'));
+        }
+    ]
+);
 
 /*
  * Rotes provided by method resource:
@@ -41,12 +47,18 @@ Route::resource('default', 'DefaultController');
 
 // send users to the posts page
 if (Config::get('cms.blogging')) {
-    Route::get('blog', ['as' => 'blog', function () {
-        Session::flash('', ''); // work around laravel bug if there is no session yet
-        Session::reflash();
+    Route::get(
+        'blog',
+        [
+            'as' => 'blog',
+            function () {
+                Session::flash('', ''); // work around laravel bug if there is no session yet
+                Session::reflash();
 
-        return Redirect::route('posts.index');
-    }]);
+                return Redirect::route('posts.index');
+            }
+        ]
+    );
 }
 
 // page routes
@@ -144,6 +156,8 @@ Route::group(['middleware' => ['access']], function () {
     });
 
     Route::group(['middleware' => ['admin']], function () {
+        Route::get('admin', ['as' => 'admin.show', 'uses' => 'AdminController@index']);
+
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', ['as' => 'show.create.category.page', 'uses' => 'CategoryController@showCreateForm']);
             Route::post('/', ['as' => 'create.category', 'uses' => 'CategoryController@createCategory']);

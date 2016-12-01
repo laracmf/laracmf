@@ -50,6 +50,6 @@ return [
     |
     */
 
-    'layout' => 'layouts.default',
+    'layout' => 'layouts.admin',
 
 ];
