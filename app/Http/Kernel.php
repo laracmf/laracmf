@@ -44,8 +44,8 @@ class Kernel extends HttpKernel
      * @var string[]
      */
     protected $routeMiddleware = [
-        'access'    => AccessMiddleware::class,
-        'admin'     => AdminMiddleware::class,
-        'moderator' => ModeratorMiddleware::class
+        'access'        => AccessMiddleware::class,
+        'admin'         => AdminMiddleware::class,
+        'moderator'     => ModeratorMiddleware::class
     ];
 }

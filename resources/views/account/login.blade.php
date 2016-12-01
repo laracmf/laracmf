@@ -1,4 +1,4 @@
-@extends(Config::get('credentials.layout'))
+@extends(Config::get('app.layout'))
 
 @section('title')
     Login

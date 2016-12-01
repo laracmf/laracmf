@@ -36,13 +36,11 @@ class ModeratorMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $user = $this->credentials->getUser();
-
-        if ($user && !$user->inRole('moderator')) {
-            return Redirect::guest(URL::route('base'))
-                ->with('error', 'You must have moderator permissions.');
+        if ($this->credentials->inRole('moderator') || $this->credentials->inRole('admin')) {
+            return $next($request);
         }
 
-        return $next($request);
+        return Redirect::guest(URL::route('base'))
+            ->with('error', 'You must have moderator permissions.');
     }
 }

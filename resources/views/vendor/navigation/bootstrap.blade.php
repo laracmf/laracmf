@@ -22,39 +22,59 @@
             </div>
             <div id="bar-nav">
                 <ul class="nav navbar-nav navbar-right">
-                    @if ($bar)
+                    @if (isRole('admin'))
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 {!! $side !!} <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                @foreach($bar as $item)
-                                    <li>
-                                        <a href="{!! $item['url'] !!}">
-                                            {!! ((!$item['icon'] == '') ? '<i class="fa fa-'.$item['icon'].' fa-fw"></i> ' : '') !!}{{ $item['title'] }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                                <li class="divider"></li>
                                 <li>
-                                    <a href="{!! route('account.logout') !!}">
-                                        <i class="fa fa-power-off fa-fw"></i> Logout
+                                    <a href="{{ route('account.profile') }}">
+                                        <i class="fa fa-cog fa-fw"></i> View profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.show') }}">
+                                        <i class="fa fa-user-circle"></i> Admin panel
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     @else
-                        <li {!! (Request::is('account/login') ? 'class="active"' : '') !!}>
-                            <a href="{!! route('account.login') !!}">
-                                Login
-                            </a>
-                        </li>
-                        @if (Config::get('credentials.regallowed'))
-                            <li {!! (Request::is('account/register') ? 'class="active"' : '') !!}>
-                                <a href="{!! route('account.register') !!}">
-                                    Register
+                        @if ($bar)
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    {!! $side !!} <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach($bar as $item)
+                                        <li>
+                                            <a href="{!! $item['url'] !!}">
+                                                {!! ((!$item['icon'] == '') ? '<i class="fa fa-'.$item['icon'].' fa-fw"></i> ' : '') !!}{{ $item['title'] }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="{!! route('account.logout') !!}">
+                                            <i class="fa fa-power-off fa-fw"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @else
+                            <li {!! (Request::is('account/login') ? 'class="active"' : '') !!}>
+                                <a href="{!! route('account.login') !!}">
+                                    Login
                                 </a>
                             </li>
+                            @if (Config::get('credentials.regallowed'))
+                                <li {!! (Request::is('account/register') ? 'class="active"' : '') !!}>
+                                    <a href="{!! route('account.register') !!}">
+                                        Register
+                                    </a>
+                                </li>
+                            @endif
                         @endif
                     @endif
                 </ul>

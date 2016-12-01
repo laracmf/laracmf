@@ -24,6 +24,7 @@ use GrahamCampbell\BootstrapCMS\Services\PagesService;
 use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
 use GrahamCampbell\BootstrapCMS\Subscribers\CommandSubscriber;
 use GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber;
+use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\ServiceProvider;
 use GrahamCampbell\BootstrapCMS\Services\CategoriesService;
 use GrahamCampbell\BootstrapCMS\Services\ConfigurationsService;

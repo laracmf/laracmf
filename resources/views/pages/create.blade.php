@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends(isRole('admin')?'layouts.admin':config('app.layout'))
 
 @section('title')
 Create Page

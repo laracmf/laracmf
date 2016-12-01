@@ -66,7 +66,7 @@ class PageController extends AbstractController
         Session::flash('', ''); // work around laravel bug if there is no session yet
         Session::reflash();
 
-        return Redirect::to('pages/home');
+        return Redirect::to(config('credentials.home'));
     }
 
     /**
@@ -117,6 +117,10 @@ class PageController extends AbstractController
      */
     public function show($slug)
     {
+        if ($slug === 'admin' && Credentials::inRole('admin')) {
+            return redirect()->back()->with('warning', 'You haven\'t got admin permissions.');
+        }
+
         $page = PageRepository::find($slug);
         $this->checkPage($page, $slug);
 
@@ -220,7 +224,7 @@ class PageController extends AbstractController
         }
 
         // write flash message and redirect
-        return Redirect::to('pages/home')->with('success', trans('messages.page.delete_success'));
+        return Redirect::to(config('credentials.home'))->with('success', trans('messages.page.delete_success'));
     }
 
     /**

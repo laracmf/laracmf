@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Bootstrap CMS.
+ * This file is part of Laravel Credentials.
  *
  * (c) Graham Campbell <graham@alt-three.com>
  *
@@ -62,6 +62,19 @@ return [
     */
 
     'layout' => 'layouts.default',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Layout
+    |--------------------------------------------------------------------------
+    |
+    | This defines the layout to extend when building views for admin panel.
+    |
+    | Default to 'layouts.admin'.
+    |
+    */
+
+    'admin-layout' => 'layouts.admin',
 
     /*
     |--------------------------------------------------------------------------

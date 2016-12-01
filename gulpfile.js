@@ -11,22 +11,13 @@ elixir.config.js.outputFolder = scriptsPath;
 elixir.config.sourcemaps = false;
 
 elixir(function (mix) {
-    mix.copy('resources/assets/images/*', imagesPath)
-        .copy('resources/assets/css/bootstrap.*.min.css', stylesPath)
-        .copy('resources/assets/css/select2.min.css', stylesPath)
-        .copy('resources/assets/css/style.css', stylesPath)
-        .copy('resources/assets/css/font-awesome.min.css', stylesPath)
-        .copy('resources/assets/css/animate.min.css', stylesPath)
-        .copy('resources/assets/js/jquery.fileupload.js', scriptsPath)
-        .copy('resources/assets/js/jquery.iframe-transport.js', scriptsPath)
-        .copy('resources/assets/js/jquery.ui.widget.js', scriptsPath)
-        .copy('resources/assets/js/script.js', scriptsPath)
-        .copy('resources/assets/js/select2.full.min.js', scriptsPath)
-        .copy('resources/assets/js/fileupload-script.js', scriptsPath)
-        .copy('resources/assets/js/select-script.js', scriptsPath)
-        .copy('resources/assets/js/jquery-3.1.1.min.js', scriptsPath)
-        .copy('resources/assets/js/bootstrap.min.js', scriptsPath)
-        .copy('resources/assets/js/jquery.timeago.min.js', scriptsPath)
+    mix.copy('resources/assets/images/*.*', imagesPath)
+        .copy('resources/dist/img/*', imagesPath)
+        .copy('resources/plugins/*', pluginPath)
+        .copy('resources/assets/css/*.*', stylesPath)
+        .copy('resources/assets/css/*.min.css', stylesPath)
+        .copy('resources/assets/js/*.*', scriptsPath)
+        .copy('resources/assets/js/*.min.js', scriptsPath)
 
         .styles(['bootstrap.min.css'], stylesPath + 'bootstrap.default.min.css')
         .styles(['bootstrap.min.css', 'bootstrap-theme.min.css'], stylesPath + 'bootstrap.legacy.min.css')
@@ -63,6 +54,27 @@ elixir(function (mix) {
             'script.js'
         ], scriptsPath + 'all.js')
 
+        .scripts([
+            'jquery-ui.min.js',
+            'morris.min.js',
+            'moment.js',
+            'raphael.min.js',
+            'respond.min.js',
+            'html5shiv.min.js',
+            'jquery.sparkline.min.js',
+            'jquery-jvectormap-1.2.2.min.js',
+            'jquery-jvectormap-world-mill-en.js',
+            'jquery.knob.js',
+            'daterangepicker.js',
+            'bootstrap-datepicker.js',
+            'bootstrap3-wysihtml5.all.min.js',
+            'jquery.slimscroll.min.js',
+            'fastclick.min.js',
+            'app.min.js',
+            'demo.js',
+            'dashboard.js'
+        ], scriptsPath + 'admin.js')
+
         .styles([
             'bootstrap.min.css',
             'bootstrap-theme.min.css',
@@ -72,5 +84,16 @@ elixir(function (mix) {
             'cms-main.css',
             'style.css'
         ], stylesPath + 'all.css')
+
+        .styles([
+            'AdminLTE.min.css',
+            '_all-skins.min.css',
+            'blue.css',
+            'morris.css',
+            'jquery-jvectormap-1.2.2.css',
+            'datepicker3.css',
+            'daterangepicker.css',
+            'bootstrap3-wysihtml5.min.css'
+        ], stylesPath + 'admin.css')
         .version([stylesPath + 'all.css', scriptsPath + 'all.js']);
 });

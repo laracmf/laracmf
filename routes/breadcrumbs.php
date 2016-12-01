@@ -20,9 +20,3 @@ Breadcrumbs::register('account.profile', function($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Profile', route('account.profile'));
 });
-
-// Create page
-Breadcrumbs::register('pages.create', function($breadcrumbs) {
-    $breadcrumbs->parent('home');
-    $breadcrumbs->push('Create Page', 'pages/create');
-});

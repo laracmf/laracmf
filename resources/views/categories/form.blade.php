@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="{{ $form['url'] }}" method="{{ $form['method'] }}">
+<form class="form-horizontal category-form" action="{{ $form['url'] }}" method="{{ $form['method'] }}">
 
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="{{ isset($form['_method'])? $form['_method'] : $form['method'] }}">

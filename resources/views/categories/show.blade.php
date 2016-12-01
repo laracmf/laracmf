@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.admin')
 
 @section('title')
     Categories
@@ -12,15 +12,12 @@
 
 @section('content')
     <div class="row">
-        <div class="col-xs-8">
-            <p class="lead">Here is a list of all current categories:</p>
-        </div>
         @if(isRole('admin'))
-        <div class="col-xs-4">
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{!! route('show.create.category.page') !!}"><i class="fa fa-folder"></i> New Category</a>
+            <div class="col-xs-12">
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="{!! route('show.create.category.page') !!}"><i class="fa fa-folder"></i> New Category</a>
+                </div>
             </div>
-        </div>
         @endif
     </div>
     <hr>
@@ -33,7 +30,7 @@
             </thead>
             <tbody>
             @foreach ($categories as $category)
-                <tr>
+                <tr class="centered">
                     <td>{!! $category->name !!}</td>
                     <td>
                         &nbsp;<a class="btn btn-info" href="{!! route('show.edit.category.page', ['id' => $category->id]) !!}"><i class="fa fa-pencil-square-o"></i> Edit</a>

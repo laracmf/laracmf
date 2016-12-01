@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/styles/bootstrap.'.Config::get('theme.name', 'default').'.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/styles/all.css') }}">
+
 <script src="{{ asset('assets/scripts/all.js') }}"></script>
 
 <!--[if lt IE 9]>
