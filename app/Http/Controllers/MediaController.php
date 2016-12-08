@@ -15,6 +15,7 @@ class MediaController extends AbstractController
 
     /**
      * MediaController constructor.
+     *
      * @param MediaService $mediaService
      */
     public function __construct(MediaService $mediaService)
@@ -28,6 +29,7 @@ class MediaController extends AbstractController
      * Upload media files on server
      *
      * @param Request $request
+     *
      * @return array
      */
     public function uploadMedia(Request $request)
@@ -51,6 +53,7 @@ class MediaController extends AbstractController
      * Delete media file from server.
      *
      * @param $id
+     *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|int|\Symfony\Component\HttpFoundation\Response
      */
     public function deleteMedia($id)

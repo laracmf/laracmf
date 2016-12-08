@@ -94,6 +94,13 @@ class CategoryControllerTest extends TestCase
         ];
     }
 
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->authenticateUser(1);
+    }
+
     /**
      * Test show create form for category entity.
      *
@@ -114,8 +121,6 @@ class CategoryControllerTest extends TestCase
      */
     public function testShowCategories()
     {
-        $this->authenticateUser(1);
-
         $this->json('GET', 'categories', [], [])->see('<i class="fa fa-folder"></i> New Category</a>');
     }
 
@@ -129,8 +134,6 @@ class CategoryControllerTest extends TestCase
      */
     public function testEditCategoryForm($id, $expected)
     {
-        $this->authenticateUser(1);
-
         $category = new Category();
         $category->name = 'test';
         $category->save();
@@ -156,8 +159,6 @@ class CategoryControllerTest extends TestCase
      */
     public function testCreateCategory($data, $expected, $assertMethod)
     {
-        $this->authenticateUser(1);
-
         $categoryService = Mockery::mock('overload:' . CategoriesService::class);
         $categoryService->shouldReceive('saveCategoryPages')->once();
 
@@ -177,8 +178,6 @@ class CategoryControllerTest extends TestCase
      */
     public function testDeleteCategory()
     {
-        $this->authenticateUser(1);
-
         $categoryService = Mockery::mock('overload:' . CategoriesService::class);
         $categoryService->shouldReceive('saveCategoryPages')->once();
         $categoryService->shouldReceive('deleteCategoryPages')->once();
@@ -208,8 +207,6 @@ class CategoryControllerTest extends TestCase
      */
     public function testEditCategory($data, $id, $expected)
     {
-        $this->authenticateUser(1);
-
         $categoryService = Mockery::mock('overload:' . CategoriesService::class);
         $categoryService->shouldReceive('saveCategoryPages')->once();
         $categoryService->shouldReceive('deleteCategoryPages')->once();
@@ -226,12 +223,19 @@ class CategoryControllerTest extends TestCase
     }
 
     /**
+     * Test show edit category form.
+     */
+    public function testShowEditCategoryForm()
+    {
+        $this->json('GET', 'category/1', [], [])
+            ->see('<button class="btn btn-primary" type="submit"><i class="fa fa-rocket"></i> Edit Category</button>');
+    }
+
+    /**
      * Test search category using query string.
      */
     public function testSearchCategory()
     {
-        $this->authenticateUser(1);
-
         $category = new Category();
         $category->name = 'test';
         $category->save();

@@ -3,7 +3,6 @@
 namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
 
 use GrahamCampbell\BootstrapCMS\Services\ConfigurationsService;
-use Illuminate\Http\Request;
 use GrahamCampbell\BootstrapCMS\Http\Requests\ConfigurationRequest;
 
 /**

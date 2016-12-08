@@ -127,7 +127,6 @@ $(document).ready(function () {
                 _token: token
             },
             success: function(data, status, xhr) {
-                console.log(data);
                 if (!xhr.responseJSON) {
                     cmsCommentMessage("There was an unknown error!", "error");
                     cmsCommentLock = false;

@@ -4,14 +4,11 @@ namespace GrahamCampbell\BootstrapCMS\Http\Middleware;
 
 use Closure;
 use GrahamCampbell\Credentials\Credentials;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Psr\Log\LoggerInterface;
 use ReflectionClass;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
-
 
 class AccessMiddleware
 {

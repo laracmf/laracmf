@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use GrahamCampbell\BootstrapCMS\Models\User;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Mockery;
+use GrahamCampbell\BootstrapCMS\Models\Comment;
 
 class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {
@@ -81,6 +82,19 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
             'user' => $user,
             'code' => $code
         ];
+    }
+
+    public function createComment()
+    {
+        $comment = new Comment(
+            [
+                'body' => 'Test comment.',
+                'user_id' =>  1,
+                'post_id' => 1
+            ]
+        );
+
+        $comment->save();
     }
 
     /**

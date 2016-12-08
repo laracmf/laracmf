@@ -19,7 +19,7 @@
         </div>
     @else
         <div class="col-xs-12">
-            <p><strong>{!! $comment->author !!}</strong> - {!! html_ago($comment->created_at, 'timeago_comment_'.$comment->id) !!}</p>
+            <p><strong>{!! $comment->author !!}</strong> - {!! html_ago($comment->created_at, 'timeago_comment_'.$comment->id) !!} @if(!$comment->approved && config('app.moderation')) <i>Pending moderator approving</i> @endif</p>
             <p id="main_comment_{!! $comment->id !!}" class="main">{!! nl2br(e($comment->body)) !!}</p>
         </div>
     @endif

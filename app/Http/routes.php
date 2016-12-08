@@ -43,7 +43,7 @@ Route::get(
  *  PUT/PATCH	/defaults/{default}	       update	defaults.update
  *  DELETE	    /defaults/{default}	       destroy	defaults.destroy
  */
-Route::resource('default', 'DefaultController');
+Route::resource('default', 'DefaultsController');
 
 // send users to the posts page
 if (Config::get('cms.blogging')) {

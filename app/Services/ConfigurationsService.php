@@ -2,8 +2,6 @@
 
 namespace GrahamCampbell\BootstrapCMS\Services;
 
-use Illuminate\Http\Request;
-
 class ConfigurationsService
 {
     const ENV_NAME = '.env';
@@ -23,7 +21,7 @@ class ConfigurationsService
         $params = array_filter(
             $params,
             function ($value) {
-                return $value !== '';
+                return $value;
             }
         );
 
@@ -67,6 +65,7 @@ class ConfigurationsService
      *
      * @param $keys
      * @param $values
+     *
      * @return string
      */
     public function createAssociations($keys, $values)
@@ -78,23 +77,6 @@ class ConfigurationsService
         }
 
         return implode("\n", $result);
-    }
-
-    /**
-     * Delete file from directory.
-     *
-     * @param $name
-     * @return boolean
-     */
-    public function deleteConfig($name)
-    {
-        $file = config('app.env_path') . $name;
-
-        if (file_exists($file)) {
-            return unlink(config('app.env_path') . $name);
-        }
-
-        return false;
     }
 
     /**
