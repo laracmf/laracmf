@@ -13,7 +13,6 @@ elixir.config.sourcemaps = false;
 elixir(function (mix) {
     mix.copy('resources/assets/images/*.*', imagesPath)
         .copy('resources/dist/img/*', imagesPath)
-        .copy('resources/plugins/*', pluginPath)
         .copy('resources/assets/css/*.*', stylesPath)
         .copy('resources/assets/css/*.min.css', stylesPath)
         .copy('resources/assets/js/*.*', scriptsPath)

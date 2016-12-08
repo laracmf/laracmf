@@ -180,9 +180,9 @@ class PageController extends AbstractController
         $page = PageRepository::find($slug);
         $this->checkPage($page, $slug);
 
-        $checkupdate = $this->checkUpdate($input, $slug);
-        if ($checkupdate) {
-            return $checkupdate;
+        $checkUpdate = $this->checkUpdate($input, $slug);
+        if ($checkUpdate) {
+            return $checkUpdate;
         }
 
         $this->pagesService->deletePageCategories($page);

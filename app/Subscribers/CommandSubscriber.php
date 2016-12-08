@@ -27,18 +27,18 @@ class CommandSubscriber
      *
      * @var \GrahamCampbell\BootstrapCMS\Repositories\PageRepository
      */
-    protected $pagerepository;
+    protected $pageRepository;
 
     /**
      * Create a new instance.
      *
-     * @param \GrahamCampbell\BootstrapCMS\Repositories\PageRepository $pagerepository
+     * @param \GrahamCampbell\BootstrapCMS\Repositories\PageRepository $pageRepository
      *
      * @return void
      */
-    public function __construct(PageRepository $pagerepository)
+    public function __construct(PageRepository $pageRepository)
     {
-        $this->pagerepository = $pagerepository;
+        $this->pageRepository = $pageRepository;
     }
 
     /**
@@ -67,7 +67,7 @@ class CommandSubscriber
     public function onUpdateCache(Command $command)
     {
         $command->line('Regenerating page cache...');
-        $this->pagerepository->refresh();
+        $this->pageRepository->refresh();
         $command->info('Page cache regenerated!');
     }
 
@@ -78,6 +78,6 @@ class CommandSubscriber
      */
     public function getPageRepository()
     {
-        return $this->pagerepository;
+        return $this->pageRepository;
     }
 }

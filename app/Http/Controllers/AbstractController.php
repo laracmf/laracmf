@@ -16,7 +16,6 @@ use GrahamCampbell\BootstrapCMS\Http\Middleware\Auth\Edit;
 use GrahamCampbell\Credentials\Http\Controllers\AbstractController as Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use GrahamCampbell\Credentials\Facades\Credentials;
 
 /**
  * This is the abstract controller class.

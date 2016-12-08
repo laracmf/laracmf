@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\View;
  */
 class CommentsManageController extends AbstractController
 {
+    const PAGINATE = 5;
+
     /**
      * Comments manager service instance
      *
@@ -44,11 +46,17 @@ class CommentsManageController extends AbstractController
      */
     public function showAll()
     {
-        return view('manage.comments.index', ['comments' => Comment::where('approved', '=', false)->paginate(5)]);
+        return view(
+            'manage.comments.index',
+            [
+                'comments' => Comment::where('approved', '=', false)->paginate(self::PAGINATE)
+            ]
+        );
     }
 
     /**
      * Provide multiple actions.
+     * Action could be: approve or delete.
      *
      * @param Request $request
      * @param string $action

@@ -151,7 +151,6 @@ class CommentController extends AbstractController
     /**
      * Update an existing comment.
      *
-     * @param int $postId
      * @param int $id
      *
      * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
@@ -199,7 +198,6 @@ class CommentController extends AbstractController
     /**
      * Delete an existing comment.
      *
-     * @param int $postId
      * @param int $id
      *
      * @return \Illuminate\Http\JsonResponse

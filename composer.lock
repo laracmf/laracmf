@@ -148,20 +148,20 @@
         },
         {
             "name": "classpreloader/classpreloader",
-            "version": "3.0.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ClassPreloader/ClassPreloader.git",
-                "reference": "9b10b913c2bdf90c3d2e0d726b454fb7f77c552a"
+                "reference": "bc7206aa892b5a33f4680421b69b191efd32b096"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ClassPreloader/ClassPreloader/zipball/9b10b913c2bdf90c3d2e0d726b454fb7f77c552a",
-                "reference": "9b10b913c2bdf90c3d2e0d726b454fb7f77c552a",
+                "url": "https://api.github.com/repos/ClassPreloader/ClassPreloader/zipball/bc7206aa892b5a33f4680421b69b191efd32b096",
+                "reference": "bc7206aa892b5a33f4680421b69b191efd32b096",
                 "shasum": ""
             },
             "require": {
-                "nikic/php-parser": "^1.0|^2.0",
+                "nikic/php-parser": "^1.0|^2.0|^3.0",
                 "php": ">=5.5.9"
             },
             "require-dev": {
@@ -170,7 +170,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -198,7 +198,7 @@
                 "class",
                 "preload"
             ],
-            "time": "2015-11-09 22:51:51"
+            "time": "2016-09-16 12:50:15"
         },
         {
             "name": "davejamesmiller/laravel-breadcrumbs",
@@ -601,12 +601,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kit-kat1/Credentials.git",
-                "reference": "ac0b6b98a494c5b04dc460a3367a5c52273e72d4"
+                "reference": "074c67adbd17266410485054d45700dba897903f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kit-kat1/Credentials/zipball/ac0b6b98a494c5b04dc460a3367a5c52273e72d4",
-                "reference": "ac0b6b98a494c5b04dc460a3367a5c52273e72d4",
+                "url": "https://api.github.com/repos/Kit-kat1/Credentials/zipball/074c67adbd17266410485054d45700dba897903f",
+                "reference": "074c67adbd17266410485054d45700dba897903f",
                 "shasum": ""
             },
             "require": {
@@ -682,7 +682,7 @@
             "support": {
                 "source": "https://github.com/Kit-kat1/Credentials/tree/master"
             },
-            "time": "2016-12-01 10:20:39"
+            "time": "2016-12-06 09:01:07"
         },
         {
             "name": "graham-campbell/exceptions",
@@ -2391,16 +2391,16 @@
         },
         {
             "name": "nayjest/grids",
-            "version": "v1.3.5",
+            "version": "v1.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Nayjest/Grids.git",
-                "reference": "125b2ca0e6c6a04db56c8ea7203ec7e1a8c9d061"
+                "reference": "0729102ff38293945442d6f697b93d52db88763a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Nayjest/Grids/zipball/125b2ca0e6c6a04db56c8ea7203ec7e1a8c9d061",
-                "reference": "125b2ca0e6c6a04db56c8ea7203ec7e1a8c9d061",
+                "url": "https://api.github.com/repos/Nayjest/Grids/zipball/0729102ff38293945442d6f697b93d52db88763a",
+                "reference": "0729102ff38293945442d6f697b93d52db88763a",
                 "shasum": ""
             },
             "require": {
@@ -2442,7 +2442,7 @@
                 "laravel5",
                 "tables"
             ],
-            "time": "2016-08-19 11:05:18"
+            "time": "2016-10-24 14:58:56"
         },
         {
             "name": "nayjest/manipulator",
@@ -5204,16 +5204,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.29",
+            "version": "4.8.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f19d481b468b76a7fb55eb2b772ed487e484891e"
+                "reference": "a534e04d0bd39c557c2881c341efd06fa6f1292a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f19d481b468b76a7fb55eb2b772ed487e484891e",
-                "reference": "f19d481b468b76a7fb55eb2b772ed487e484891e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a534e04d0bd39c557c2881c341efd06fa6f1292a",
+                "reference": "a534e04d0bd39c557c2881c341efd06fa6f1292a",
                 "shasum": ""
             },
             "require": {
@@ -5272,7 +5272,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-11-20 10:35:28"
+            "time": "2016-12-01 17:05:48"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

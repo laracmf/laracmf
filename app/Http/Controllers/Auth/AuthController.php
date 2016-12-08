@@ -146,7 +146,7 @@ class AuthController extends AbstractController
         ];
 
         if ($user) {
-            if (!$activation = Credentials::getActivationRepository()->completed($user)) {
+            if (!Credentials::getActivationRepository()->completed($user)) {
                 $user->setAttribute('password', $user->hash($request->password));
                 $user->save();
 

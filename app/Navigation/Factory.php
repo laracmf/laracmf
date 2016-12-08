@@ -129,7 +129,7 @@ class Factory
         $propery = $this->property;
         $user = $this->credentials->getDecoratedUser();
 
-        return $user->$propery;
+        return $user->{$propery};
     }
 
     /**
