@@ -1,7 +1,7 @@
 Bootstrap CMS
 =============
 
-## Installation
+# Installation
 
 [PHP](https://php.net) 5.5+ or [HHVM](http://hhvm.com) 3.6+, a database server, and [Composer](https://getcomposer.org) are required.
 
@@ -25,7 +25,7 @@ If you want launch site using specific domain look [here](https://laravel.com/do
 
 **Admin credentials** admin@dsmg.co.uk/password
 
-## Setting Up Queuing
+# Setting Up Queuing
 
 Bootstrap CMS uses Laravel's queue system to offload jobs such as sending emails so your users don't have to wait for these activities to complete before their pages load. By default, we're using the "sync" queue driver.
 
@@ -33,7 +33,7 @@ Bootstrap CMS uses Laravel's queue system to offload jobs such as sending emails
 2. Enter your queue server details into `config/queue.php`.
 
 
-## Setting Up Caching
+# Setting Up Caching
 
 Bootstrap CMS provides caching functionality, and when enabled, requires a caching server.
 Note that caching will not work with Laravel's `file` or `database` cache drivers.
@@ -43,7 +43,7 @@ Note that caching will not work with Laravel's `file` or `database` cache driver
 3. Setting the driver to array will effectively disable caching if you don't want the overhead.
 
 
-## Setting Up Themes
+# Setting Up Themes
 
 Bootstrap CMS also ships with 18 themes, 16 from [Bootswatch](http://bootswatch.com).
 
@@ -52,7 +52,7 @@ Bootstrap CMS also ships with 18 themes, 16 from [Bootswatch](http://bootswatch.
 3. After making theme changes, you will have to run `php artisan app:update`.
 
 
-## Setting Up Google Analytics
+# Setting Up Google Analytics
 
 Bootstrap CMS natively supports [Google Analytics](http://www.google.com/analytics).
 
@@ -61,20 +61,20 @@ Bootstrap CMS natively supports [Google Analytics](http://www.google.com/analyti
 3. Enable Google Analytics in `config/analytics.php`.
 
 
-## Setting Up CloudFlare Analytics
+# Setting Up CloudFlare Analytics
 
 Bootstrap CMS can read [CloudFlare](https://www.cloudflare.com/) analytic data through a package.
 
 1. Follow the install instructions for my [Laravel CloudFlare](https://github.com/BootstrapCMS/CloudFlare) package.
 2. Bootstrap CMS will auto-detect the package, only allow admin access, and add links to the navigation bar.
 
-## Sign in and up with socials
+# Sign in and up with socials
 
 For this needs we use [Socialite package](https://github.com/laravel/socialite).
 We provide auth through github. However socialite package offer wide range of socials you can implement.
 Just follow steps from the [doc](https://github.com/laravel/socialite#configuration).
 
-## Features in admin panel
+# Features in admin panel
 
  1. Users crud.
  2. Edit configuration from admin page.
@@ -82,11 +82,11 @@ Just follow steps from the [doc](https://github.com/laravel/socialite#configurat
  4. Comments management.
  5. Media crud.
  
-## Comments management
+# Comments management
 
 To enable comments approvement set `COMMENTS_MODERATION` variable to `true` in .env file.
 
-## Dynamic grid maker
+# Dynamic grid maker
 
 To simplify this staff we wrapped [Nayjest/Grids](https://github.com/Nayjest/Grids) package.
 For advanced options look in [package]((https://github.com/Nayjest/Grids)) docs.
@@ -123,13 +123,13 @@ Usage example.
  
  **How to use:**
  
-1. Just render fields:
+## Just render fields:
  
    ``` $grid->generateGrid($user, ['first_name', 'last_name', 'email']);```
    
-2. Render field with filter flow:
+## Render field with filter flow:
  
-   Filter options you can use:
+  Options:
    
   * **like**;
   * **eq**;
@@ -144,7 +144,7 @@ Usage example.
      
    It will generate input for providing filter options.
   
-3. Set components:
+## Set components:
  
    Available components:
    
@@ -156,7 +156,7 @@ Usage example.
    
    ```$grid->generateGrid($user, ['first_name'], ['csv']);```
   
-## Breadcrumbs
+# Breadcrumbs
 
 Breadcrumbs feature provides by [davejamesmiller/laravel-breadcrumbs](https://github.com/davejamesmiller/laravel-breadcrumbs)package.
 
@@ -174,36 +174,36 @@ In template add
 
 For advanced usage see [docs](https://laravel-breadcrumbs.readthedocs.io/en/latest/start.html).
 
-## Flash messages
+# Flash messages
 
 To show flash message: `flash('Message', 'info')`;
 For more options look at [this](https://github.com/laracasts/flash#usage).
 
-## Mailer
+# Mailer
  
 We override Mailer class for headers support.
 To provide headers in mails just add in .env file for `MAIL_SMTP_HEADERS` variable something like this:
 
 ```MAIL_SMTP_HEADERS='{"PROJECT":"cms", "EMAILS":"your_mail@gmail.com"}'```
 
-## Minify css and js files
+# Minify css and js files
 
 For minifying css and js files we use [gulp](https://github.com/gulpjs/gulp/tree/4.0).
 
-## Dynamic crud maker
+# Dynamic crud maker
 
 See [here](https://github.com/appzcoder/crud-generator) how to use package. It's already implemented. Just run
 commands in command line.
 
-## Admin panel
+# Admin panel
 
 We use [Adminlte](https://almsaeedstudio.com/themes/AdminLTE/index2.html).
 
-## Testing
+# Testing
 
 Run in command line, from project root "./vendor/bin/phpunit"
 
-## License
+# License
 
 GNU AFFERO GENERAL PUBLIC LICENSE
 
