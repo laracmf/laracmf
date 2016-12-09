@@ -5,10 +5,8 @@ Bootstrap CMS
 
 [PHP](https://php.net) 5.5+ or [HHVM](http://hhvm.com) 3.6+, a database server, and [Composer](https://getcomposer.org) are required.
 
-1. There are 3 ways of grabbing the code:
-  * Use GitHub: simply download the zip on the right of the readme
-  * Use Git: `git clone git@github.com:BootstrapCMS/CMS.git`
-  * Use Composer: `composer create-project graham-campbell/bootstrap-cms --prefer-dist -s dev`
+1. There is one ways of grabbing the code:
+  * Use Git: `git clone git@bitbucket.org:nixsolutions/phpsu-1496.git`
 2. From a command line open in the folder, run `composer install --no-dev -o` and then `npm install`.
 3. Enter your database details into `config/database.php`.
 4. Run `php artisan app:install` followed by `gulp --production` to setup the application.
