@@ -105,22 +105,31 @@ Provided features:
  * Sorting;
 
 Usage example.
+
  1. In your template render method add following:
+ 
   ```
    $grid = new GridService();
+   
    $user = new User();
+   
    $gridComponent = $grid->generateGrid($user, ['first_name' => ['filter' => 'like'], 'last_name', 'email'], ['csv', 'exel', 'recordsPerPage', 'hider', 'refresher']);
-   view('your_template',  compact('gridComponent'));`
+   
+   view('your_template',  compact('gridComponent'));
   ```
+  
  2. In template add following:
+ 
  ```
    {!! $gridComponent !!}
  ```
  
  #### How to use:
+ 
  * Just render fields:
  
    ```$grid->generateGrid($user, ['first_name', 'last_name', 'email']);```
+   
  * Render field with filter flow:
  
    Filter options you can use:
@@ -138,6 +147,7 @@ Usage example.
    It will generate input for providing filter options.
   
  * Set components:
+ 
    Available components:
      * `csv`;
      * `exel`;
@@ -190,6 +200,10 @@ commands in command line.
 
 We use [Adminlte](https://almsaeedstudio.com/themes/AdminLTE/index2.html).
 
+## Testing
+
+Run in command line, from project root "./vendor/bin/phpunit"
+
 ## License
 
 GNU AFFERO GENERAL PUBLIC LICENSE
@@ -210,7 +224,3 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-## Testing
-
-Run in command line, from project root "./vendor/bin/phpunit"
