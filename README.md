@@ -106,7 +106,7 @@ Provided features:
 
 Usage example.
 
- 1. In your template render method add following:
+ In your template render method add following:
  
  ``` 
     $grid = new GridService(); 
@@ -115,31 +115,32 @@ Usage example.
     view('your_template',  compact('gridComponent'));
  ``` 
   
- 2. In template add following:
+ In template add following:
  
  ```
    {!! $gridComponent !!}
  ```
  
- ### How to use:
+ **How to use:**
  
- * Just render fields:
+ 1. Just render fields:
  
    ```
      $grid->generateGrid($user, ['first_name', 'last_name', 'email']);
    ```
    
- * Render field with filter flow:
+ 2. Render field with filter flow:
  
    Filter options you can use:
-    - `like`;
-    - `eq`;
-    - `n_eq`;
-    - `gt`;
-    - `lt`;
-    - `ls_e`;
-    - `gt_e`;
-    - `in`;
+   
+    * like;
+    * eq;
+    * n_eq;
+    * gt;
+    * lt;
+    * ls_e;
+    * gt_e;
+    * in;
  
    ```
       $grid->generateGrid($user, ['first_name' => ['filter' => 'ls_e']); 
@@ -147,9 +148,10 @@ Usage example.
      
    It will generate input for providing filter options.
   
- * Set components:
+ 3. Set components:
  
    Available components:
+   
      * `csv`;
      * `exel`;
      * `recordsPerPage`;
