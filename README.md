@@ -71,7 +71,7 @@ Bootstrap CMS can read [CloudFlare](https://www.cloudflare.com/) analytic data t
 ## Sign in and up with socials
 
 For this needs we use [Socialite package](https://github.com/laravel/socialite).
-We provide auth through github. But socialite package offer wide range of socials you can implement.
+We provide auth through github. However socialite package offer wide range of socials you can implement.
 Just follow steps from the [doc](https://github.com/laravel/socialite#configuration).
 
 ## Features in admin panel
