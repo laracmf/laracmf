@@ -108,15 +108,13 @@ Usage example.
 
  1. In your template render method add following:
  
-  ```
-   $grid = new GridService();
+  `$grid = new GridService();`
    
-   $user = new User();
+   `$user = new User();`
    
-   $gridComponent = $grid->generateGrid($user, ['first_name' => ['filter' => 'like'], 'last_name', 'email'], ['csv', 'exel', 'recordsPerPage', 'hider', 'refresher']);
+   `$gridComponent = $grid->generateGrid($user, ['first_name' => ['filter' => 'like'], 'last_name', 'email'], ['csv', 'exel', 'recordsPerPage', 'hider', 'refresher']);`
    
-   view('your_template',  compact('gridComponent'));
-  ```
+   `view('your_template',  compact('gridComponent'));`
   
  2. In template add following:
  
@@ -124,7 +122,7 @@ Usage example.
    {!! $gridComponent !!}
  ```
  
- #### How to use:
+ ### How to use:
  
  * Just render fields:
  
