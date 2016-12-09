@@ -22,17 +22,6 @@ use Nayjest\Grids\Components\FiltersRow;
 
 /**
  * Class GridService
- * 
- * Usage example.
- * 1. In your template render method add following:
- *  $grid = new GridService();
- *  $user = new User();
- *
- *  $gridComponent = $grid->generateGrid($user, ['first_name' => ['filter' => 'like'], 'last_name', 'email'], ['csv', 'exel', 'recordsPerPage', 'hider', 'refresher']);
- *  view('your_template',  compact('gridComponent'));
- *
- * 2. In template add following:
- *   {!! $gridComponent !!}
  *
  * @package GrahamCampbell\BootstrapCMS\Services
  */

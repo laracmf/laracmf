@@ -13,6 +13,10 @@
     @section('scripts')
         <script src="{{ asset('assets/scripts/admin.js') }}"></script>
     @show
+    @section('css')
+    @show
+    @section('js')
+    @show
 </head>
 <body class="admin">
 <header class="main-header">

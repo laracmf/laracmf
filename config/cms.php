@@ -35,7 +35,7 @@ return [
     |
     */
 
-    'author' => env('CMS_AUTHOR', 'Graham Campbell'),
+    'author' => env('CMS_AUTHOR', 'Nix Solutions'),
 
     /*
     |--------------------------------------------------------------------------

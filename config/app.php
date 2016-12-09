@@ -213,6 +213,9 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+        Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -240,7 +243,7 @@ return [
         'DB'          => Illuminate\Support\Facades\DB::class,
         'Event'       => Illuminate\Support\Facades\Event::class,
         'File'        => Illuminate\Support\Facades\File::class,
-        'Form'        => Illuminate\Html\FormFacade::class,
+        'Form'        => Collective\Html\FormFacade::class,
         'Grids'       => Nayjest\Grids\Grids::class,
         'Hash'        => Illuminate\Support\Facades\Hash::class,
         'Html'        => Collective\Html\HtmlFacade::class,
@@ -266,6 +269,8 @@ return [
         'Activation'  => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
         'Reminder'    => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
         'Sentinel'    => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
+        'HTML'        => Collective\Html\HtmlFacade::class,
+        'Debugbar'    => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
