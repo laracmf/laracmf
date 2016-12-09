@@ -125,26 +125,22 @@ Usage example.
  
  1. Just render fields:
  
-   ```
-     $grid->generateGrid($user, ['first_name', 'last_name', 'email']);
-   ```
+   ``` $grid->generateGrid($user, ['first_name', 'last_name', 'email']);```
    
  2. Render field with filter flow:
  
    Filter options you can use:
    
-    * like;
-    * eq;
-    * n_eq;
-    * gt;
-    * lt;
-    * ls_e;
-    * gt_e;
-    * in;
+  * like;
+  * eq;
+  * n_eq;
+  * gt;
+  * lt;
+  * ls_e;
+  * gt_e;
+  * in;
  
-   ```
-      $grid->generateGrid($user, ['first_name' => ['filter' => 'ls_e']); 
-   ```
+   ```$grid->generateGrid($user, ['first_name' => ['filter' => 'ls_e']); ```
      
    It will generate input for providing filter options.
   
@@ -152,11 +148,11 @@ Usage example.
  
    Available components:
    
-     * `csv`;
-     * `exel`;
-     * `recordsPerPage`;
-     * `hider`;
-     * `refresher`;
+   * `csv`;
+   * `exel`;
+   * `recordsPerPage`;
+   * `hider`;
+   * `refresher`;
    
    ```$grid->generateGrid($user, ['first_name'], ['csv']);```
   
