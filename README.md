@@ -117,9 +117,7 @@ Usage example.
   
  2. In template add following:
  
- ```
-   {!! $gridComponent !!}
- ```
+ ``` {!! $gridComponent !!}```
  
  ### How to use:
  
@@ -130,13 +128,13 @@ Usage example.
  * Render field with filter flow:
  
    Filter options you can use:
-    * `like`;
-    * `eq`;
-    * `n_eq`;
-    * `gt`;
-    * `lt`;
-    * `ls_e`;
-    * `gt_e`;
+    - `like`;
+    - `eq`;
+    - `n_eq`;
+    - `gt`;
+    - `lt`;
+    - `ls_e`;
+    - `gt_e`;
     * `in`;
  
    ```$grid->generateGrid($user, ['first_name' => ['filter' => 'ls_e']); ```
