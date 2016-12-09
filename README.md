@@ -81,6 +81,7 @@ Just follow steps from the [doc](https://github.com/laravel/socialite#configurat
  3. Categories crud.
  4. Comments management.
  5. Media crud.
+ 6. Pages crud.
  
 # Comments management
 
