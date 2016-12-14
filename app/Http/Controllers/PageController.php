@@ -21,6 +21,7 @@ use GrahamCampbell\BootstrapCMS\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
+use Nayjest\Grids\EloquentDataProvider;
 use Nayjest\Grids\ObjectDataRow;
 use Illuminate\Support\Facades\View;
 use GrahamCampbell\BootstrapCMS\Models\User;
@@ -81,6 +82,13 @@ class PageController extends AbstractController
             }
         };
 
+        $filterFunction = function($val, EloquentDataProvider $provider) {
+            $provider->getBuilder()
+                ->join('users', 'pages.user_id', '=', 'users.id')
+                ->where('users.first_name', 'like', '%' . trim($val) . '%')
+                ->orWhere('users.last_name', 'like', '%' . trim($val) . '%');
+        };
+
         $grid = $this->gridService->generateGrid(
             new Page(),
             [
@@ -94,7 +102,8 @@ class PageController extends AbstractController
                 'user_id' => [
                     'label' => 'Creator',
                     'callback' => $creatorCallback,
-                    'filter' => 'like'
+                    'filter' => 'like',
+                    'function' => $filterFunction
                 ],
                 'created_at' => [
                     'label' => 'Created',
