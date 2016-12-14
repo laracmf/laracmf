@@ -140,7 +140,6 @@ Usage example.
   * **lt**;
   * **ls_e**;
   * **gt_e**;
-  * **in**;
  
    ```$grid->generateGrid($user, ['first_name' => ['filter' => 'ls_e']); ```
      
@@ -157,18 +156,13 @@ Usage example.
    
    ```$grid->generateGrid($user, ['first_name'], ['csv']);```
    
-   For `recordsPerPage` component you can set variants for selector. See an example:
-   
-   ```$grid->setRecordsPerPage([10, 20, 30]);```
-   
 ## Add callback:
 
    ```$callback = function ($val, ObjectDataRow $row) {
           if ($val) {
               return view('partials.names', ['user' =>  $row->getSrc()]);
           }
-      };
-      
+      }; 
       $grid->generateGrid($user, ['first_name' => ['callback' => $callback]);
    ```
    Example above shows how callback option delegate rights for building first_name view to partial 'names'.

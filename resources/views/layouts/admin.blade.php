@@ -76,17 +76,25 @@
                     <span>View Logs</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('show.create.category.page') }}">
-                    <i class="fa fa-pencil fa-fw"></i>
-                    <span>Create Categories</span>
-                </a>
-            </li>
             <li class="treeview">
-                <a href="{{ route('show.categories') }}">
+                <a href="#">
                     <i class="fa fa-folder-open fa-fw"></i>
-                    <span>View Categories</span>
+                    <span>Categories</span>
                 </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{{ route('show.create.category.page') }}">
+                            <i class="fa fa-pencil fa-fw"></i>
+                            <span>Create Categories</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{ route('show.categories') }}">
+                            <i class="fa fa-folder-open fa-fw"></i>
+                            <span>View Categories</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="treeview">
                 <a href="{{ route('show.all.media') }}">
@@ -95,16 +103,24 @@
                 </a>
             </li>
             <li class="treeview">
-                <a href="{{ route('users.create') }}">
-                    <i class="fa fa-star fa-fw"></i>
-                    <span>Create User</span>
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>Users</span>
                 </a>
-            </li>
-            <li class="treeview">
-                <a href="{{ route('users.index') }}">
-                    <i class="fa fa-user fa-fw"></i>
-                    <span>View Users</span>
-                </a>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="{{ route('users.index') }}">
+                            <i class="fa fa-user fa-fw"></i>
+                            <span>View Users</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{ route('users.create') }}">
+                            <i class="fa fa-star fa-fw"></i>
+                            <span>Create User</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="{{ route('show.environment') }}">
@@ -112,17 +128,25 @@
                     <span>View Environment</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('pages.index') }}">
-                    <i class="fa fa-pencil fa-fw"></i>
-                    <span>View pages list</span>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-window-maximize"></i>
+                    <span>Pages</span>
                 </a>
-            </li>
-            <li>
-                <a href="{{ route('pages.create') }}">
-                    <i class="fa fa-pencil fa-fw"></i>
-                    <span>Create Page</span>
-                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{{ route('pages.index') }}">
+                            <i class="fa fa-window-restore"></i>
+                            <span>View pages list</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('pages.create') }}">
+                            <i class="fa fa-pencil fa-fw"></i>
+                            <span>Create Page</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="treeview">
                 <a href="{{ route('comments.show') }}">

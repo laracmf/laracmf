@@ -124,18 +124,66 @@ class GridService
         $config = (new FieldConfig)
             ->setName($key)
             ->setLabel(array_get($field, 'label', ucfirst($key)))
-            ->setSortable(array_get($field, 'sortable', 'false'))
+            ->setSortable(array_get($field, 'sortable', true))
             ->setSorting(array_get($field, 'sorting', null))
             ->setCallback(array_get($field, 'callback', null));
 
-        if (isset($field['filter'])) {
+        if (isset($field['filter']) && $operator = $this->convertOperator($field['filter'])) {
             return $config->addFilter(
                 (new FilterConfig)
-                    ->setOperator(array_get($field, 'filter', FilterConfig::OPERATOR_LIKE))
+                    ->setOperator($field['filter'])
+                    ->setFilteringFunc(function($val, EloquentDataProvider $provider) use ($key, $operator) {
+                        $val = trim($val);
+
+                        if ($operator === 'like') {
+                            $val = '%' . $val . '%';
+                        }
+
+                        $provider->getBuilder()->where($key, $operator, $val);
+                    })
             );
         }
 
         return $config;
+    }
+
+    /**
+     * Convert filter option for query builder.
+     *
+     * @param $filterOption
+     *
+     * @return string
+     */
+    public function convertOperator($filterOption)
+    {
+        switch ($filterOption)
+        {
+            case 'like':
+                $option = 'like';
+                break;
+            case 'eq':
+                $option = '=';
+                break;
+            case 'n_eq':
+                $option = '<>';
+                break;
+            case 'gt':
+                $option = '>';
+                break;
+            case 'lt':
+                $option = '<';
+                break;
+            case 'ls_e':
+                $option = '<=';
+                break;
+            case 'gt_e':
+                $option = '>=';
+                break;
+            default:
+                $option = false;
+        }
+
+        return $option;
     }
 
     /**

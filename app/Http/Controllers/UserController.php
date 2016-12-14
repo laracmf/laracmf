@@ -5,7 +5,6 @@ namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
 use GrahamCampbell\BootstrapCMS\Models\User;
 use GrahamCampbell\BootstrapCMS\Services\GridService;
 use GrahamCampbell\Credentials\Http\Controllers\UserController as BaseController;
-use GrahamCampbell\Credentials\Facades\UserRepository;
 use Illuminate\Support\Facades\View;
 use GrahamCampbell\Credentials\Services\UsersService;
 use Nayjest\Grids\ObjectDataRow;
@@ -70,7 +69,8 @@ class UserController extends BaseController
                 ],
                 'id' => [
                     'label' => 'Options',
-                    'callback' => $callback
+                    'callback' => $callback,
+                    'sortable' => false
                 ]
             ]
         );

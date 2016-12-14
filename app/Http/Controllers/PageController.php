@@ -101,7 +101,8 @@ class PageController extends AbstractController
                 ],
                 'id' => [
                     'label' => 'Options',
-                    'callback' => $callback
+                    'callback' => $callback,
+                    'sortable' => false
                 ]
             ]
         );
