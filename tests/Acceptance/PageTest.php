@@ -114,7 +114,7 @@ class PageTest extends TestCase
             'nav_title'  => 'Herro',
             'slug'       => 'home',
             'icon'       => '',
-            'body'       => 'Why herro there!',
+            'body'       => 'Why hero there!',
             'css'        => '',
             'js'         => '',
             'show_title' => 'on',
@@ -122,7 +122,7 @@ class PageTest extends TestCase
 
         ]);
 
-        $this->assertRedirectedTo('pages/home');
+        $this->assertRedirectedTo('pages');
         $this->assertSessionHas('success');
     }
 
@@ -130,7 +130,7 @@ class PageTest extends TestCase
     {
         $this->delete('pages/home');
 
-        $this->assertRedirectedTo('pages/home');
+        $this->assertRedirectedTo('pages');
         $this->assertSessionHas('error');
     }
 
@@ -138,6 +138,6 @@ class PageTest extends TestCase
     {
         $this->delete('pages/about');
 
-        $this->assertRedirectedTo('pages/home');
+        $this->assertRedirectedTo('pages');
     }
 }

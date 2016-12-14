@@ -19,6 +19,7 @@ use GrahamCampbell\BootstrapCMS\Repositories\EventRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PageRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PostRepository;
 use GrahamCampbell\BootstrapCMS\Services\CommentsManagerService;
+use GrahamCampbell\BootstrapCMS\Services\GridService;
 use GrahamCampbell\BootstrapCMS\Services\MediaService;
 use GrahamCampbell\BootstrapCMS\Services\PagesService;
 use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
@@ -134,6 +135,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerConfigurationsService();
         $this->registerMediaService();
         $this->registerCommentsManagerService();
+        $this->registerGridService();
 
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
@@ -152,6 +154,18 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('socialuser', 'GrahamCampbell\BootstrapCMS\Services\SocialAccountService');
+    }
+
+    /**
+     * Register the social account service class.
+     *
+     * @return void
+     */
+    protected function registerGridService()
+    {
+        $this->app->bind(GridService::class, function () {
+            return new GridService();
+        });
     }
 
     /**

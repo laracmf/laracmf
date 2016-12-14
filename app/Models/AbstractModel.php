@@ -19,6 +19,6 @@ abstract class AbstractModel extends BaseAbstractModel implements ModelInterface
      */
     public function getClassName()
     {
-        return get_class(static::class);
+        return static::class;
     }
 }

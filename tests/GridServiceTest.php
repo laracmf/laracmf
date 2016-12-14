@@ -44,12 +44,6 @@ class GridServiceTest extends TestCase
                 'expected' => 'Excel Export',
                 'message' => 'Expected existence exel component on page.'
             ],
-            'testGenerateGridCase6' => [
-                'fields' => ['last_name', 'email'],
-                'components' => ['recordsPerPage'],
-                'expected' => '<span>Records per page</span>',
-                'message' => 'Expected existence recordsPerPage component on page.'
-            ],
             'testGenerateGridCase7' => [
                 'fields' => ['last_name', 'email'],
                 'components' => ['hider'],

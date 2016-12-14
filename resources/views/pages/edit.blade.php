@@ -1,8 +1,4 @@
-@if(isRole('admin'))
-    @extends('layouts.admin')
-@else
-    @extends(config('app.layout'))
-@endif
+@extends(isRole('admin')?'layouts.admin':config('app.layout'))
 
 @section('title')
 Edit {{ $page->title }}

@@ -113,6 +113,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('pages.index') }}">
+                    <i class="fa fa-pencil fa-fw"></i>
+                    <span>View pages list</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('pages.create') }}">
                     <i class="fa fa-pencil fa-fw"></i>
                     <span>Create Page</span>

@@ -104,6 +104,7 @@ Provided features:
  * Refresh;
  * Render field with filter;
  * Sorting;
+ * Add callback for customizing field output;
 
 Usage example.
 
@@ -151,11 +152,31 @@ Usage example.
    
    * **csv**;
    * **exel**;
-   * **recordsPerPage**;
    * **hider**;
    * **refresher**;
    
    ```$grid->generateGrid($user, ['first_name'], ['csv']);```
+   
+   For `recordsPerPage` component you can set variants for selector. See an example:
+   
+   ```$grid->setRecordsPerPage([10, 20, 30]);```
+   
+## Add callback:
+
+   ```$callback = function ($val, ObjectDataRow $row) {
+          if ($val) {
+              return view('partials.names', ['user' =>  $row->getSrc()]);
+          }
+      };
+      
+      $grid->generateGrid($user, ['first_name' => ['callback' => $callback]);
+   ```
+   Example above shows how callback option delegate rights for building first_name view to partial 'names'.
+
+## Extra 
+
+  You can set items per page quantity `$grid->setPageSize(4);` and grid name `$grid->setGridName('Grid name')`.
+  By default items per page quantity - 15, grid name - 'grid'.
   
 # Breadcrumbs
 

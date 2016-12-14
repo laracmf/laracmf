@@ -16,12 +16,14 @@ use GrahamCampbell\Binput\Facades\Binput;
 use GrahamCampbell\BootstrapCMS\Facades\PageRepository;
 use GrahamCampbell\BootstrapCMS\Http\Requests\PageRequest;
 use GrahamCampbell\BootstrapCMS\Models\Page;
+use GrahamCampbell\BootstrapCMS\Services\GridService;
 use GrahamCampbell\BootstrapCMS\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
+use Nayjest\Grids\ObjectDataRow;
 use Illuminate\Support\Facades\View;
+use GrahamCampbell\BootstrapCMS\Models\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -37,46 +39,84 @@ class PageController extends AbstractController
     protected $pagesService;
 
     /**
+     * @var GridService
+     */
+    protected $gridService;
+
+    /**
      * Create a new instance.
      *
      * @param PagesService $pagesService
      */
-    public function __construct(PagesService $pagesService)
+    public function __construct(PagesService $pagesService, GridService $gridService)
     {
-        $this->setPermissions([
-            'create'  => 'editor',
-            'store'   => 'editor',
-            'edit'    => 'editor',
-            'update'  => 'editor',
-            'destroy' => 'editor',
-        ]);
+        parent::__construct();
 
         $this->pagesService = $pagesService;
-
-        parent::__construct();
+        $this->gridService = $gridService;
     }
 
     /**
-     * Redirect to the homepage.
+     * Show pages list.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
-        Session::flash('', ''); // work around laravel bug if there is no session yet
-        Session::reflash();
+        $pages = Page::all();
 
-        return Redirect::to(config('credentials.home'));
+        $callback = function ($val, ObjectDataRow $row) {
+            if ($val) {
+                return view('partials.pagesOptions', ['page' =>  $row->getSrc()]);
+            }
+        };
+
+        $creatorCallback = function ($val, ObjectDataRow $row) {
+            if ($val) {
+                $user = User::find(($row->getSrc())->user_id);
+
+                if ($user) {
+                    return $user->first_name . ' ' .$user->last_name;
+                }
+            }
+        };
+
+        $grid = $this->gridService->generateGrid(
+            new Page(),
+            [
+                'title' => [
+                    'filter' => 'like'
+                ],
+                'nav_title' => [
+                    'label' => 'Navigation title',
+                    'filter' => 'like'
+                ],
+                'user_id' => [
+                    'label' => 'Creator',
+                    'callback' => $creatorCallback,
+                    'filter' => 'like'
+                ],
+                'created_at' => [
+                    'label' => 'Created',
+                ],
+                'id' => [
+                    'label' => 'Options',
+                    'callback' => $callback
+                ]
+            ]
+        );
+
+        return view('pages.index', compact('pages', 'links', 'grid'));
     }
 
     /**
      * Show the form for creating a new page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
-        return View::make('pages.create');
+        return view('pages.create');
     }
 
     /**
@@ -104,8 +144,7 @@ class PageController extends AbstractController
         }
 
         // write flash message and redirect
-        return Redirect::route('pages.show', ['pages' => $page->slug])
-            ->with('success', trans('messages.page.store_success'));
+        return redirect()->route('pages.index')->with('success', trans('messages.page.store_success'));
     }
 
     /**
@@ -113,14 +152,10 @@ class PageController extends AbstractController
      *
      * @param string $slug
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function show($slug)
     {
-        if ($slug === 'admin' && Credentials::inRole('admin')) {
-            return redirect()->back()->with('warning', 'You haven\'t got admin permissions.');
-        }
-
         $page = PageRepository::find($slug);
         $this->checkPage($page, $slug);
 
@@ -128,7 +163,7 @@ class PageController extends AbstractController
             $page->categories = $this->pagesService->getPageCategories($page);
         }
 
-        return View::make('pages.show', ['page' => $page]);
+        return view('pages.show', ['page' => $page]);
     }
 
     /**
@@ -136,7 +171,7 @@ class PageController extends AbstractController
      *
      * @param string $slug
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit($slug)
     {
@@ -148,7 +183,7 @@ class PageController extends AbstractController
 
         $this->checkPage($page, $slug);
 
-        return View::make('pages.edit', ['page' => $page]);
+        return view('pages.edit', ['page' => $page]);
     }
 
     /**
@@ -161,6 +196,7 @@ class PageController extends AbstractController
      */
     public function update($slug, PageRequest $request)
     {
+
         $input = $this->getInput();
         $categories = $request->input('categories');
 
@@ -173,8 +209,9 @@ class PageController extends AbstractController
         }
 
         $val = PageRepository::validate($input, array_keys($input));
+
         if ($val->fails()) {
-            return Redirect::route('pages.edit', ['pages' => $slug])->withInput()->withErrors($val->errors());
+            return redirect()->route('pages.edit', ['pages' => $slug])->withInput()->withErrors($val->errors());
         }
 
         $page = PageRepository::find($slug);
@@ -196,8 +233,7 @@ class PageController extends AbstractController
         $page->categories = $this->pagesService->getPageCategories($page);
 
         // write flash message and redirect
-        return Redirect::route('pages.show', ['pages' => $page->slug])
-            ->with('success', trans('messages.page.update_success'));
+        return redirect()->route('pages.index')->with('success', trans('messages.page.update_success'));
     }
 
     /**
@@ -219,12 +255,12 @@ class PageController extends AbstractController
         try {
             $page->delete();
         } catch (Exception $e) {
-            return Redirect::route('pages.show', ['pages' => $page->slug])
-                ->with('error', trans('messages.page.delete_error'));
+            // write flash message and redirect
+            return  redirect()->route('pages.index')->with('error', trans('messages.page.delete_error'));
         }
 
         // write flash message and redirect
-        return Redirect::to(config('credentials.home'))->with('success', trans('messages.page.delete_success'));
+        return redirect()->route('pages.index')->with('success', trans('messages.page.delete_success'));
     }
 
     /**

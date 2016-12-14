@@ -61,9 +61,6 @@ if (Config::get('cms.blogging')) {
     );
 }
 
-// page routes
-Route::resource('pages', 'PageController');
-
 // blog routes
 if (Config::get('cms.blogging')) {
     Route::resource('blog/posts', 'PostController');
@@ -156,6 +153,16 @@ Route::group(['middleware' => ['access']], function () {
     });
 
     Route::group(['middleware' => ['admin']], function () {
+        Route::get('users', ['as' => 'users.index', 'uses' => 'UserController@index']);
+        Route::group(['prefix' => 'pages'], function () {
+            Route::get('/', ['as' => 'pages.index', 'uses' => 'PageController@index']);
+            Route::post('/', ['as' => 'pages.store', 'uses' => 'PageController@store']);
+            Route::get('/create', ['as' => 'pages.create', 'uses' => 'PageController@create']);
+            Route::delete('/{page}', ['as' => 'pages.destroy', 'uses' => 'PageController@destroy']);
+            Route::match(['put', 'patch'], '/{page}', ['as' => 'pages.update', 'uses' => 'PageController@update']);
+            Route::get('/{page}/edit', ['as' => 'pages.edit', 'uses' => 'PageController@edit']);
+        });
+
         Route::get('admin', ['as' => 'admin.show', 'uses' => 'AdminController@index']);
 
         Route::group(['prefix' => 'category'], function () {
@@ -181,3 +188,5 @@ Route::group(['middleware' => ['access']], function () {
         });
     });
 });
+
+Route::get('pages/{page}', ['as' => 'pages.show', 'uses' => 'PageController@show']);

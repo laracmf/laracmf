@@ -9,8 +9,9 @@ use Nayjest\Grids\Components\ColumnsHider;
 use Nayjest\Grids\Components\CsvExport;
 use Nayjest\Grids\Components\ExcelExport;
 use Nayjest\Grids\Components\HtmlTag;
+use Nayjest\Grids\Components\Laravel5\Pager;
 use Nayjest\Grids\Components\OneCellRow;
-use Nayjest\Grids\Components\RecordsPerPage;
+use Nayjest\Grids\Components\TFoot;
 use Nayjest\Grids\Components\THead;
 use Nayjest\Grids\EloquentDataProvider;
 use Nayjest\Grids\FieldConfig;
@@ -27,8 +28,9 @@ use Nayjest\Grids\Components\FiltersRow;
  */
 class GridService
 {
-    protected $gridName;
-    protected $pageSize;
+    public $withId = false;
+    protected $gridName = 'grid';
+    protected $pageSize = 15;
 
     /**
      * Generate table
@@ -79,16 +81,18 @@ class GridService
             }
         }
 
-        $columns = array_merge(
-            [
-                (new FieldConfig)
-                    ->setName('id')
-                    ->setLabel('ID')
-                    ->setSortable(true)
-                    ->setSorting(Grid::SORT_ASC)
-            ],
-            $columns
-        );
+        if ($this->withId) {
+            $columns = array_merge(
+                [
+                    (new FieldConfig)
+                        ->setName('id')
+                        ->setLabel('ID')
+                        ->setSortable(true)
+                        ->setSorting(Grid::SORT_ASC)
+                ],
+                $columns
+            );
+        }
 
         return $config->setColumns($columns);
     }
@@ -97,6 +101,7 @@ class GridService
      * Add column without filters.
      *
      * @param string $field
+     *
      * @return FieldConfig
      */
     private function addPlainColumn($field)
@@ -116,16 +121,21 @@ class GridService
      */
     private function addColumnWithFeatures($key, $field)
     {
-        return (new FieldConfig)
+        $config = (new FieldConfig)
             ->setName($key)
             ->setLabel(array_get($field, 'label', ucfirst($key)))
             ->setSortable(array_get($field, 'sortable', 'false'))
             ->setSorting(array_get($field, 'sorting', null))
-            ->setCallback(array_get($field, 'callback', null))
-            ->addFilter(
+            ->setCallback(array_get($field, 'callback', null));
+
+        if (isset($field['filter'])) {
+            return $config->addFilter(
                 (new FilterConfig)
                     ->setOperator(array_get($field, 'filter', FilterConfig::OPERATOR_LIKE))
             );
+        }
+
+        return $config;
     }
 
     /**
@@ -135,7 +145,7 @@ class GridService
      */
     public function getGridName()
     {
-        return $this->gridName ?: 'grid';
+        return $this->gridName;
     }
 
     /**
@@ -155,7 +165,7 @@ class GridService
      */
     public function getPageSize()
     {
-        return $this->pageSize ?: 15;
+        return $this->pageSize;
     }
 
     /**
@@ -172,6 +182,7 @@ class GridService
      * Check is array associative or not
      *
      * @param array $value
+     *
      * @return bool
      */
     public function isAssociative($value)
@@ -189,6 +200,7 @@ class GridService
      * Convert string in snake case into string devided with spaces.
      *
      * @param string $value
+     *
      * @return string
      */
     public function snakeCaseConvertation($value)
@@ -201,6 +213,7 @@ class GridService
      *
      * @param GridConfig $config
      * @param array $components
+     *
      * @return GridConfig
      */
     public function setComponents(GridConfig $config, $components)
@@ -215,16 +228,22 @@ class GridService
             }
         }
 
-       return $config->setComponents([
-       (new THead)
-           ->setComponents([
-               (new ColumnHeadersRow),
-               (new FiltersRow),
-               (new OneCellRow)
-                   ->setRenderSection(RenderableRegistry::SECTION_END)
-                   ->setComponents($componentsObjects)
-                ]
-           )]
+        return $config->setComponents([
+                (new THead)
+                    ->setComponents([
+                            (new ColumnHeadersRow),
+                            (new FiltersRow),
+                            (new OneCellRow)
+                                ->setRenderSection(RenderableRegistry::SECTION_END)
+                                ->setComponents($componentsObjects)
+                        ]
+                    ),
+                (new TFoot)
+                    ->addComponent(
+                        (new OneCellRow)
+                            ->addComponent(new Pager)
+                    )
+            ]
         );
     }
 
@@ -273,15 +292,5 @@ class GridService
     private function setHiderComponent()
     {
         return new ColumnsHider;
-    }
-
-    /**
-     * Set paginator component.
-     *
-     * @return RecordsPerPage
-     */
-    private function setRecordsPerPageComponent()
-    {
-        return new RecordsPerPage;
     }
 }

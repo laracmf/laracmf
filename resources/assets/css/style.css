@@ -220,7 +220,8 @@ ul li {
 	padding: 20px;
 }
 
-.centered td {
+.centered td,
+.table-striped > tbody > tr > td {
 	text-align: center;
 }
 
