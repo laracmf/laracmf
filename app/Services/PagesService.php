@@ -4,7 +4,10 @@ namespace GrahamCampbell\BootstrapCMS\Services;
 
 use GrahamCampbell\BootstrapCMS\Models\Page;
 use GrahamCampbell\BootstrapCMS\Models\CategoriesPages;
+use GrahamCampbell\Credentials\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Nayjest\Grids\EloquentDataProvider;
+use Nayjest\Grids\ObjectDataRow;
 
 /**
  * Class PagesService
@@ -13,6 +16,21 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class PagesService
 {
+    /**
+     * @var GridService
+     */
+    public $gridService;
+
+    /**
+     * PagesService constructor.
+     *
+     * @param GridService $gridService
+     */
+    public function __construct(GridService $gridService)
+    {
+        $this->gridService = $gridService;
+    }
+
     /**
      * Get page categories.
      *
@@ -52,5 +70,63 @@ class PagesService
     public function deletePageCategories(Page $page)
     {
         $page->categories()->detach();
+    }
+
+    /**
+     * Generate pages grid.
+     *
+     * @return object
+     */
+    public function getPagesGrid()
+    {
+        $callback = function ($val, ObjectDataRow $row) {
+            if ($val) {
+                return view('partials.pagesOptions', ['page' =>  $row->getSrc()]);
+            }
+        };
+
+        $creatorCallback = function ($val, ObjectDataRow $row) {
+            if ($val) {
+                $user = User::find(($row->getSrc())->user_id);
+
+                if ($user) {
+                    return $user->first_name . ' ' .$user->last_name;
+                }
+            }
+        };
+
+        $filterFunction = function($val, EloquentDataProvider $provider) {
+            $provider->getBuilder()
+                ->join('users', 'pages.user_id', '=', 'users.id')
+                ->where('users.first_name', 'like', '%' . trim($val) . '%')
+                ->orWhere('users.last_name', 'like', '%' . trim($val) . '%');
+        };
+
+        return $this->gridService->generateGrid(
+            new Page(),
+            [
+                'title' => [
+                    'filter' => 'like'
+                ],
+                'nav_title' => [
+                    'label' => 'Navigation title',
+                    'filter' => 'like'
+                ],
+                'user_id' => [
+                    'label' => 'Creator',
+                    'callback' => $creatorCallback,
+                    'filter' => 'like',
+                    'function' => $filterFunction
+                ],
+                'created_at' => [
+                    'label' => 'Created',
+                ],
+                'id' => [
+                    'label' => 'Options',
+                    'callback' => $callback,
+                    'sortable' => false
+                ]
+            ]
+        );
     }
 }

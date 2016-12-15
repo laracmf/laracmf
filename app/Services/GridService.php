@@ -128,19 +128,41 @@ class GridService
             ->setSorting(array_get($field, 'sorting', null))
             ->setCallback(array_get($field, 'callback', null));
 
+        return $this->setFiltering($config, $field, $key);
+    }
+
+    /**
+     * Set filtering for column.
+     *
+     * @param $config
+     * @param $field
+     * @param $key
+     *
+     * @return mixed
+     */
+    public function setFiltering($config, $field, $key)
+    {
         if (isset($field['filter']) && $operator = $this->convertOperator($field['filter'])) {
+            if (!isset($field['function'])) {
+                return $config->addFilter(
+                    (new FilterConfig)
+                        ->setOperator($field['filter'])
+                        ->setFilteringFunc(function ($val, EloquentDataProvider $provider) use ($key, $operator) {
+                            $val = trim($val);
+
+                            if ($operator === 'like') {
+                                $val = '%' . $val . '%';
+                            }
+
+                            $provider->getBuilder()->where($key, $operator, $val);
+                        })
+                );
+            }
+
             return $config->addFilter(
                 (new FilterConfig)
                     ->setOperator($field['filter'])
-                    ->setFilteringFunc(function($val, EloquentDataProvider $provider) use ($key, $operator) {
-                        $val = trim($val);
-
-                        if ($operator === 'like') {
-                            $val = '%' . $val . '%';
-                        }
-
-                        $provider->getBuilder()->where($key, $operator, $val);
-                    })
+                    ->setFilteringFunc($field['function'])
             );
         }
 
@@ -156,8 +178,7 @@ class GridService
      */
     public function convertOperator($filterOption)
     {
-        switch ($filterOption)
-        {
+        switch ($filterOption) {
             case 'like':
                 $option = 'like';
                 break;

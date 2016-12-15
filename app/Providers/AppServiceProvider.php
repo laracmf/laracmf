@@ -238,8 +238,8 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerPagesService()
     {
-        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\PagesService', function () {
-            return new PagesService();
+        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\PagesService', function ($app) {
+            return new PagesService($app->make('GrahamCampbell\BootstrapCMS\Services\GridService'));
         });
     }
 

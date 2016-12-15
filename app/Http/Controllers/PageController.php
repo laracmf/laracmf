@@ -21,9 +21,7 @@ use GrahamCampbell\BootstrapCMS\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
-use Nayjest\Grids\ObjectDataRow;
 use Illuminate\Support\Facades\View;
-use GrahamCampbell\BootstrapCMS\Models\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -65,47 +63,7 @@ class PageController extends AbstractController
     {
         $pages = Page::all();
 
-        $callback = function ($val, ObjectDataRow $row) {
-            if ($val) {
-                return view('partials.pagesOptions', ['page' =>  $row->getSrc()]);
-            }
-        };
-
-        $creatorCallback = function ($val, ObjectDataRow $row) {
-            if ($val) {
-                $user = User::find(($row->getSrc())->user_id);
-
-                if ($user) {
-                    return $user->first_name . ' ' .$user->last_name;
-                }
-            }
-        };
-
-        $grid = $this->gridService->generateGrid(
-            new Page(),
-            [
-                'title' => [
-                    'filter' => 'like'
-                ],
-                'nav_title' => [
-                    'label' => 'Navigation title',
-                    'filter' => 'like'
-                ],
-                'user_id' => [
-                    'label' => 'Creator',
-                    'callback' => $creatorCallback,
-                    'filter' => 'like'
-                ],
-                'created_at' => [
-                    'label' => 'Created',
-                ],
-                'id' => [
-                    'label' => 'Options',
-                    'callback' => $callback,
-                    'sortable' => false
-                ]
-            ]
-        );
+        $grid = $this->pagesService->getPagesGrid();
 
         return view('pages.index', compact('pages', 'links', 'grid'));
     }
