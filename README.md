@@ -218,7 +218,7 @@ We use [Adminlte](https://almsaeedstudio.com/themes/AdminLTE/index2.html).
 
 # Testing
 
-Run in command line, from project root "./vendor/bin/phpunit"
+Run in command line, from project root `./vendor/bin/phpunit`
 
 # License
 
