@@ -21,12 +21,18 @@
         @endif
     </div>
     <hr>
-    <div class="well">
-        <table class="table">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Categories list</h3>
+        </div>
+        <div class="box-body">
+            <table class="table table-bordered table-hover">
             {{ csrf_field() }}
             <thead>
-            <th>Name</th>
-            <th>Options</th>
+            <tr>
+                <th>Name</th>
+                <th>Options</th>
+            </tr>
             </thead>
             <tbody>
             @foreach ($categories as $category)
@@ -39,6 +45,7 @@
                 </tr>
             @endforeach
             </tbody>
-        </table>
+            </table>
+        </div>
     </div>
 @stop

@@ -1,44 +1,51 @@
 @extends(isRole('admin')?'layouts.admin':config('app.layout'))
 
 @section('title')
-Create Page
+    Create Page
 @stop
 
 @section('top')
-<div class="page-header">
-<h1>Create Page</h1>
-</div>
+    <div class="page-header">
+        <h1>Create Page</h1>
+    </div>
 @stop
 
 @section('content')
-<div class="well">
-    <?php
-    $form = ['url' => route('pages.store'),
-        'method' => 'POST',
-        'button' => 'Create New Page',
-        'defaults' => [
-            'title' => '',
-            'nav_title' => '',
-            'slug' => '',
-            'icon' => '',
-            'body' => '',
-            'css' => '',
-            'js' => '',
-            'categories' => [],
-            'show_title' => true,
-            'show_nav' => true,
-    ], ];
-    ?>
-    @include('pages.form')
-</div>
+    <div class="box box-group">
+        <div class="box-header">
+            <h3 class="box-title">Create page</h3>
+        </div>
+        <div class="box-body">
+            <?php
+            $form = ['url' => route('pages.store'),
+                    'method' => 'POST',
+                    'button' => 'Create New Page',
+                    'defaults' => [
+                            'title' => '',
+                            'nav_title' => '',
+                            'slug' => '',
+                            'icon' => '',
+                            'body' => '',
+                            'css' => '',
+                            'js' => '',
+                            'categories' => [],
+                            'show_title' => true,
+                            'show_nav' => true,
+                    ],];
+            ?>
+            @include('pages.form')
+        </div>
+    </div>
 @stop
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.min.css">
 @stop
 
 @section('js')
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
+    <script type="text/javascript"
+            src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(".make-switch").bootstrapSwitch();

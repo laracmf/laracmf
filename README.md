@@ -158,7 +158,8 @@ Usage example.
    
 ## Add callback:
 
-   ```$callback = function ($val, ObjectDataRow $row) {
+   ```
+      $callback = function ($val, ObjectDataRow $row) {
           if ($val) {
               return view('partials.names', ['user' =>  $row->getSrc()]);
           }
@@ -179,9 +180,9 @@ Breadcrumbs feature provides by [davejamesmiller/laravel-breadcrumbs](https://gi
 Here is an example how to generate breadcrumb:
 
 ``` 
-Breadcrumbs::register('account.register', function($breadcrumbs) {
-      $breadcrumbs->push('Registration', route('account.register'));
-});
+    Breadcrumbs::register('account.register', function($breadcrumbs) {
+       $breadcrumbs->push('Registration', route('account.register'));
+    });
 ``` 
 
 In template add

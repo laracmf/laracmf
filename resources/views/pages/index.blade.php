@@ -13,11 +13,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-xs-8">
-            <p class="lead">Here is all pages list: </p>
-        </div>
         @if(isAdmin())
-            <div class="col-xs-4">
+            <div class="col-xs-12">
                 <div class="pull-right">
                     <a class="btn btn-primary" href="{!! URL::route('pages.create') !!}"><i class="fa fa-user"></i> New Page</a>
                 </div>
@@ -25,9 +22,14 @@
         @endif
     </div>
     <hr>
-    <div class="well">
-        <table class="table">
-            {!! $grid !!}
-        </table>
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Pages list</h3>
+        </div>
+        <div class="box-body">
+            <table class="table table-bordered table-hover">
+                {!! $grid !!}
+            </table>
+        </div>
     </div>
 @stop

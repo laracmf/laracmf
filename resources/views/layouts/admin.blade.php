@@ -65,7 +65,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="treeview">
                 <a href="{{ route('admin.show') }}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
@@ -82,16 +82,16 @@
                     <span>Categories</span>
                 </a>
                 <ul class="treeview-menu">
-                    <li>
-                        <a href="{{ route('show.create.category.page') }}">
-                            <i class="fa fa-pencil fa-fw"></i>
-                            <span>Create Categories</span>
-                        </a>
-                    </li>
                     <li class="treeview">
                         <a href="{{ route('show.categories') }}">
                             <i class="fa fa-folder-open fa-fw"></i>
                             <span>View Categories</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{ route('show.create.category.page') }}">
+                            <i class="fa fa-pencil fa-fw"></i>
+                            <span>Create Category</span>
                         </a>
                     </li>
                 </ul>
@@ -122,7 +122,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="treeview">
                 <a href="{{ route('show.environment') }}">
                     <i class="fa fa-pencil fa-fw"></i>
                     <span>View Environment</span>
@@ -134,13 +134,13 @@
                     <span>Pages</span>
                 </a>
                 <ul class="treeview-menu">
-                    <li>
+                    <li class="treeview">
                         <a href="{{ route('pages.index') }}">
                             <i class="fa fa-window-restore"></i>
-                            <span>View pages list</span>
+                            <span>View pages</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="treeview">
                         <a href="{{ route('pages.create') }}">
                             <i class="fa fa-pencil fa-fw"></i>
                             <span>Create Page</span>

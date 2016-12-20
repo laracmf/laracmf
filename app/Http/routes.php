@@ -156,8 +156,8 @@ Route::group(['middleware' => ['access']], function () {
         Route::get('users', ['as' => 'users.index', 'uses' => 'UserController@index']);
         Route::group(['prefix' => 'pages'], function () {
             Route::get('/', ['as' => 'pages.index', 'uses' => 'PageController@index']);
-            Route::post('/', ['as' => 'pages.store', 'uses' => 'PageController@store']);
             Route::get('/create', ['as' => 'pages.create', 'uses' => 'PageController@create']);
+            Route::post('/', ['as' => 'pages.store', 'uses' => 'PageController@store']);
             Route::delete('/{page}', ['as' => 'pages.destroy', 'uses' => 'PageController@destroy']);
             Route::match(['put', 'patch'], '/{page}', ['as' => 'pages.update', 'uses' => 'PageController@update']);
             Route::get('/{page}/edit', ['as' => 'pages.edit', 'uses' => 'PageController@edit']);
