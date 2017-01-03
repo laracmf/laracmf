@@ -12,9 +12,12 @@
 namespace GrahamCampbell\BootstrapCMS\Http;
 
 use GrahamCampbell\BootstrapCMS\Http\Middleware\AdminMiddleware;
+use GrahamCampbell\BootstrapCMS\Http\Middleware\BloggerMiddleware;
+use GrahamCampbell\BootstrapCMS\Http\Middleware\EditorMiddleware;
 use GrahamCampbell\BootstrapCMS\Http\Middleware\ModeratorMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use GrahamCampbell\BootstrapCMS\Http\Middleware\AccessMiddleware;
+use GrahamCampbell\BootstrapCMS\Http\Middleware\OwnerMiddleware;
 
 /**
  * This is the http kernel class.
@@ -46,6 +49,9 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'access'        => AccessMiddleware::class,
         'admin'         => AdminMiddleware::class,
-        'moderator'     => ModeratorMiddleware::class
+        'moderator'     => ModeratorMiddleware::class,
+        'owner'         => OwnerMiddleware::class,
+        'editor'        => EditorMiddleware::class,
+        'blogger'       => BloggerMiddleware::class
     ];
 }

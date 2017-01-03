@@ -136,7 +136,7 @@ class PageTest extends TestCase
 
     public function testDestroySuccess()
     {
-        $this->delete('pages/about');
+        $this->delete('pages/contact');
 
         $this->assertRedirectedTo('pages');
     }

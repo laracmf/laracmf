@@ -74,7 +74,7 @@ class UserControllerTest extends TestCase
                     'role_2' => 'on',
                 ],
                 'assertMethod' => 'see',
-                'expected' => 'User Not Found'
+                'expected' => '<h1 class="error-text">NOT FOUND</h1>'
             ],
             'testUpdateFailedSecondCase' => [
                 'userID' => 2,
@@ -161,7 +161,8 @@ class UserControllerTest extends TestCase
     {
         $this->authenticateUser(1);
 
-        $this->json('GET', 'users/2', [], [])->see('<p><strong>Roles:</strong> Moderator, Blogger, Editor, User</p>');
+        $this->json('GET', 'users/2', [], [])
+            ->see('Currently showing CMS Semi-Admin\'s profile:');
     }
 
     /**
@@ -171,7 +172,8 @@ class UserControllerTest extends TestCase
     {
         $this->authenticateUser(1);
 
-        $this->json('GET', 'users/2/edit', [], [])->see('Currently editing CMS Semi-Admin\'s profile:');
+        $this->json('GET', 'users/2/edit', [], [])
+            ->see('<button class="btn btn-primary" type="submit"><i class="fa fa-rocket"></i> Save User</button>');
     }
 
     /**

@@ -38,6 +38,11 @@
                                         <i class="fa fa-user-circle"></i> Admin panel
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{!! route('account.logout') !!}">
+                                        <i class="fa fa-power-off"></i> Logout
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     @else
@@ -57,7 +62,7 @@
                                     <li class="divider"></li>
                                     <li>
                                         <a href="{!! route('account.logout') !!}">
-                                            <i class="fa fa-power-off fa-fw"></i> Logout
+                                            <i class="fa fa-power-off"></i> Logout
                                         </a>
                                     </li>
                                 </ul>
@@ -68,7 +73,7 @@
                                     Login
                                 </a>
                             </li>
-                            @if (Config::get('credentials.regallowed'))
+                            @if (config('credentials.regallowed'))
                                 <li {!! (Request::is('account/register') ? 'class="active"' : '') !!}>
                                     <a href="{!! route('account.register') !!}">
                                         Register

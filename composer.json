@@ -25,10 +25,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/Kit-kat1/Contact"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Kit-kat1/Laravel-Exceptions"
         }
     ],
     "require-all": true,
@@ -40,7 +36,6 @@
         "graham-campbell/contact": "dev-master",
         "graham-campbell/credentials": "dev-master",
         "graham-campbell/core": "~4.0",
-        "graham-campbell/exceptions": "dev-master",
         "graham-campbell/htmlmin": "~4.0",
         "graham-campbell/logviewer": "dev-master",
         "graham-campbell/markdown": "7.0",
@@ -56,8 +51,7 @@
         "laravelcollective/html":"^5.3",
         "illuminate/html": "5.*",
         "maatwebsite/excel": "^2.1",
-        "appzcoder/crud-generator": "^1.2",
-        "barryvdh/laravel-debugbar": "^2.3"
+        "appzcoder/crud-generator": "^1.2"
     },
     "require-dev": {
         "doctrine/dbal": "~2.5",
@@ -66,7 +60,8 @@
         "phpunit/phpunit": "^4.7.6",
         "symfony/dom-crawler": "3.1.*",
         "symfony/css-selector": "3.1.*",
-        "barryvdh/laravel-ide-helper": "^2.2"
+        "barryvdh/laravel-ide-helper": "^2.2",
+        "barryvdh/laravel-debugbar": "^2.3"
     },
     "suggest": {
         "graham-campbell/cloudflare": "Integration with CloudFlare."

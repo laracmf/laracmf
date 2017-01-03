@@ -11,29 +11,28 @@
 @stop
 
 @section('content')
-    <div class="box box-group">
-        <div class="box-header">
-            <h3 class="box-title">Create page</h3>
-        </div>
-        <div class="box-body">
-            <?php
-            $form = ['url' => route('pages.store'),
-                    'method' => 'POST',
-                    'button' => 'Create New Page',
-                    'defaults' => [
-                            'title' => '',
-                            'nav_title' => '',
-                            'slug' => '',
-                            'icon' => '',
-                            'body' => '',
-                            'css' => '',
-                            'js' => '',
-                            'categories' => [],
-                            'show_title' => true,
-                            'show_nav' => true,
-                    ],];
-            ?>
-            @include('pages.form')
+    <div class="half">
+        <div class="box box-group">
+            <div class="box-body">
+                <?php
+                $form = ['url' => route('pages.store'),
+                        'method' => 'POST',
+                        'button' => 'Create New Page',
+                        'defaults' => [
+                                'title' => '',
+                                'nav_title' => '',
+                                'slug' => '',
+                                'icon' => '',
+                                'body' => '',
+                                'css' => '',
+                                'js' => '',
+                                'categories' => [],
+                                'show_title' => true,
+                                'show_nav' => true,
+                        ],];
+                ?>
+                @include('pages.form')
+            </div>
         </div>
     </div>
 @stop

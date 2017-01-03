@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-xs-8">
                 <p class="text-muted credit">
-                    &copy; <a href="https://www.nixsolutions.com">{{ Config::get('cms.author') }}</a> 2016. All rights reserved.
+                    &copy; <a href="https://www.nixsolutions.com">{{ config('cms.author') }}</a> 2016. All rights reserved.
                 </p>
             </div>
             <div class="col-xs-4">
@@ -17,7 +17,7 @@
     </div>
     <div class="container visible-xs">
         <p class="text-muted credit">
-            &copy; <a href="https://www.nixsolutions.com/ru/">{{ Config::get('cms.author') }}</a> 2016. All rights reserved.
+            &copy; <a href="https://www.nixsolutions.com/ru/">{{ config('cms.author') }}</a> 2016. All rights reserved.
         </p>
     </div>
 </div>
@@ -25,6 +25,6 @@
 @section('js')
 @show
 
-@if (Config::get('analytics.google'))
+@if (config('analytics.google'))
     @include('partials.analytics')
 @endif

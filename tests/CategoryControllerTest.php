@@ -54,7 +54,7 @@ class CategoryControllerTest extends TestCase
             'testCreateCategory' => [
                 'data' => [
                     'name' => 'test',
-                    'pages' => [1,2,3]
+                    'pages' => [1,2]
                 ],
                 'expected' => 'Redirecting to',
                 'assertMethod' => 'assertNotEmpty'

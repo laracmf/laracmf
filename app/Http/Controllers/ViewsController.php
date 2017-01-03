@@ -7,7 +7,7 @@ class ViewsController extends AbstractController
     /**
      * Display the registration form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getRegister()
     {
@@ -17,7 +17,7 @@ class ViewsController extends AbstractController
     /**
      * Display the registration form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getLogin()
     {

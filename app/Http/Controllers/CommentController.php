@@ -33,22 +33,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class CommentController extends AbstractController
 {
     /**
-     * Create a new instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->setPermissions([
-            'store'   => 'user',
-            'update'  => 'moderator',
-            'destroy' => 'moderator'
-        ]);
-
-        parent::__construct();
-    }
-
-    /**
      * Display a listing of the comments.
      *
      * @param int $postId
@@ -65,7 +49,7 @@ class CommentController extends AbstractController
                 'success' => false,
                 'code'    => 404,
                 'msg'     => trans('messages.comment.view_error'),
-                'url'     => URL::route('posts.index'),
+                'url'     => route('posts.index'),
             ], 404);
         }
 
@@ -109,7 +93,7 @@ class CommentController extends AbstractController
             $comment->save();
         }
 
-        $contents = View::make('posts.comment', [
+        $contents = view('posts.comment', [
             'comment' => $comment,
             'post' => Post::find($postId),
         ]);
@@ -135,7 +119,7 @@ class CommentController extends AbstractController
         $comment = CommentRepository::find($id);
         $this->checkComment($comment);
 
-        $contents = View::make('posts.comment', [
+        $contents = view('posts.comment', [
             'comment' => $comment,
             'post_id' => $postId,
         ]);

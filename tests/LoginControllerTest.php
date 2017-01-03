@@ -49,7 +49,7 @@ class LoginControllerTest extends TestCase
     public function testGetLogin()
     {
         $this->json('GET', 'account/login', [], [])
-            ->see('<button class="btn btn-primary" type="submit"><i class="fa fa-rocket"></i> Log In</button>');
+            ->see('<form class="form-horizontal" action="' . route('account.login') . '" method="POST">');
     }
 
     /**

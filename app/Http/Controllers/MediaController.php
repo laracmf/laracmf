@@ -8,6 +8,8 @@ use GrahamCampbell\BootstrapCMS\Services\MediaService;
 
 class MediaController extends AbstractController
 {
+    const PAGINATE = 16;
+
     /**
      * @var MediaService
      */
@@ -46,7 +48,7 @@ class MediaController extends AbstractController
      */
     public function showAllMedia()
     {
-        return view('media.show', ['files' => Media::all()]);
+        return view('media.show', ['files' => Media::paginate(self::PAGINATE)]);
     }
 
     /**
