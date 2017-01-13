@@ -1,10 +1,12 @@
 var pk = 0;
+var baseURL = window.location.origin;
 
 function cmsCommentSubmit(that) {
     var token = $("input[name='_token']").val();
+    var action = baseURL + '/blog/comments/' + this.pk;
 
     $.ajax({
-        url: $(that).data('url'),
+        url: action,
         type: 'PUT',
         dataType: 'json',
         data: {

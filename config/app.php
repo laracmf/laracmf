@@ -214,7 +214,11 @@ return [
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class
+        Barryvdh\Debugbar\ServiceProvider::class,
+        L5Swagger\L5SwaggerServiceProvider::class,
+        CloudCreativity\LaravelJsonApi\ServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
     ],
 
     /*
@@ -270,6 +274,9 @@ return [
         'Sentinel'    => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
         'HTML'        => Collective\Html\HtmlFacade::class,
         'Debugbar'    => Barryvdh\Debugbar\Facade::class,
+        'JsonApi'     => CloudCreativity\LaravelJsonApi\Facade::class,
+        'JWTAuth'     => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory'  => Tymon\JWTAuth\Facades\JWTFactory::class
     ],
 
 ];

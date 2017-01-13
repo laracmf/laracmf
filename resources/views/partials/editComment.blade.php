@@ -21,10 +21,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button id="edit_comment_ok" data-url="" type="button" class="btn btn-primary">OK</button>
+                    <button id="edit_comment_ok" type="button" class="btn btn-primary">OK</button>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endif

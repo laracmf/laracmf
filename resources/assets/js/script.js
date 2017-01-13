@@ -187,13 +187,6 @@ $(document).ready(function () {
         });
     });
 
-    $('.editable').on('click', function () {
-        var commentId = $(this).data('pk');
-        var action = baseURL + '/blog/comments/' + commentId;
-
-        $('#edit_comment_ok').data('url', action);
-    });
-
     $('#select-all').on('click', function () {
         var $comment = $('.comment');
         if ($(this).is(':checked')) {

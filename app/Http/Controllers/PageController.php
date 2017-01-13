@@ -155,7 +155,6 @@ class PageController extends AbstractController
      */
     public function update($slug, PageRequest $request)
     {
-
         $input = $this->getInput();
         $categories = $request->input('categories');
 

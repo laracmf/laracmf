@@ -42,7 +42,7 @@
         "graham-campbell/navigation": "dev-master",
         "graham-campbell/throttle": "~5.2",
         "mccool/laravel-auto-presenter": "~3.0",
-        "laravel/homestead": "^3.0",
+        "laravel/homestead": "^4.0",
         "laravel/socialite": "^2.0",
         "webpatser/laravel-uuid": "^2.0",
         "laracasts/flash": "^2.0",
@@ -51,7 +51,10 @@
         "laravelcollective/html":"^5.3",
         "illuminate/html": "5.*",
         "maatwebsite/excel": "^2.1",
-        "appzcoder/crud-generator": "^1.2"
+        "appzcoder/crud-generator": "^1.2",
+        "darkaonline/l5-swagger": "~3.0",
+        "cloudcreativity/laravel-json-api": "^0.5.4",
+        "tymon/jwt-auth": "1.0.0-beta.1"
     },
     "require-dev": {
         "doctrine/dbal": "~2.5",

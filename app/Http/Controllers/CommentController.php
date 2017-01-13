@@ -17,6 +17,7 @@ use GrahamCampbell\BootstrapCMS\Facades\PostRepository;
 use GrahamCampbell\BootstrapCMS\Models\Comment;
 use GrahamCampbell\BootstrapCMS\Models\Post;
 use GrahamCampbell\Credentials\Facades\Credentials;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
