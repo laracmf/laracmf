@@ -1,5 +1,5 @@
 before_script:
-  - bundle install
+  - bash ./ci/install.sh
 
 variables:
   MYSQL_DATABASE: homestead_testing
@@ -10,4 +10,4 @@ phpunit:php7.0:mysql5.7:
   services:
     - mysql:latest
   script:
-    - bundle exec rake spec
+    - php vendor/bin/phpunit --colors
