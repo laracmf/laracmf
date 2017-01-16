@@ -1,6 +1,6 @@
 before_script:
   - chmod +x ci/install.sh
-  - bash ./ci/install.sh
+  - ./ci/install.sh
 
 variables:
   MYSQL_DATABASE: homestead_testing
