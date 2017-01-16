@@ -6,10 +6,10 @@ apt-get install git libcurl4-gnutls-dev libicu-dev libmcrypt-dev libvpx-dev libj
 
 # Install Composer and project dependencies.
 curl -sS https://getcomposer.org/installer | php
-php composer.phar install
+composer install
 
 # Copy over testing configuration.
-cp .env.testing .env
+cp config/env/.env.testing .env
 
 # Generate an application key. Re-cache.
 php artisan key:generate
