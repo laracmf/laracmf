@@ -28,7 +28,6 @@ use GrahamCampbell\BootstrapCMS\Http\Middleware\OwnerMiddleware;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Routing\Middleware\ThrottleRequests;
-use Illuminate\Session\EncryptedStore;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
@@ -62,8 +61,6 @@ class Kernel extends HttpKernel
             TrustProxies::class,
             EncryptCookies::class,
             AddQueuedCookiesToResponse::class,
-//            StartSession::class,
-//            ShareErrorsFromSession::class,
             VerifyCsrfToken::class
         ],
 
