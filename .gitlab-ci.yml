@@ -1,5 +1,5 @@
 before_script:
-  - bash ./ci/install.sh
+  - bundle install
 
 variables:
   MYSQL_DATABASE: homestead_testing
