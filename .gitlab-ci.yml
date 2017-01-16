@@ -6,8 +6,8 @@ variables:
   MYSQL_ROOT_PASSWORD: secret
 
 phpunit:php7.0:mysql5.7:
-  image: php:7.0
-  services:
-    - mysql:5.7
-  script:
-    - php vendor/bin/phpunit --colors
+  image: ruby:2.2
+    services:
+    - mysql:latest
+    script:
+    - bundle exec rake spec
