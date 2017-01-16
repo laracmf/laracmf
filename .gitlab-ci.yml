@@ -8,6 +8,6 @@ variables:
 phpunit:php7.0:mysql5.7:
   image: ruby:2.2
     services:
-    - mysql:latest
+      - mysql:latest
     script:
-    - bundle exec rake spec
+      - bundle exec rake spec
