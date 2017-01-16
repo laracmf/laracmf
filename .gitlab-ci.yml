@@ -1,14 +1,13 @@
 before_script:
   - bash ./ci/install.sh
 
-
 variables:
   MYSQL_DATABASE: homestead_testing
   MYSQL_ROOT_PASSWORD: secret
 
 phpunit:php7.0:mysql5.7:
-  image: php:7.0
+  image: ruby:2.1
   services:
-    - mysql:5.7
+    - mysql:latest
   script:
-    - php vendor/bin/phpunit --colors
+    - bundle exec rake spec
