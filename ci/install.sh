@@ -11,6 +11,19 @@ apt-get install git libcurl4-gnutls-dev libicu-dev libmcrypt-dev libvpx-dev libj
 curl -sS https://getcomposer.org/installer | php
 php composer.phar install
 
+# Install phpunit, the tool that we will use for testing
+curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
+chmod +x /usr/local/bin/phpunit
+# Install phpcs, the tool that we will use for Code Sniffing
+curl --location --output /usr/local/bin/phpcs https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+chmod +x /usr/local/bin/phpcs
+# Install phpmd, the tool that we will use for Mess Detecting
+curl --location --output /usr/local/bin/phpmd  http://static.phpmd.org/php/latest/phpmd.phar
+chmod +x /usr/local/bin/phpmd
+
+# Install mysql driver Here you can install any other extension that you need
+docker-php-ext-install pdo_mysql
+
 # Copy over testing configuration.
 cp config/env/.env.testing .env
 
