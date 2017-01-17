@@ -1,13 +1,13 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
 use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 use Mockery;
 use stdClass;
 use Laravel\Socialite\SocialiteManager;
-use GrahamCampbell\BootstrapCMS\Models\User;
+use App\Models\User;
 
 class AuthControllerTest extends TestCase
 {

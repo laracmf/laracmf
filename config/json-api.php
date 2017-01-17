@@ -99,7 +99,7 @@ return [
     */
     'schemas' => [
         'defaults' => [
-            \GrahamCampbell\BootstrapCMS\Models\User::class => \GrahamCampbell\BootstrapCMS\JsonApi\Users\Schema::class
+            \App\Models\User::class => \App\JsonApi\Users\Schema::class
         ],
         'v1' => [],
     ],
@@ -122,7 +122,7 @@ return [
     */
     'eloquent-adapter' => [
         'map' => [
-            'users' => \GrahamCampbell\BootstrapCMS\Models\User::class,
+            'users' => \App\Models\User::class,
         ],
         'columns' => [],
     ],

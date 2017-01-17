@@ -1,8 +1,8 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Services;
+namespace App\Services;
 
-use GrahamCampbell\BootstrapCMS\Models\Media;
+use App\Models\Media;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Illuminate\Support\Facades\Storage;

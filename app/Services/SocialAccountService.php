@@ -1,8 +1,8 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Services;
+namespace App\Services;
 
-use GrahamCampbell\BootstrapCMS\Models\User;
+use App\Models\User;
 
 class SocialAccountService implements SociableInterface
 {

@@ -1,34 +1,20 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Exception;
 use GrahamCampbell\Binput\Facades\Binput;
-use GrahamCampbell\BootstrapCMS\Facades\PageRepository;
-use GrahamCampbell\BootstrapCMS\Http\Requests\PageRequest;
-use GrahamCampbell\BootstrapCMS\Models\Page;
-use GrahamCampbell\BootstrapCMS\Services\GridService;
-use GrahamCampbell\BootstrapCMS\Services\PagesService;
+use App\Facades\PageRepository;
+use App\Http\Requests\PageRequest;
+use App\Models\Page;
+use App\Services\GridService;
+use App\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * This is the page controller class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class PageController extends AbstractController
 {
     /**

@@ -1,14 +1,14 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
 use Cartalyst\Sentinel\Permissions\StandardPermissions;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Facades\DB;
-use GrahamCampbell\BootstrapCMS\Models\User;
+use App\Models\User;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Mockery;
-use GrahamCampbell\BootstrapCMS\Models\Comment;
+use App\Models\Comment;
 
 class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {

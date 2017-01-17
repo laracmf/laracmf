@@ -1,6 +1,6 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
 use GrahamCampbell\Credentials\Facades\Credentials;
 

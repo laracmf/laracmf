@@ -9,15 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\BootstrapCMS\Facades;
+namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-/**
- * This is the navigation factory facade class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class NavigationFactory extends Facade
 {
     /**

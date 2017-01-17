@@ -138,11 +138,11 @@ return [
     |
     | This defines the comment model to be used.
     |
-    | Default: 'GrahamCampbell\BootstrapCMS\Models\Comment'
+    | Default: 'App\Models\Comment'
     |
     */
 
-    'comment' => 'GrahamCampbell\BootstrapCMS\Models\Comment',
+    'comment' => 'App\Models\Comment',
 
     /*
     |--------------------------------------------------------------------------
@@ -151,11 +151,11 @@ return [
     |
     | This defines the event model to be used.
     |
-    | Default: 'GrahamCampbell\BootstrapCMS\Models\Event'
+    | Default: 'App\Models\Event'
     |
     */
 
-    'event' => 'GrahamCampbell\BootstrapCMS\Models\Event',
+    'event' => 'App\Models\Event',
 
     /*
     |--------------------------------------------------------------------------
@@ -164,11 +164,11 @@ return [
     |
     | This defines the page model to be used.
     |
-    | Default: 'GrahamCampbell\BootstrapCMS\Models\Page'
+    | Default: 'App\Models\Page'
     |
     */
 
-    'page' => 'GrahamCampbell\BootstrapCMS\Models\Page',
+    'page' => 'App\Models\Page',
 
     /*
     |--------------------------------------------------------------------------
@@ -177,10 +177,10 @@ return [
     |
     | This defines the post model to be used.
     |
-    | Default: 'GrahamCampbell\BootstrapCMS\Models\Post'
+    | Default: 'App\Models\Post'
     |
     */
 
-    'post' => 'GrahamCampbell\BootstrapCMS\Models\Post',
+    'post' => 'App\Models\Post',
 
 ];

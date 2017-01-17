@@ -1,15 +1,15 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use GrahamCampbell\BootstrapCMS\Http\Requests\SignUpRequest;
-use GrahamCampbell\BootstrapCMS\Models\User;
+use App\Http\Requests\SignUpRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\View;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Response;
-use GrahamCampbell\BootstrapCMS\Http\Controllers\AbstractController;
+use App\Http\Controllers\AbstractController;
 use GrahamCampbell\Credentials\Facades\Credentials;
-use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
+use App\Services\SocialAccountService;
 use Illuminate\Support\Facades\Mail;
 
 class AuthController extends AbstractController

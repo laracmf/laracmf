@@ -1,30 +1,16 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace App\Models;
 
-namespace GrahamCampbell\BootstrapCMS\Models;
-
-use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyCommentsTrait;
-use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyEventsTrait;
-use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyPagesTrait;
-use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyPostsTrait;
+use App\Models\Relations\HasManyCommentsTrait;
+use App\Models\Relations\HasManyEventsTrait;
+use App\Models\Relations\HasManyPagesTrait;
+use App\Models\Relations\HasManyPostsTrait;
 use GrahamCampbell\Credentials\Models\User as CredentialsUser;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableInterface;
 use Tymon\JWTAuth\Contracts\JWTSubject as AuthenticatableUserContract;
 
-/**
- * This is the user model class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class User extends CredentialsUser implements ModelInterface, AuthenticatableUserContract, AuthenticatableInterface
 {
     use HasManyPagesTrait,
@@ -40,7 +26,7 @@ class User extends CredentialsUser implements ModelInterface, AuthenticatableUse
      */
     public function getPresenterClass()
     {
-        return 'GrahamCampbell\BootstrapCMS\Presenters\UserPresenter';
+        return 'App\Presenters\UserPresenter';
     }
 
     /**

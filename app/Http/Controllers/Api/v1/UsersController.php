@@ -1,11 +1,11 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers\Api\v1;
+namespace App\Http\Controllers\Api\v1;
 
-use GrahamCampbell\BootstrapCMS\JsonApi\Users\Hydrator;
-use GrahamCampbell\BootstrapCMS\JsonApi\Users\Request;
-use GrahamCampbell\BootstrapCMS\JsonApi\Users\Search;
-use GrahamCampbell\BootstrapCMS\Models\User;
+use App\JsonApi\Users\Hydrator;
+use App\JsonApi\Users\Request;
+use App\JsonApi\Users\Search;
+use App\Models\User;
 use CloudCreativity\LaravelJsonApi\Http\Controllers\EloquentController;
 
 class UsersController extends EloquentController

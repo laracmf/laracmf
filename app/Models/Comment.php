@@ -1,26 +1,12 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace App\Models;
 
-namespace GrahamCampbell\BootstrapCMS\Models;
-
-use GrahamCampbell\BootstrapCMS\Models\Relations\BelongsToPostTrait;
+use App\Models\Relations\BelongsToPostTrait;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
-/**
- * This is the comment model class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class Comment extends AbstractModel implements HasPresenter
 {
     use BelongsToPostTrait, BelongsToUserTrait, SoftDeletes;
@@ -78,6 +64,6 @@ class Comment extends AbstractModel implements HasPresenter
      */
     public function getPresenterClass()
     {
-        return 'GrahamCampbell\BootstrapCMS\Presenters\CommentPresenter';
+        return 'App\Presenters\CommentPresenter';
     }
 }

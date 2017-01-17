@@ -1,15 +1,10 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Models;
+namespace App\Models;
 
 use GrahamCampbell\Credentials\Models\AbstractModel as BaseAbstractModel;
-use GrahamCampbell\BootstrapCMS\Models\ModelInterface;
+use App\Models\ModelInterface;
 
-/**
- * This is the abstract model class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 abstract class AbstractModel extends BaseAbstractModel implements ModelInterface
 {
     /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
-use GrahamCampbell\BootstrapCMS\Models\Media;
-use GrahamCampbell\BootstrapCMS\Services\MediaService;
+use App\Models\Media;
+use App\Services\MediaService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaServiceTest extends TestCase

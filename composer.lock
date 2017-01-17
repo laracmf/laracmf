@@ -928,12 +928,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kit-kat1/Credentials.git",
-                "reference": "4f094a3a2e76df004c783b0fb191ba7a27b13664"
+                "reference": "abacb95f3465d98e3edfdd58c2bbbc1c93716d50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kit-kat1/Credentials/zipball/4f094a3a2e76df004c783b0fb191ba7a27b13664",
-                "reference": "4f094a3a2e76df004c783b0fb191ba7a27b13664",
+                "url": "https://api.github.com/repos/Kit-kat1/Credentials/zipball/abacb95f3465d98e3edfdd58c2bbbc1c93716d50",
+                "reference": "abacb95f3465d98e3edfdd58c2bbbc1c93716d50",
                 "shasum": ""
             },
             "require": {
@@ -1009,7 +1009,7 @@
             "support": {
                 "source": "https://github.com/Kit-kat1/Credentials/tree/master"
             },
-            "time": "2016-12-22T14:02:04+00:00"
+            "time": "2017-01-17T11:09:44+00:00"
         },
         {
             "name": "graham-campbell/htmlmin",

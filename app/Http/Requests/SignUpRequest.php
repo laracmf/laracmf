@@ -1,6 +1,6 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Requests;
+namespace App\Http\Requests;
 
 class SignUpRequest extends Request
 {

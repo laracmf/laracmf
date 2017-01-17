@@ -1,22 +1,8 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Seeder;
 
-/**
- * This is the database seeder class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -28,15 +14,15 @@ class DatabaseSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\UsersTableSeeder');
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\RolesTableSeeder');
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\UsersRolesTableSeeder');
+        $this->call('App\Seeds\UsersTableSeeder');
+        $this->call('App\Seeds\RolesTableSeeder');
+        $this->call('App\Seeds\UsersRolesTableSeeder');
 
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\PagesTableSeeder');
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\PostsTableSeeder');
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\CommentsTableSeeder');
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\EventsTableSeeder');
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\CategoriesTableSeeder');
-        $this->call('GrahamCampbell\BootstrapCMS\Seeds\CategoriesPagesTableSeeder');
+        $this->call('App\Seeds\PagesTableSeeder');
+        $this->call('App\Seeds\PostsTableSeeder');
+        $this->call('App\Seeds\CommentsTableSeeder');
+        $this->call('App\Seeds\EventsTableSeeder');
+        $this->call('App\Seeds\CategoriesTableSeeder');
+        $this->call('App\Seeds\CategoriesPagesTableSeeder');
     }
 }

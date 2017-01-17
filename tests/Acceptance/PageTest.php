@@ -1,27 +1,11 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace GrahamCampbell\Tests\BootstrapCMS\Acceptance;
+namespace App\Tests\Acceptance;
 
 use GrahamCampbell\Credentials\Facades\Credentials;
-use GrahamCampbell\Tests\BootstrapCMS\TestCase;
-use GrahamCampbell\BootstrapCMS\Models\User;
+use App\Tests\TestCase;
+use App\Models\User;
 
-/**
- * This is the page test class.
- *
- * @group page
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class PageTest extends TestCase
 {
     public function setUp()

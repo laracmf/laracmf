@@ -1,10 +1,10 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Services;
+namespace App\Services;
 
 /**
  * Class Mailer
- * @package GrahamCampbell\BootstrapCMS\Services
+ * @package App\Services
  */
 class Mailer extends \Illuminate\Mail\Mailer
 {

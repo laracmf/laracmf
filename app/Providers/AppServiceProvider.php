@@ -1,40 +1,26 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace App\Providers;
 
-namespace GrahamCampbell\BootstrapCMS\Providers;
-
-use GrahamCampbell\BootstrapCMS\Http\Controllers\CommentController;
-use GrahamCampbell\BootstrapCMS\Navigation\Factory;
-use GrahamCampbell\BootstrapCMS\Observers\PageObserver;
-use GrahamCampbell\BootstrapCMS\Repositories\CommentRepository;
-use GrahamCampbell\BootstrapCMS\Repositories\EventRepository;
-use GrahamCampbell\BootstrapCMS\Repositories\PageRepository;
-use GrahamCampbell\BootstrapCMS\Repositories\PostRepository;
-use GrahamCampbell\BootstrapCMS\Services\CommentsManagerService;
-use GrahamCampbell\BootstrapCMS\Services\GridService;
-use GrahamCampbell\BootstrapCMS\Services\MediaService;
-use GrahamCampbell\BootstrapCMS\Services\PagesService;
-use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
-use GrahamCampbell\BootstrapCMS\Subscribers\CommandSubscriber;
-use GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber;
+use App\Http\Controllers\CommentController;
+use App\Navigation\Factory;
+use App\Observers\PageObserver;
+use App\Repositories\CommentRepository;
+use App\Repositories\EventRepository;
+use App\Repositories\PageRepository;
+use App\Repositories\PostRepository;
+use App\Services\CommentsManagerService;
+use App\Services\GridService;
+use App\Services\MediaService;
+use App\Services\PagesService;
+use App\Services\SocialAccountService;
+use App\Subscribers\CommandSubscriber;
+use App\Subscribers\NavigationSubscriber;
 use Illuminate\Support\ServiceProvider;
-use GrahamCampbell\BootstrapCMS\Services\CategoriesService;
-use GrahamCampbell\BootstrapCMS\Services\ConfigurationsService;
+use App\Services\CategoriesService;
+use App\Services\ConfigurationsService;
 use Illuminate\Support\Facades\Validator;
 
-/**
- * This is the app service provider class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -94,7 +80,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $blade->directive('navigation', function () {
-            return '<?php echo \GrahamCampbell\BootstrapCMS\Facades\NavigationFactory::make($__navtype); ?>';
+            return '<?php echo \App\Facades\NavigationFactory::make($__navtype); ?>';
         });
     }
 
@@ -153,7 +139,7 @@ class AppServiceProvider extends ServiceProvider
             return new SocialAccountService();
         });
 
-        $this->app->alias('socialuser', 'GrahamCampbell\BootstrapCMS\Services\SocialAccountService');
+        $this->app->alias('socialuser', 'App\Services\SocialAccountService');
     }
 
     /**
@@ -197,7 +183,7 @@ class AppServiceProvider extends ServiceProvider
             return new Factory($credentials, $navigation, $name, $property, $inverse);
         });
 
-        $this->app->alias('navfactory', 'GrahamCampbell\BootstrapCMS\Navigation\Factory');
+        $this->app->alias('navfactory', 'App\Navigation\Factory');
     }
 
     /**
@@ -216,7 +202,7 @@ class AppServiceProvider extends ServiceProvider
             return new CommentRepository($comment, $validator);
         });
 
-        $this->app->alias('commentrepository', 'GrahamCampbell\BootstrapCMS\Repositories\CommentRepository');
+        $this->app->alias('commentrepository', 'App\Repositories\CommentRepository');
     }
 
     /**
@@ -226,7 +212,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerCategoriesService()
     {
-        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\CategoriesService', function () {
+        $this->app->bind('App\Services\CategoriesService', function () {
             return new CategoriesService();
         });
     }
@@ -238,8 +224,8 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerPagesService()
     {
-        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\PagesService', function ($app) {
-            return new PagesService($app->make('GrahamCampbell\BootstrapCMS\Services\GridService'));
+        $this->app->bind('App\Services\PagesService', function ($app) {
+            return new PagesService($app->make('App\Services\GridService'));
         });
     }
 
@@ -250,7 +236,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerConfigurationsService()
     {
-        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\ConfigurationsService', function () {
+        $this->app->bind('App\Services\ConfigurationsService', function () {
             return new ConfigurationsService();
         });
     }
@@ -262,7 +248,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerMediaService()
     {
-        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\MediaService', function () {
+        $this->app->bind('App\Services\MediaService', function () {
             return new MediaService();
         });
     }
@@ -283,7 +269,7 @@ class AppServiceProvider extends ServiceProvider
             return new EventRepository($event, $validator);
         });
 
-        $this->app->alias('eventrepository', 'GrahamCampbell\BootstrapCMS\Repositories\EventRepository');
+        $this->app->alias('eventrepository', 'App\Repositories\EventRepository');
     }
 
     /**
@@ -302,7 +288,7 @@ class AppServiceProvider extends ServiceProvider
             return new PageRepository($page, $validator);
         });
 
-        $this->app->alias('pagerepository', 'GrahamCampbell\BootstrapCMS\Repositories\PageRepository');
+        $this->app->alias('pagerepository', 'App\Repositories\PageRepository');
     }
 
     /**
@@ -321,7 +307,7 @@ class AppServiceProvider extends ServiceProvider
             return new PostRepository($post, $validator);
         });
 
-        $this->app->alias('postrepository', 'GrahamCampbell\BootstrapCMS\Repositories\PostRepository');
+        $this->app->alias('postrepository', 'App\Repositories\PostRepository');
     }
 
     /**
@@ -331,7 +317,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerCommandSubscriber()
     {
-        $this->app->singleton('GrahamCampbell\BootstrapCMS\Subscribers\CommandSubscriber', function ($app) {
+        $this->app->singleton('App\Subscribers\CommandSubscriber', function ($app) {
             $pagerepository = $app['pagerepository'];
 
             return new CommandSubscriber($pagerepository);
@@ -345,7 +331,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerNavigationSubscriber()
     {
-        $this->app->singleton('GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber', function ($app) {
+        $this->app->singleton('App\Subscribers\NavigationSubscriber', function ($app) {
             $navigation = $app['navigation'];
             $credentials = $app['credentials'];
             $pagerepository = $app['pagerepository'];
@@ -371,7 +357,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerCommentController()
     {
-        $this->app->bind('GrahamCampbell\BootstrapCMS\Http\Controllers\CommentController', function ($app) {
+        $this->app->bind('App\Http\Controllers\CommentController', function ($app) {
             $throttler = $app['throttle']->get($app['request'], 1, 10);
 
             return new CommentController($throttler);

@@ -1,26 +1,12 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace App\Http\Controllers;
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
-
-use GrahamCampbell\BootstrapCMS\Models\Comment;
-use GrahamCampbell\BootstrapCMS\Services\CommentsManagerService;
+use App\Models\Comment;
+use App\Services\CommentsManagerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-/**
- * This is the comment controller class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class CommentsManageController extends AbstractController
 {
     const PAGINATE = 5;

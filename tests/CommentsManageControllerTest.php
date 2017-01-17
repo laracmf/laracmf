@@ -1,10 +1,10 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
-use GrahamCampbell\BootstrapCMS\Services\CommentsManagerService;
+use App\Services\CommentsManagerService;
 use Mockery;
-use GrahamCampbell\BootstrapCMS\Models\Comment;
+use App\Models\Comment;
 
 class CommentsManageControllerTest extends TestCase
 {

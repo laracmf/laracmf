@@ -1,8 +1,8 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Requests;
+namespace App\Http\Requests;
 
-use GrahamCampbell\BootstrapCMS\Http\Requests\Request;
+use App\Http\Requests\Request;
 
 class ConfigurationRequest extends Request
 {

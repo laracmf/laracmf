@@ -1,6 +1,6 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Services;
+namespace App\Services;
 
 use Grids;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
@@ -18,13 +18,13 @@ use Nayjest\Grids\FieldConfig;
 use Nayjest\Grids\FilterConfig;
 use Nayjest\Grids\Grid;
 use Nayjest\Grids\GridConfig;
-use GrahamCampbell\BootstrapCMS\Models\ModelInterface;
+use App\Models\ModelInterface;
 use Nayjest\Grids\Components\FiltersRow;
 
 /**
  * Class GridService
  *
- * @package GrahamCampbell\BootstrapCMS\Services
+ * @package App\Services
  */
 class GridService
 {
@@ -35,7 +35,7 @@ class GridService
     /**
      * Generate table
      *
-     * @param \GrahamCampbell\BootstrapCMS\Models\ModelInterface $model
+     * @param \App\Models\ModelInterface $model
      * @param array $fields
      * @param array $components
      *

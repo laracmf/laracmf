@@ -1,10 +1,10 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GrahamCampbell\BootstrapCMS\Models\Media;
+use App\Models\Media;
 use Illuminate\Http\Request;
-use GrahamCampbell\BootstrapCMS\Services\MediaService;
+use App\Services\MediaService;
 
 class MediaController extends AbstractController
 {

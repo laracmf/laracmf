@@ -1,10 +1,10 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers\ApiAuth;
+namespace App\Http\Controllers\ApiAuth;
 
 use Auth;
 use Illuminate\Http\Request;
-use GrahamCampbell\BootstrapCMS\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use phpDocumentor\Reflection\Types\String_;
 

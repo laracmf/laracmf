@@ -1,26 +1,12 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace App\Subscribers;
 
-namespace GrahamCampbell\BootstrapCMS\Subscribers;
-
-use GrahamCampbell\BootstrapCMS\Repositories\PageRepository;
+use App\Repositories\PageRepository;
 use GrahamCampbell\Credentials\Credentials;
 use GrahamCampbell\Navigation\Navigation;
 use Illuminate\Events\Dispatcher;
 
-/**
- * This is the navigation subscriber class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class NavigationSubscriber
 {
     /**
@@ -40,7 +26,7 @@ class NavigationSubscriber
     /**
      * The page repository instance.
      *
-     * @var \GrahamCampbell\BootstrapCMS\Repositories\PageRepository
+     * @var \App\Repositories\PageRepository
      */
     protected $pagerepository;
 
@@ -70,7 +56,7 @@ class NavigationSubscriber
      *
      * @param \GrahamCampbell\Navigation\Navigation                    $navigation
      * @param \GrahamCampbell\Credentials\Credentials                  $credentials
-     * @param \GrahamCampbell\BootstrapCMS\Repositories\PageRepository $pagerepository
+     * @param \App\Repositories\PageRepository $pagerepository
      * @param bool                                                     $blogging
      * @param bool                                                     $events
      * @param bool                                                     $cloudflare
@@ -104,32 +90,32 @@ class NavigationSubscriber
     {
         $events->listen(
             'navigation.main',
-            'GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber@onNavigationMainFirst',
+            'App\Subscribers\NavigationSubscriber@onNavigationMainFirst',
             8
         );
         $events->listen(
             'navigation.main',
-            'GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber@onNavigationMainSecond',
+            'App\Subscribers\NavigationSubscriber@onNavigationMainSecond',
             5
         );
         $events->listen(
             'navigation.main',
-            'GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber@onNavigationMainThird',
+            'App\Subscribers\NavigationSubscriber@onNavigationMainThird',
             2
         );
         $events->listen(
             'navigation.bar',
-            'GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber@onNavigationBarFirst',
+            'App\Subscribers\NavigationSubscriber@onNavigationBarFirst',
             8
         );
         $events->listen(
             'navigation.bar',
-            'GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber@onNavigationBarSecond',
+            'App\Subscribers\NavigationSubscriber@onNavigationBarSecond',
             5
         );
         $events->listen(
             'navigation.bar',
-            'GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber@onNavigationBarThird',
+            'App\Subscribers\NavigationSubscriber@onNavigationBarThird',
             2
         );
     }
@@ -345,7 +331,7 @@ class NavigationSubscriber
     /**
      * Get the page repository instance.
      *
-     * @return \GrahamCampbell\BootstrapCMS\Repositories\PageRepository
+     * @return \App\Repositories\PageRepository
      */
     public function getPageRepository()
     {

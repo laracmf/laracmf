@@ -1,28 +1,14 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace App\Http\Controllers;
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
-
-use GrahamCampbell\BootstrapCMS\Http\Requests\CategoryRequest;
-use GrahamCampbell\BootstrapCMS\Models\Category;
-use GrahamCampbell\BootstrapCMS\Services\CategoriesService;
+use App\Http\Requests\CategoryRequest;
+use App\Models\Category;
+use App\Services\CategoriesService;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Input;
 
-/**
- * This is the comment controller class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class CategoryController extends AbstractController
 {
     /**

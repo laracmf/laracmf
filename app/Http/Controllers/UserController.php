@@ -1,19 +1,14 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GrahamCampbell\BootstrapCMS\Models\User;
-use GrahamCampbell\BootstrapCMS\Services\GridService;
+use App\Models\User;
+use App\Services\GridService;
 use GrahamCampbell\Credentials\Http\Controllers\UserController as BaseController;
 use Illuminate\Support\Facades\View;
 use GrahamCampbell\Credentials\Services\UsersService;
 use Nayjest\Grids\ObjectDataRow;
 
-/**
- * This is the user controller class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class UserController extends BaseController
 {
     /**

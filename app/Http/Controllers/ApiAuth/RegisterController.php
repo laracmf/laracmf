@@ -1,13 +1,13 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers\ApiAuth;
+namespace App\Http\Controllers\ApiAuth;
 
-use GrahamCampbell\BootstrapCMS\Models\User;
+use App\Models\User;
 use Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Validator;
-use GrahamCampbell\BootstrapCMS\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller

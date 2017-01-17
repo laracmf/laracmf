@@ -1,14 +1,14 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Services;
+namespace App\Services;
 
-use GrahamCampbell\BootstrapCMS\Models\Category;
-use GrahamCampbell\BootstrapCMS\Models\CategoriesPages;
+use App\Models\Category;
+use App\Models\CategoriesPages;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class PagesService
- * @package GrahamCampbell\BootstrapCMS\Services
+ * @package App\Services
  */
 class CategoriesService
 {

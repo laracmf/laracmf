@@ -1,13 +1,13 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Services;
+namespace App\Services;
 
-use GrahamCampbell\BootstrapCMS\Models\Comment;
+use App\Models\Comment;
 
 /**
  * Class CommentsManagerService
  *
- * @package GrahamCampbell\BootstrapCMS\Services
+ * @package App\Services
  */
 class CommentsManagerService
 {
