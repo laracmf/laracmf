@@ -6,8 +6,9 @@
  **/
 
 $(function () {
-
   "use strict";
+
+  var todoList = $(".todo-list");
 
   //Make the dashboard widgets sortable Using jquery UI
   $(".connectedSortable").sortable({
@@ -20,7 +21,7 @@ $(function () {
   $(".connectedSortable .box-header, .connectedSortable .nav-tabs-custom").css("cursor", "move");
 
   //jQuery UI sortable for the todo list
-  $(".todo-list").sortable({
+  todoList.sortable({
     placeholder: "sort-highlight",
     handle: ".handle",
     forcePlaceholderSize: true,
@@ -196,7 +197,7 @@ $(function () {
   });
 
   /* The todo list plugin */
-  $(".todo-list").todolist({
+  todoList.todolist({
     onCheck: function (ele) {
       window.console.log("The element has been checked");
       return ele;

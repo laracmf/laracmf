@@ -54,7 +54,7 @@ class AccessMiddleware
                 throw new UnauthorizedHttpException('Action Requires Login');
             }
 
-            return Redirect::guest(URL::route('account.login'))
+            return Redirect::guest(route('account.login'))
                 ->with('error', 'You must be logged in to perform that action.');
         }
 

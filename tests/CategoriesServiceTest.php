@@ -26,7 +26,7 @@ class CategoriesServiceTest extends TestCase
      */
     public function testGetCategoryPages()
     {
-        $this->assertEquals(2, count($this->categoriesService->getCategoryPages(Category::find(1))));
+        $this->assertEquals(1, count($this->categoriesService->getCategoryPages(Category::find(1))));
     }
 
     /**

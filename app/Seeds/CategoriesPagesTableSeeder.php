@@ -45,10 +45,6 @@ class CategoriesPagesTableSeeder extends Seeder
                 [
                     'page_id' => 2,
                     'category_id' => 1
-                ],
-                [
-                    'page_id' => 3,
-                    'category_id' => 1
                 ]
             ]
         );

@@ -1,5 +1,10 @@
+@font-face {
+	font-family: "BB";
+	src: url("../fonts/bb_style.ttf") format("truetype");
+}
+
 #githubLink {
-	width: 90px;
+	width: 40px;
 }
 
 .half {
@@ -42,11 +47,6 @@ table th {
 	padding: 10px;
 }
 
-.fileUpload {
-	position: relative;
-	overflow: hidden;
-	margin: 10px;
-}
 .fileUpload input.upload {
 	position: absolute;
 	top: 0;
@@ -221,33 +221,80 @@ ul li {
 }
 
 .centered td,
-.table-striped > tbody > tr > td {
+.table-striped > tbody > tr > td,
+.centered {
 	text-align: center;
-}
-
-.admin {
-	background-color: #333;
 }
 
 .accordion-toggle {
 	color: #001f3f!important;
 }
 
-.treeview.active {
-	background: rgba(0,0,0,.4);
-	color: #fff!important;
-}
-
-.treeview-menu {
-	padding-left: 0!important;
-	background: #222!important;
-}
-
-.treeview-menu > .treeview.active > a {
-	color: bisque!important;
-	background: #222;
-}
-
 .treeview-menu > .treeview.active > a:hover {
 	background: rgba(0,0,0,.1)!important;
+}
+
+.full-width {
+	width: 100%
+}
+
+.login-box-body {
+	margin-top: 100px;
+}
+
+.eye:hover {
+	cursor: pointer;
+}
+
+.password-label {
+	padding-left: 0;
+}
+
+.eye {
+	color: black;
+}
+
+.registration-button {
+	margin-left: 5px;
+	width: 47%;
+}
+
+.register-buttons {
+	padding-bottom: 20px;
+}
+
+.navbar {
+	border-width: 0 1px 1px 1px;
+}
+
+.socials-capture {
+	padding-bottom: 10px;
+}
+
+textarea#message {
+	resize: none;
+}
+
+.error-text,
+.error-text a {
+	text-decoration: none!important;
+	color: black;
+	text-align: center;
+	font-family: "BB";
+}
+
+.error-text a:hover {
+	color: red;
+}
+
+.error-text a {
+	font-size: 50px;
+}
+
+h1.error-text {
+	font-size: 300px;
+}
+
+.date.input-group {
+	padding-bottom: 15px;
 }

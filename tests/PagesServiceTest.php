@@ -3,6 +3,7 @@
 namespace GrahamCampbell\Tests\BootstrapCMS;
 
 use GrahamCampbell\BootstrapCMS\Models\Page;
+use GrahamCampbell\BootstrapCMS\Services\GridService;
 use GrahamCampbell\BootstrapCMS\Services\PagesService;
 
 class PagesServiceTest extends TestCase
@@ -18,7 +19,9 @@ class PagesServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->pagesService = new PagesService();
+        $gridService = new GridService();
+
+        $this->pagesService = new PagesService($gridService);
     }
 
     /**

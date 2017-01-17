@@ -50,7 +50,7 @@
         </div>
         <hr>
     @endif
-@if (Config::get('cms.eval', false))
+@if (config('cms.eval', false))
 <?php eval('?>'.$page->body); ?>
 @else
 {!! $page->body !!}

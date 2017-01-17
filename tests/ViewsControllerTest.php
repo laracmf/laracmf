@@ -9,7 +9,7 @@ class ViewsControllerTest extends TestCase
      */
     public function testViewRegisterPage()
     {
-        $this->json('GET', 'account/register', [], [])->see('<li class="active">Registration</li>');
+        $this->json('GET', 'account/register', [], [])->see('<div class="col-sm-12 col-xs-12 register-buttons">');
     }
 
     /**
@@ -17,6 +17,6 @@ class ViewsControllerTest extends TestCase
      */
     public function testViewLoginPage()
     {
-        $this->json('GET', 'account/login', [], [])->see('<li class="active">Login</li>');
+        $this->json('GET', 'account/login', [], [])->see('><i class="fa fa-rocket"></i> Log In</button>');
     }
 }

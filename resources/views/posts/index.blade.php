@@ -21,7 +21,7 @@ Blog
             @endif
         </p>
     </div>
-    @if(isRole('blogger'))
+    @if(isRole('blogger') || isRole('admin'))
         <div class="col-xs-4">
             <div class="pull-right">
                 <a class="btn btn-primary" href="{!! route('posts.create') !!}"><i class="fa fa-book"></i> New Post</a>

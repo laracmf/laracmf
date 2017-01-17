@@ -38,7 +38,7 @@ return [
             'provider' => 'users',
         ],
         'api' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
@@ -62,7 +62,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => \GrahamCampbell\BootstrapCMS\Models\User::class,
+            'model'  => \GrahamCampbell\BootstrapCMS\Models\User::class,
         ]
     ],
 

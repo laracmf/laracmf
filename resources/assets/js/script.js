@@ -50,7 +50,7 @@ $(document).ready(function () {
         multipleActions('approve');
     });
 
-    $(document).on('click', '.delete-pair', function (event) {
+    $(document).on('click', '.delete-pair', function () {
         $(this).closest('tr').remove();
     });
 
@@ -60,12 +60,12 @@ $(document).ready(function () {
         var name = $(this).data('name');
         var type = $(this).data('type');
         var delteUrl = $(this).data('url');
-        var $partial = '<b>' + name + '</b>';
-        var modalSize = '';
+        var $partial = '<a href="' + path + '">Download ' + name + '</a>';
+        var modalSize = 0;
 
         if ($(this).data('is_image')) {
-            $partial = '<img src="'+ path +'"/>';
-            modalSize = 'modal-lg';
+            $partial = '<img src="' + path + '"/>';
+            modalSize = 'modal';
         } else if (type.split('/')[0] === 'video') {
             $partial = '<video controls>' +
                 '<source src="' + path + '">' +
@@ -83,10 +83,12 @@ $(document).ready(function () {
             '<h4 class="modal-title">' + name + '</h4>' +
             '</div>' +
             '<div class="modal-body">' +
-            '<div class="img-block img-block-modal">' +
+            '<div class="img-block-modal">' +
             $partial +
             '</div>' +
-            '<div class="img-block">' +
+            '</div>' +
+            '<div class="modal-footer">' +
+            '<div class="info-block">' +
             '<ul>' +
             '<li>' +
             'Size: ' + size +
@@ -96,8 +98,6 @@ $(document).ready(function () {
             '</li>' +
             '</ul>' +
             '</div>' +
-            '</div>' +
-            '<div class="modal-footer">' +
             '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
             '<button type="button" data-url="' + delteUrl + '" class="btn btn-danger delete">Delete</button>' +
             '</div>' +
@@ -126,7 +126,7 @@ $(document).ready(function () {
                 body: $('#body').val(),
                 _token: token
             },
-            success: function(data, status, xhr) {
+            success: function (data, status, xhr) {
                 if (!xhr.responseJSON) {
                     cmsCommentMessage("There was an unknown error!", "error");
                     cmsCommentLock = false;
@@ -149,24 +149,24 @@ $(document).ready(function () {
                 cmsCommentMessage(xhr.responseJSON.msg, "success");
 
                 if ($("#comments > div").length == 0) {
-                    $("#nocomments").fadeOut(cmsCommentTime, function() {
+                    $("#nocomments").fadeOut(cmsCommentTime, function () {
                         $(this).remove();
-                        $(xhr.responseJSON.contents).prependTo('#comments').hide().slideDown(cmsCommentTime, function() {
-                            cmsTimeAgo("#timeago_comment_"+xhr.responseJSON.comment_id);
-                            cmsCommentEdit("#editable_comment_"+xhr.responseJSON.comment_id+"_1");
-                            cmsCommentEdit("#editable_comment_"+xhr.responseJSON.comment_id+"_2");
-                            cmsCommentDelete("#deletable_comment_"+xhr.responseJSON.comment_id+"_1");
-                            cmsCommentDelete("#deletable_comment_"+xhr.responseJSON.comment_id+"_2");
+                        $(xhr.responseJSON.contents).prependTo('#comments').hide().slideDown(cmsCommentTime, function () {
+                            cmsTimeAgo("#timeago_comment_" + xhr.responseJSON.comment_id);
+                            cmsCommentEdit("#editable_comment_" + xhr.responseJSON.comment_id + "_1");
+                            cmsCommentEdit("#editable_comment_" + xhr.responseJSON.comment_id + "_2");
+                            cmsCommentDelete("#deletable_comment_" + xhr.responseJSON.comment_id + "_1");
+                            cmsCommentDelete("#deletable_comment_" + xhr.responseJSON.comment_id + "_2");
                             cmsCommentLock = false;
                         });
                     });
                 } else {
-                    $(xhr.responseJSON.contents).prependTo('#comments').hide().slideDown(cmsCommentTime, function() {
-                        cmsTimeAgo("#timeago_comment_"+xhr.responseJSON.comment_id);
-                        cmsCommentEdit("#editable_comment_"+xhr.responseJSON.comment_id+"_1");
-                        cmsCommentEdit("#editable_comment_"+xhr.responseJSON.comment_id+"_2");
-                        cmsCommentDelete("#deletable_comment_"+xhr.responseJSON.comment_id+"_1");
-                        cmsCommentDelete("#deletable_comment_"+xhr.responseJSON.comment_id+"_2");
+                    $(xhr.responseJSON.contents).prependTo('#comments').hide().slideDown(cmsCommentTime, function () {
+                        cmsTimeAgo("#timeago_comment_" + xhr.responseJSON.comment_id);
+                        cmsCommentEdit("#editable_comment_" + xhr.responseJSON.comment_id + "_1");
+                        cmsCommentEdit("#editable_comment_" + xhr.responseJSON.comment_id + "_2");
+                        cmsCommentDelete("#deletable_comment_" + xhr.responseJSON.comment_id + "_1");
+                        cmsCommentDelete("#deletable_comment_" + xhr.responseJSON.comment_id + "_2");
                         cmsCommentLock = false;
                     });
                 }
@@ -174,7 +174,7 @@ $(document).ready(function () {
                 cmsCommentLock = true;
                 $('#body').val('');
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 if (!xhr.responseJSON || !xhr.responseJSON.msg) {
                     cmsCommentMessage("There was an unknown error!", "error");
                     cmsCommentLock = false;
@@ -187,26 +187,19 @@ $(document).ready(function () {
         });
     });
 
-    $('.editable').on('click', function () {
-        var commentId = $(this).data('pk');
-        var action =  baseURL + '/blog/comments/' + commentId;
-
-        $('#edit_comment_ok').data('url', action);
-    });
-
     $('#select-all').on('click', function () {
         var $comment = $('.comment');
         if ($(this).is(':checked')) {
             $comment.css({'background-image': 'inherit', 'background-color': 'silver'});
 
-            $comment.each(function(i, comment) {
+            $comment.each(function (i, comment) {
                 var $hiddenInput = $(comment).find('input[type=hidden]');
                 $hiddenInput.val($(this).data('pk'));
             });
         } else {
             $comment.css({'background-image': '', 'background-color': ''});
 
-            $comment.each(function(i, comment) {
+            $comment.each(function (i, comment) {
                 var $hiddenInput = $(comment).find('input[type=hidden]');
                 $hiddenInput.val('');
             });
@@ -224,6 +217,20 @@ $(document).ready(function () {
             $hiddenInput.val($(this).data('pk'));
         }
     });
+
+    $('.eye').on('click', function () {
+        var $password = $('#password');
+
+        if ($(this).hasClass('fa-eye')) {
+            $password.attr('type', 'password');
+            $(this).removeClass('fa-eye');
+            $(this).addClass('fa-eye-slash');
+        } else {
+            $password.attr('type', 'text');
+            $(this).removeClass('fa-eye-slash');
+            $(this).addClass('fa-eye');
+        }
+    });
 });
 
 $(document).ready(function () {
@@ -237,7 +244,7 @@ $(document).ready(function () {
 
     $('.treeview a[href="' + urlLink + '"]').parent().addClass('active');
 
-    $('.treeview a').filter(function() {
+    $('.treeview a').filter(function () {
         return this.href == url.href;
     }).parent().parent().parent().addClass('active');
 });

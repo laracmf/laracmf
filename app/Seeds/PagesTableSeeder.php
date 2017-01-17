@@ -61,18 +61,6 @@ class PagesTableSeeder extends Seeder
 
         DB::table('pages')->insert($contact);
 
-        $about = [
-            'title'      => 'About Us',
-            'nav_title'  => 'About',
-            'slug'       => 'about',
-            'body'       => $this->getContent('about'),
-            'user_id'    => 1,
-            'icon'       => 'info-circle',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ];
-
-        DB::table('pages')->insert($about);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
     }
