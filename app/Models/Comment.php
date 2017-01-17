@@ -12,9 +12,7 @@
 namespace GrahamCampbell\BootstrapCMS\Models;
 
 use GrahamCampbell\BootstrapCMS\Models\Relations\BelongsToPostTrait;
-use GrahamCampbell\Credentials\Models\AbstractModel;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
-use GrahamCampbell\Credentials\Models\Relations\RevisionableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
@@ -25,14 +23,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  */
 class Comment extends AbstractModel implements HasPresenter
 {
-    use BelongsToPostTrait, BelongsToUserTrait, RevisionableTrait, SoftDeletes;
-
-    /**
-     * The table the comments are stored in.
-     *
-     * @var string
-     */
-    protected $table = 'comments';
+    use BelongsToPostTrait, BelongsToUserTrait, SoftDeletes;
 
     /**
      * The model name.
@@ -49,18 +40,11 @@ class Comment extends AbstractModel implements HasPresenter
     protected $dates = ['deleted_at'];
 
     /**
-     * The revisionable columns.
-     *
-     * @var array
-     */
-    protected $keepRevisionOf = ['body'];
-
-    /**
      * The columns to select when displaying an index.
      *
      * @var array
      */
-    public static $index = ['id', 'body', 'user_id', 'created_at', 'version'];
+    public static $index = ['id', 'body', 'user_id', 'created_at', 'version', 'approved'];
 
     /**
      * The columns to order by when displaying an index.

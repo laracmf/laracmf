@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends(config('app.layout'))
 
 @section('title')
     Complete registration
@@ -19,7 +19,7 @@
                         <div class="panel-heading">Complete registration</div>
 
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ route('save.register.complete', ['id' => $userId]) }}">
+                            <form class="form-horizontal" role="form" method="POST" action="{{ route('save.register.complete', ['id' => $userId, 'code' => $code]) }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <label for="password" class="col-md-4 control-label">Password</label>
@@ -60,11 +60,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    @else
-        <div class="alert alert-danger">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>{{ trans('messages.common.warning') }}!</strong> {{ trans('messages.common.wrong.token') }}!
         </div>
     @endif
 @endsection

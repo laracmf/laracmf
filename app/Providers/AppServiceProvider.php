@@ -11,7 +11,6 @@
 
 namespace GrahamCampbell\BootstrapCMS\Providers;
 
-use GrahamCampbell\BootstrapCMS\Services\MailerService;
 use GrahamCampbell\BootstrapCMS\Http\Controllers\CommentController;
 use GrahamCampbell\BootstrapCMS\Navigation\Factory;
 use GrahamCampbell\BootstrapCMS\Observers\PageObserver;
@@ -19,9 +18,17 @@ use GrahamCampbell\BootstrapCMS\Repositories\CommentRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\EventRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PageRepository;
 use GrahamCampbell\BootstrapCMS\Repositories\PostRepository;
+use GrahamCampbell\BootstrapCMS\Services\CommentsManagerService;
+use GrahamCampbell\BootstrapCMS\Services\GridService;
+use GrahamCampbell\BootstrapCMS\Services\MediaService;
+use GrahamCampbell\BootstrapCMS\Services\PagesService;
+use GrahamCampbell\BootstrapCMS\Services\SocialAccountService;
 use GrahamCampbell\BootstrapCMS\Subscribers\CommandSubscriber;
 use GrahamCampbell\BootstrapCMS\Subscribers\NavigationSubscriber;
 use Illuminate\Support\ServiceProvider;
+use GrahamCampbell\BootstrapCMS\Services\CategoriesService;
+use GrahamCampbell\BootstrapCMS\Services\ConfigurationsService;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * This is the app service provider class.
@@ -40,6 +47,35 @@ class AppServiceProvider extends ServiceProvider
         $this->setupBlade();
 
         $this->setupListeners();
+
+        Validator::extend('name_unique', function ($attribute, $value, $parameters) {
+            $configService = new ConfigurationsService();
+            $environments = $configService->getEnvironmentsList();
+
+            return !in_array($parameters[0], $environments);
+        });
+
+        Validator::extend('ids_array', function ($attribute, $value, $parameters) {
+            $requestArray = unserialize($parameters[0]);
+            $model = unserialize($parameters[1]);
+
+            $modelData = $model::all();
+            $modelData = $modelData->pluck('id')->toArray();
+
+            if (!is_array($requestArray)) {
+                return false;
+            }
+
+            return count($requestArray) === count(array_intersect($requestArray, $modelData));
+        });
+
+        Validator::replacer('name_unique', function ($message) {
+            return str_replace($message, 'Config with such name already exists!', $message);
+        });
+
+        Validator::replacer('ids_array', function ($message) {
+            return str_replace($message, 'Some or all pages you entered don\'t exists!', $message);
+        });
     }
 
     /**
@@ -94,22 +130,54 @@ class AppServiceProvider extends ServiceProvider
         $this->registerNavigationSubscriber();
 
         $this->registerCommentController();
+        $this->registerCategoriesService();
+        $this->registerPagesService();
+        $this->registerConfigurationsService();
+        $this->registerMediaService();
+        $this->registerCommentsManagerService();
+        $this->registerGridService();
 
-
+        if ($this->app->environment() !== 'production') {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
     }
 
     /**
-     * Register the mailer service class.
+     * Register the social account service class.
      *
      * @return void
      */
-    protected function registerMailerService()
+    protected function registerSocialAccountService()
     {
-        $this->app->bind(MailerService::class, function () {
-            return new MailerService();
+        $this->app->bind(SocialAccountService::class, function () {
+            return new SocialAccountService();
         });
 
-        $this->app->alias('mailer', 'GrahamCampbell\BootstrapCMS\Services\MailerService');
+        $this->app->alias('socialuser', 'GrahamCampbell\BootstrapCMS\Services\SocialAccountService');
+    }
+
+    /**
+     * Register the social account service class.
+     *
+     * @return void
+     */
+    protected function registerGridService()
+    {
+        $this->app->bind(GridService::class, function () {
+            return new GridService();
+        });
+    }
+
+    /**
+     * Register comments manager service.
+     *
+     * @return void
+     */
+    protected function registerCommentsManagerService()
+    {
+        $this->app->bind(CommentsManagerService::class, function () {
+            return new CommentsManagerService();
+        });
     }
 
     /**
@@ -149,6 +217,54 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('commentrepository', 'GrahamCampbell\BootstrapCMS\Repositories\CommentRepository');
+    }
+
+    /**
+     * Register category service.
+     *
+     * @return void
+     */
+    protected function registerCategoriesService()
+    {
+        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\CategoriesService', function () {
+            return new CategoriesService();
+        });
+    }
+
+    /**
+     * Register pages service.
+     *
+     * @return void
+     */
+    protected function registerPagesService()
+    {
+        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\PagesService', function ($app) {
+            return new PagesService($app->make('GrahamCampbell\BootstrapCMS\Services\GridService'));
+        });
+    }
+
+    /**
+     * Register configurations service.
+     *
+     * @return void
+     */
+    protected function registerConfigurationsService()
+    {
+        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\ConfigurationsService', function () {
+            return new ConfigurationsService();
+        });
+    }
+
+    /**
+     * Register media service.
+     *
+     * @return void
+     */
+    protected function registerMediaService()
+    {
+        $this->app->bind('GrahamCampbell\BootstrapCMS\Services\MediaService', function () {
+            return new MediaService();
+        });
     }
 
     /**
@@ -277,7 +393,7 @@ class AppServiceProvider extends ServiceProvider
             'folderprovider',
             'pagerepository',
             'postrepository',
-            'mailer'
+            'socialuser'
         ];
     }
 }

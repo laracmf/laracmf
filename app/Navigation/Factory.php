@@ -87,7 +87,7 @@ class Factory
     {
         if ($this->credentials->check()) {
             if ($type === 'admin') {
-                if ($this->credentials->hasAccess('admin')) {
+                if ($this->credentials->inRole('admin')) {
                     // the requested type is admin, and the user is an admin
                     return $this->navigation->render('admin', 'admin', [
                         'title'   => 'Admin Panel',
@@ -129,7 +129,7 @@ class Factory
         $propery = $this->property;
         $user = $this->credentials->getDecoratedUser();
 
-        return $user->$propery;
+        return $user->{$propery};
     }
 
     /**

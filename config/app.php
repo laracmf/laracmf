@@ -13,6 +13,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Environment
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the "environment" your application is currently
+    | running in. This may determine how you prefer to configure various
+    | services your application utilizes. Set this in your ".env" file.
+    |
+    */
+    'env' => env('APP_ENV', 'local'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Debug Mode
     |--------------------------------------------------------------------------
     |
@@ -26,6 +38,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Environments path
+    |--------------------------------------------------------------------------
+    */
+
+    'env_path' => '../',
+
+    /*
+    |--------------------------------------------------------------------------
     | Application URL
     |--------------------------------------------------------------------------
     |
@@ -36,6 +56,14 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Comments moderation
+    |--------------------------------------------------------------------------
+    */
+
+    'moderation' => env('COMMENTS_MODERATION', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -120,6 +148,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Layout
+    |--------------------------------------------------------------------------
+    |
+    | Admin or default.
+    |
+    */
+
+    'layout' => 'layouts.default',
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -130,48 +169,56 @@ return [
     */
 
     'providers' => [
-
-        'GrahamCampbell\Exceptions\ExceptionsServiceProvider',
-        'Illuminate\Foundation\Providers\ArtisanServiceProvider',
-        'Illuminate\Auth\AuthServiceProvider',
-        'Illuminate\Broadcasting\BroadcastServiceProvider',
-        'Illuminate\Bus\BusServiceProvider',
-        'Illuminate\Cache\CacheServiceProvider',
-        'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
-        'Illuminate\Routing\ControllerServiceProvider',
-        'Illuminate\Cookie\CookieServiceProvider',
-        'Illuminate\Database\DatabaseServiceProvider',
-        'Illuminate\Encryption\EncryptionServiceProvider',
-        'Illuminate\Filesystem\FilesystemServiceProvider',
-        'Illuminate\Foundation\Providers\FoundationServiceProvider',
-        'Illuminate\Hashing\HashServiceProvider',
-        'Illuminate\Mail\MailServiceProvider',
-        'Illuminate\Pagination\PaginationServiceProvider',
-        'Illuminate\Pipeline\PipelineServiceProvider',
-        'Illuminate\Queue\QueueServiceProvider',
-        'Illuminate\Redis\RedisServiceProvider',
-        'Illuminate\Auth\Passwords\PasswordResetServiceProvider',
-        'Illuminate\Session\SessionServiceProvider',
-        'Illuminate\Translation\TranslationServiceProvider',
-        'Illuminate\Validation\ValidationServiceProvider',
-        'Illuminate\View\ViewServiceProvider',
-        'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
-        'Cartalyst\Sentry\SentryServiceProvider',
-        'Fideloper\Proxy\TrustedProxyServiceProvider',
-        'GrahamCampbell\Core\CoreServiceProvider',
-        'GrahamCampbell\HTMLMin\HTMLMinServiceProvider',
-        'GrahamCampbell\Markdown\MarkdownServiceProvider',
-        'GrahamCampbell\Security\SecurityServiceProvider',
-        'GrahamCampbell\Binput\BinputServiceProvider',
-        'GrahamCampbell\Throttle\ThrottleServiceProvider',
-        'GrahamCampbell\Credentials\CredentialsServiceProvider',
-        'GrahamCampbell\Navigation\NavigationServiceProvider',
-        'GrahamCampbell\Contact\ContactServiceProvider',
-        'GrahamCampbell\LogViewer\LogViewerServiceProvider',
-        'GrahamCampbell\BootstrapCMS\Providers\AppServiceProvider',
-        'GrahamCampbell\BootstrapCMS\Providers\RouteServiceProvider',
-        'Laravel\Socialite\SocialiteServiceProvider',
-
+        Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Broadcasting\BroadcastServiceProvider::class,
+        Illuminate\Bus\BusServiceProvider::class,
+        Illuminate\Cache\CacheServiceProvider::class,
+        Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
+        Illuminate\Cookie\CookieServiceProvider::class,
+        Illuminate\Database\DatabaseServiceProvider::class,
+        Illuminate\Encryption\EncryptionServiceProvider::class,
+        Illuminate\Filesystem\FilesystemServiceProvider::class,
+        Illuminate\Foundation\Providers\FoundationServiceProvider::class,
+        Illuminate\Hashing\HashServiceProvider::class,
+        Illuminate\Pagination\PaginationServiceProvider::class,
+        Illuminate\Pipeline\PipelineServiceProvider::class,
+        Illuminate\Queue\QueueServiceProvider::class,
+        Illuminate\Redis\RedisServiceProvider::class,
+        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+        Illuminate\Session\SessionServiceProvider::class,
+        Illuminate\Translation\TranslationServiceProvider::class,
+        Illuminate\Validation\ValidationServiceProvider::class,
+        Illuminate\View\ViewServiceProvider::class,
+        McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider::class,
+        Fideloper\Proxy\TrustedProxyServiceProvider::class,
+        GrahamCampbell\Core\CoreServiceProvider::class,
+        GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        GrahamCampbell\Security\SecurityServiceProvider::class,
+        GrahamCampbell\Binput\BinputServiceProvider::class,
+        GrahamCampbell\Throttle\ThrottleServiceProvider::class,
+        GrahamCampbell\Credentials\CredentialsServiceProvider::class,
+        GrahamCampbell\Navigation\NavigationServiceProvider::class,
+        GrahamCampbell\Contact\ContactServiceProvider::class,
+        GrahamCampbell\Credentials\CredentialsServiceProvider::class,
+        GrahamCampbell\LogViewer\LogViewerServiceProvider::class,
+        GrahamCampbell\BootstrapCMS\Providers\AppServiceProvider::class,
+        GrahamCampbell\BootstrapCMS\Providers\RouteServiceProvider::class,
+        GrahamCampbell\BootstrapCMS\Providers\MailServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Nayjest\Grids\ServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+        Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        L5Swagger\L5SwaggerServiceProvider::class,
+        CloudCreativity\LaravelJsonApi\ServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
     ],
 
     /*
@@ -186,39 +233,50 @@ return [
     */
 
     'aliases' => [
-
-        'App'         => 'Illuminate\Support\Facades\App',
-        'Artisan'     => 'Illuminate\Support\Facades\Artisan',
-        'Auth'        => 'Illuminate\Support\Facades\Auth',
-        'Blade'       => 'Illuminate\Support\Facades\Blade',
-        'Bus'         => 'Illuminate\Support\Facades\Bus',
-        'Cache'       => 'Illuminate\Support\Facades\Cache',
-        'Config'      => 'Illuminate\Support\Facades\Config',
-        'Cookie'      => 'Illuminate\Support\Facades\Cookie',
-        'Credentials' => 'GrahamCampbell\Credentials\Facades\Credentials',
-        'Crypt'       => 'Illuminate\Support\Facades\Crypt',
-        'DB'          => 'Illuminate\Support\Facades\DB',
-        'Event'       => 'Illuminate\Support\Facades\Event',
-        'File'        => 'Illuminate\Support\Facades\File',
-        'Hash'        => 'Illuminate\Support\Facades\Hash',
-        'Input'       => 'Illuminate\Support\Facades\Input',
-        'Lang'        => 'Illuminate\Support\Facades\Lang',
-        'Log'         => 'Illuminate\Support\Facades\Log',
-        'Mail'        => 'Illuminate\Support\Facades\Mail',
-        'Password'    => 'Illuminate\Support\Facades\Password',
-        'Queue'       => 'Illuminate\Support\Facades\Queue',
-        'Redirect'    => 'Illuminate\Support\Facades\Redirect',
-        'Redis'       => 'Illuminate\Support\Facades\Redis',
-        'Request'     => 'Illuminate\Support\Facades\Request',
-        'Response'    => 'Illuminate\Support\Facades\Response',
-        'Route'       => 'Illuminate\Support\Facades\Route',
-        'Schema'      => 'Illuminate\Support\Facades\Schema',
-        'Session'     => 'Illuminate\Support\Facades\Session',
-        'URL'         => 'Illuminate\Support\Facades\URL',
-        'Validator'   => 'Illuminate\Support\Facades\Validator',
-        'View'        => 'Illuminate\Support\Facades\View',
-        'Socialite'   => 'Laravel\Socialite\Facades\Socialite',
-
+        'App'         => Illuminate\Support\Facades\App::class,
+        'Artisan'     => Illuminate\Support\Facades\Artisan::class,
+        'Auth'        => Illuminate\Support\Facades\Auth::class,
+        'Blade'       => Illuminate\Support\Facades\Blade::class,
+        'Bus'         => Illuminate\Support\Facades\Bus::class,
+        'Cache'       => Illuminate\Support\Facades\Cache::class,
+        'Config'      => Illuminate\Support\Facades\Config::class,
+        'Cookie'      => Illuminate\Support\Facades\Cookie::class,
+        'Credentials' => GrahamCampbell\Credentials\Facades\Credentials::class,
+        'Crypt'       => Illuminate\Support\Facades\Crypt::class,
+        'DB'          => Illuminate\Support\Facades\DB::class,
+        'Event'       => Illuminate\Support\Facades\Event::class,
+        'File'        => Illuminate\Support\Facades\File::class,
+        'Form'        => Collective\Html\FormFacade::class,
+        'Grids'       => Nayjest\Grids\Grids::class,
+        'Hash'        => Illuminate\Support\Facades\Hash::class,
+        'Html'        => Collective\Html\HtmlFacade::class,
+        'Input'       => Illuminate\Support\Facades\Input::class,
+        'Lang'        => Illuminate\Support\Facades\Lang::class,
+        'Log'         => Illuminate\Support\Facades\Log::class,
+        'Mail'        => Illuminate\Support\Facades\Mail::class,
+        'Password'    => Illuminate\Support\Facades\Password::class,
+        'Queue'       => Illuminate\Support\Facades\Queue::class,
+        'Redirect'    => Illuminate\Support\Facades\Redirect::class,
+        'Redis'       => Illuminate\Support\Facades\Redis::class,
+        'Request'     => Illuminate\Support\Facades\Request::class,
+        'Response'    => Illuminate\Support\Facades\Response::class,
+        'Route'       => Illuminate\Support\Facades\Route::class,
+        'Schema'      => Illuminate\Support\Facades\Schema::class,
+        'Session'     => Illuminate\Support\Facades\Session::class,
+        'Socialite'   => Laravel\Socialite\Facades\Socialite::class,
+        'URL'         => Illuminate\Support\Facades\URL::class,
+        'Validator'   => Illuminate\Support\Facades\Validator::class,
+        'View'        => Illuminate\Support\Facades\View::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Excel'       => Maatwebsite\Excel\Facades\Excel::class,
+        'Activation'  => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
+        'Reminder'    => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
+        'Sentinel'    => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
+        'HTML'        => Collective\Html\HtmlFacade::class,
+        'Debugbar'    => Barryvdh\Debugbar\Facade::class,
+        'JsonApi'     => CloudCreativity\LaravelJsonApi\Facade::class,
+        'JWTAuth'     => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory'  => Tymon\JWTAuth\Facades\JWTFactory::class
     ],
 
 ];

@@ -14,8 +14,10 @@ namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
 use GrahamCampbell\Binput\Facades\Binput;
 use GrahamCampbell\BootstrapCMS\Facades\CommentRepository;
 use GrahamCampbell\BootstrapCMS\Facades\PostRepository;
+use GrahamCampbell\BootstrapCMS\Models\Comment;
+use GrahamCampbell\BootstrapCMS\Models\Post;
 use GrahamCampbell\Credentials\Facades\Credentials;
-use GrahamCampbell\Throttle\Throttlers\ThrottlerInterface;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
@@ -31,35 +33,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class CommentController extends AbstractController
 {
-    /**
-     * The throttler instance.
-     *
-     * @var \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
-     */
-    protected $throttler;
-
-    /**
-     * Create a new instance.
-     *
-     * @param \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface $throttler
-     *
-     * @return void
-     */
-    public function __construct(ThrottlerInterface $throttler)
-    {
-        $this->throttler = $throttler;
-
-        $this->setPermissions([
-            'store'   => 'user',
-            'update'  => 'mod',
-            'destroy' => 'mod',
-        ]);
-
-        $this->beforeFilter('throttle.comment', ['only' => ['store']]);
-
-        parent::__construct();
-    }
-
     /**
      * Display a listing of the comments.
      *
@@ -77,7 +50,7 @@ class CommentController extends AbstractController
                 'success' => false,
                 'code'    => 404,
                 'msg'     => trans('messages.comment.view_error'),
-                'url'     => URL::route('blog.posts.index'),
+                'url'     => route('posts.index'),
             ], 404);
         }
 
@@ -104,29 +77,33 @@ class CommentController extends AbstractController
     public function store($postId)
     {
         $input = array_merge(Binput::only('body'), [
-            'user_id' => Credentials::getuser()->id,
-            'post_id' => $postId,
-            'version' => 1,
+            'user_id'  => Credentials::getuser()->id,
+            'post_id'  => $postId,
+            'version'  => 1,
+            'approved' => false
         ]);
 
         if (CommentRepository::validate($input, array_keys($input))->fails()) {
             throw new BadRequestHttpException('Your comment was empty.');
         }
 
-        $this->throttler->hit();
-
         $comment = CommentRepository::create($input);
 
-        $contents = View::make('posts.comment', [
+        if (!config('app.moderation')) {
+            $comment->approved = true;
+            $comment->save();
+        }
+
+        $contents = view('posts.comment', [
             'comment' => $comment,
-            'post_id' => $postId,
+            'post' => Post::find($postId),
         ]);
 
         return Response::json([
             'success'    => true,
             'msg'        => trans('messages.comment.store_success'),
             'contents'   => $contents->render(),
-            'comment_id' => $comment->id,
+            'comment_id' => $comment->id
         ], 201);
     }
 
@@ -143,7 +120,7 @@ class CommentController extends AbstractController
         $comment = CommentRepository::find($id);
         $this->checkComment($comment);
 
-        $contents = View::make('posts.comment', [
+        $contents = view('posts.comment', [
             'comment' => $comment,
             'post_id' => $postId,
         ]);
@@ -159,7 +136,6 @@ class CommentController extends AbstractController
     /**
      * Update an existing comment.
      *
-     * @param int $postId
      * @param int $id
      *
      * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
@@ -167,18 +143,18 @@ class CommentController extends AbstractController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($postId, $id)
+    public function update($id)
     {
-        $input = Binput::map(['edit_body' => 'body']);
+        $body = Binput::input('body');
 
-        if (CommentRepository::validate($input, array_keys($input))->fails()) {
+        if (!$body) {
             throw new BadRequestHttpException('Your comment was empty.');
         }
 
         $comment = CommentRepository::find($id);
         $this->checkComment($comment);
 
-        $version = Binput::get('version');
+        $version = Binput::input('version');
 
         if (empty($version)) {
             throw new BadRequestHttpException('No version data was supplied.');
@@ -190,7 +166,10 @@ class CommentController extends AbstractController
 
         $version++;
 
-        $comment->update(array_merge($input, ['version' => $version]));
+        $comment->body = $body;
+        $comment->version = $version;
+
+        $comment->update();
 
         return Response::json([
             'success'      => true,
@@ -204,12 +183,11 @@ class CommentController extends AbstractController
     /**
      * Delete an existing comment.
      *
-     * @param int $postId
      * @param int $id
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($postId, $id)
+    public function destroy($id)
     {
         $comment = CommentRepository::find($id);
         $this->checkComment($comment);
@@ -237,5 +215,23 @@ class CommentController extends AbstractController
         if (!$comment) {
             throw new NotFoundHttpException('Comment Not Found.');
         }
+    }
+
+    /**
+     * Comment approved by moderator
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function approve($id)
+    {
+        $comment = Comment::find($id);
+
+        if ($comment) {
+            $comment->approved = true;
+            $comment->save();
+        }
+
+        return redirect()->back();
     }
 }

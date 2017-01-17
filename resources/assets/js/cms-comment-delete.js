@@ -1,9 +1,13 @@
 function cmsCommentDeleteSubmit(that) {
+    var token = $("input[name='_token']").val();
+
     $.ajax({
         url: $(that).attr("href"),
-        type: "DELETE",
+        type: 'DELETE',
         dataType: "json",
-        timeout: 5000,
+        data: {
+            _token: token
+        },
         success: function(data, status, xhr) {
             if (!xhr.responseJSON) {
                 cmsCommentLock = false;
@@ -35,12 +39,13 @@ function cmsCommentDelete(bindval) {
     $(bindval).click(function() {
         var that = this;
         var cmsCommentDeleteCheck = setInterval(function() {
-            if (cmsCommentLock == false) {
-                clearInterval(cmsCommentDeleteCheck);
+            if (!cmsCommentLock) {
                 cmsCommentLock = true;
                 cmsCommentDeleteSubmit(that);
+            } else {
+                clearInterval(cmsCommentDeleteCheck);
             }
-        }, 10);
+        }, 1);
         return false;
     });
 }

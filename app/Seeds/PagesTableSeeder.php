@@ -31,6 +31,7 @@ class PagesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('pages')->truncate();
 
         $home = [
@@ -60,18 +61,8 @@ class PagesTableSeeder extends Seeder
 
         DB::table('pages')->insert($contact);
 
-        $about = [
-            'title'      => 'About Us',
-            'nav_title'  => 'About',
-            'slug'       => 'about',
-            'body'       => $this->getContent('about'),
-            'user_id'    => 1,
-            'icon'       => 'info-circle',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ];
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        DB::table('pages')->insert($about);
     }
 
     /**

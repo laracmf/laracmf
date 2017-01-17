@@ -28,44 +28,26 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class EventController extends AbstractController
 {
     /**
-     * Create a new instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->setPermissions([
-            'create'  => 'edit',
-            'store'   => 'edit',
-            'edit'    => 'edit',
-            'update'  => 'edit',
-            'destroy' => 'edit',
-        ]);
-
-        parent::__construct();
-    }
-
-    /**
      * Display a listing of the events.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
         $events = EventRepository::paginate();
         $links = EventRepository::links();
 
-        return View::make('events.index', ['events' => $events, 'links' => $links]);
+        return view('events.index', ['events' => $events, 'links' => $links]);
     }
 
     /**
      * Show the form for creating a new event.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
-        return View::make('events.create');
+        return view('events.create');
     }
 
     /**
@@ -81,14 +63,14 @@ class EventController extends AbstractController
 
         $val = EventRepository::validate($input, array_keys($input));
         if ($val->fails()) {
-            return Redirect::route('events.create')->withInput()->withErrors($val->errors());
+            return redirect()->route('events.create')->withInput()->withErrors($val->errors());
         }
 
-        $input['date'] = Carbon::createFromFormat(Config::get('date.php_format'), $input['date']);
+        $input['date'] = Carbon::createFromFormat(config('date.php_format'), $input['date']);
 
         $event = EventRepository::create($input);
 
-        return Redirect::route('events.show', ['events' => $event->id])
+        return redirect()->route('events.show', ['events' => $event->id])
             ->with('success', trans('messages.event.store_success'));
     }
 
@@ -97,14 +79,14 @@ class EventController extends AbstractController
      *
      * @param int $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function show($id)
     {
         $event = EventRepository::find($id);
         $this->checkEvent($event);
 
-        return View::make('events.show', ['event' => $event]);
+        return view('events.show', ['event' => $event]);
     }
 
     /**
@@ -112,14 +94,14 @@ class EventController extends AbstractController
      *
      * @param int $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit($id)
     {
         $event = EventRepository::find($id);
         $this->checkEvent($event);
 
-        return View::make('events.edit', ['event' => $event]);
+        return view('events.edit', ['event' => $event]);
     }
 
     /**
@@ -135,17 +117,17 @@ class EventController extends AbstractController
 
         $val = $val = EventRepository::validate($input, array_keys($input));
         if ($val->fails()) {
-            return Redirect::route('events.edit', ['events' => $id])->withInput()->withErrors($val->errors());
+            return redirect()->route('events.edit', ['events' => $id])->withInput()->withErrors($val->errors());
         }
 
-        $input['date'] = Carbon::createFromFormat(Config::get('date.php_format'), $input['date']);
+        $input['date'] = Carbon::createFromFormat(config('date.php_format'), $input['date']);
 
         $event = EventRepository::find($id);
         $this->checkEvent($event);
 
         $event->update($input);
 
-        return Redirect::route('events.show', ['events' => $event->id])
+        return redirect()->route('events.show', ['events' => $event->id])
             ->with('success', trans('messages.event.update_success'));
     }
 
@@ -163,7 +145,7 @@ class EventController extends AbstractController
 
         $event->delete();
 
-        return Redirect::route('events.index')
+        return redirect()->route('events.index')
             ->with('success', trans('messages.event.delete_success'));
     }
 

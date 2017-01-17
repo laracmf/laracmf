@@ -11,9 +11,9 @@
 
 namespace GrahamCampbell\BootstrapCMS\Models;
 
-use GrahamCampbell\Credentials\Models\AbstractModel;
+use Exception;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
-use GrahamCampbell\Credentials\Models\Relations\RevisionableTrait;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
@@ -24,7 +24,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  */
 class Page extends AbstractModel implements HasPresenter
 {
-    use BelongsToUserTrait, RevisionableTrait, SoftDeletes;
+    use BelongsToUserTrait, SoftDeletes;
 
     /**
      * The table the pages are stored in.
@@ -46,13 +46,6 @@ class Page extends AbstractModel implements HasPresenter
      * @var array
      */
     protected $dates = ['deleted_at'];
-
-    /**
-     * The revisionable columns.
-     *
-     * @var array
-     */
-    protected $keepRevisionOf = ['title', 'nav_title', 'slug', 'body', 'css', 'js', 'show_title', 'show_nav', 'icon'];
 
     /**
      * The columns to select when displaying an index.
@@ -117,7 +110,22 @@ class Page extends AbstractModel implements HasPresenter
     public function beforeDelete()
     {
         if ($this->slug == 'home') {
-            throw new \Exception('You cannot delete the homepage.');
+            throw new Exception('You cannot delete the homepage.');
         }
+    }
+
+    /**
+     * Returns current category pages.
+     *
+     * @return BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(
+            'GrahamCampbell\BootstrapCMS\Models\Category',
+            'categories_pages',
+            'page_id',
+            'category_id'
+        );
     }
 }

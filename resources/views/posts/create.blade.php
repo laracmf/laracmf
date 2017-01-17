@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends(config('app.layout'))
 
 @section('title')
 Create Post
@@ -13,7 +13,7 @@ Create Post
 @section('content')
 <div class="well">
     <?php
-    $form = ['url' => URL::route('blog.posts.store'),
+    $form = ['url' => route('posts.store'),
         'method' => 'POST',
         'button' => 'Create New Post',
         'defaults' => [
@@ -27,9 +27,9 @@ Create Post
 @stop
 
 @section('css')
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/css/bootstrap-markdown.min.css">
 @stop
 
 @section('js')
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/js/bootstrap-markdown.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.8.0/js/bootstrap-markdown.min.js"></script>
 @stop

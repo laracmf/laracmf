@@ -12,6 +12,8 @@
 namespace GrahamCampbell\Tests\BootstrapCMS\Acceptance;
 
 use GrahamCampbell\Credentials\Facades\Credentials;
+use GrahamCampbell\Tests\BootstrapCMS\TestCase;
+use GrahamCampbell\BootstrapCMS\Models\User;
 
 /**
  * This is the page test class.
@@ -20,8 +22,15 @@ use GrahamCampbell\Credentials\Facades\Credentials;
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class PageTest extends AbstractTestCase
+class PageTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->authenticateUser(1);
+    }
+
     public function testIndex()
     {
         $this->visit('/')->seePageIs('pages/home');
@@ -29,45 +38,7 @@ class PageTest extends AbstractTestCase
 
     public function testCreate()
     {
-        $this->markTestSkipped('Tests requiring authentication are currently broken.');
-
         $this->visit('pages/create')->see('Create Page');
-    }
-
-    public function testStoreFail()
-    {
-        $this->markTestSkipped('Tests requiring authentication are currently broken.');
-
-        Credentials::shouldReceive('getuser')->once()->andReturn((object) ['id' => 1]);
-
-        $this->post('pages');
-
-        $this->assertRedirectedTo('pages/create');
-        $this->assertSessionHasErrors();
-        $this->assertHasOldInput();
-    }
-
-    public function testStoreSuccess()
-    {
-        $this->markTestSkipped('Tests requiring authentication are currently broken.');
-
-        Credentials::shouldReceive('getuser')->once()->andReturn((object) ['id' => 1]);
-
-        $this->post('pages', [
-            'title'      => 'New Page',
-            'nav_title'  => 'Herro',
-            'slug'       => 'foobar',
-            'icon'       => '',
-            'body'       => 'Why herro there!',
-            'css'        => '',
-            'js'         => '',
-            'show_title' => 'on',
-            'show_nav'   => 'on',
-
-        ]);
-
-        $this->assertRedirectedTo('pages/foobar');
-        $this->assertSessionHas('success');
     }
 
     public function testShowFail()
@@ -84,15 +55,11 @@ class PageTest extends AbstractTestCase
 
     public function testEditHome()
     {
-        $this->markTestSkipped('Tests requiring authentication are currently broken.');
-
         $this->visit('pages/home/edit')->see('Edit Welcome');
     }
 
     public function testUpdateFail()
     {
-        $this->markTestSkipped('Tests requiring authentication are currently broken.');
-
         $this->patch('pages/home');
 
         $this->assertRedirectedTo('pages/home/edit');
@@ -102,8 +69,6 @@ class PageTest extends AbstractTestCase
 
     public function testUpdateHomeUrl()
     {
-        $this->markTestSkipped('Tests requiring authentication are currently broken.');
-
         $this->patch('pages/home', [
             'title'      => 'New Page',
             'nav_title'  => 'Herro',
@@ -124,8 +89,6 @@ class PageTest extends AbstractTestCase
 
     public function testUpdateHomeNav()
     {
-        $this->markTestSkipped('Tests requiring authentication are currently broken.');
-
         $this->patch('pages/home', [
             'title'      => 'New Page',
             'nav_title'  => 'Herro',
@@ -146,14 +109,12 @@ class PageTest extends AbstractTestCase
 
     public function testUpdateSuccess()
     {
-        $this->markTestSkipped('Tests requiring authentication are currently broken.');
-
         $this->patch('pages/home', [
             'title'      => 'New Page',
             'nav_title'  => 'Herro',
             'slug'       => 'home',
             'icon'       => '',
-            'body'       => 'Why herro there!',
+            'body'       => 'Why hero there!',
             'css'        => '',
             'js'         => '',
             'show_title' => 'on',
@@ -161,26 +122,22 @@ class PageTest extends AbstractTestCase
 
         ]);
 
-        $this->assertRedirectedTo('pages/home');
+        $this->assertRedirectedTo('pages');
         $this->assertSessionHas('success');
     }
 
     public function testDestroyFail()
     {
-        $this->markTestSkipped('Tests requiring authentication are currently broken.');
-
         $this->delete('pages/home');
 
-        $this->assertRedirectedTo('pages/home');
+        $this->assertRedirectedTo('pages');
         $this->assertSessionHas('error');
     }
 
     public function testDestroySuccess()
     {
-        $this->markTestSkipped('Tests requiring authentication are currently broken.');
+        $this->delete('pages/contact');
 
-        $this->delete('pages/about');
-
-        $this->assertRedirectedTo('pages/home');
+        $this->assertRedirectedTo('pages');
     }
 }

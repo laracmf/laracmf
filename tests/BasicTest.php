@@ -18,16 +18,8 @@ use Illuminate\Contracts\Console\Kernel;
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class BasicTest extends AbstractTestCase
+class BasicTest extends TestCase
 {
-    /**
-     * @before
-     */
-    public function runInstallCommand()
-    {
-        $this->app->make(Kernel::class)->call('app:install');
-    }
-
     public function testBase()
     {
         $this->visit('/')->seePageIs('pages/home');

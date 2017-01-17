@@ -12,9 +12,8 @@
 namespace GrahamCampbell\BootstrapCMS\Models;
 
 use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyCommentsTrait;
-use GrahamCampbell\Credentials\Models\AbstractModel;
+use GrahamCampbell\BootstrapCMS\Models\AbstractModel;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
-use GrahamCampbell\Credentials\Models\Relations\RevisionableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
@@ -25,7 +24,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  */
 class Post extends AbstractModel implements HasPresenter
 {
-    use HasManyCommentsTrait, BelongsToUserTrait, RevisionableTrait, SoftDeletes;
+    use HasManyCommentsTrait, BelongsToUserTrait, SoftDeletes;
 
     /**
      * The table the posts are stored in.
@@ -47,13 +46,6 @@ class Post extends AbstractModel implements HasPresenter
      * @var array
      */
     protected $dates = ['deleted_at'];
-
-    /**
-     * The revisionable columns.
-     *
-     * @var array
-     */
-    protected $keepRevisionOf = ['title', 'summary', 'body'];
 
     /**
      * The columns to select when displaying an index.

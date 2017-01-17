@@ -26,44 +26,26 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PostController extends AbstractController
 {
     /**
-     * Create a new instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->setPermissions([
-            'create'  => 'blog',
-            'store'   => 'blog',
-            'edit'    => 'blog',
-            'update'  => 'blog',
-            'destroy' => 'blog',
-        ]);
-
-        parent::__construct();
-    }
-
-    /**
      * Display a listing of the posts.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
         $posts = PostRepository::paginate();
         $links = PostRepository::links();
 
-        return View::make('posts.index', ['posts' => $posts, 'links' => $links]);
+        return view('posts.index', ['posts' => $posts, 'links' => $links]);
     }
 
     /**
      * Show the form for creating a new post.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
-        return View::make('posts.create');
+        return view('posts.create');
     }
 
     /**
@@ -79,12 +61,12 @@ class PostController extends AbstractController
 
         $val = PostRepository::validate($input, array_keys($input));
         if ($val->fails()) {
-            return Redirect::route('blog.posts.create')->withInput()->withErrors($val->errors());
+            return redirect()->route('posts.create')->withInput()->withErrors($val->errors());
         }
 
         $post = PostRepository::create($input);
 
-        return Redirect::route('blog.posts.show', ['posts' => $post->id])
+        return redirect()->route('posts.show', ['posts' => $post->id])
             ->with('success', trans('messages.post.store_success'));
     }
 
@@ -93,7 +75,7 @@ class PostController extends AbstractController
      *
      * @param int $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function show($id)
     {
@@ -102,7 +84,7 @@ class PostController extends AbstractController
 
         $comments = $post->comments()->orderBy('id', 'desc')->get();
 
-        return View::make('posts.show', ['post' => $post, 'comments' => $comments]);
+        return view('posts.show', ['post' => $post, 'comments' => $comments]);
     }
 
     /**
@@ -110,14 +92,14 @@ class PostController extends AbstractController
      *
      * @param int $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit($id)
     {
         $post = PostRepository::find($id);
         $this->checkPost($post);
 
-        return View::make('posts.edit', ['post' => $post]);
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -133,7 +115,7 @@ class PostController extends AbstractController
 
         $val = PostRepository::validate($input, array_keys($input));
         if ($val->fails()) {
-            return Redirect::route('blog.posts.edit', ['posts' => $id])->withInput()->withErrors($val->errors());
+            return redirect()->route('posts.edit', ['posts' => $id])->withInput()->withErrors($val->errors());
         }
 
         $post = PostRepository::find($id);
@@ -141,7 +123,7 @@ class PostController extends AbstractController
 
         $post->update($input);
 
-        return Redirect::route('blog.posts.show', ['posts' => $post->id])
+        return redirect()->route('posts.show', ['posts' => $post->id])
             ->with('success', trans('messages.post.update_success'));
     }
 
@@ -159,7 +141,7 @@ class PostController extends AbstractController
 
         $post->delete();
 
-        return Redirect::route('blog.posts.index')
+        return redirect()->route('posts.index')
             ->with('success', trans('messages.post.delete_success'));
     }
 

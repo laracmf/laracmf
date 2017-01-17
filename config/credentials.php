@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Bootstrap CMS.
+ * This file is part of Laravel Credentials.
  *
  * (c) Graham Campbell <graham@alt-three.com>
  *
@@ -22,7 +22,7 @@ return [
     |
     */
 
-    'regallowed' => env('CRED_REG', true),
+    'regallowed' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -35,20 +35,7 @@ return [
     |
     */
 
-    'activation' => env('CRED_ACTIVATION', true),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Revision Model
-    |--------------------------------------------------------------------------
-    |
-    | This defines the revision model to be used.
-    |
-    | Default: 'GrahamCampbell\Credentials\Models\Revision'
-    |
-    */
-
-    'revision' => 'GrahamCampbell\Credentials\Models\Revision',
+    'activation' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -78,6 +65,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Layout
+    |--------------------------------------------------------------------------
+    |
+    | This defines the layout to extend when building views for admin panel.
+    |
+    | Default to 'layouts.admin'.
+    |
+    */
+
+    'admin-layout' => 'layouts.admin',
+
+    /*
+    |--------------------------------------------------------------------------
     | Email Layout
     |--------------------------------------------------------------------------
     |
@@ -89,4 +89,23 @@ return [
 
     'email' => 'layouts.email',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Items quantity per page.
+    |--------------------------------------------------------------------------
+    |
+    | Show declared items per page.
+    |
+    */
+
+    'paginate' => 4,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Items quantity per page.
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'sort' => 'asc',
 ];

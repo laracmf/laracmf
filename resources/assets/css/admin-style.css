@@ -1,0 +1,89 @@
+a {
+    text-decoration: none!important;
+}
+
+.logotype {
+    width: 100%;
+    max-width: 75px;
+    height: auto;
+}
+
+.user-full-name {
+    font-size: 20px;
+    color: black;
+}
+
+.panel-heading > h5 {
+    color: white!important;
+}
+
+.btn:hover {
+    border-bottom-width: 0;
+}
+
+.select2-search__field:focus {
+    border: none!important;
+}
+
+textarea {
+    resize: none;
+}
+
+.modal-content {
+    max-width: 900px;
+}
+
+.img-block-modal > video {
+    max-width: 100%;
+}
+
+.info-block {
+    float: left;
+}
+
+.img-block-modal {
+    text-align: center;
+}
+
+.info-block > ul li {
+    text-align: left;
+}
+
+.sidebar {
+    background-color: azure;
+}
+
+.sidebar-menu a span:hover,
+.left-side-menu li a:hover,
+.sidebar a {
+    color: black!important;
+}
+
+.admin {
+    background-color: azure;
+}
+
+.sidebar-menu > .treeview.active > a {
+    background-color: gainsboro;
+}
+
+.treeview-menu {
+    background: rgba(0,0,0,.1)!important;
+    padding-left: 0!important;
+}
+
+.treeview-menu > .treeview.active > a {
+    color: darkblue!important;
+}
+
+.sidebar-menu .treeview-menu>li>a {
+    padding-left: 25px;
+}
+
+.ui-tooltip.ui-corner-all.ui-widget-shadow.ui-widget.ui-widget-content {
+    display: none!important;
+}
+
+.align-right {
+    text-align: right;
+}

@@ -33,11 +33,20 @@ $app = new Illuminate\Foundation\Application(realpath(__DIR__.'/../'));
 |
 */
 
-$app->singleton('Illuminate\Contracts\Http\Kernel', 'GrahamCampbell\BootstrapCMS\Http\Kernel');
+$app->singleton(
+    Illuminate\Contracts\Http\Kernel::class,
+    GrahamCampbell\BootstrapCMS\Http\Kernel::class
+);
 
-$app->singleton('Illuminate\Contracts\Console\Kernel', 'GrahamCampbell\BootstrapCMS\Console\Kernel');
+$app->singleton(
+    Illuminate\Contracts\Console\Kernel::class,
+    GrahamCampbell\BootstrapCMS\Console\Kernel::class
+);
 
-$app->singleton('Illuminate\Contracts\Debug\ExceptionHandler', 'GrahamCampbell\Exceptions\ExceptionHandler');
+$app->singleton(
+    Illuminate\Contracts\Debug\ExceptionHandler::class,
+    GrahamCampbell\BootstrapCMS\Exceptions\Handler::class
+);
 
 /*
 |--------------------------------------------------------------------------

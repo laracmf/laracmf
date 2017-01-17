@@ -21,7 +21,6 @@ body {
 }
 
 .navbar-right {
-    padding-right: 20px;
     padding-left: 5px;
 }
 
@@ -121,8 +120,4 @@ body {
 }
 .carousel-fade .carousel-control {
     z-index: 2;
-}
-
-#githubLink {
-    width: 35px;
 }

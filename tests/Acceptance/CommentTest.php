@@ -11,7 +11,7 @@
 
 namespace GrahamCampbell\Tests\BootstrapCMS\Acceptance;
 
-use GrahamCampbell\BootstrapCMS\Facades\PostRepository;
+use GrahamCampbell\Tests\BootstrapCMS\TestCase;
 
 /**
  * This is the comment test class.
@@ -20,19 +20,19 @@ use GrahamCampbell\BootstrapCMS\Facades\PostRepository;
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class CommentTest extends AbstractTestCase
+class CommentTest extends TestCase
 {
-    public function testIndexFail()
-    {
-        PostRepository::shouldReceive('find')->once()->with(1, ['id']);
-
-        $this->get('blog/posts/1/comments');
-
-        $this->assertEquals(404, $this->response->status());
-    }
-
     public function testIndexSuccess()
     {
-        $this->visit('blog/posts/1/comments')->see('[{"comment_id":"1","comment_ver":"1"}]');
+        $this->authenticateUser(1);
+        
+        $this->visit('blog/posts/1/comments')->seeJsonEquals(
+            [
+                [
+                    'comment_id' => 1,
+                    'comment_ver' => 1
+                ]
+            ]
+        );
     }
 }
