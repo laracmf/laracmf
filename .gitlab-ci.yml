@@ -1,12 +1,12 @@
 before_script:
-  - bash ./ci/install.sh
+  - bash ./ci/install.sh > /dev/null
 
 variables:
   MYSQL_DATABASE: homestead_testing
   MYSQL_ROOT_PASSWORD: secret
 
 phpunit:php7.0:mysql5.7:
-  image: ruby:2.1
+  image: php:7.0
   services:
     - mysql:latest
   script:
