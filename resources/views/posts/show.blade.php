@@ -90,7 +90,7 @@
     </div>
     @else
         <p>
-            @if (Config::get('credentials.regallowed'))
+            @if (config('credentials.regallowed'))
                 <strong>Please <a href="{!! route('account.login') !!}">login</a> or <a href="{!! route('account.register') !!}">register</a> to post a comment.</strong>
             @else
                 <strong>Please <a href="{!! route('account.login') !!}">login</a> to post a comment.</strong>
@@ -138,15 +138,14 @@
                 </div>
             </div>
         </div>
-        </div>
     @endif
 @stop
 
 @section('js')
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
     <script>
-        var cmsCommentInterval = {!! Config::get('cms.commentfetch') !!};
-        var cmsCommentTime = {!! Config::get('cms.commenttrans') !!};
+        var cmsCommentInterval = {!! config('cms.commentfetch') !!};
+        var cmsCommentTime = {!! config('cms.commenttrans') !!};
     </script>
     <script type="text/javascript" src="{{ asset('assets/scripts/cms-comment.js') }}"></script>
 @stop

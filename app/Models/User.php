@@ -16,16 +16,22 @@ use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyEventsTrait;
 use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyPagesTrait;
 use GrahamCampbell\BootstrapCMS\Models\Relations\HasManyPostsTrait;
 use GrahamCampbell\Credentials\Models\User as CredentialsUser;
-use GrahamCampbell\BootstrapCMS\Models\ModelInterface;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableInterface;
+use Tymon\JWTAuth\Contracts\JWTSubject as AuthenticatableUserContract;
 
 /**
  * This is the user model class.
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-class User extends CredentialsUser implements ModelInterface
+class User extends CredentialsUser implements ModelInterface, AuthenticatableUserContract, AuthenticatableInterface
 {
-    use HasManyPagesTrait, HasManyPostsTrait, HasManyEventsTrait, HasManyCommentsTrait;
+    use HasManyPagesTrait,
+        HasManyPostsTrait,
+        HasManyEventsTrait,
+        HasManyCommentsTrait,
+        Authenticatable;
 
     /**
      * Get the presenter class.
@@ -58,5 +64,25 @@ class User extends CredentialsUser implements ModelInterface
     public function getClassName()
     {
         return get_class($this);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();  // Eloquent model method
+    }
+
+    /**
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [
+            'user' => [
+                'id' => $this->id
+            ]
+        ];
     }
 }

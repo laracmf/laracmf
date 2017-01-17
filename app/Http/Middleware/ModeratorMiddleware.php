@@ -40,7 +40,7 @@ class ModeratorMiddleware
             return $next($request);
         }
 
-        return Redirect::guest(URL::route('base'))
+        return Redirect::guest(route('base'))
             ->with('error', 'You must have moderator permissions.');
     }
 }

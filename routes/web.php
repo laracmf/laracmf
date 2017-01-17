@@ -29,7 +29,7 @@ Route::get(
             Session::flash('', ''); // work around laravel bug if there is no session yet
             Session::reflash();
 
-            return Redirect::to(Config::get('credentials.home'));
+            return Redirect::to(config('credentials.home'));
         }
     ]
 );
@@ -46,7 +46,7 @@ Route::get(
 Route::resource('default', 'DefaultsController');
 
 // send users to the posts page
-if (Config::get('cms.blogging')) {
+if (config('cms.blogging')) {
     Route::get(
         'blog',
         [
@@ -55,55 +55,10 @@ if (Config::get('cms.blogging')) {
                 Session::flash('', ''); // work around laravel bug if there is no session yet
                 Session::reflash();
 
-                return Redirect::route('posts.index');
+                return redirect()->route('posts.index');
             }
         ]
     );
-}
-
-// blog routes
-if (Config::get('cms.blogging')) {
-    Route::resource('blog/posts', 'PostController');
-
-    Route::get('blog/posts/{post}/comments', [
-        'as' => 'posts.comments.index',
-        'uses' => 'CommentController@index'
-    ]);
-
-    Route::post('blog/posts/{post}/comments', [
-        'as' => 'posts.comments.store',
-        'uses' => 'CommentController@store'
-    ]);
-
-    Route::get('blog/posts/{post}/comments/create', [
-        'as' => 'posts.comments.create',
-        'uses' => 'CommentController@create'
-    ]);
-
-    Route::delete('blog/comments/{comment}', [
-        'as' => 'posts.comments.destroy',
-        'uses' => 'CommentController@destroy'
-    ]);
-
-    Route::put('blog/comments/{comment}', [
-        'as' => 'posts.comments.update',
-        'uses' => 'CommentController@update'
-    ]);
-
-    Route::get('blog/posts/{post}/comments/{comment}', [
-        'as' => 'posts.comments.show',
-        'uses' => 'CommentController@show'
-    ]);
-
-    Route::get('blog/posts/{post}/comments/{comment}/edit', [
-        'as' => 'posts.comments.edit',
-        'uses' => 'CommentController@edit'
-    ]);
-}
-
-// event routes
-if (Config::get('cms.events')) {
-    Route::resource('events', 'EventController');
 }
 
 Route::get('auth/social/{social}', [
@@ -136,6 +91,16 @@ Route::group(['middleware' => ['access']], function () {
     ]);
 
     Route::group(['middleware' => ['moderator']], function () {
+        Route::delete('blog/comments/{comment}', [
+            'as' => 'posts.comments.destroy',
+            'uses' => 'CommentController@destroy'
+        ]);
+
+        Route::put('blog/comments/{comment}', [
+            'as' => 'posts.comments.update',
+            'uses' => 'CommentController@update'
+        ]);
+
         Route::get('comment/{id}/approve', [
             'as' => 'comment.approve',
             'uses' => 'CommentController@approve'
@@ -150,6 +115,48 @@ Route::group(['middleware' => ['access']], function () {
             'as' => 'comments.multiple',
             'uses' => 'CommentsManageController@multiple'
         ]);
+    });
+
+    Route::get('blog/posts/{post}/comments', [
+        'as' => 'posts.comments.index',
+        'uses' => 'CommentController@index'
+    ]);
+
+    Route::post('blog/posts/{post}/comments', [
+        'as' => 'posts.comments.store',
+        'uses' => 'CommentController@store'
+    ]);
+
+    Route::get('blog/posts/{post}/comments/create', [
+        'as' => 'posts.comments.create',
+        'uses' => 'CommentController@create'
+    ]);
+
+    Route::get('blog/posts/{post}/comments/{comment}', [
+        'as' => 'posts.comments.show',
+        'uses' => 'CommentController@show'
+    ]);
+
+    Route::get('blog/posts/{post}/comments/{comment}/edit', [
+        'as' => 'posts.comments.edit',
+        'uses' => 'CommentController@edit',
+        'middleware' => 'owner'
+    ]);
+
+    Route::group(['prefix' => 'events', 'middleware' => ['editor']], function () {
+        Route::post('/', ['as' => 'events.store', 'uses' => 'EventController@store']);
+        Route::get('/create', ['as' => 'events.create', 'uses' => 'EventController@create']);
+        Route::delete('/{event}', ['as' => 'events.destroy', 'uses' => 'EventController@destroy']);
+        Route::match(['put', 'patch'], '/{event}', ['as' => 'events.update', 'uses' => 'EventController@update']);
+        Route::get('/{event}/edit', ['as' => 'events.edit', 'uses' => 'EventController@edit']);
+    });
+
+    Route::group(['prefix' => 'blog/posts', 'middleware' => ['blogger']], function () {
+        Route::post('/', ['as' => 'posts.store', 'uses' => 'PostController@store']);
+        Route::get('/create', ['as' => 'posts.create', 'uses' => 'PostController@create']);
+        Route::delete('/{post}', ['as' => 'posts.destroy', 'uses' => 'PostController@destroy']);
+        Route::match(['put', 'patch'], '/{post}', ['as' => 'posts.update', 'uses' => 'PostController@update']);
+        Route::get('/{post}/edit', ['as' => 'posts.edit', 'uses' => 'PostController@edit']);
     });
 
     Route::group(['middleware' => ['admin']], function () {
@@ -188,5 +195,11 @@ Route::group(['middleware' => ['access']], function () {
         });
     });
 });
+
+Route::get('events/', ['as' => 'events.index', 'uses' => 'EventController@index']);
+Route::get('events/{event}', ['as' => 'events.show', 'uses' => 'EventController@show']);
+
+Route::get('blog/posts', ['as' => 'posts.index', 'uses' => 'PostController@index']);
+Route::get('blog/posts/{post}', ['as' => 'posts.show', 'uses' => 'PostController@show']);
 
 Route::get('pages/{page}', ['as' => 'pages.show', 'uses' => 'PageController@show']);

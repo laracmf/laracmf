@@ -5,6 +5,8 @@ var elixir = require('laravel-elixir');
 stylesPath = 'public/assets/styles/';
 scriptsPath = 'public/assets/scripts/';
 imagesPath = 'public/assets/images/';
+skinsPath = 'public/assets/scripts/skins/';
+fontsPath = 'public/assets/fonts/';
 
 elixir.config.css.outputFolder = stylesPath;
 elixir.config.js.outputFolder = scriptsPath;
@@ -17,6 +19,8 @@ elixir(function (mix) {
         .copy('resources/assets/css/*.min.css', stylesPath)
         .copy('resources/assets/js/*.*', scriptsPath)
         .copy('resources/assets/js/*.min.js', scriptsPath)
+        .copy('resources/assets/skins/*', skinsPath)
+        .copy('resources/assets/fonts/*.*', fontsPath)
 
         .styles(['bootstrap.min.css'], stylesPath + 'bootstrap.default.min.css')
         .styles(['bootstrap.min.css', 'bootstrap-theme.min.css'], stylesPath + 'bootstrap.legacy.min.css')
@@ -45,6 +49,9 @@ elixir(function (mix) {
             'jquery.iframe-transport.js',
             'select2.full.min.js',
             'fileupload-script.js',
+            'moment.js',
+            'daterangepicker.js',
+            'bootstrap-datepicker.js',
             'select-script.js',
             'cms-timeago.js',
             'cms-restfulizer.js',
@@ -56,7 +63,6 @@ elixir(function (mix) {
         .scripts([
             'jquery-ui.min.js',
             'morris.min.js',
-            'moment.js',
             'raphael.min.js',
             'respond.min.js',
             'html5shiv.min.js',
@@ -64,22 +70,22 @@ elixir(function (mix) {
             'jquery-jvectormap-1.2.2.min.js',
             'jquery-jvectormap-world-mill-en.js',
             'jquery.knob.js',
+            'moment.js',
             'daterangepicker.js',
             'bootstrap-datepicker.js',
             'bootstrap3-wysihtml5.all.min.js',
             'jquery.slimscroll.min.js',
             'fastclick.min.js',
             'app.min.js',
-            'demo.js',
-            'dashboard.js'
+            'demo.js'
         ], scriptsPath + 'admin.js')
 
         .styles([
-            'bootstrap.min.css',
-            'bootstrap-theme.min.css',
             'font-awesome.min.css',
             'animate.min.css',
             'select2.min.css',
+            'datepicker3.css',
+            'daterangepicker.css',
             'cms-main.css',
             'style.css'
         ], stylesPath + 'all.css')
@@ -92,7 +98,8 @@ elixir(function (mix) {
             'jquery-jvectormap-1.2.2.css',
             'datepicker3.css',
             'daterangepicker.css',
-            'bootstrap3-wysihtml5.min.css'
+            'bootstrap3-wysihtml5.min.css',
+            'admin-style.css'
         ], stylesPath + 'admin.css')
         .version([stylesPath + 'all.css', scriptsPath + 'all.js']);
 });

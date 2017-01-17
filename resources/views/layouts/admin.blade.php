@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>{{ Config::get('app.name') }} - @section('title')
+<title>{{ config('app.name') }}  @section('title')
 @show</title>
 @include('partials.header')
     @section('styles')
@@ -15,17 +15,12 @@
     @show
     @section('css')
     @show
-    @section('js')
-    @show
 </head>
 <body class="admin">
 <header class="main-header">
     <!-- Logo -->
     <a href="{{ route('base') }}" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>LT</span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-lg"><b>{{ config('app.name') }}</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top top-bar">
@@ -42,8 +37,13 @@
                     </a>
                     <ul class="dropdown-menu logout-item">
                         <li>
+                            <a href="{{ route('base') }}">
+                                <i class="fa fa-user-circle"></i> Home
+                            </a>
+                        </li>
+                        <li>
                             <a href="{!! route('account.logout') !!}">
-                                <i class="fa fa-power-off fa-fw"></i> Logout
+                                <i class="fa fa-power-off"></i> Logout
                             </a>
                         </li>
                     </ul>
@@ -56,25 +56,58 @@
     <section class="sidebar left-side-menu">
         <!-- Sidebar user panel -->
         <div class="user-panel">
-            <div class="pull-left image">
-                <img src="{{ asset('assets/images/avatar.jpg') }}" class="img-circle" alt="User Image">
+            <div class="pull-left">
+                <img src="{{ asset('assets/images/avatar.jpg') }}" class="logotype img-circle" alt="User Image">
             </div>
-            <div class="pull-left info">
+            <div class="user-full-name">
                 <p>{{ Credentials::getUser()->first_name }} {{ Credentials::getUser()->last_name }}</p>
             </div>
         </div>
         <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
                 <a href="{{ route('admin.show') }}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
             <li class="treeview">
-                <a href="{{ route('logviewer.index') }}">
-                    <i class="fa fa-wrench fa-fw"></i>
-                    <span>View Logs</span>
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>Users</span>
                 </a>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="{{ route('users.index') }}">
+                            <i class="fa fa-user fa-fw"></i>
+                            <span>View Users</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{ route('users.create') }}">
+                            <i class="fa fa-star fa-fw"></i>
+                            <span>Create User</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-window-maximize"></i>
+                    <span>Pages</span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="{{ route('pages.index') }}">
+                            <i class="fa fa-window-restore"></i>
+                            <span>View pages</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{ route('pages.create') }}">
+                            <i class="fa fa-pencil fa-fw"></i>
+                            <span>Create Page</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="treeview">
                 <a href="#">
@@ -103,55 +136,21 @@
                 </a>
             </li>
             <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-users"></i>
-                    <span>Users</span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="treeview">
-                        <a href="{{ route('users.index') }}">
-                            <i class="fa fa-user fa-fw"></i>
-                            <span>View Users</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="{{ route('users.create') }}">
-                            <i class="fa fa-star fa-fw"></i>
-                            <span>Create User</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="treeview">
                 <a href="{{ route('show.environment') }}">
                     <i class="fa fa-pencil fa-fw"></i>
                     <span>View Environment</span>
                 </a>
             </li>
             <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-window-maximize"></i>
-                    <span>Pages</span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="treeview">
-                        <a href="{{ route('pages.index') }}">
-                            <i class="fa fa-window-restore"></i>
-                            <span>View pages</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="{{ route('pages.create') }}">
-                            <i class="fa fa-pencil fa-fw"></i>
-                            <span>Create Page</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="treeview">
                 <a href="{{ route('comments.show') }}">
                     <i class="fa fa-comment fa-fw"></i>
                     <span>Comments moderation</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="{{ route('logviewer.index') }}">
+                    <i class="fa fa-wrench fa-fw"></i>
+                    <span>View Logs</span>
                 </a>
             </li>
         </ul>

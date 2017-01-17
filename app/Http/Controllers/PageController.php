@@ -93,7 +93,7 @@ class PageController extends AbstractController
         $val = PageRepository::validate($input, array_keys($input));
 
         if ($val->fails()) {
-            return Redirect::route('pages.create')->withInput()->withErrors($val->errors());
+            return redirect()->route('pages.create')->withInput()->withErrors($val->errors());
         }
 
         $page = PageRepository::create($input);
@@ -155,7 +155,6 @@ class PageController extends AbstractController
      */
     public function update($slug, PageRequest $request)
     {
-
         $input = $this->getInput();
         $categories = $request->input('categories');
 
@@ -278,12 +277,12 @@ class PageController extends AbstractController
     {
         if ($slug == 'home') {
             if ($slug != $input['slug']) {
-                return Redirect::route('pages.edit', ['pages' => $slug])->withInput()
+                return redirect()->route('pages.edit', ['pages' => $slug])->withInput()
                     ->with('error', trans('messages.page.homepage_slug'));
             }
 
             if ($input['show_nav'] == false) {
-                return Redirect::route('pages.edit', ['pages' => $slug])->withInput()
+                return redirect()->route('pages.edit', ['pages' => $slug])->withInput()
                     ->with('error', trans('messages.page.show_nav'));
             }
         }

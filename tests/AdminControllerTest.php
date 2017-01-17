@@ -8,6 +8,6 @@ class AdminControllerTest extends TestCase
     {
         $this->authenticateUser(1);
 
-        $this->json('GET', 'admin', [], [])->see('<li class="active">Dashboard</li>');
+        $this->json('GET', 'admin', [], [])->see('<a href="' . route('admin.show') . '">');
     }
 }

@@ -1,4 +1,4 @@
-@extends(Config::get('credentials.admin-layout'))
+@extends(config('credentials.admin-layout'))
 
 @section('title')
     <?php $__navtype = 'admin'; ?>
@@ -12,26 +12,20 @@
 @stop
 
 @section('content')
-    <div class="row">
-        @if(isAdmin())
-            <div class="col-xs-12">
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{!! URL::route('users.create') !!}"><i class="fa fa-user"></i> New User</a>
-                </div>
+    <div class="{{ isAdmin() ? 'col-lg-11' : 'col-lg-12' }}">
+        <div class="box">
+            <div class="box-body">
+                <table class="table table-bordered table-hover">
+                    {!! $grid !!}
+                </table>
             </div>
-        @endif
-    </div>
-    <hr>
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title">Users list</h3>
-        </div>
-        <div class="box-body">
-            <table class="table table-bordered table-hover">
-                {!! $grid !!}
-            </table>
         </div>
     </div>
+    @if(isAdmin())
+    <div class="col-lg-1 pull-right">
+        <a class="btn btn-primary" href="{!! route('users.create') !!}"><i class="fa fa-user"></i> New User</a>
+    </div>
+    @endif
 @stop
 
 @section('bottom')

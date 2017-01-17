@@ -25,10 +25,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/Kit-kat1/Contact"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Kit-kat1/Laravel-Exceptions"
         }
     ],
     "require-all": true,
@@ -40,14 +36,13 @@
         "graham-campbell/contact": "dev-master",
         "graham-campbell/credentials": "dev-master",
         "graham-campbell/core": "~4.0",
-        "graham-campbell/exceptions": "dev-master",
         "graham-campbell/htmlmin": "~4.0",
         "graham-campbell/logviewer": "dev-master",
         "graham-campbell/markdown": "7.0",
         "graham-campbell/navigation": "dev-master",
         "graham-campbell/throttle": "~5.2",
         "mccool/laravel-auto-presenter": "~3.0",
-        "laravel/homestead": "^3.0",
+        "laravel/homestead": "^4.0",
         "laravel/socialite": "^2.0",
         "webpatser/laravel-uuid": "^2.0",
         "laracasts/flash": "^2.0",
@@ -57,7 +52,9 @@
         "illuminate/html": "5.*",
         "maatwebsite/excel": "^2.1",
         "appzcoder/crud-generator": "^1.2",
-        "barryvdh/laravel-debugbar": "^2.3"
+        "darkaonline/l5-swagger": "~3.0",
+        "cloudcreativity/laravel-json-api": "^0.5.4",
+        "tymon/jwt-auth": "1.0.0-beta.1"
     },
     "require-dev": {
         "doctrine/dbal": "~2.5",
@@ -66,7 +63,8 @@
         "phpunit/phpunit": "^4.7.6",
         "symfony/dom-crawler": "3.1.*",
         "symfony/css-selector": "3.1.*",
-        "barryvdh/laravel-ide-helper": "^2.2"
+        "barryvdh/laravel-ide-helper": "^2.2",
+        "barryvdh/laravel-debugbar": "^2.3"
     },
     "suggest": {
         "graham-campbell/cloudflare": "Integration with CloudFlare."

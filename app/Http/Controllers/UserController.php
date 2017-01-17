@@ -37,7 +37,7 @@ class UserController extends BaseController
     /**
      * Display a listing of the users.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -75,6 +75,6 @@ class UserController extends BaseController
             ]
         );
 
-        return View::make('users.index', compact('users', 'grid'));
+        return view('users.index', compact('users', 'grid'));
     }
 }

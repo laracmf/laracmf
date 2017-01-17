@@ -26,6 +26,6 @@
 @endif
 {!! Breadcrumbs::renderIfExists() !!}
 
-@if(Request::path() === Config::get('credentials.home'))
+@if(Request::path() === config('credentials.home'))
     {!! Breadcrumbs::render('home') !!}
 @endif

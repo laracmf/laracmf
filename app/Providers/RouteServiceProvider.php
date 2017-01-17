@@ -1,29 +1,14 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace GrahamCampbell\BootstrapCMS\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\App;
 
-/**
- * This is the route service provider class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * This namespace is applied to the controller routes in your routes file.
+     * This namespace is applied to your controller routes.
      *
      * In addition, it is set as the URL generator's root namespace.
      *
@@ -32,16 +17,81 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'GrahamCampbell\BootstrapCMS\Http\Controllers';
 
     /**
-     * Define the routes for the application.
-     *
-     * @param \Illuminate\Routing\Router $router
+     * Define your route model bindings, pattern filters, etc.
      *
      * @return void
      */
-    public function map(Router $router)
+    public function boot()
     {
-        $router->group(['namespace' => $this->namespace], function () {
-            require app_path('Http/routes.php');
+        //
+
+        parent::boot();
+    }
+
+    /**
+     * Define the routes for the application.
+     *
+     * @return void
+     */
+    public function map()
+    {
+        $this->mapApiRoutes();
+
+        $this->mapWebRoutes();
+
+        $this->mapJsonApiV1Routes();
+    }
+
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapWebRoutes()
+    {
+        Route::group([
+            'middleware' => 'web',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/web.php');
+        });
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapApiRoutes()
+    {
+        Route::group([
+            'middleware' => 'api',
+            'namespace' => $this->namespace,
+            'prefix' => 'api',
+        ], function ($router) {
+            require base_path('routes/api.php');
+        });
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapJsonApiV1Routes()
+    {
+        Route::group([
+            'middleware' => 'json-api:v1',
+            'namespace' => $this->namespace,
+            'prefix' => 'api/v1'
+        ], function ($router) {
+            require base_path('routes/json-api-v1.php');
         });
     }
 }

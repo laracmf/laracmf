@@ -22,7 +22,7 @@ use GrahamCampbell\Tests\BootstrapCMS\AbstractTestCase;
  */
 class PageRepositoryTest extends AbstractTestCase
 {
-    use FacadeTrait, HelperTrait;
+    use FacadeTrait;
 
     /**
      * Get the facade accessor.

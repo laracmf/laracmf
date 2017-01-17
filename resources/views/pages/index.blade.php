@@ -1,4 +1,4 @@
-@extends(Config::get('credentials.admin-layout'))
+@extends(config('credentials.admin-layout'))
 
 @section('title')
     <?php $__navtype = 'admin'; ?>
@@ -12,24 +12,18 @@
 @stop
 
 @section('content')
-    <div class="row">
-        @if(isAdmin())
-            <div class="col-xs-12">
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{!! URL::route('pages.create') !!}"><i class="fa fa-user"></i> New Page</a>
-                </div>
-            </div>
-        @endif
-    </div>
-    <hr>
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title">Pages list</h3>
-        </div>
-        <div class="box-body">
+    <div class="{{ isAdmin() ? 'col-lg-11' : 'col-lg-12' }}">
+        <div class="box">
             <table class="table table-bordered table-hover">
                 {!! $grid !!}
             </table>
         </div>
     </div>
+    @if(isAdmin())
+        <div class="col-lg-1 pull-right">
+            <a class="btn btn-primary" href="{!! route('pages.create') !!}">
+                <i class="fa fa-user"></i> New Page
+            </a>
+        </div>
+    @endif
 @stop

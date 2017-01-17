@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 
+@section('title')
+    Dashboard
+@stop
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -7,10 +10,6 @@
             Dashboard
             <small>Control panel</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
-        </ol>
     </section>
 
     <!-- Main content -->
@@ -509,4 +508,8 @@
 
     </section>
     <!-- /.content -->
+@stop
+
+@section('js')
+    <script src="{{ asset('assets/scripts/dashboard.js') }}"></script>
 @stop

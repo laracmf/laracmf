@@ -52,7 +52,7 @@ class RegistrationControllerTest extends TestCase
     public function testGetRegister()
     {
         $this->json('GET', 'account/register', [], [])
-            ->see('<button class="btn btn-primary" type="submit"><i class="fa fa-rocket"></i> Register</button>');
+            ->see('<form class="form-horizontal" action="' . route('account.register') . '" method="POST">');
     }
 
     /**
