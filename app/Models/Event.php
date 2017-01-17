@@ -1,25 +1,11 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace GrahamCampbell\BootstrapCMS\Models;
+namespace App\Models;
 
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
-/**
- * This is the event model class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class Event extends AbstractModel implements HasPresenter
 {
     use BelongsToUserTrait, SoftDeletes;
@@ -93,7 +79,7 @@ class Event extends AbstractModel implements HasPresenter
      */
     public function getPresenterClass()
     {
-        return 'GrahamCampbell\BootstrapCMS\Presenters\EventPresenter';
+        return 'App\Presenters\EventPresenter';
     }
 
     /**

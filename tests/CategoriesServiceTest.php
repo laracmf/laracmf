@@ -1,9 +1,9 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
-use GrahamCampbell\BootstrapCMS\Models\Category;
-use GrahamCampbell\BootstrapCMS\Services\CategoriesService;
+use App\Models\Category;
+use App\Services\CategoriesService;
 
 class CategoriesServiceTest extends TestCase
 {

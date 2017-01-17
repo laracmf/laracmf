@@ -75,7 +75,7 @@
             "app/Providers"
         ],
         "psr-4": {
-            "GrahamCampbell\\BootstrapCMS\\": "app/"
+            "App\\": "app/"
         },
         "files": [
             "app/Support/helpers.php"
@@ -83,7 +83,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "GrahamCampbell\\Tests\\BootstrapCMS\\": "tests/"
+            "App\\Tests\\": "tests/"
         }
     },
     "scripts": {

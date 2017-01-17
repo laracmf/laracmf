@@ -1,38 +1,24 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace App\Subscribers;
 
-namespace GrahamCampbell\BootstrapCMS\Subscribers;
-
-use GrahamCampbell\BootstrapCMS\Repositories\PageRepository;
+use App\Repositories\PageRepository;
 use Illuminate\Console\Command;
 use Illuminate\Events\Dispatcher;
 
-/**
- * This is the command subscriber class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class CommandSubscriber
 {
     /**
      * The page repository instance.
      *
-     * @var \GrahamCampbell\BootstrapCMS\Repositories\PageRepository
+     * @var \App\Repositories\PageRepository
      */
     protected $pageRepository;
 
     /**
      * Create a new instance.
      *
-     * @param \GrahamCampbell\BootstrapCMS\Repositories\PageRepository $pageRepository
+     * @param \App\Repositories\PageRepository $pageRepository
      *
      * @return void
      */
@@ -52,7 +38,7 @@ class CommandSubscriber
     {
         $events->listen(
             'command.updatecache',
-            'GrahamCampbell\BootstrapCMS\Subscribers\CommandSubscriber@onUpdateCache',
+            'App\Subscribers\CommandSubscriber@onUpdateCache',
             3
         );
     }
@@ -74,7 +60,7 @@ class CommandSubscriber
     /**
      * Get the page repository instance.
      *
-     * @return \GrahamCampbell\BootstrapCMS\Repositories\PageRepository
+     * @return \App\Repositories\PageRepository
      */
     public function getPageRepository()
     {

@@ -1,41 +1,27 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace GrahamCampbell\BootstrapCMS\Http;
+namespace App\Http;
 
 use Fideloper\Proxy\TrustProxies;
-use GrahamCampbell\BootstrapCMS\Http\Middleware\AdminMiddleware;
-use GrahamCampbell\BootstrapCMS\Http\Middleware\BloggerMiddleware;
-use GrahamCampbell\BootstrapCMS\Http\Middleware\EditorMiddleware;
-use GrahamCampbell\BootstrapCMS\Http\Middleware\ModeratorMiddleware;
-use GrahamCampbell\BootstrapCMS\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\BloggerMiddleware;
+use App\Http\Middleware\EditorMiddleware;
+use App\Http\Middleware\ModeratorMiddleware;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use GrahamCampbell\BootstrapCMS\Http\Middleware\AccessMiddleware;
-use GrahamCampbell\BootstrapCMS\Http\Middleware\OwnerMiddleware;
+use App\Http\Middleware\AccessMiddleware;
+use App\Http\Middleware\OwnerMiddleware;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-/**
- * This is the http kernel class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class Kernel extends HttpKernel
 {
     /**

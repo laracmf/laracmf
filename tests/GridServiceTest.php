@@ -1,9 +1,9 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
-use GrahamCampbell\BootstrapCMS\Models\User;
-use GrahamCampbell\BootstrapCMS\Services\GridService;
+use App\Models\User;
+use App\Services\GridService;
 
 class GridServiceTest extends TestCase
 {

@@ -1,25 +1,11 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace GrahamCampbell\Tests\BootstrapCMS\Facades;
+namespace App\Tests\Facades;
 
 use GrahamCampbell\TestBenchCore\FacadeTrait;
 use GrahamCampbell\TestBenchCore\HelperTrait;
-use GrahamCampbell\Tests\BootstrapCMS\AbstractTestCase;
+use App\Tests\AbstractTestCase;
 
-/**
- * This is the post repository facade test class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class PostRepositoryTest extends AbstractTestCase
 {
     use FacadeTrait;
@@ -41,7 +27,7 @@ class PostRepositoryTest extends AbstractTestCase
      */
     protected function getFacadeClass()
     {
-        return 'GrahamCampbell\BootstrapCMS\Facades\PostRepository';
+        return 'App\Facades\PostRepository';
     }
 
     /**
@@ -51,6 +37,6 @@ class PostRepositoryTest extends AbstractTestCase
      */
     protected function getFacadeRoot()
     {
-        return 'GrahamCampbell\BootstrapCMS\Repositories\PostRepository';
+        return 'App\Repositories\PostRepository';
     }
 }

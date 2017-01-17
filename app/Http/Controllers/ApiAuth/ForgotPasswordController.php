@@ -1,8 +1,8 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers\ApiAuth;
+namespace App\Http\Controllers\ApiAuth;
 
-use GrahamCampbell\BootstrapCMS\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller

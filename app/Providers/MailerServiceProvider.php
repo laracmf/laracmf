@@ -1,14 +1,14 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Providers;
+namespace App\Providers;
 
 use Illuminate\Mail\MailServiceProvider as ServiceProvider;
-use GrahamCampbell\BootstrapCMS\Services\Mailer;
+use App\Services\Mailer;
 
 /**
  * Class MailServiceProvider
  *
- * @package GrahamCampbell\BootstrapCMS\Providers
+ * @package App\Providers
  */
 class MailServiceProvider extends ServiceProvider
 {

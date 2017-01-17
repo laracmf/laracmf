@@ -75,7 +75,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Bootstrap CMS'),
+    'name' => env('APP_NAME', 'Laravel CMF'),
 
     /*
     |--------------------------------------------------------------------------
@@ -202,9 +202,9 @@ return [
         GrahamCampbell\Contact\ContactServiceProvider::class,
         GrahamCampbell\Credentials\CredentialsServiceProvider::class,
         GrahamCampbell\LogViewer\LogViewerServiceProvider::class,
-        GrahamCampbell\BootstrapCMS\Providers\AppServiceProvider::class,
-        GrahamCampbell\BootstrapCMS\Providers\RouteServiceProvider::class,
-        GrahamCampbell\BootstrapCMS\Providers\MailServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        App\Providers\MailServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,

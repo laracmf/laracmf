@@ -1,4 +1,4 @@
-Bootstrap CMS
+Laravel CMF
 =============
 
 # Installation
@@ -28,7 +28,7 @@ If you want launch site using specific domain look [here](https://laravel.com/do
 
 # Setting Up Queuing
 
-Bootstrap CMS uses Laravel's queue system to offload jobs such as sending emails so your users don't have to wait for these activities to complete before their pages load. By default, we're using the "sync" queue driver.
+In CMF uses Laravel's queue system to offload jobs such as sending emails so your users don't have to wait for these activities to complete before their pages load. By default, we're using the "sync" queue driver.
 
 1. Check out Laravel's [documentation](http://laravel.com/docs/master/queues#configuration).
 2. Enter your queue server details into `config/queue.php`.
@@ -36,7 +36,7 @@ Bootstrap CMS uses Laravel's queue system to offload jobs such as sending emails
 
 # Setting Up Caching
 
-Bootstrap CMS provides caching functionality, and when enabled, requires a caching server.
+CMF provides caching functionality, and when enabled, requires a caching server.
 Note that caching will not work with Laravel's `file` or `database` cache drivers.
 
 1. Choose your poison - I'd recommend [Redis](http://redis.io).
@@ -46,7 +46,7 @@ Note that caching will not work with Laravel's `file` or `database` cache driver
 
 # Setting Up Themes
 
-Bootstrap CMS also ships with 18 themes, 16 from [Bootswatch](http://bootswatch.com).
+CMF also ships with 18 themes, 16 from [Bootswatch](http://bootswatch.com).
 
 1. You can set your theme in `config/theme.php`.
 2. You can also set your navbar style in `config/theme.php`.
@@ -55,7 +55,7 @@ Bootstrap CMS also ships with 18 themes, 16 from [Bootswatch](http://bootswatch.
 
 # Setting Up Google Analytics
 
-Bootstrap CMS natively supports [Google Analytics](http://www.google.com/analytics).
+CMF natively supports [Google Analytics](http://www.google.com/analytics).
 
 1. Setup a web property on [Google Analytics](http://www.google.com/analytics).
 2. Enter your tracking id into `config/analytics.php`.
@@ -64,10 +64,10 @@ Bootstrap CMS natively supports [Google Analytics](http://www.google.com/analyti
 
 # Setting Up CloudFlare Analytics
 
-Bootstrap CMS can read [CloudFlare](https://www.cloudflare.com/) analytic data through a package.
+CMF can read [CloudFlare](https://www.cloudflare.com/) analytic data through a package.
 
 1. Follow the install instructions for my [Laravel CloudFlare](https://github.com/BootstrapCMS/CloudFlare) package.
-2. Bootstrap CMS will auto-detect the package, only allow admin access, and add links to the navigation bar.
+2. CMF will auto-detect the package, only allow admin access, and add links to the navigation bar.
 
 # Sign in and up with socials
 
@@ -220,24 +220,3 @@ We use [Adminlte](https://almsaeedstudio.com/themes/AdminLTE/index2.html).
 # Testing
 
 Run in command line, from project root `./vendor/bin/phpunit`
-
-# License
-
-GNU AFFERO GENERAL PUBLIC LICENSE
-
-Bootstrap CMS Is A PHP CMS Powered By Laravel 5 And Sentry
-
-Copyright (C) 2013-2015 Graham Campbell
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.

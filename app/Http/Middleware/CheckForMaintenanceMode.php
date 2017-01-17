@@ -1,26 +1,12 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace GrahamCampbell\BootstrapCMS\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory as View;
 use Illuminate\Http\Response;
 
-/**
- * This is the check for maintenance mode middleware class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class CheckForMaintenanceMode
 {
     /**

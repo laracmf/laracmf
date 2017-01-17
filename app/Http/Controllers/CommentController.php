@@ -1,21 +1,12 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
+namespace App\Http\Controllers;
 
 use GrahamCampbell\Binput\Facades\Binput;
-use GrahamCampbell\BootstrapCMS\Facades\CommentRepository;
-use GrahamCampbell\BootstrapCMS\Facades\PostRepository;
-use GrahamCampbell\BootstrapCMS\Models\Comment;
-use GrahamCampbell\BootstrapCMS\Models\Post;
+use App\Facades\CommentRepository;
+use App\Facades\PostRepository;
+use App\Models\Comment;
+use App\Models\Post;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -26,11 +17,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * This is the comment controller class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class CommentController extends AbstractController
 {
     /**

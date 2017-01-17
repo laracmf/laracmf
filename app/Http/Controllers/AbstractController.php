@@ -1,27 +1,13 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace App\Http\Controllers;
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
-
-use GrahamCampbell\BootstrapCMS\Http\Middleware\Auth\Blog;
-use GrahamCampbell\BootstrapCMS\Http\Middleware\Auth\Edit;
+use App\Http\Middleware\Auth\Blog;
+use App\Http\Middleware\Auth\Edit;
 use GrahamCampbell\Credentials\Http\Controllers\AbstractController as Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
-/**
- * This is the abstract controller class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 abstract class AbstractController extends Controller
 {
     use DispatchesJobs, ValidatesRequests;

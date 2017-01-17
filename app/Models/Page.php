@@ -1,15 +1,6 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace GrahamCampbell\BootstrapCMS\Models;
+namespace App\Models;
 
 use Exception;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
@@ -17,11 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
-/**
- * This is the page model class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class Page extends AbstractModel implements HasPresenter
 {
     use BelongsToUserTrait, SoftDeletes;
@@ -97,7 +83,7 @@ class Page extends AbstractModel implements HasPresenter
      */
     public function getPresenterClass()
     {
-        return 'GrahamCampbell\BootstrapCMS\Presenters\PagePresenter';
+        return 'App\Presenters\PagePresenter';
     }
 
     /**
@@ -122,7 +108,7 @@ class Page extends AbstractModel implements HasPresenter
     public function categories()
     {
         return $this->belongsToMany(
-            'GrahamCampbell\BootstrapCMS\Models\Category',
+            'App\Models\Category',
             'categories_pages',
             'page_id',
             'category_id'

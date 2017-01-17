@@ -1,6 +1,6 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\JsonApi\Users;
+namespace App\JsonApi\Users;
 
 use CloudCreativity\LaravelJsonApi\Schema\EloquentSchema;
 

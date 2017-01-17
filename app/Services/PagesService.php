@@ -1,9 +1,9 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Services;
+namespace App\Services;
 
-use GrahamCampbell\BootstrapCMS\Models\Page;
-use GrahamCampbell\BootstrapCMS\Models\CategoriesPages;
+use App\Models\Page;
+use App\Models\CategoriesPages;
 use GrahamCampbell\Credentials\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Nayjest\Grids\EloquentDataProvider;
@@ -12,7 +12,7 @@ use Nayjest\Grids\ObjectDataRow;
 /**
  * Class PagesService
  *
- * @package GrahamCampbell\BootstrapCMS\Services
+ * @package App\Services
  */
 class PagesService
 {

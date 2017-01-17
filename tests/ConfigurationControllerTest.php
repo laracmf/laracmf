@@ -1,8 +1,8 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
-use GrahamCampbell\BootstrapCMS\Services\ConfigurationsService;
+use App\Services\ConfigurationsService;
 use Mockery;
 
 class ConfigurationControllerTest extends TestCase

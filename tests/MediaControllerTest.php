@@ -1,10 +1,10 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
 use Mockery;
-use GrahamCampbell\BootstrapCMS\Services\MediaService;
-use GrahamCampbell\BootstrapCMS\Models\Media;
+use App\Services\MediaService;
+use App\Models\Media;
 
 class MediaControllerTest extends TestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Requests;
+namespace App\Http\Requests;
 
-use GrahamCampbell\BootstrapCMS\Models\Category;
+use App\Models\Category;
 
 class PageRequest extends Request
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Models;
+namespace App\Models;
 
 interface ModelInterface
 {

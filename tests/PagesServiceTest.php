@@ -1,10 +1,10 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
-use GrahamCampbell\BootstrapCMS\Models\Page;
-use GrahamCampbell\BootstrapCMS\Services\GridService;
-use GrahamCampbell\BootstrapCMS\Services\PagesService;
+use App\Models\Page;
+use App\Services\GridService;
+use App\Services\PagesService;
 
 class PagesServiceTest extends TestCase
 {

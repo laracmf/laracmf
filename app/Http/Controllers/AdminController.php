@@ -1,13 +1,9 @@
 <?php
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
+
+namespace App\Http\Controllers;
 
 use GrahamCampbell\Credentials\Facades\Credentials;
 
-/**
- * This is the comment controller class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class AdminController extends AbstractController
 {
     public function index()

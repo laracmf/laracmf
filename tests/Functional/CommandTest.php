@@ -1,22 +1,10 @@
 <?php
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-namespace GrahamCampbell\Tests\BootstrapCMS\Functional;
 
-use GrahamCampbell\Tests\BootstrapCMS\AbstractTestCase;
+namespace App\Tests\Functional;
+
+use App\Tests\AbstractTestCase;
 use Illuminate\Contracts\Console\Kernel;
 
-/**
- * This is the command test class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class CommandTest extends AbstractTestCase
 {
     public function testInstall()

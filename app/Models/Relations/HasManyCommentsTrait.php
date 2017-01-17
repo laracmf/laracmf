@@ -1,21 +1,7 @@
 <?php
 
-/*
- * This file is part of Bootstrap CMS.
- *
- * (c) Graham Campbell <graham@alt-three.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace App\Models\Relations;
 
-namespace GrahamCampbell\BootstrapCMS\Models\Relations;
-
-/**
- * This is the has many comments trait.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 trait HasManyCommentsTrait
 {
     /**
@@ -25,7 +11,7 @@ trait HasManyCommentsTrait
      */
     public function comments()
     {
-        return $this->hasMany('GrahamCampbell\BootstrapCMS\Models\Comment');
+        return $this->hasMany('App\Models\Comment');
     }
 
     /**

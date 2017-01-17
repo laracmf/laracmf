@@ -1,15 +1,10 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Controllers;
+namespace App\Http\Controllers;
 
-use GrahamCampbell\BootstrapCMS\Services\ConfigurationsService;
-use GrahamCampbell\BootstrapCMS\Http\Requests\ConfigurationRequest;
+use App\Services\ConfigurationsService;
+use App\Http\Requests\ConfigurationRequest;
 
-/**
- * This is the comment controller class.
- *
- * @author Graham Campbell <graham@alt-three.com>
- */
 class ConfigurationController extends AbstractController
 {
     /**

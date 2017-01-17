@@ -1,6 +1,6 @@
 <?php
 
-namespace GrahamCampbell\BootstrapCMS\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Closure;
 use GrahamCampbell\Credentials\Credentials;

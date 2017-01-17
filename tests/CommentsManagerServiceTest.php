@@ -1,9 +1,9 @@
 <?php
 
-namespace GrahamCampbell\Tests\BootstrapCMS;
+namespace App\Tests;
 
-use GrahamCampbell\BootstrapCMS\Models\Comment;
-use GrahamCampbell\BootstrapCMS\Services\CommentsManagerService;
+use App\Models\Comment;
+use App\Services\CommentsManagerService;
 
 class CommentsManagerServiceTest extends TestCase
 {
