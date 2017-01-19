@@ -13,7 +13,7 @@ Laravel CMF
 5. Provide database, socials credentials and another staff in .env configuration file.
 6. Enter `./vendor/bin/homestead make` in command line.
 7. Let vagrant environment up in command line `vagrant up` and than `vagrant ssh`.
-8. From project root (as usual you can get it by typing cd {project folder name}) under vagrant run `php artisan app:install` followed by `gulp --production` to setup the application. 
+8. From project root (as usual you can get it by typing cd {project folder name}) under vagrant run `php artisan app:install` followed by `gulp` to setup the application. 
 9. You will need to enter your mail server details into `config/mail.php`.
   * You can disable verification emails in `config/credentials.php`
   * Mail is still required for other functions like password resets and the contact form
