@@ -6,8 +6,8 @@ Laravel CMF
 [PHP](https://php.net) 5.5+ or [HHVM](http://hhvm.com) 3.6+, a database server, and [Composer](https://getcomposer.org) are required.
 
 1. There is one ways of grabbing the code:
-  * Use Git: `git clone git@bitbucket.org:nixsolutions/phpsu-1496.git`
-2. From a command line open in the folder, run `composer install --no-dev -o` and then `npm install`.
+  * Use Git: `git clone git@nix.githost.io:php-skillup/laravel-cmf.git`
+2. From a command line open in the folder, run `composer install` and then `npm install`.
 3. Create .env file (copy entry from config/env/.env.vagrant).
 4. Generate jwt secret `php artisan jwt:generate`.
 5. Provide database, socials credentials and another staff in .env configuration file.
