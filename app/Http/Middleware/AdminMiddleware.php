@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\ThemeUser;
 use Closure;
 use GrahamCampbell\Credentials\Credentials;
 use Illuminate\Http\Request;
@@ -37,6 +38,12 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if (!session('theme') && $user = Credentials::getUser()) {
+            $theme = ThemeUser::where('user_id', $user->id)->first();
+
+            session(['theme' => $theme ? $theme->name : 'skin-blue']);
+        }
+
         if ($this->credentials->inRole('admin')) {
             return $next($request);
         }

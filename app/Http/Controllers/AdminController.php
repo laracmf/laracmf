@@ -20,7 +20,7 @@ class AdminController extends AbstractController
      */
     public function changeTheme(Request $request)
     {
-        $theme = ThemeUser::firstOrCreate(['user_id' => (Credentials::getUser())->id]);
+        $theme = ThemeUser::firstOrCreate(['user_id' => Credentials::getUser()->id]);
 
         $theme->name = $request->get('theme');
         $theme->save();

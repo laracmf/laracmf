@@ -160,8 +160,6 @@ Route::group(['middleware' => ['access']], function () {
     });
 
     Route::group(['middleware' => ['admin']], function () {
-        checkTheme();
-
         Route::post('theme', [
             'as' => 'admin.panel.theme',
             'uses' => 'AdminController@changeTheme'

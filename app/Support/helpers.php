@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\ThemeUser;
 use GrahamCampbell\Credentials\Facades\Credentials;
 
 function isImage($path)
@@ -41,13 +40,4 @@ function commentOwner($userId)
     $user = Credentials::getUser();
 
     return $user && ($user->id === $userId);
-}
-
-function checkTheme()
-{
-    if (!session('theme') && $user = Credentials::getUser()) {
-        $theme = ThemeUser::where('user_id', $user->id)->first();
-
-        session(['theme' => $theme ? $theme->name : 'skin-blue']);
-    }
 }

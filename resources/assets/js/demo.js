@@ -247,18 +247,18 @@
         var baseURL = window.location.origin;
 
         if (my_skins.includes(cls)) {
-            $.each(my_skins, function (i) {
-                $("body").removeClass(my_skins[i]);
-            });
-
-            $('body').addClass(cls);
-
             $.ajax({
                 method: 'POST',
                 url: baseURL + '/theme',
                 data: {
                     theme: cls,
                 }
+            }).done(function () {
+                $.each(my_skins, function (i) {
+                    $("body").removeClass(my_skins[i]);
+                });
+
+                $('body').addClass(cls);
             });
         }
     }
