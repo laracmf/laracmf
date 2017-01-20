@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\ThemeUser;
+use GrahamCampbell\Credentials\Facades\Credentials;
+
 function isImage($path)
 {
     return in_array(exif_imagetype($path), config('uploads.images_types'));
@@ -26,8 +29,8 @@ function formatBytes($bytes)
 
 function isRole($role)
 {
-    if (\GrahamCampbell\Credentials\Facades\Credentials::getUser()) {
-        return \GrahamCampbell\Credentials\Facades\Credentials::inRole($role);
+    if (Credentials::getUser()) {
+        return Credentials::inRole($role);
     }
 
     return false;
@@ -35,7 +38,16 @@ function isRole($role)
 
 function commentOwner($userId)
 {
-    $user = \GrahamCampbell\Credentials\Facades\Credentials::getUser();
+    $user = Credentials::getUser();
 
     return $user && ($user->id === $userId);
+}
+
+function checkTheme()
+{
+    if (!session('theme') && $user = Credentials::getUser()) {
+        $theme = ThemeUser::where('user_id', $user->id)->first();
+
+        session(['theme' => $theme ? $theme->name : 'skin-blue']);
+    }
 }
