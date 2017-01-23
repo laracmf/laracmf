@@ -232,19 +232,3 @@ $(document).ready(function () {
         }
     });
 });
-
-$(document).ready(function () {
-    var url = window.location;
-    var logviewer = url.origin + '/' + 'logviewer';
-    var urlLink = url.href;
-
-    if ((url.href).includes(logviewer)) {
-        urlLink = logviewer;
-    }
-
-    $('.treeview a[href="' + urlLink + '"]').parent().addClass('active');
-
-    $('.treeview a').filter(function () {
-        return this.href == url.href;
-    }).parent().parent().parent().addClass('active');
-});

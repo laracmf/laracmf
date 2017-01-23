@@ -7,6 +7,7 @@ scriptsPath = 'public/assets/scripts/';
 imagesPath = 'public/assets/images/';
 skinsPath = 'public/assets/scripts/skins/';
 fontsPath = 'public/assets/fonts/';
+lessPath = 'public/assets/styles/less';
 
 elixir.config.css.outputFolder = stylesPath;
 elixir.config.js.outputFolder = scriptsPath;
@@ -21,6 +22,10 @@ elixir(function (mix) {
         .copy('resources/assets/js/*.min.js', scriptsPath)
         .copy('resources/assets/skins/*', skinsPath)
         .copy('resources/assets/fonts/*.*', fontsPath)
+        .copy('resources/assets/build/bootstrap-less/*.*', lessPath)
+        .copy('resources/assets/build/bootstrap-less/mixins/*.*', lessPath)
+        .copy('resources/assets/build/less/*.*', lessPath)
+        .copy('resources/assets/build/less/skins/*.*', lessPath)
 
         .styles(['bootstrap.min.css'], stylesPath + 'bootstrap.default.min.css')
         .styles(['bootstrap.min.css', 'bootstrap-theme.min.css'], stylesPath + 'bootstrap.legacy.min.css')
@@ -76,8 +81,7 @@ elixir(function (mix) {
             'bootstrap3-wysihtml5.all.min.js',
             'jquery.slimscroll.min.js',
             'fastclick.min.js',
-            'app.min.js',
-            'demo.js'
+            'app.min.js'
         ], scriptsPath + 'admin.js')
 
         .styles([

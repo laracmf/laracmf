@@ -8,11 +8,6 @@ a {
     height: auto;
 }
 
-.user-full-name {
-    font-size: 20px;
-    color: black;
-}
-
 .panel-heading > h5 {
     color: white!important;
 }
@@ -49,41 +44,22 @@ textarea {
     text-align: left;
 }
 
-.sidebar {
-    background-color: azure;
-}
-
-.sidebar-menu a span:hover,
-.left-side-menu li a:hover,
-.sidebar a {
-    color: black!important;
-}
-
-.admin {
-    background-color: azure;
-}
-
-.sidebar-menu > .treeview.active > a {
-    background-color: gainsboro;
-}
-
-.treeview-menu {
-    background: rgba(0,0,0,.1)!important;
-    padding-left: 0!important;
-}
-
-.treeview-menu > .treeview.active > a {
-    color: darkblue!important;
-}
-
-.sidebar-menu .treeview-menu>li>a {
-    padding-left: 25px;
-}
-
 .ui-tooltip.ui-corner-all.ui-widget-shadow.ui-widget.ui-widget-content {
     display: none!important;
 }
 
 .align-right {
     text-align: right;
+}
+
+.navbar {
+    padding: 0!important;
+}
+
+.sidebar-menu .treeview-menu {
+    padding-left: 0!important;
+}
+
+.content-wrapper {
+    margin-top: 15px;
 }

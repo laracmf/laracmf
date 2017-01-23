@@ -2,25 +2,25 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\ThemeUser;
 use Closure;
 use GrahamCampbell\Credentials\Credentials;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\URL;
 
 class AdminMiddleware
 {
     /**
      * The credentials instance.
      *
-     * @var \GrahamCampbell\Credentials\Credentials
+     * @var Credentials
      */
     protected $credentials;
 
     /**
      * Create a new instance.
      *
-     * @param \GrahamCampbell\Credentials\Credentials $credentials
+     * @param Credentials $credentials
      */
     public function __construct(Credentials $credentials)
     {
@@ -30,13 +30,19 @@ class AdminMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param Request $request
+     * @param Closure                 $next
      *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
+        if (!session('theme') && $user = $this->credentials->getUser()) {
+            $theme = ThemeUser::where('user_id', $user->id)->first();
+
+            session(['theme' => $theme ? $theme->name : 'skin-blue']);
+        }
+
         if ($this->credentials->inRole('admin')) {
             return $next($request);
         }

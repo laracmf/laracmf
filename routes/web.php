@@ -160,6 +160,11 @@ Route::group(['middleware' => ['access']], function () {
     });
 
     Route::group(['middleware' => ['admin']], function () {
+        Route::post('theme', [
+            'as' => 'admin.panel.theme',
+            'uses' => 'AdminController@changeTheme'
+        ]);
+
         Route::get('users', ['as' => 'users.index', 'uses' => 'UserController@index']);
         Route::group(['prefix' => 'pages'], function () {
             Route::get('/', ['as' => 'pages.index', 'uses' => 'PageController@index']);
