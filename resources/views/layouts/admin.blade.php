@@ -149,12 +149,6 @@
                 </a>
             </li>
             <li class="treeview">
-                <a href="{{ route('show.environment') }}">
-                    <i class="fa fa-pencil fa-fw"></i>
-                    <span>View Environment</span>
-                </a>
-            </li>
-            <li class="treeview">
                 <a href="{{ route('comments.show') }}">
                     <i class="fa fa-comment fa-fw"></i>
                     <span>Comments moderation</span>

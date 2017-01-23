@@ -278,3 +278,17 @@ h1.error-text {
 .date.input-group {
 	padding-bottom: 15px;
 }
+
+.img-minimized > img:hover {
+	opacity: 0.5;
+}
+
+.img-minimized > img {
+	position: relative;
+}
+
+.img-info-block {
+	position: absolute;
+	bottom: 32px;
+	left: 0;
+}

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Media;
 use Illuminate\Http\Request;
 use App\Services\MediaService;
+use Illuminate\View\View;
+use Illuminate\Contracts\View\Factory as FactoryView;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Symfony\Component\HttpFoundation\Response;
 
 class MediaController extends AbstractController
 {
@@ -44,11 +48,15 @@ class MediaController extends AbstractController
     /**
      * Show all media files.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return FactoryView|View
      */
     public function showAllMedia()
     {
-        return view('media.show', ['files' => Media::paginate(self::PAGINATE)]);
+        $media = Media::all();
+
+        $grid = $this->mediaService->generateGrid();
+
+        return view('media.show', compact('media', 'links', 'grid'));
     }
 
     /**
@@ -56,7 +64,7 @@ class MediaController extends AbstractController
      *
      * @param $id
      *
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|int|\Symfony\Component\HttpFoundation\Response
+     * @return ResponseFactory|int|Response
      */
     public function deleteMedia($id)
     {

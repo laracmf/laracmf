@@ -8,6 +8,11 @@ use App\Services\CategoriesService;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Contracts\View\Factory as FactoryView;
+use Illuminate\View\View;
+use Illuminate\Http\Response;
+use App\Services\GridService;
+use Nayjest\Grids\ObjectDataRow;
 
 class CategoryController extends AbstractController
 {
@@ -31,7 +36,7 @@ class CategoryController extends AbstractController
     /**
      * Render create category form.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return FactoryView|View
      */
     public function showCreateForm()
     {
@@ -41,11 +46,15 @@ class CategoryController extends AbstractController
     /**
      * Show categories list.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return FactoryView|View
      */
     public function showCategories()
     {
-        return view('categories.show', ['categories' => Category::all()]);
+        $categories = Category::all();
+
+        $grid = $this->categoriesService->generateGrid();
+
+        return view('categories.show', compact('categories', 'links', 'grid'));
     }
 
     /**
@@ -106,7 +115,7 @@ class CategoryController extends AbstractController
      * Show edit category.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return
      */
     public function editCategoryForm($id)
     {
@@ -158,7 +167,7 @@ class CategoryController extends AbstractController
     /**
      * Search pages.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     protected function searchCategories()
     {

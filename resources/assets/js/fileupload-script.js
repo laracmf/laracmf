@@ -6,10 +6,13 @@ $(document).ready(function () {
         dataType: 'json',
         done: function (e, data) {
             $.each(data.result, function (index, file) {
-                var $partial = '<b>' + file.name + '</b>';
+                var $partial = '';
 
                 if (file.isImage) {
-                    $partial = '<img src="' + file.path + '">';
+                    $partial = '<img src="' + file.path + '">' + '<p class="centered"><b>' + file.name + '</b></p>';
+                } else {
+                    $partial = '<img src="assets/images/file-icon.png">' +
+                        '<p class="centered"><b>' + file.name + '</b></p>';
                 }
 
                 $('.well').append('<div class="img-block img-minimized"' +

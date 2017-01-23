@@ -18,7 +18,6 @@ use App\Subscribers\CommandSubscriber;
 use App\Subscribers\NavigationSubscriber;
 use Illuminate\Support\ServiceProvider;
 use App\Services\CategoriesService;
-use App\Services\ConfigurationsService;
 use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,13 +33,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->setupListeners();
 
-        Validator::extend('name_unique', function ($attribute, $value, $parameters) {
-            $configService = new ConfigurationsService();
-            $environments = $configService->getEnvironmentsList();
-
-            return !in_array($parameters[0], $environments);
-        });
-
         Validator::extend('ids_array', function ($attribute, $value, $parameters) {
             $requestArray = unserialize($parameters[0]);
             $model = unserialize($parameters[1]);
@@ -53,10 +45,6 @@ class AppServiceProvider extends ServiceProvider
             }
 
             return count($requestArray) === count(array_intersect($requestArray, $modelData));
-        });
-
-        Validator::replacer('name_unique', function ($message) {
-            return str_replace($message, 'Config with such name already exists!', $message);
         });
 
         Validator::replacer('ids_array', function ($message) {
@@ -118,7 +106,6 @@ class AppServiceProvider extends ServiceProvider
         $this->registerCommentController();
         $this->registerCategoriesService();
         $this->registerPagesService();
-        $this->registerConfigurationsService();
         $this->registerMediaService();
         $this->registerCommentsManagerService();
         $this->registerGridService();
@@ -139,7 +126,7 @@ class AppServiceProvider extends ServiceProvider
             return new SocialAccountService();
         });
 
-        $this->app->alias('socialuser', 'App\Services\SocialAccountService');
+        $this->app->alias('socialuser', SocialAccountService::class);
     }
 
     /**
@@ -183,7 +170,7 @@ class AppServiceProvider extends ServiceProvider
             return new Factory($credentials, $navigation, $name, $property, $inverse);
         });
 
-        $this->app->alias('navfactory', 'App\Navigation\Factory');
+        $this->app->alias('navfactory', Factory::class);
     }
 
     /**
@@ -202,7 +189,7 @@ class AppServiceProvider extends ServiceProvider
             return new CommentRepository($comment, $validator);
         });
 
-        $this->app->alias('commentrepository', 'App\Repositories\CommentRepository');
+        $this->app->alias('commentrepository', CommentRepository::class);
     }
 
     /**
@@ -212,8 +199,8 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerCategoriesService()
     {
-        $this->app->bind('App\Services\CategoriesService', function () {
-            return new CategoriesService();
+        $this->app->bind(CategoriesService::class, function ($app) {
+            return new CategoriesService($app->make(GridService::class));
         });
     }
 
@@ -224,20 +211,8 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerPagesService()
     {
-        $this->app->bind('App\Services\PagesService', function ($app) {
-            return new PagesService($app->make('App\Services\GridService'));
-        });
-    }
-
-    /**
-     * Register configurations service.
-     *
-     * @return void
-     */
-    protected function registerConfigurationsService()
-    {
-        $this->app->bind('App\Services\ConfigurationsService', function () {
-            return new ConfigurationsService();
+        $this->app->bind(PagesService::class, function ($app) {
+            return new PagesService($app->make(GridService::class));
         });
     }
 
@@ -248,8 +223,8 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerMediaService()
     {
-        $this->app->bind('App\Services\MediaService', function () {
-            return new MediaService();
+        $this->app->bind(MediaService::class, function ($app) {
+            return new MediaService($app->make(GridService::class));
         });
     }
 
@@ -269,7 +244,7 @@ class AppServiceProvider extends ServiceProvider
             return new EventRepository($event, $validator);
         });
 
-        $this->app->alias('eventrepository', 'App\Repositories\EventRepository');
+        $this->app->alias('eventrepository', EventRepository::class);
     }
 
     /**
@@ -288,7 +263,7 @@ class AppServiceProvider extends ServiceProvider
             return new PageRepository($page, $validator);
         });
 
-        $this->app->alias('pagerepository', 'App\Repositories\PageRepository');
+        $this->app->alias('pagerepository', PageRepository::class);
     }
 
     /**
@@ -307,7 +282,7 @@ class AppServiceProvider extends ServiceProvider
             return new PostRepository($post, $validator);
         });
 
-        $this->app->alias('postrepository', 'App\Repositories\PostRepository');
+        $this->app->alias('postrepository', PostRepository::class);
     }
 
     /**
@@ -317,7 +292,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerCommandSubscriber()
     {
-        $this->app->singleton('App\Subscribers\CommandSubscriber', function ($app) {
+        $this->app->singleton(CommandSubscriber::class, function ($app) {
             $pagerepository = $app['pagerepository'];
 
             return new CommandSubscriber($pagerepository);
@@ -331,7 +306,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerNavigationSubscriber()
     {
-        $this->app->singleton('App\Subscribers\NavigationSubscriber', function ($app) {
+        $this->app->singleton(NavigationSubscriber::class, function ($app) {
             $navigation = $app['navigation'];
             $credentials = $app['credentials'];
             $pagerepository = $app['pagerepository'];
@@ -357,7 +332,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerCommentController()
     {
-        $this->app->bind('App\Http\Controllers\CommentController', function ($app) {
+        $this->app->bind(CommentController::class, function ($app) {
             $throttler = $app['throttle']->get($app['request'], 1, 10);
 
             return new CommentController($throttler);

@@ -81,8 +81,10 @@ Route::post('register/{id}/complete/{code}', [
     'uses' => 'Auth\AuthController@completeRegistration'
 ]);
 
-Route::get('account/register', ['as' => 'account.register', 'uses' => 'ViewsController@getRegister']);
-Route::get('account/login', ['as' => 'account.login', 'uses' => 'ViewsController@getLogin']);
+Route::group(['prefix' => 'account', 'middleware' => ['access.lr']], function () {
+    Route::get('/login', ['as' => 'account.login', 'uses' => 'ViewsController@getLogin']);
+    Route::get('/register', ['as' => 'account.register', 'uses' => 'ViewsController@getRegister']);
+});
 
 Route::group(['middleware' => ['access']], function () {
     Route::get('search/categories', [
@@ -187,11 +189,6 @@ Route::group(['middleware' => ['access']], function () {
 
         Route::get('search/pages', ['as' => 'pages.search', 'uses' => 'PageController@searchPages']);
         Route::get('categories', ['as' => 'show.categories', 'uses' => 'CategoryController@showCategories']);
-
-        Route::group(['prefix' => 'environment'], function () {
-            Route::get('/', ['as' => 'show.environment', 'uses' => 'ConfigurationController@showEnvironment']);
-            Route::put('/', ['as' => 'edit.environment', 'uses' => 'ConfigurationController@editEnvironment']);
-        });
 
         Route::group(['prefix' => 'media'], function () {
             Route::post('/', ['as' => 'upload.media', 'uses' => 'MediaController@uploadMedia']);

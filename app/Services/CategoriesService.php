@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Models\Category;
 use App\Models\CategoriesPages;
+use App\Services\GridService;
 use Illuminate\Database\Eloquent\Collection;
+use Nayjest\Grids\ObjectDataRow;
 
 /**
  * Class PagesService
@@ -12,6 +14,21 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class CategoriesService
 {
+    /**
+     * @var GridService
+     */
+    public $gridService;
+
+    /**
+     * PagesService constructor.
+     *
+     * @param GridService $gridService
+     */
+    public function __construct(GridService $gridService)
+    {
+        $this->gridService = $gridService;
+    }
+
     /**
      * Create category pages relationship.
      *
@@ -51,5 +68,33 @@ class CategoriesService
                     'pages.title'
                 ]
             );
+    }
+
+    /**
+     * Generate grid for categories model.
+     *
+     * @return object
+     */
+    public function generateGrid()
+    {
+        $callback = function ($val, ObjectDataRow $row) {
+            if ($val) {
+                return view('partials.categoriesOptions', ['category' =>  $row->getSrc()]);
+            }
+        };
+
+        return $this->gridService->generateGrid(
+            new Category(),
+            [
+                'name' => [
+                    'filter' => 'like'
+                ],
+                'id' => [
+                    'label' => 'Options',
+                    'callback' => $callback,
+                    'sortable' => false
+                ]
+            ]
+        );
     }
 }

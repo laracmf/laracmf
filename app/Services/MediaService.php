@@ -4,11 +4,27 @@ namespace App\Services;
 
 use App\Models\Media;
 use GrahamCampbell\Credentials\Facades\Credentials;
+use Nayjest\Grids\ObjectDataRow;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class MediaService
 {
+    /**
+     * @var GridService
+     */
+    public $gridService;
+
+    /**
+     * PagesService constructor.
+     *
+     * @param GridService $gridService
+     */
+    public function __construct(GridService $gridService)
+    {
+        $this->gridService = $gridService;
+    }
+
     /**
      * Upload media on server.
      *
@@ -129,5 +145,52 @@ class MediaService
         }
 
         return false;
+    }
+
+    public function generateGrid()
+    {
+        $callback = function ($val, ObjectDataRow $row) {
+            if ($val) {
+                return view('partials.mediaOptions', ['file' =>  $row->getSrc()]);
+            }
+        };
+
+        $sizeCallback = function ($val, ObjectDataRow $row) {
+            if ($val) {
+                return formatBytes($row->getSrc()->size);
+            }
+        };
+
+        $imageCallback = function ($val, ObjectDataRow $row) {
+            if ($val) {
+                return view('partials.renderImage', ['file' =>  $row->getSrc()]);
+            }
+        };
+
+        return $this->gridService->generateGrid(
+            new Media(),
+            [
+                'path' => [
+                    'label' => 'Image',
+                    'callback' => $imageCallback,
+                    'sortable' => false
+                ],
+                'name' => [
+                    'filter' => 'like'
+                ],
+                'type' => [
+                    'filter' => 'like'
+                ],
+                'size' => [
+                    'filter' => 'eq',
+                    'callback' => $sizeCallback
+                ],
+                'id' => [
+                    'label' => 'Options',
+                    'callback' => $callback,
+                    'sortable' => false
+                ]
+            ]
+        );
     }
 }

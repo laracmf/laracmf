@@ -77,7 +77,7 @@ class PagesService
      *
      * @return object
      */
-    public function getPagesGrid()
+    public function generateGrid()
     {
         $callback = function ($val, ObjectDataRow $row) {
             if ($val) {

@@ -78,11 +78,10 @@ Just follow steps from the [doc](https://github.com/laravel/socialite#configurat
 # Features in admin panel
 
  1. Users crud.
- 2. Edit configuration from admin page.
- 3. Categories crud.
- 4. Comments management.
- 5. Media crud.
- 6. Pages crud.
+ 2. Categories crud.
+ 3. Comments management.
+ 4. Media crud.
+ 5. Pages crud.
  
 # Comments management
 

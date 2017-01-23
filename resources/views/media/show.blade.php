@@ -12,20 +12,11 @@
 
 @section('content')
     <div class="{{ isAdmin() ? 'col-lg-10' : 'col-lg-12' }}">
-        <div class="well">
-            @foreach($files as $file)
-                <div class="img-block img-minimized" data-url="{{ route('delete.media', [$file->id]) }}"
-                     data-path="{{ $file->path }}" data-is_image="{{ isImage($file->path) }}"
-                     data-size="{{ formatBytes($file->size) }}" data-type="{{ $file->type }}" data-name="{{ $file->name }}">
-                    @if (isImage($file->path))
-                        <img src="{{ $file->path }}"/>
-                    @else
-                        <b>{{ $file->name }}</b>
-                    @endif
-                </div>
-            @endforeach
+        <div class="box">
+            <table class="table table-bordered table-hover">
+                {!! $grid !!}
+            </table>
         </div>
-        {{ $files->links() }}
     </div>
     @if(isRole('admin'))
         <div class="col-lg-2 pull-right">

@@ -31,7 +31,7 @@ class AdminMiddleware
      * Handle an incoming request.
      *
      * @param Request $request
-     * @param Closure                 $next
+     * @param Closure $next
      *
      * @return mixed
      */

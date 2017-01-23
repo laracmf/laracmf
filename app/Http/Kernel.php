@@ -21,6 +21,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Http\Middleware\LoginRegisterAccessMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -75,5 +76,6 @@ class Kernel extends HttpKernel
         'can'           => Authorize::class,
         'guest'         => RedirectIfAuthenticated::class,
         'throttle'      => ThrottleRequests::class,
+        'access.lr'     => LoginRegisterAccessMiddleware::class
     ];
 }

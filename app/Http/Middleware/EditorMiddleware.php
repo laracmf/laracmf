@@ -5,21 +5,21 @@ namespace App\Http\Middleware;
 use Closure;
 use GrahamCampbell\Credentials\Credentials;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Http\Request;
 
 class EditorMiddleware
 {
     /**
      * The credentials instance.
      *
-     * @var \GrahamCampbell\Credentials\Credentials
+     * @var Credentials
      */
     protected $credentials;
 
     /**
      * Create a new instance.
      *
-     * @param \GrahamCampbell\Credentials\Credentials $credentials
+     * @param Credentials $credentials
      */
     public function __construct(Credentials $credentials)
     {
@@ -29,8 +29,8 @@ class EditorMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param Request $request
+     * @param Closure $next
      *
      * @return mixed
      */

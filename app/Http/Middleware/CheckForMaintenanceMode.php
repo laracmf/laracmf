@@ -6,28 +6,29 @@ use Closure;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory as View;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 class CheckForMaintenanceMode
 {
     /**
      * The application instance.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var Application
      */
     protected $app;
 
     /**
      * The view factory instance.
      *
-     * @var \Illuminate\Contracts\View\Factory
+     * @var View
      */
     protected $view;
 
     /**
      * Create a new check for maintenance mode instance.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     * @param \Illuminate\Contracts\View\Factory           $view
+     * @param Application $app
+     * @param View $view
      *
      * @return void
      */
@@ -40,8 +41,8 @@ class CheckForMaintenanceMode
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param Request $request
+     * @param Closure $next
      *
      * @return mixed
      */

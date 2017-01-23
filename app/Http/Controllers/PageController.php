@@ -10,8 +10,9 @@ use App\Models\Page;
 use App\Services\GridService;
 use App\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -31,6 +32,7 @@ class PageController extends AbstractController
      * Create a new instance.
      *
      * @param PagesService $pagesService
+     * @param GridService $gridService
      */
     public function __construct(PagesService $pagesService, GridService $gridService)
     {
@@ -49,7 +51,7 @@ class PageController extends AbstractController
     {
         $pages = Page::all();
 
-        $grid = $this->pagesService->getPagesGrid();
+        $grid = $this->pagesService->generateGrid();
 
         return view('pages.index', compact('pages', 'links', 'grid'));
     }
@@ -69,7 +71,7 @@ class PageController extends AbstractController
      *
      * @param PageRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return Response|RedirectResponse
      */
     public function store(PageRequest $request)
     {

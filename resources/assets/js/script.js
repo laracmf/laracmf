@@ -54,12 +54,12 @@ $(document).ready(function () {
         $(this).closest('tr').remove();
     });
 
-    $(document).on('click', '.img-minimized', function (event) {
+    $(document).on('click', '.img-minimized, .show-image', function (event) {
         var path = event.target.getAttribute('src') || $(this).data('path');
         var size = $(this).data('size');
         var name = $(this).data('name');
         var type = $(this).data('type');
-        var delteUrl = $(this).data('url');
+        var deleteUrl = $(this).data('url');
         var $partial = '<a href="' + path + '">Download ' + name + '</a>';
         var modalSize = 0;
 
@@ -99,7 +99,7 @@ $(document).ready(function () {
             '</ul>' +
             '</div>' +
             '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
-            '<button type="button" data-url="' + delteUrl + '" class="btn btn-danger delete">Delete</button>' +
+            '<button type="button" data-url="' + deleteUrl + '" class="btn btn-danger delete">Delete</button>' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -230,5 +230,17 @@ $(document).ready(function () {
             $(this).removeClass('fa-eye-slash');
             $(this).addClass('fa-eye');
         }
+    });
+
+    $(document).on('mouseenter', '.img-minimized', function () {
+        const type = $(this).data('type');
+        const size = $(this).data('size');
+        const infoBlock = '<ul><li><b>' + 'Size: ' + size + '</b></li><li><b>' + 'Type: ' + type + '</b></li></ul>';
+
+        $(this).append("<div class='img-info-block'>" + infoBlock + "</div>");
+    });
+
+    $(document).on('mouseleave', '.img-minimized', function () {
+        $('.img-info-block').remove()
     });
 });

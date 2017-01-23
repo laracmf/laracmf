@@ -5,9 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use GrahamCampbell\Credentials\Credentials;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class ModeratorMiddleware
+class LoginRegisterAccessMiddleware
 {
     /**
      * The credentials instance.
@@ -36,11 +35,10 @@ class ModeratorMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($this->credentials->inRole('moderator') || $this->credentials->inRole('admin')) {
-            return $next($request);
+        if ($this->credentials->check()) {
+            return back();
         }
 
-        return Redirect::guest(route('base'))
-            ->with('error', 'You must have moderator permissions.');
+        return $next($request);
     }
 }
