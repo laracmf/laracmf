@@ -3,7 +3,7 @@ Laravel CMF
 
 # Installation
 
-[PHP](https://php.net) 5.5+ or [HHVM](http://hhvm.com) 3.6+, a database server, and [Composer](https://getcomposer.org) are required.
+[PHP](https://php.net) 5.5+, a database server, and [Composer](https://getcomposer.org) are required.
 
 1. There is one ways of grabbing the code:
   * Use Git: `git clone git@nix.githost.io:php-skillup/laravel-cmf.git`
