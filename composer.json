@@ -12,19 +12,19 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/Kit-kat1/Credentials"
+            "url": "https://github.com/laracmf/Credentials"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/Kit-kat1/Navigation"
+            "url": "https://github.com/laracmf/Navigation"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/Kit-kat1/LogViewer"
+            "url": "https://github.com/laracmf/LogViewer"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/Kit-kat1/Contact"
+            "url": "https://github.com/laracmf/Contact"
         }
     ],
     "require-all": true,

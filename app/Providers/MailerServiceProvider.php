@@ -10,7 +10,7 @@ use App\Services\Mailer;
  *
  * @package App\Providers
  */
-class MailServiceProvider extends ServiceProvider
+class MailerServiceProvider extends ServiceProvider
 {
     /**
      * This is just a copy of method from parent class with a tiny modification of mailer instance.
