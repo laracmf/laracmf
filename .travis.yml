@@ -8,11 +8,6 @@ sudo: false
 
 env:
   global:
-    - DB_DATABASE=homestead
-    - APP_ENV=testing
-    - APP_DEBUG=true
-    - APP_KEY=key
-
     - DB_HOST=mysql
     - DB_DATABASE=homestead_testing
     - DB_USERNAME=root
