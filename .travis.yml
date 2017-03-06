@@ -6,12 +6,19 @@ php:
 
 sudo: false
 
+env:
+  global:
+    - DB_DATABASE=homestead
+    - DB_USERNAME=homestead
+    - DB_PASSWORD=secret
+
 install:
   - travis_retry composer install --no-interaction --prefer-source  
   - npm install -g npm@2
-  - travis_retry npm install
+  - travis_retry npm install  
 
 before_script:
+  - mysql -e 'create database homestead_test;'
   - travis_retry php artisan vendor:publish
   - travis_retry gulp --production
 
