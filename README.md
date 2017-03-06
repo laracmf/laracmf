@@ -1,20 +1,13 @@
 Laravel CMF
 =============
 
-[![PHP >= 5.5+](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg?style=flat-square)](https://php.net/)
+[![PHP >= 7+](https://img.shields.io/badge/php-%3E%3D%207-8892BF.svg?style=flat-square)](https://php.net/)
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nixsolutions/yandex-php-library?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![Build Status](https://secure.travis-ci.org/nixsolutions/yandex-php-library.png?branch=master)](https://travis-ci.org/nixsolutions/yandex-php-library)
-[![Latest Stable Version](https://poser.pugx.org/nixsolutions/yandex-php-library/v/stable.png)](https://packagist.org/packages/nixsolutions/yandex-php-library)
-[![Total Downloads](https://poser.pugx.org/nixsolutions/yandex-php-library/downloads.png)](https://packagist.org/packages/nixsolutions/yandex-php-library)
+[![Build Status](https://api.travis-ci.org/laracmf/laracmf.png?branch=master)](https://api.travis-ci.org/laracmf/laracmf.png)
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/laracmf/laracmf/badges/quality-score.png)](https://scrutinizer-ci.com/g/laracmf/laracmf/?branch=master)
-[![Coverage Status](https://coveralls.io/repos/nixsolutions/yandex-php-library/badge.png)](https://coveralls.io/r/nixsolutions/yandex-php-library)
-[![Dependency Status](https://www.versioneye.com/user/projects/53a1549983add72cb9000014/badge.svg?style=flat)](https://www.versioneye.com/user/projects/53a1549983add72cb9000014)
 
-[![Software License][ico-license]](LICENSE.md)
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[![Coverage Status](https://coveralls.io/repos/laracmf/laracmf/badge.png)](https://coveralls.io/r/laracmf/laracmf)
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg?style=flat-square)](http://www.gnu.org/licenses/agpl-3.0)
 
