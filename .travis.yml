@@ -10,7 +10,7 @@ env:
   global:
     - DB_HOST=localhost
     - DB_DATABASE=homestead_testing
-    - DB_USERNAME=root
+    - DB_USERNAME=homestead
     - DB_PASSWORD=secret
 
 install:
