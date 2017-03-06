@@ -22,6 +22,8 @@ install:
 before_script:
   - travis_retry php artisan vendor:publish
   - travis_retry gulp --production
+  - php artisan migrate
+  - php artisan db:seed
 
 script:
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml;
