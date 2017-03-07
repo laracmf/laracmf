@@ -28,9 +28,11 @@ before_script:
   - php artisan db:seed
 
 script:
+  - mkdir -p build/logs
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml;
 
 after_script:  
+  - php vendor/bin/coveralls -v
   - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
 
 notifications:
