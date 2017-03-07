@@ -20,7 +20,7 @@ install:
   - travis_retry npm install  
 
 before_script:
-  - cp config/env/.env.vagrant .env
+  - cp config/env/.env.travis .env
   - travis_retry php artisan vendor:publish
   - travis_retry gulp --production
   - php artisan key:generate
