@@ -9,18 +9,18 @@ env:
   global:
     - DB_HOST=localhost
     - DB_CONNECTION=mysql
-    - DB_DATABASE=homestead_testing
+    - DB_DATABASE=homestead
     - DB_USERNAME=root
     - DB_PASSWORD=
 
 install:
-  - mysql -e 'create database homestead_testing;'
+  - mysql -e 'create database homestead;'
   - travis_retry composer install --no-interaction --prefer-source  
   - npm install -g npm@2
   - travis_retry npm install  
 
 before_script:
-  - cp config/env/.env.testing .env
+  - cp config/env/.env.vagrant .env
   - travis_retry php artisan vendor:publish
   - travis_retry gulp --production
   - php artisan key:generate
@@ -33,3 +33,7 @@ script:
 after_script:
   - if [ "$TRAVIS_PHP_VERSION" == "5.5.9" ] || [ "$TRAVIS_PHP_VERSION" == "5.5" ] || [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
   - if [ "$TRAVIS_PHP_VERSION" == "5.5.9" ] || [ "$TRAVIS_PHP_VERSION" == "5.5" ] || [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml; fi
+
+notifications:
+  email: false
+
