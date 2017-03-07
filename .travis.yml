@@ -23,8 +23,6 @@ before_script:
   - travis_retry php artisan vendor:publish
   - travis_retry gulp --production
   - php artisan key:generate
-  - php artisan jwt:secret
-  - php artisan config:cache
   - php artisan migrate
   - php artisan db:seed
 
