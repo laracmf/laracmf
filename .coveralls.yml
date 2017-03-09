@@ -1,5 +1,4 @@
 service_name: travis-ci
-src_dir: module
 coverage_clover: build/logs/phpunit.clover.xml
 json_path: build/logs/logs/coveralls-upload.json
 repo_token: J5Xau7on1SGl0qiww8LgaYZmDQDlR5sTt
