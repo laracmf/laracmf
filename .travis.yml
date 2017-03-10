@@ -33,6 +33,7 @@ script:
   - mkdir -p 775 /home/travis/build/laracmf/laracmf/build/logs
   - ls -la
   - vendor/bin/phpunit --coverage-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;
+  - cat /home/travis/build/laracmf/laracmf/build/logs/clover.xml;
   - ls -la
 
 after_script:
