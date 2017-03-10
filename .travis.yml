@@ -20,6 +20,7 @@ install:
   - travis_retry npm install  
 
 before_script:
+  - mkdir -p 775 /home/travis/build/laracmf/laracmf/build/logs
   - cp config/env/.env.travis .env
   - travis_retry php artisan vendor:publish
   - travis_retry gulp --production
@@ -27,13 +28,9 @@ before_script:
   - php artisan migrate
   - php artisan db:seed
 
-script:
-  - pwd
+script:  
   - ls -la
-  - mkdir -p 775 /home/travis/build/laracmf/laracmf/build/logs
-  - ls -la
-  - vendor/bin/phpunit --coverage-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;
-  - cat /home/travis/build/laracmf/laracmf/build/logs/clover.xml;
+  - vendor/bin/phpunit --coverage-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;  
   - ls -la
 
 after_script:
