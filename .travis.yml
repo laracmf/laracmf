@@ -39,7 +39,7 @@ after_script:
 - pwd
 - php vendor/bin/coveralls -v
 - wget https://scrutinizer-ci.com/ocular.phar
-- php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
+- php ocular.phar code-coverage:upload --format=php-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;
 
 notifications:
   email: false
