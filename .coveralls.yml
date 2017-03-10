@@ -1,4 +1,3 @@
 service_name: travis-ci
 coverage_clover: /home/travis/build/laracmf/laracmf/build/logs/clover.xml
 json_path: /home/travis/build/laracmf/laracmf/build/logs/coveralls-upload.json
-repo_token: J5Xau7on1SGl0qiww8LgaYZmDQDlR5sTt
