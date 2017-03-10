@@ -28,10 +28,15 @@ before_script:
   - php artisan db:seed
 
 script:
-  - mkdir -p build/logs
-  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml;
+  - pwd
+  - ls -la
+  - mkdir -p 775 /home/travis/build/laracmf/laracmf/build/logs
+  - ls -la
+  - vendor/bin/phpunit --coverage-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;
+  - ls -la
 
-after_script:  
+after_script:
+- pwd
 - php vendor/bin/coveralls -v
 - wget https://scrutinizer-ci.com/ocular.phar
 - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
