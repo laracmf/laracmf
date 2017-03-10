@@ -28,7 +28,7 @@ before_script:
   - php artisan db:seed
 
 script:
-  - mkdir -p build/logs
+  - mkdir -p 775 build/logs
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml;
 
 after_script:  
