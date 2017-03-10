@@ -29,12 +29,9 @@ before_script:
   - php artisan db:seed
 
 script:  
-  - ls -la
-  - vendor/bin/phpunit --coverage-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;  
-  - ls -la
+  - vendor/bin/phpunit --coverage-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;    
 
 after_script:
-- pwd
 - php vendor/bin/coveralls -v
 - wget https://scrutinizer-ci.com/ocular.phar
 - php ocular.phar code-coverage:upload --format=php-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;
