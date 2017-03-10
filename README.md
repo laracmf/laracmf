@@ -10,7 +10,7 @@ Laravel CMF
 
 # Installation
 
-[PHP](https://php.net) 5.5+, database server, and [Composer](https://getcomposer.org) are required.
+[PHP](https://php.net) 7.0+, database server, and [Composer](https://getcomposer.org) are required.
 
 1. There is one ways of grabbing the code:
   * Use Git: `git clone git@github.com:laracmf/laracmf.git`
