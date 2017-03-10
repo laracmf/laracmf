@@ -28,8 +28,13 @@ before_script:
   - php artisan db:seed
 
 script:
+  - pwd
+  - echo pwd
+  - echo ls -la
   - mkdir -p 775 build/logs
+  - ls -la
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml;
+  - ls -la
 
 after_script:  
 - php vendor/bin/coveralls -v
