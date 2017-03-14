@@ -24,4 +24,5 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
     </php>
+    <log type="coverage-php" target="/home/travis/build/laracmf/laracmf/build/build/logs/clover.xml"/>
 </phpunit>

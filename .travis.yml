@@ -1,26 +1,41 @@
 language: php
 
 php:
-  - 5.5.9
-  - 5.5
-  - 5.6
   - 7.0
-  - hhvm
 
 sudo: false
 
+env:
+  global:
+    - DB_HOST=localhost
+    - DB_CONNECTION=mysql
+    - DB_DATABASE=homestead
+    - DB_USERNAME=root
+    - DB_PASSWORD=
+
 install:
-  - travis_retry composer install --no-interaction --prefer-source
-  - travis_retry npm install
+  - mysql -e 'create database homestead;'
+  - travis_retry composer install --no-interaction --prefer-source  
+  - npm install -g npm@2
+  - travis_retry npm install  
 
 before_script:
+  - mkdir -p 775 /home/travis/build/laracmf/laracmf/build/logs
+  - cp config/env/.env.travis .env
   - travis_retry php artisan vendor:publish
   - travis_retry gulp --production
+  - php artisan key:generate
+  - php artisan migrate
+  - php artisan db:seed
 
-script:
-  - if [ "$TRAVIS_PHP_VERSION" != "5.5.9" ] && [ "$TRAVIS_PHP_VERSION" != "5.5" ] && [ "$TRAVIS_PHP_VERSION" != "5.6" ]; then vendor/bin/phpunit; fi
-  - if [ "$TRAVIS_PHP_VERSION" == "5.5.9" ] || [ "$TRAVIS_PHP_VERSION" == "5.5" ] || [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; fi
+script:  
+  - vendor/bin/phpunit --coverage-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;    
 
 after_script:
-  - if [ "$TRAVIS_PHP_VERSION" == "5.5.9" ] || [ "$TRAVIS_PHP_VERSION" == "5.5" ] || [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-  - if [ "$TRAVIS_PHP_VERSION" == "5.5.9" ] || [ "$TRAVIS_PHP_VERSION" == "5.5" ] || [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml; fi
+- php vendor/bin/coveralls -v
+- wget https://scrutinizer-ci.com/ocular.phar
+- php ocular.phar code-coverage:upload --format=php-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;
+
+notifications:
+  email: false
+

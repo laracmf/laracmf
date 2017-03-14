@@ -12,19 +12,19 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/Kit-kat1/Credentials"
+            "url": "https://github.com/laracmf/Credentials"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/Kit-kat1/Navigation"
+            "url": "https://github.com/laracmf/Navigation"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/Kit-kat1/LogViewer"
+            "url": "https://github.com/laracmf/LogViewer"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/Kit-kat1/Contact"
+            "url": "https://github.com/laracmf/Contact"
         }
     ],
     "require-all": true,
@@ -49,7 +49,6 @@
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "nayjest/grids": "^1.3",
         "laravelcollective/html":"^5.3",
-        "illuminate/html": "5.*",
         "maatwebsite/excel": "^2.1",
         "appzcoder/crud-generator": "^1.2",
         "darkaonline/l5-swagger": "~3.0",
@@ -64,7 +63,8 @@
         "symfony/dom-crawler": "3.1.*",
         "symfony/css-selector": "3.1.*",
         "barryvdh/laravel-ide-helper": "^2.2",
-        "barryvdh/laravel-debugbar": "^2.3"
+        "barryvdh/laravel-debugbar": "^2.3",
+        "satooshi/php-coveralls": "dev-master"
     },
     "suggest": {
         "graham-campbell/cloudflare": "Integration with CloudFlare."

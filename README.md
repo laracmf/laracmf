@@ -1,12 +1,19 @@
 Laravel CMF
 =============
 
+[![PHP >= 7+](https://img.shields.io/badge/php-%3E%3D%207-8892BF.svg?style=flat-square)](https://php.net/)
+[![Build Status](https://api.travis-ci.org/laracmf/laracmf.png?branch=master)](https://api.travis-ci.org/laracmf/laracmf.png)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/laracmf/laracmf/badges/quality-score.png)](https://scrutinizer-ci.com/g/laracmf/laracmf/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/laracmf/laracmf/badge.svg?branch=master)](https://coveralls.io/github/laracmf/laracmf?branch=master)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg?style=flat-square)](http://www.gnu.org/licenses/agpl-3.0)
+[![Dependency Status](https://www.versioneye.com/user/projects/58b853502ff6830047a07c1c/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58b853502ff6830047a07c1c)
+
 # Installation
 
-[PHP](https://php.net) 5.5+ or [HHVM](http://hhvm.com) 3.6+, a database server, and [Composer](https://getcomposer.org) are required.
+[PHP](https://php.net) 7.0+, database server, and [Composer](https://getcomposer.org) are required.
 
 1. There is one ways of grabbing the code:
-  * Use Git: `git clone git@nix.githost.io:php-skillup/laravel-cmf.git`
+  * Use Git: `git clone git@github.com:laracmf/laracmf.git`
 2. From a command line open in the folder, run `composer install` and then `npm install`.
 3. Create .env file (copy entry from config/env/.env.vagrant).
 4. Generate jwt secret `php artisan jwt:secret`.
