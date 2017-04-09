@@ -6,7 +6,7 @@ Laravel CMF
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AlexFloppy/laracmf/badges/quality-score.png)](https://scrutinizer-ci.com/g/AlexFloppy/laracmf/?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/AlexFloppy/laracmf/badge.svg?branch=master)](https://coveralls.io/github/AlexFloppy/laracmf?branch=master)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg?style=flat-square)](http://www.gnu.org/licenses/agpl-3.0)
-[![Dependency Status](https://www.versioneye.com/user/projects/58b853502ff6830047a07c1c/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58b853502ff6830047a07c1c)
+[![Dependency Status](https://www.versioneye.com/user/projects/58ea1e9d26a5bb003f581a60/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58ea1e9d26a5bb003f581a60)
 
 # Installation
 
