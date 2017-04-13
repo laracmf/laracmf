@@ -1,20 +1,21 @@
 {
   "dependencies": {
-    "gulp": "~3.9.0",
-    "laravel-elixir": "~3.1.1",
+    "minimatch": "^3.0.3",
+    "gulp": "^3.9.1",
+    "laravel-elixir": "^3.1.2",
     "select2": "^4.0.3"
   },
   "private": true,
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-bootlint": "^0.10.1",
+    "grunt-bootlint": "^0.10.2",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-csslint": "^2.0.0",
     "grunt-contrib-jshint": "^1.1.0",
-    "grunt-contrib-less": "^1.4.0",
-    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-less": "^1.4.1",
+    "grunt-contrib-uglify": "^2.3.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-image": "^2.2.2",
+    "grunt-image": "^2.2.3",
     "grunt-includes": "^1.0.0",
     "gulp": "^3.9.1"
   }
