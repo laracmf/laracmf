@@ -14,15 +14,11 @@ Laravel CMF
 
 1. There is one ways of grabbing the code:
   * Use Git: `git clone git@github.com:laracmf/laracmf.git`
-2. From a command line open in the folder, run `composer install` and then `npm install`.
-3. Create .env file (copy entry from config/env/.env.vagrant).
-4. Generate jwt secret `php artisan jwt:secret`.
-5. Provide database, socials credentials and another staff in .env configuration file.
-6. Enter `./vendor/bin/homestead make` in command line.
-7. Let vagrant environment up in command line `vagrant up` and than `vagrant ssh`.
-8. From project root (as usual you can get it by typing cd {project folder name}) under vagrant run `php artisan app:install` followed by `gulp` to setup the application. 
-9. Run gulp .
-10. You will need to enter your mail server details into `config/mail.php`.
+2. From a command line open in the folder, run `composer install`
+3. From project root (as usual you can get it by typing cd {project folder name}) under vagrant run bash ./install.sh
+
+Custom database settings, socials credentials and another staff in .env configuration file.
+You will need to enter your mail server details into `config/mail.php`.
   * You can disable verification emails in `config/credentials.php`
   * Mail is still required for other functions like password resets and the contact form
   * You must set the contact email in `config/contact.php`
@@ -31,6 +27,24 @@ Laravel CMF
 To launch site type in your browser address line `192.168.10.10`
 
 If you want launch site using specific domain look [here](https://laravel.com/docs/5.3/homestead).
+
+Manual install steps:
+1. git clone git@github.com:laracmf/laracmf.git
+2. composer install
+2.1 cp config/env/.env.vagrant .env
+2.2 php artisan jwt:secret
+2.3 php artisan key:generate
+2.4 ./vendor/bin/homestead make
+
+If you use vagrant, run vagrant up && vagrant ssh
+
+3. install.sh
+3.1 php artisan migrate 
+3.2 php artisan db:seed
+3.3 npm install
+3.4 gulp
+3.5 php artisan app:install
+
 
 **Admin credentials** admin@dsmg.co.uk/password
 
