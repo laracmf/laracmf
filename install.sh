@@ -5,8 +5,7 @@
 # Small installation script
 #
 #############################################################################
-#composer install
-php artisan migrate:refresh
+php artisan migrate
 php artisan db:seed
 npm install
 gulp
