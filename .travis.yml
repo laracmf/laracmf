@@ -15,7 +15,7 @@ env:
 
 install:
   - mysql -e 'create database homestead;'
-  - travis_retry composer install --no-interaction --prefer-source  
+  - travis_retry composer install --no-interaction --prefer-source --no-scripts
   - npm install -g npm@2
   - travis_retry npm install  
 
