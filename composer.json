@@ -89,8 +89,8 @@
     "scripts": {
         "post-install-cmd": [
             "cp config/env/.env.vagrant .env",
-            "php artisan jwt:secret",
             "php artisan key:generate",
+            "php artisan jwt:secret -f",
             "./vendor/bin/homestead make",
             "php artisan clear-compiled"
         ],
