@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\Request;
 use Exception;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -113,5 +114,14 @@ class Page extends AbstractModel implements HasPresenter
             'page_id',
             'category_id'
         );
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public static function search($query)
+    {
+        return Page::where('title', 'like', $query . '%')->get(['id', 'title as text']);
     }
 }

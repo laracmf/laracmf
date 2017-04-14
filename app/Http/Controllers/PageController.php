@@ -226,8 +226,6 @@ class PageController extends AbstractController
         ];
     }
 
-
-
     /**
      * Search pages.
      *
@@ -235,6 +233,6 @@ class PageController extends AbstractController
      */
     protected function searchPages()
     {
-        return Page::where('title', 'like', Request::get('query') . '%')->get(['id', 'title as text']);
+        return Page::search(Request::get('query'));
     }
 }
