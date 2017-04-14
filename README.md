@@ -28,22 +28,18 @@ To launch site type in your browser address line `192.168.10.10`
 
 If you want launch site using specific domain look [here](https://laravel.com/docs/5.3/homestead).
 
-Manual install steps:
-1. git clone git@github.com:laracmf/laracmf.git
-2. composer install
-2.1 cp config/env/.env.vagrant .env
-2.2 php artisan jwt:secret
-2.3 php artisan key:generate
-2.4 ./vendor/bin/homestead make
+* You can install all manual, without using install.sh script if you needed
+
+**Manual install steps:**
+
+1. Clone project git clone git@github.com:laracmf/laracmf.git
+2. Install composer dependencies and composer script - composer install
 
 If you use vagrant, run vagrant up && vagrant ssh
 
-3. install.sh
-3.1 php artisan migrate 
-3.2 php artisan db:seed
-3.3 npm install
-3.4 gulp
-3.5 php artisan app:install
+3. From a command line open in the folder php artisan migrate && php artisan db:seed
+4. Than run npm install && gulp
+5. After all run php artisan app:install
 
 
 **Admin credentials** admin@dsmg.co.uk/password
