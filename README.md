@@ -14,6 +14,9 @@ Laravel CMF
 
 1. There is one ways of grabbing the code:
   * Use Git: `git clone git@github.com:laracmf/laracmf.git`
+  
+  If you use vagrant, run vagrant up && vagrant ssh
+  
 2. From a command line open in the folder, run `composer install`
 3. From project root (as usual you can get it by typing cd {project folder name}) under vagrant run bash ./install.sh
 
