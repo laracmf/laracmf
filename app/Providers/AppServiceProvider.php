@@ -10,6 +10,7 @@ use App\Repositories\EventRepository;
 use App\Repositories\PageRepository;
 use App\Repositories\PostRepository;
 use App\Services\CommentsManagerService;
+use App\Services\PostService;
 use App\Services\GridService;
 use App\Services\MediaService;
 use App\Services\PagesService;
@@ -121,6 +122,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerConfigurationsService();
         $this->registerMediaService();
         $this->registerCommentsManagerService();
+        $this->registerPostService();
         $this->registerGridService();
 
         if ($this->app->environment() !== 'production') {
@@ -163,6 +165,18 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(CommentsManagerService::class, function () {
             return new CommentsManagerService();
+        });
+    }
+
+    /**
+     * Register comments manager service.
+     *
+     * @return void
+     */
+    protected function registerPostService()
+    {
+        $this->app->bind(PostService::class, function () {
+            return new PostService();
         });
     }
 

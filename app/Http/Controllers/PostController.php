@@ -8,9 +8,26 @@ use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Services\PostService;
 
 class PostController extends AbstractController
 {
+    /**
+     * @var PostService
+     */
+    protected $postService;
+
+    /**
+     * PostController constructor.
+     * @param PostService $postService
+     */
+    public function __construct(PostService $postService)
+    {
+        parent::__construct();
+
+        $this->postService = $postService;
+    }
+
     /**
      * Display a listing of the posts.
      *
@@ -66,7 +83,7 @@ class PostController extends AbstractController
     public function show($id)
     {
         $post = PostRepository::find($id);
-        $this->checkPost($post);
+        $this->postService->checkPost($post);
 
         $comments = $post->comments()->orderBy('id', 'desc')->get();
 
@@ -83,7 +100,7 @@ class PostController extends AbstractController
     public function edit($id)
     {
         $post = PostRepository::find($id);
-        $this->checkPost($post);
+        $this->postService->checkPost($post);
 
         return view('posts.edit', ['post' => $post]);
     }
@@ -105,7 +122,7 @@ class PostController extends AbstractController
         }
 
         $post = PostRepository::find($id);
-        $this->checkPost($post);
+        $this->postService->checkPost($post);
 
         $post->update($input);
 
@@ -123,27 +140,11 @@ class PostController extends AbstractController
     public function destroy($id)
     {
         $post = PostRepository::find($id);
-        $this->checkPost($post);
+        $this->postService->checkPost($post);
 
         $post->delete();
 
         return redirect()->route('posts.index')
             ->with('success', trans('messages.post.delete_success'));
-    }
-
-    /**
-     * Check the post model.
-     *
-     * @param mixed $post
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return void
-     */
-    protected function checkPost($post)
-    {
-        if (!$post) {
-            throw new NotFoundHttpException('Post Not Found');
-        }
     }
 }
