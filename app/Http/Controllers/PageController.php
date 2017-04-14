@@ -13,7 +13,6 @@ use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageController extends AbstractController
 {
@@ -49,7 +48,7 @@ class PageController extends AbstractController
     {
         $pages = Page::all();
 
-        $grid = $this->pagesService->getPagesGrid();
+        $grid = $this->pagesService;
 
         return view('pages.index', compact('pages', 'links', 'grid'));
     }
@@ -102,7 +101,7 @@ class PageController extends AbstractController
     public function show($slug)
     {
         $page = PageRepository::find($slug);
-        $this->checkPage($page, $slug);
+        $this->pagesService->checkPage($page, $slug);
 
         if ($page) {
             $page->categories = $this->pagesService->getPageCategories($page);
@@ -126,7 +125,7 @@ class PageController extends AbstractController
             $page->categories = $this->pagesService->getPageCategories($page);
         }
 
-        $this->checkPage($page, $slug);
+        $this->pagesService->checkPage($page, $slug);
 
         return view('pages.edit', ['page' => $page]);
     }
@@ -159,9 +158,9 @@ class PageController extends AbstractController
         }
 
         $page = PageRepository::find($slug);
-        $this->checkPage($page, $slug);
+        $this->pagesService->checkPage($page, $slug);
 
-        $checkUpdate = $this->checkUpdate($input, $slug);
+        $checkUpdate = $this->pagesService->checkUpdate($input, $slug);
         if ($checkUpdate) {
             return $checkUpdate;
         }
@@ -190,7 +189,7 @@ class PageController extends AbstractController
     public function destroy($slug)
     {
         $page = PageRepository::find($slug);
-        $this->checkPage($page, $slug);
+        $this->pagesService->checkPage($page, $slug);
 
         if ($page) {
             $this->pagesService->deletePageCategories($page);
@@ -227,52 +226,7 @@ class PageController extends AbstractController
         ];
     }
 
-    /**
-     * Check the page model.
-     *
-     * @param mixed  $page
-     * @param string $slug
-     *
-     * @throws \Exception
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return void
-     */
-    protected function checkPage($page, $slug)
-    {
-        if ($page) {
-            return;
-        }
 
-        if ($slug == 'home') {
-            throw new Exception('The homepage is missing.');
-        }
-
-        throw new NotFoundHttpException('Page Not Found');
-    }
-
-    /**
-     * Check the update input.
-     *
-     * @param string[] $input
-     * @param string   $slug
-     *
-     * @return \Illuminate\Http\Response
-     */
-    protected function checkUpdate(array $input, $slug)
-    {
-        if ($slug == 'home') {
-            if ($slug != $input['slug']) {
-                return redirect()->route('pages.edit', ['pages' => $slug])->withInput()
-                    ->with('error', trans('messages.page.homepage_slug'));
-            }
-
-            if ($input['show_nav'] == false) {
-                return redirect()->route('pages.edit', ['pages' => $slug])->withInput()
-                    ->with('error', trans('messages.page.show_nav'));
-            }
-        }
-    }
 
     /**
      * Search pages.
