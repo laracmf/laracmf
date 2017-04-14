@@ -11,7 +11,6 @@ use App\Services\GridService;
 use App\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
 class PageController extends AbstractController
@@ -75,10 +74,10 @@ class PageController extends AbstractController
         $input = array_merge($this->getInput(), ['user_id' => Credentials::getuser()->id]);
         $categories = $request->input('categories');
 
-        $val = PageRepository::validate($input, array_keys($input));
+        $validator = PageRepository::validate($input, array_keys($input));
 
-        if ($val->fails()) {
-            return redirect()->route('pages.create')->withInput()->withErrors($val->errors());
+        if ($validator->fails()) {
+            return redirect()->route('pages.create')->withInput()->withErrors($validator->errors());
         }
 
         $page = PageRepository::create($input);
@@ -151,10 +150,10 @@ class PageController extends AbstractController
             $input['js'] = '';
         }
 
-        $val = PageRepository::validate($input, array_keys($input));
+        $validator = PageRepository::validate($input, array_keys($input));
 
-        if ($val->fails()) {
-            return redirect()->route('pages.edit', ['pages' => $slug])->withInput()->withErrors($val->errors());
+        if ($validator->fails()) {
+            return redirect()->route('pages.edit', ['pages' => $slug])->withInput()->withErrors($validator->errors());
         }
 
         $page = PageRepository::find($slug);
