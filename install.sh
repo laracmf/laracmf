@@ -5,8 +5,9 @@
 # Small installation script
 #
 #############################################################################
-php artisan migrate
-php artisan db:seed
+cp config/env/.env.vagrant .env
+php artisan key:generate
+php artisan jwt:secret -f
 npm install
 gulp
 php artisan app:install
