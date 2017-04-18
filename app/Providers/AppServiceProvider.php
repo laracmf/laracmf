@@ -10,12 +10,10 @@ use App\Repositories\EventRepository;
 use App\Repositories\PageRepository;
 use App\Repositories\PostRepository;
 use App\Services\CommentsManagerService;
-use App\Services\PostService;
-use App\Services\EventsService;
-use App\Services\CommentService;
 use App\Services\GridService;
 use App\Services\MediaService;
 use App\Services\PagesService;
+use App\Services\EntityService;
 use App\Services\SocialAccountService;
 use App\Subscribers\CommandSubscriber;
 use App\Subscribers\NavigationSubscriber;
@@ -124,10 +122,8 @@ class AppServiceProvider extends ServiceProvider
         $this->registerConfigurationsService();
         $this->registerMediaService();
         $this->registerCommentsManagerService();
-        $this->registerPostService();
-        $this->registerEventsService();
-        $this->registerCommentService();
         $this->registerGridService();
+        $this->registerEntityService();
 
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
@@ -161,6 +157,18 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register entity service class.
+     *
+     * @return void
+     */
+    protected function registerEntityService()
+    {
+        $this->app->bind(EntityService::class, function () {
+            return new entityService();
+        });
+    }
+
+    /**
      * Register comments manager service.
      *
      * @return void
@@ -169,42 +177,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(CommentsManagerService::class, function () {
             return new CommentsManagerService();
-        });
-    }
-
-    /**
-     * Register post service.
-     *
-     * @return void
-     */
-    protected function registerPostService()
-    {
-        $this->app->bind(PostService::class, function () {
-            return new PostService();
-        });
-    }
-
-    /**
-     * Register events service.
-     *
-     * @return void
-     */
-    protected function registerEventsService()
-    {
-        $this->app->bind(EventsService::class, function () {
-            return new EventsService();
-        });
-    }
-
-    /**
-     * Register comment service.
-     *
-     * @return void
-     */
-    protected function registerCommentService()
-    {
-        $this->app->bind(CommentService::class, function () {
-            return new CommentService();
         });
     }
 

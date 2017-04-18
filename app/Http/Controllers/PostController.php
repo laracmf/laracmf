@@ -8,24 +8,24 @@ use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Services\PostService;
+use App\Services\EntityService;
 
 class PostController extends AbstractController
 {
     /**
-     * @var PostService
+     * @var EntityService
      */
-    protected $postService;
+    protected $entityService;
 
     /**
      * PostController constructor.
-     * @param PostService $postService
+     * @param EntityService $entityService
      */
-    public function __construct(PostService $postService)
+    public function __construct(EntityService $entityService)
     {
         parent::__construct();
 
-        $this->postService = $postService;
+        $this->entityService = $entityService;
     }
 
     /**
@@ -83,7 +83,7 @@ class PostController extends AbstractController
     public function show($id)
     {
         $post = PostRepository::find($id);
-        $this->postService->checkPost($post);
+        $this->entityService->checkEntity($post);
 
         $comments = $post->comments()->orderBy('id', 'desc')->get();
 
@@ -100,7 +100,7 @@ class PostController extends AbstractController
     public function edit($id)
     {
         $post = PostRepository::find($id);
-        $this->postService->checkPost($post);
+        $this->entityService->checkEntity($post);
 
         return view('posts.edit', ['post' => $post]);
     }
@@ -122,7 +122,7 @@ class PostController extends AbstractController
         }
 
         $post = PostRepository::find($id);
-        $this->postService->checkPost($post);
+        $this->entityService->checkEntity($post);
 
         $post->update($input);
 
@@ -140,7 +140,7 @@ class PostController extends AbstractController
     public function destroy($id)
     {
         $post = PostRepository::find($id);
-        $this->postService->checkPost($post);
+        $this->entityService->checkEntity($post);
 
         $post->delete();
 

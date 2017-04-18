@@ -4,22 +4,21 @@ namespace App\Services;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PostService
+class EntityService
 {
     /**
-     * Check the post model.
+     * Check the comment model.
      *
-     * @param mixed $post
+     * @param mixed $entity
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @return void
      */
-    public function checkPost($post)
+    public function checkEntity($entity)
     {
-        if (!$post) {
-            throw new NotFoundHttpException('Post Not Found');
+        if (!$entity) {
+            throw new NotFoundHttpException('Comment Not Found.');
         }
     }
-
 }

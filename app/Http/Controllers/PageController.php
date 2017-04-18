@@ -12,6 +12,7 @@ use App\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
+use App\Services\CommentService;
 
 class PageController extends AbstractController
 {

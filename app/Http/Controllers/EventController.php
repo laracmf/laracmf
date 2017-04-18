@@ -10,23 +10,23 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Services\EventsService;
+use App\Services\EntityService;
 
 class EventController extends AbstractController
 {
     /**
-     * @var EventsService
+     * @var EntityService
      */
-    protected $eventService;
+    protected $entityService;
 
     /**
      * EventController constructor.
-     * @param EventsService $eventsService
+     * @param EntityService $entityService
      */
-    public function __construct(EventsService $eventsService)
+    public function __construct(EntityService $entityService)
     {
         parent::__construct();
-        $this->eventService = $eventsService;
+        $this->entityService = $entityService;
     }
 
     /**
@@ -86,7 +86,7 @@ class EventController extends AbstractController
     public function show($id)
     {
         $event = EventRepository::find($id);
-        $this->eventService->checkEvent($event);
+        $this->entityService->checkEntity($event);
 
         return view('events.show', ['event' => $event]);
     }
@@ -101,7 +101,7 @@ class EventController extends AbstractController
     public function edit($id)
     {
         $event = EventRepository::find($id);
-        $this->eventService->checkEvent($event);
+        $this->entityService->checkEntity($event);
 
         return view('events.edit', ['event' => $event]);
     }
@@ -125,7 +125,7 @@ class EventController extends AbstractController
         $input['date'] = Carbon::createFromFormat(config('date.php_format'), $input['date']);
 
         $event = EventRepository::find($id);
-        $this->eventService->checkEvent($event);
+        $this->entityService->checkEntity($event);
 
         $event->update($input);
 
@@ -143,7 +143,7 @@ class EventController extends AbstractController
     public function destroy($id)
     {
         $event = EventRepository::find($id);
-        $this->eventService->checkEvent($event);
+        $this->entityService->checkEntity($event);
 
         $event->delete();
 
