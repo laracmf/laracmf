@@ -20,12 +20,15 @@ class Category extends Model
     }
 
     /**
-     * @param $query
-     * @return mixed
+     * Scope of search query
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param mixed $search
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function search($query)
+    public static function scopeSearch($query, $search)
     {
-        return Category::where('name', 'like', $query . '%')->get(['id', 'name as text']);
+        return $query->where('name', 'like', $search . '%');
     }
 
 }

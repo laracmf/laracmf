@@ -233,6 +233,6 @@ class PageController extends AbstractController
      */
     protected function searchPages()
     {
-        return Page::search(Request::get('query'));
+        return Page::search(Request::get('query'))->get(['id', 'title as text']);
     }
 }

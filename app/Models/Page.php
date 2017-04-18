@@ -117,11 +117,14 @@ class Page extends AbstractModel implements HasPresenter
     }
 
     /**
-     * @param $query
-     * @return mixed
+     * Scope of search query
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param mixed $search
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function search($query)
+    public static function scopeSearch($query, $search)
     {
-        return Page::where('title', 'like', $query . '%')->get(['id', 'title as text']);
+        return $query->where('title', 'like', $search . '%');
     }
 }
