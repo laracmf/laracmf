@@ -81,11 +81,7 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
-            "cp config/env/.env.vagrant .env",
-            "php artisan key:generate",
-            "php artisan jwt:secret -f",
-            "./vendor/bin/homestead make",
+        "post-install-cmd": [            
             "php artisan clear-compiled"
         ],
         "pre-update-cmd": [

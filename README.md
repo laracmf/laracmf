@@ -2,11 +2,11 @@ Laravel CMF
 =============
 
 [![PHP >= 7+](https://img.shields.io/badge/php-%3E%3D%207-8892BF.svg?style=flat-square)](https://php.net/)
-[![Build Status](https://secure.travis-ci.org/AlexFloppy/laracmf.png?branch=master)](https://travis-ci.org/AlexFloppy/laracmf)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AlexFloppy/laracmf/badges/quality-score.png)](https://scrutinizer-ci.com/g/AlexFloppy/laracmf/?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/AlexFloppy/laracmf/badge.svg?branch=master)](https://coveralls.io/github/AlexFloppy/laracmf?branch=master)
+[![Build Status](https://secure.travis-ci.org/laracmf/laracmf.png?branch=master)](https://travis-ci.org/laracmf/laracmf)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/laracmf/laracmf/badges/quality-score.png)](https://scrutinizer-ci.com/g/laracmf/laracmf/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/laracmf/laracmf/badge.svg?branch=master)](https://coveralls.io/github/laracmf/laracmf?branch=master)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg?style=flat-square)](http://www.gnu.org/licenses/agpl-3.0)
-[![Dependency Status](https://www.versioneye.com/user/projects/58ea1e9d26a5bb003f581a60/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58ea1e9d26a5bb003f581a60)
+[![Dependency Status](https://www.versioneye.com/user/projects/58b853502ff6830047a07c1c/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58b853502ff6830047a07c1c)
 
 # Installation
 
@@ -15,9 +15,13 @@ Laravel CMF
 1. There is one ways of grabbing the code:
   * Use Git: `git clone git@github.com:laracmf/laracmf.git`
   
-  If you use vagrant, run vagrant up && vagrant ssh
-  
 2. From a command line open in the folder, run `composer install`
+
+If you want to use Homestead:
+
+ * Run ./vendor/bin/homestead make
+ * Than run vagrant up && vagrant ssh
+  
 3. From project root (as usual you can get it by typing cd {project folder name}) under vagrant run bash ./install.sh
 
 Custom database settings, socials credentials and another staff in .env configuration file.
@@ -36,13 +40,19 @@ If you want launch site using specific domain look [here](https://laravel.com/do
 **Manual install steps:**
 
 1. Clone project git clone git@github.com:laracmf/laracmf.git
-2. Install composer dependencies and composer script - composer install
+2. Install composer dependencies - composer install
 
-If you use vagrant, run vagrant up && vagrant ssh
+If you want to use Homestead:
 
-3. From a command line open in the folder php artisan migrate && php artisan db:seed
-4. Than run npm install && gulp
-5. After all run php artisan app:install
+ * Run ./vendor/bin/homestead make
+ * Than run vagrant up && vagrant ssh
+
+From a command line open in the folder:
+3. Copy config cp config/env/.env.vagrant .env
+4. Generate app key php artisan key:generate
+5. Generate jwt key php artisan jwt:secret
+6. Than run npm install && gulp
+7. After all run php artisan app:install
 
 
 **Admin credentials** admin@dsmg.co.uk/password
