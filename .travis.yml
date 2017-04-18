@@ -15,12 +15,12 @@ env:
 
 install:
   - mysql -e 'create database homestead;'
-  - travis_retry composer install --no-interaction --prefer-source --no-scripts
+  - travis_retry composer install --no-interaction --prefer-source
   - npm install -g npm@2
   - travis_retry npm install  
 
 before_script:
-  - mkdir -p 775 /home/travis/build/AlexFloppy/laracmf/build/logs
+  - mkdir -p 775 /home/travis/build/laracmf/laracmf/build/logs
   - cp config/env/.env.travis .env
   - travis_retry php artisan vendor:publish
   - travis_retry gulp --production
@@ -29,12 +29,12 @@ before_script:
   - php artisan db:seed
 
 script:  
-  - vendor/bin/phpunit --coverage-clover /home/travis/build/AlexFloppy/laracmf/build/logs/clover.xml;    
+  - vendor/bin/phpunit --coverage-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;
 
 after_script:
 - php vendor/bin/coveralls -v
 - wget https://scrutinizer-ci.com/ocular.phar
-- php ocular.phar code-coverage:upload --format=php-clover /home/travis/build/AlexFloppy/laracmf/build/logs/clover.xml;
+- php ocular.phar code-coverage:upload --format=php-clover /home/travis/build/laracmf/laracmf/build/logs/clover.xml;
 
 notifications:
   email: false
