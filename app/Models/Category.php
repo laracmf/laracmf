@@ -18,4 +18,14 @@ class Category extends Model
         return $this
             ->belongsToMany('App\Models\Page', 'categories_pages', 'category_id', 'page_id');
     }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public static function search($query)
+    {
+        return Category::where('name', 'like', $query . '%')->get(['id', 'name as text']);
+    }
+
 }
