@@ -18,4 +18,17 @@ class Category extends Model
         return $this
             ->belongsToMany('App\Models\Page', 'categories_pages', 'category_id', 'page_id');
     }
+
+    /**
+     * Scope of search query
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param mixed $search
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'like', $search . '%');
+    }
+
 }

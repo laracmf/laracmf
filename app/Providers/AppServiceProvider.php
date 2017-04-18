@@ -13,6 +13,7 @@ use App\Services\CommentsManagerService;
 use App\Services\GridService;
 use App\Services\MediaService;
 use App\Services\PagesService;
+use App\Services\EntityService;
 use App\Services\SocialAccountService;
 use App\Subscribers\CommandSubscriber;
 use App\Subscribers\NavigationSubscriber;
@@ -122,6 +123,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerMediaService();
         $this->registerCommentsManagerService();
         $this->registerGridService();
+        $this->registerEntityService();
 
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
@@ -151,6 +153,18 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(GridService::class, function () {
             return new GridService();
+        });
+    }
+
+    /**
+     * Register entity service class.
+     *
+     * @return void
+     */
+    protected function registerEntityService()
+    {
+        $this->app->bind(EntityService::class, function () {
+            return new entityService();
         });
     }
 
@@ -359,7 +373,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('App\Http\Controllers\CommentController', function ($app) {
             $throttler = $app['throttle']->get($app['request'], 1, 10);
-
             return new CommentController($throttler);
         });
     }

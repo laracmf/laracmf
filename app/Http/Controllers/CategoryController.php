@@ -162,6 +162,6 @@ class CategoryController extends AbstractController
      */
     protected function searchCategories()
     {
-        return Category::where('name', 'like', Request::input('query') . '%')->get(['id', 'name as text']);
+        return Category::search(Request::get('query'))->get(['id', 'name as text']);
     }
 }

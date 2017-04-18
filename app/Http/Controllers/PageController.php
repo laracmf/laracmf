@@ -11,9 +11,7 @@ use App\Services\GridService;
 use App\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageController extends AbstractController
 {
@@ -76,10 +74,10 @@ class PageController extends AbstractController
         $input = array_merge($this->getInput(), ['user_id' => Credentials::getuser()->id]);
         $categories = $request->input('categories');
 
-        $val = PageRepository::validate($input, array_keys($input));
+        $validator = PageRepository::validate($input, array_keys($input));
 
-        if ($val->fails()) {
-            return redirect()->route('pages.create')->withInput()->withErrors($val->errors());
+        if ($validator->fails()) {
+            return redirect()->route('pages.create')->withInput()->withErrors($validator->errors());
         }
 
         $page = PageRepository::create($input);
@@ -102,7 +100,7 @@ class PageController extends AbstractController
     public function show($slug)
     {
         $page = PageRepository::find($slug);
-        $this->checkPage($page, $slug);
+        $this->pagesService->checkPage($page, $slug);
 
         if ($page) {
             $page->categories = $this->pagesService->getPageCategories($page);
@@ -126,7 +124,7 @@ class PageController extends AbstractController
             $page->categories = $this->pagesService->getPageCategories($page);
         }
 
-        $this->checkPage($page, $slug);
+        $this->pagesService->checkPage($page, $slug);
 
         return view('pages.edit', ['page' => $page]);
     }
@@ -152,16 +150,16 @@ class PageController extends AbstractController
             $input['js'] = '';
         }
 
-        $val = PageRepository::validate($input, array_keys($input));
+        $validator = PageRepository::validate($input, array_keys($input));
 
-        if ($val->fails()) {
-            return redirect()->route('pages.edit', ['pages' => $slug])->withInput()->withErrors($val->errors());
+        if ($validator->fails()) {
+            return redirect()->route('pages.edit', ['pages' => $slug])->withInput()->withErrors($validator->errors());
         }
 
         $page = PageRepository::find($slug);
-        $this->checkPage($page, $slug);
+        $this->pagesService->checkPage($page, $slug);
 
-        $checkUpdate = $this->checkUpdate($input, $slug);
+        $checkUpdate = $this->pagesService->checkUpdate($input, $slug);
         if ($checkUpdate) {
             return $checkUpdate;
         }
@@ -190,7 +188,7 @@ class PageController extends AbstractController
     public function destroy($slug)
     {
         $page = PageRepository::find($slug);
-        $this->checkPage($page, $slug);
+        $this->pagesService->checkPage($page, $slug);
 
         if ($page) {
             $this->pagesService->deletePageCategories($page);
@@ -228,59 +226,12 @@ class PageController extends AbstractController
     }
 
     /**
-     * Check the page model.
-     *
-     * @param mixed  $page
-     * @param string $slug
-     *
-     * @throws \Exception
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return void
-     */
-    protected function checkPage($page, $slug)
-    {
-        if ($page) {
-            return;
-        }
-
-        if ($slug == 'home') {
-            throw new Exception('The homepage is missing.');
-        }
-
-        throw new NotFoundHttpException('Page Not Found');
-    }
-
-    /**
-     * Check the update input.
-     *
-     * @param string[] $input
-     * @param string   $slug
-     *
-     * @return \Illuminate\Http\Response
-     */
-    protected function checkUpdate(array $input, $slug)
-    {
-        if ($slug == 'home') {
-            if ($slug != $input['slug']) {
-                return redirect()->route('pages.edit', ['pages' => $slug])->withInput()
-                    ->with('error', trans('messages.page.homepage_slug'));
-            }
-
-            if ($input['show_nav'] == false) {
-                return redirect()->route('pages.edit', ['pages' => $slug])->withInput()
-                    ->with('error', trans('messages.page.show_nav'));
-            }
-        }
-    }
-
-    /**
      * Search pages.
      *
      * @return \Illuminate\Http\Response
      */
     protected function searchPages()
     {
-        return Page::where('title', 'like', Request::get('query') . '%')->get(['id', 'title as text']);
+        return Page::search(Request::get('query'))->get(['id', 'title as text']);
     }
 }

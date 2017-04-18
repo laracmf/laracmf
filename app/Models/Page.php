@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\Request;
 use Exception;
 use GrahamCampbell\Credentials\Models\Relations\BelongsToUserTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -113,5 +114,17 @@ class Page extends AbstractModel implements HasPresenter
             'page_id',
             'category_id'
         );
+    }
+
+    /**
+     * Scope of search query
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param mixed $search
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function scopeSearch($query, $search)
+    {
+        return $query->where('title', 'like', $search . '%');
     }
 }

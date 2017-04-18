@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Carbon\Carbon;
 use GrahamCampbell\Binput\Facades\Binput;
 use App\Facades\EventRepository;
@@ -69,8 +70,7 @@ class EventController extends AbstractController
      */
     public function show($id)
     {
-        $event = EventRepository::find($id);
-        $this->checkEvent($event);
+        $event = Event::findOrFail($id);
 
         return view('events.show', ['event' => $event]);
     }
@@ -84,8 +84,7 @@ class EventController extends AbstractController
      */
     public function edit($id)
     {
-        $event = EventRepository::find($id);
-        $this->checkEvent($event);
+        $event = Event::findOrFail($id);
 
         return view('events.edit', ['event' => $event]);
     }
@@ -108,8 +107,7 @@ class EventController extends AbstractController
 
         $input['date'] = Carbon::createFromFormat(config('date.php_format'), $input['date']);
 
-        $event = EventRepository::find($id);
-        $this->checkEvent($event);
+        $event = Event::findOrFail($id);
 
         $event->update($input);
 
@@ -126,28 +124,11 @@ class EventController extends AbstractController
      */
     public function destroy($id)
     {
-        $event = EventRepository::find($id);
-        $this->checkEvent($event);
+        $event = Event::findOrFail($id);
 
         $event->delete();
 
         return redirect()->route('events.index')
             ->with('success', trans('messages.event.delete_success'));
-    }
-
-    /**
-     * Check the event model.
-     *
-     * @param mixed $event
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return void
-     */
-    protected function checkEvent($event)
-    {
-        if (!$event) {
-            throw new NotFoundHttpException('Event Not Found');
-        }
     }
 }

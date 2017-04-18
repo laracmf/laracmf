@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Nayjest\Grids\EloquentDataProvider;
 use Nayjest\Grids\ObjectDataRow;
 
+use Exception;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Class PagesService
  *
@@ -128,5 +130,52 @@ class PagesService
                 ]
             ]
         );
+    }
+
+    /**
+     * Check the page model.
+     *
+     * @param mixed  $page
+     * @param string $slug
+     *
+     * @throws \Exception
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return void
+     */
+    public function checkPage($page, $slug)
+    {
+        if ($page) {
+            return;
+        }
+
+        if ($slug == 'home') {
+            throw new Exception('The homepage is missing.');
+        }
+
+        throw new NotFoundHttpException('Page Not Found');
+    }
+
+    /**
+     * Check the update input.
+     *
+     * @param string[] $input
+     * @param string   $slug
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkUpdate(array $input, $slug)
+    {
+        if ($slug == 'home') {
+            if ($slug != $input['slug']) {
+                return redirect()->route('pages.edit', ['pages' => $slug])->withInput()
+                    ->with('error', trans('messages.page.homepage_slug'));
+            }
+
+            if ($input['show_nav'] == false) {
+                return redirect()->route('pages.edit', ['pages' => $slug])->withInput()
+                    ->with('error', trans('messages.page.show_nav'));
+            }
+        }
     }
 }

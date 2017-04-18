@@ -103,8 +103,7 @@ class CommentController extends AbstractController
      */
     public function show($postId, $id)
     {
-        $comment = CommentRepository::find($id);
-        $this->checkComment($comment);
+        $comment = Comment::findOrFail($id);
 
         $contents = view('posts.comment', [
             'comment' => $comment,
@@ -137,8 +136,7 @@ class CommentController extends AbstractController
             throw new BadRequestHttpException('Your comment was empty.');
         }
 
-        $comment = CommentRepository::find($id);
-        $this->checkComment($comment);
+        $comment = Comment::findOrFail($id);
 
         $version = Binput::input('version');
 
@@ -175,8 +173,7 @@ class CommentController extends AbstractController
      */
     public function destroy($id)
     {
-        $comment = CommentRepository::find($id);
-        $this->checkComment($comment);
+        $comment = Comment::findOrFail($id);
 
         $comment->delete();
 
@@ -185,22 +182,6 @@ class CommentController extends AbstractController
             'msg'        => trans('messages.comment.delete_success'),
             'comment_id' => $id,
         ]);
-    }
-
-    /**
-     * Check the comment model.
-     *
-     * @param mixed $comment
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return void
-     */
-    protected function checkComment($comment)
-    {
-        if (!$comment) {
-            throw new NotFoundHttpException('Comment Not Found.');
-        }
     }
 
     /**

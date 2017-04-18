@@ -1,14 +1,8 @@
 {
-    "name": "graham-campbell/bootstrap-cms",
+    "name": "laracmf/laracmf",
     "description": "Bootstrap CMS Is A PHP CMS Powered By Laravel 5 And Sentinel",
     "keywords": ["laravel", "framework", "sentinel", "bootstrap", "cms", "bootstrap cms", "Bootstrap CMS", "Bootstrap-CMS", "blog", "login", "Graham Campbell", "GrahamCampbell"],
     "license": "AGPL-3.0",
-    "authors": [
-        {
-            "name": "Graham Campbell",
-            "email": "graham@alt-three.com"
-        }
-    ],
     "repositories": [
         {
             "type": "vcs",
@@ -29,7 +23,7 @@
     ],
     "require-all": true,
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.0",
         "laravel/framework": "5.3.*",
         "fideloper/proxy": "~3.0",
         "graham-campbell/binput": "~3.0",
@@ -87,7 +81,7 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
+        "post-install-cmd": [            
             "php artisan clear-compiled"
         ],
         "pre-update-cmd": [
