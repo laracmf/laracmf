@@ -10,9 +10,25 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Services\EventsService;
 
 class EventController extends AbstractController
 {
+    /**
+     * @var EventsService
+     */
+    protected $eventService;
+
+    /**
+     * EventController constructor.
+     * @param EventsService $eventsService
+     */
+    public function __construct(EventsService $eventsService)
+    {
+        parent::__construct();
+        $this->eventService = $eventsService;
+    }
+
     /**
      * Display a listing of the events.
      *
@@ -70,7 +86,7 @@ class EventController extends AbstractController
     public function show($id)
     {
         $event = EventRepository::find($id);
-        $this->checkEvent($event);
+        $this->eventService->checkEvent($event);
 
         return view('events.show', ['event' => $event]);
     }
@@ -85,7 +101,7 @@ class EventController extends AbstractController
     public function edit($id)
     {
         $event = EventRepository::find($id);
-        $this->checkEvent($event);
+        $this->eventService->checkEvent($event);
 
         return view('events.edit', ['event' => $event]);
     }
@@ -109,7 +125,7 @@ class EventController extends AbstractController
         $input['date'] = Carbon::createFromFormat(config('date.php_format'), $input['date']);
 
         $event = EventRepository::find($id);
-        $this->checkEvent($event);
+        $this->eventService->checkEvent($event);
 
         $event->update($input);
 
@@ -127,27 +143,11 @@ class EventController extends AbstractController
     public function destroy($id)
     {
         $event = EventRepository::find($id);
-        $this->checkEvent($event);
+        $this->eventService->checkEvent($event);
 
         $event->delete();
 
         return redirect()->route('events.index')
             ->with('success', trans('messages.event.delete_success'));
-    }
-
-    /**
-     * Check the event model.
-     *
-     * @param mixed $event
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return void
-     */
-    protected function checkEvent($event)
-    {
-        if (!$event) {
-            throw new NotFoundHttpException('Event Not Found');
-        }
     }
 }
