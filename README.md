@@ -15,9 +15,13 @@ Laravel CMF
 1. There is one ways of grabbing the code:
   * Use Git: `git clone git@github.com:laracmf/laracmf.git`
   
-  If you use vagrant, run vagrant up && vagrant ssh
-  
 2. From a command line open in the folder, run `composer install`
+
+If you want to use Homestead:
+
+ * Run ./vendor/bin/homestead make
+ * Than run vagrant up && vagrant ssh
+  
 3. From project root (as usual you can get it by typing cd {project folder name}) under vagrant run bash ./install.sh
 
 Custom database settings, socials credentials and another staff in .env configuration file.
@@ -36,13 +40,19 @@ If you want launch site using specific domain look [here](https://laravel.com/do
 **Manual install steps:**
 
 1. Clone project git clone git@github.com:laracmf/laracmf.git
-2. Install composer dependencies and composer script - composer install
+2. Install composer dependencies - composer install
 
-If you use vagrant, run vagrant up && vagrant ssh
+If you want to use Homestead:
 
-3. From a command line open in the folder php artisan migrate && php artisan db:seed
-4. Than run npm install && gulp
-5. After all run php artisan app:install
+ * Run ./vendor/bin/homestead make
+ * Than run vagrant up && vagrant ssh
+
+From a command line open in the folder:
+3. Copy config cp config/env/.env.vagrant .env
+4. Generate app key php artisan key:generate
+5. Generate jwt key php artisan jwt:secret
+6. Than run npm install && gulp
+7. After all run php artisan app:install
 
 
 **Admin credentials** admin@dsmg.co.uk/password
