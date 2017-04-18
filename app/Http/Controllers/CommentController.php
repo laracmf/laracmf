@@ -16,19 +16,9 @@ use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Services\CommentService;
 
 class CommentController extends AbstractController
 {
-    /**
-     * CommentController constructor.
-     *
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * Display a listing of the comments.
      *
