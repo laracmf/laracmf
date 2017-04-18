@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Carbon\Carbon;
 use GrahamCampbell\Binput\Facades\Binput;
 use App\Facades\EventRepository;
@@ -10,25 +11,9 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Services\EntityService;
 
 class EventController extends AbstractController
 {
-    /**
-     * @var EntityService
-     */
-    protected $entityService;
-
-    /**
-     * EventController constructor.
-     * @param EntityService $entityService
-     */
-    public function __construct(EntityService $entityService)
-    {
-        parent::__construct();
-        $this->entityService = $entityService;
-    }
-
     /**
      * Display a listing of the events.
      *
@@ -85,8 +70,7 @@ class EventController extends AbstractController
      */
     public function show($id)
     {
-        $event = EventRepository::find($id);
-        $this->entityService->checkEntity($event);
+        $event = Event::findOrFail($id);
 
         return view('events.show', ['event' => $event]);
     }
@@ -100,8 +84,7 @@ class EventController extends AbstractController
      */
     public function edit($id)
     {
-        $event = EventRepository::find($id);
-        $this->entityService->checkEntity($event);
+        $event = Event::findOrFail($id);
 
         return view('events.edit', ['event' => $event]);
     }
@@ -124,8 +107,7 @@ class EventController extends AbstractController
 
         $input['date'] = Carbon::createFromFormat(config('date.php_format'), $input['date']);
 
-        $event = EventRepository::find($id);
-        $this->entityService->checkEntity($event);
+        $event = Event::findOrFail($id);
 
         $event->update($input);
 
@@ -142,8 +124,7 @@ class EventController extends AbstractController
      */
     public function destroy($id)
     {
-        $event = EventRepository::find($id);
-        $this->entityService->checkEntity($event);
+        $event = Event::findOrFail($id);
 
         $event->delete();
 

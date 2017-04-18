@@ -4,30 +4,14 @@ namespace App\Http\Controllers;
 
 use GrahamCampbell\Binput\Facades\Binput;
 use App\Facades\PostRepository;
+use App\Models\Post;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Services\EntityService;
 
 class PostController extends AbstractController
 {
-    /**
-     * @var EntityService
-     */
-    protected $entityService;
-
-    /**
-     * PostController constructor.
-     * @param EntityService $entityService
-     */
-    public function __construct(EntityService $entityService)
-    {
-        parent::__construct();
-
-        $this->entityService = $entityService;
-    }
-
     /**
      * Display a listing of the posts.
      *
@@ -82,8 +66,7 @@ class PostController extends AbstractController
      */
     public function show($id)
     {
-        $post = PostRepository::find($id);
-        $this->entityService->checkEntity($post);
+        $post = Post::findOrFail($id);
 
         $comments = $post->comments()->orderBy('id', 'desc')->get();
 
@@ -99,8 +82,7 @@ class PostController extends AbstractController
      */
     public function edit($id)
     {
-        $post = PostRepository::find($id);
-        $this->entityService->checkEntity($post);
+        $post = Post::findOrFail($id);
 
         return view('posts.edit', ['post' => $post]);
     }
@@ -121,8 +103,7 @@ class PostController extends AbstractController
             return redirect()->route('posts.edit', ['posts' => $id])->withInput()->withErrors($val->errors());
         }
 
-        $post = PostRepository::find($id);
-        $this->entityService->checkEntity($post);
+        $post = Post::findOrFail($id);
 
         $post->update($input);
 
@@ -139,8 +120,7 @@ class PostController extends AbstractController
      */
     public function destroy($id)
     {
-        $post = PostRepository::find($id);
-        $this->entityService->checkEntity($post);
+        $post = Post::findOrFail($id);
 
         $post->delete();
 

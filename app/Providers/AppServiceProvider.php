@@ -373,7 +373,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('App\Http\Controllers\CommentController', function ($app) {
             $throttler = $app['throttle']->get($app['request'], 1, 10);
-
             return new CommentController($throttler);
         });
     }

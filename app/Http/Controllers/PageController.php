@@ -12,7 +12,6 @@ use App\Services\PagesService;
 use GrahamCampbell\Credentials\Facades\Credentials;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
-use App\Services\CommentService;
 
 class PageController extends AbstractController
 {
@@ -48,7 +47,7 @@ class PageController extends AbstractController
     {
         $pages = Page::all();
 
-        $grid = $this->pagesService;
+        $grid = $this->pagesService->getPagesGrid();
 
         return view('pages.index', compact('pages', 'links', 'grid'));
     }
